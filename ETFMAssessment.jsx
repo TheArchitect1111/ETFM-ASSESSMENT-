@@ -334,7 +334,6 @@ const SnapshotResult = ({ data, loading, firstName }) => {
 
   return (
     <div>
-      {/* Header */}
       <div style={{
         background: C.dark, borderRadius: 16,
         padding: "28px 24px", marginBottom: 20,
@@ -349,7 +348,6 @@ const SnapshotResult = ({ data, loading, firstName }) => {
         <div style={{ color: C.muted, fontSize: 13, fontFamily: "'DM Sans', sans-serif" }}>Based on your assessment responses</div>
       </div>
 
-      {/* Thank you */}
       <div style={{
         background: C.goldSoft, border: `1px solid ${C.gold}30`,
         borderRadius: 14, padding: "16px 20px", marginBottom: 16,
@@ -363,7 +361,6 @@ const SnapshotResult = ({ data, loading, firstName }) => {
         </p>
       </div>
 
-      {/* Pattern label */}
       <div style={{
         background: C.white, border: `1px solid ${C.border}`,
         borderRadius: 14, padding: "20px", marginBottom: 12,
@@ -386,22 +383,18 @@ const SnapshotResult = ({ data, loading, firstName }) => {
         }}>{data.patternSummary}</p>
       </div>
 
-      {/* Key Observation */}
       <InsightCard icon="🔍" label="Key Observation" color={C.blue} bgColor={C.blueSoft}>
         {data.keyObservation}
       </InsightCard>
 
-      {/* Immediate Opportunity */}
       <InsightCard icon="💡" label="Immediate Opportunity" color={C.green} bgColor={C.greenSoft}>
         {data.immediateOpportunity}
       </InsightCard>
 
-      {/* Recommended First Step */}
       <InsightCard icon="🛠️" label="Recommended First Step" color={C.purple} bgColor={C.purpleSoft}>
         {data.recommendedFirstStep}
       </InsightCard>
 
-      {/* Action Steps */}
       <div style={{
         background: C.white, border: `1px solid ${C.border}`,
         borderRadius: 14, padding: "20px", marginBottom: 12,
@@ -416,10 +409,8 @@ const SnapshotResult = ({ data, loading, firstName }) => {
         ))}
       </div>
 
-      {/* Divider */}
       <div style={{ borderTop: `1px solid ${C.border}`, margin: "20px 0" }} />
 
-      {/* Upsell */}
       <div style={{
         background: `linear-gradient(135deg, ${C.dark} 0%, #2a1a4e 100%)`,
         borderRadius: 16, padding: "28px 24px",
@@ -445,15 +436,17 @@ const SnapshotResult = ({ data, loading, firstName }) => {
             "Long-term positioning guidance",
           ].map((f, i) => <RoadmapFeature key={i} text={f} />)}
         </div>
-        <button style={{
-          background: C.gold, color: C.dark,
-          border: "none", borderRadius: 10,
-          padding: "16px 28px", fontSize: 16,
-          fontWeight: 700, cursor: "pointer",
-          fontFamily: "'Lora', serif", width: "100%",
-          letterSpacing: "0.01em",
-        }}>
-          Unlock My Full Roadmap →
+        <button
+          onClick={() => window.open("https://calendly.com/rbrickey", "_blank")}
+          style={{
+            background: C.gold, color: C.dark,
+            border: "none", borderRadius: 10,
+            padding: "16px 28px", fontSize: 16,
+            fontWeight: 700, cursor: "pointer",
+            fontFamily: "'Lora', serif", width: "100%",
+            letterSpacing: "0.01em",
+          }}>
+          Book a Free Call with Robert →
         </button>
         <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 12, textAlign: "center", marginTop: 12, fontFamily: "'DM Sans', sans-serif" }}>
           Deeper analysis · Priority action plan · Implementation strategy
@@ -468,16 +461,36 @@ const EmailCapture = ({ onSubmit }) => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [visible, setVisible] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!firstName.trim()) { setError("Please enter your first name."); return; }
     if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError("Please enter a valid email address."); return; }
     setError("");
+    setSubmitting(true);
+
+    // Subscribe to Mailchimp
+    try {
+      await fetch("/api/claude", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "subscribe",
+          firstName: firstName.trim(),
+          email: email.trim(),
+        }),
+      });
+    } catch (e) {
+      console.error("Mailchimp subscribe error:", e);
+      // Don't block the user if Mailchimp fails
+    }
+
+    setSubmitting(false);
     onSubmit({ firstName: firstName.trim(), email: email.trim() });
   };
 
@@ -498,7 +511,6 @@ const EmailCapture = ({ onSubmit }) => {
       transition: "all 0.5s ease",
       maxWidth: 520, margin: "0 auto",
     }}>
-      {/* Header card */}
       <div style={{
         background: C.dark, borderRadius: 16,
         padding: "32px 24px", marginBottom: 20,
@@ -522,7 +534,6 @@ const EmailCapture = ({ onSubmit }) => {
         </p>
       </div>
 
-      {/* Email form card */}
       <div style={{
         background: C.white, borderRadius: 16,
         border: `1px solid ${C.border}`,
@@ -533,7 +544,7 @@ const EmailCapture = ({ onSubmit }) => {
           lineHeight: 1.7, color: C.text,
           margin: "0 0 24px", textAlign: "center",
         }}>
-          Your personalized ETFM Financial Roadmap is being prepared and will be sent directly to your email.
+          Your personalized ETFM Financial Snapshot is ready. Enter your details to receive it now.
         </p>
 
         <label style={{
@@ -571,16 +582,19 @@ const EmailCapture = ({ onSubmit }) => {
 
         <button
           onClick={handleSubmit}
+          disabled={submitting}
           style={{
             width: "100%", padding: "16px",
-            background: C.dark, color: C.white,
+            background: submitting ? C.muted : C.dark,
+            color: C.white,
             border: "none", borderRadius: 10,
             fontSize: 16, fontWeight: 600,
             fontFamily: "'Lora', serif",
-            cursor: "pointer", letterSpacing: "0.02em",
+            cursor: submitting ? "default" : "pointer",
+            letterSpacing: "0.02em",
           }}
         >
-          Send My Roadmap →
+          {submitting ? "Saving..." : "Send My Roadmap →"}
         </button>
 
         <p style={{
@@ -588,7 +602,7 @@ const EmailCapture = ({ onSubmit }) => {
           fontSize: 12, marginTop: 12,
           fontFamily: "'DM Sans', sans-serif",
         }}>
-          No spam. Your information is kept private.
+          Your responses are used only to generate your personalized snapshot and will never be sold or shared.
         </p>
       </div>
     </div>
