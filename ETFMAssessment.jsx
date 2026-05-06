@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 
-const LOGO_URL = "https://raw.githubusercontent.com/TheArchitect1111/ETFM-ASSESSMENT-/main/file_00000000e10471f5bb36fabf63d29869.png";
-
 const C = {
   bg: "#f7f4ef",
   card: "#ffffff",
@@ -175,10 +173,8 @@ const BotMessage = ({ text, subtext, animate }) => {
           width: 36, height: 36, borderRadius: "50%",
           background: C.dark,
           display: "flex", alignItems: "center", justifyContent: "center",
-          flexShrink: 0, overflow: "hidden",
-        }}>
-          <img src={LOGO_URL} alt="ETFM" style={{ width: 36, height: 36, objectFit: "cover" }} />
-        </div>
+          flexShrink: 0, fontSize: 14, color: C.gold, fontWeight: 700,
+        }}>E</div>
         <div style={{
           background: C.dark, color: C.white,
           borderRadius: "4px 18px 18px 18px",
@@ -300,104 +296,6 @@ const RoadmapFeature = ({ text }) => (
   </div>
 );
 
-// ─── Transition Screen ────────────────────────────────────────────────────────
-const TransitionScreen = ({ onContinue }) => {
-  const [visible, setVisible] = useState(false);
-  const [line1, setLine1] = useState(false);
-  const [line2, setLine2] = useState(false);
-  const [line3, setLine3] = useState(false);
-  const [showBtn, setShowBtn] = useState(false);
-
-  useEffect(() => {
-    const t1 = setTimeout(() => setVisible(true), 100);
-    const t2 = setTimeout(() => setLine1(true), 600);
-    const t3 = setTimeout(() => setLine2(true), 1800);
-    const t4 = setTimeout(() => setLine3(true), 3000);
-    const t5 = setTimeout(() => setShowBtn(true), 4200);
-    return () => [t1, t2, t3, t4, t5].forEach(clearTimeout);
-  }, []);
-
-  const fadeIn = (show) => ({
-    opacity: show ? 1 : 0,
-    transform: show ? "translateY(0)" : "translateY(16px)",
-    transition: "all 0.8s ease",
-  });
-
-  return (
-    <div style={{
-      minHeight: "100vh", background: C.dark,
-      display: "flex", alignItems: "center", justifyContent: "center",
-      padding: 32,
-      opacity: visible ? 1 : 0,
-      transition: "opacity 0.6s ease",
-    }}>
-      <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-      <div style={{ maxWidth: 480, width: "100%", textAlign: "center" }}>
-
-        <div style={{ marginBottom: 40, ...fadeIn(line1) }}>
-          <img src={LOGO_URL} alt="ETFM" style={{ width: 100, height: 100, objectFit: "contain", margin: "0 auto 24px", display: "block" }} />
-        </div>
-
-        <div style={{ marginBottom: 28, ...fadeIn(line1) }}>
-          <p style={{
-            fontFamily: "'Lora', serif", fontSize: 22,
-            color: C.white, lineHeight: 1.6, margin: 0,
-            fontWeight: 600,
-          }}>
-            You just did something most people never do.
-          </p>
-        </div>
-
-        <div style={{ marginBottom: 28, ...fadeIn(line2) }}>
-          <p style={{
-            fontFamily: "'Lora', serif", fontSize: 18,
-            color: "rgba(255,255,255,0.75)", lineHeight: 1.7, margin: 0,
-          }}>
-            You stopped. You looked honestly at where you are. And you decided it matters.
-          </p>
-        </div>
-
-        <div style={{ marginBottom: 48, ...fadeIn(line3) }}>
-          <p style={{
-            fontFamily: "'Lora', serif", fontSize: 18,
-            color: C.gold, lineHeight: 1.7, margin: 0,
-            fontStyle: "italic",
-          }}>
-            Thank you for investing in your own future. This is a big step — keep going.
-          </p>
-        </div>
-
-        <div style={{ ...fadeIn(showBtn) }}>
-          <div style={{
-            background: C.goldSoft, border: `1px solid ${C.gold}40`,
-            borderRadius: 12, padding: "14px 20px", marginBottom: 28,
-          }}>
-            <p style={{
-              fontFamily: "'DM Sans', sans-serif", fontSize: 13,
-              color: "rgba(255,255,255,0.6)", margin: 0, lineHeight: 1.6,
-            }}>
-              Your personalized snapshot is being prepared. What comes next is insight — not judgment.
-            </p>
-          </div>
-
-          <button
-            onClick={onContinue}
-            style={{
-              width: "100%", padding: "16px",
-              background: C.gold, color: C.dark,
-              border: "none", borderRadius: 12, fontSize: 16,
-              fontFamily: "'Lora', serif", fontWeight: 700,
-              cursor: "pointer", letterSpacing: "0.02em",
-            }}
-          >
-            See My Snapshot →
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const SnapshotResult = ({ data, loading, firstName }) => {
   if (loading) {
     return (
@@ -441,7 +339,6 @@ const SnapshotResult = ({ data, loading, firstName }) => {
         padding: "28px 24px", marginBottom: 20,
         textAlign: "center",
       }}>
-        <img src={LOGO_URL} alt="ETFM" style={{ width: 80, height: 80, objectFit: "contain", margin: "0 auto 12px", display: "block" }} />
         <div style={{ color: C.gold, fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 8, fontFamily: "'DM Sans', sans-serif" }}>
           Your Personalized
         </div>
@@ -577,6 +474,7 @@ const EmailCapture = ({ onSubmit }) => {
     setError("");
     setSubmitting(true);
 
+    // Subscribe to Mailchimp
     try {
       await fetch("/api/claude", {
         method: "POST",
@@ -589,6 +487,7 @@ const EmailCapture = ({ onSubmit }) => {
       });
     } catch (e) {
       console.error("Mailchimp subscribe error:", e);
+      // Don't block the user if Mailchimp fails
     }
 
     setSubmitting(false);
@@ -617,7 +516,7 @@ const EmailCapture = ({ onSubmit }) => {
         padding: "32px 24px", marginBottom: 20,
         textAlign: "center",
       }}>
-        <img src={LOGO_URL} alt="ETFM" style={{ width: 80, height: 80, objectFit: "contain", margin: "0 auto 16px", display: "block" }} />
+        <div style={{ fontSize: 32, marginBottom: 12 }}>🌱</div>
         <div style={{
           color: C.gold, fontSize: 11, letterSpacing: "0.2em",
           textTransform: "uppercase", marginBottom: 10,
@@ -645,7 +544,7 @@ const EmailCapture = ({ onSubmit }) => {
           lineHeight: 1.7, color: C.text,
           margin: "0 0 24px", textAlign: "center",
         }}>
-          Enter your details to receive your personalized ETFM Financial Snapshot now.
+          Your personalized ETFM Financial Snapshot is ready. Enter your details to receive it now.
         </p>
 
         <label style={{
@@ -695,7 +594,7 @@ const EmailCapture = ({ onSubmit }) => {
             letterSpacing: "0.02em",
           }}
         >
-          {submitting ? "Saving..." : "See My Snapshot →"}
+          {submitting ? "Saving..." : "Send My Roadmap →"}
         </button>
 
         <p style={{
@@ -772,20 +671,15 @@ export default function ETFMAssessment() {
         }, 600);
       } else {
         setTimeout(() => {
-          setPhase("transition");
+          setPhase("email");
           snapshotRef.current = generateSnapshot(newAnswers);
         }, 800);
       }
     }, 300);
   };
 
-  const handleTransitionContinue = () => {
-    setPhase("email");
-  };
-
   const handleEmailSubmit = async (info) => {
     setUserData(info);
-    setLoading(true);
     setPhase("result");
     if (snapshotRef.current) await snapshotRef.current;
   };
@@ -829,11 +723,12 @@ export default function ETFMAssessment() {
         <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
         <div style={{ maxWidth: 480, width: "100%" }}>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
-            <img
-              src={LOGO_URL}
-              alt="ETFM Logo"
-              style={{ width: 120, height: 120, objectFit: "contain", margin: "0 auto 20px", display: "block" }}
-            />
+            <div style={{
+              width: 64, height: 64, borderRadius: "50%",
+              background: C.dark, display: "flex", alignItems: "center", justifyContent: "center",
+              margin: "0 auto 20px", fontSize: 24, color: C.gold, fontWeight: 700,
+              fontFamily: "'Lora', serif",
+            }}>E</div>
             <div style={{ color: C.gold, fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 8, fontFamily: "'DM Sans', sans-serif" }}>
               Escaping the Financial Matrix
             </div>
@@ -877,10 +772,6 @@ export default function ETFMAssessment() {
         </div>
       </div>
     );
-  }
-
-  if (phase === "transition") {
-    return <TransitionScreen onContinue={handleTransitionContinue} />;
   }
 
   if (phase === "email") {
