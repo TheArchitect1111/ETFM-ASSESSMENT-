@@ -656,7 +656,6 @@ export default function ETFMAssessment() {
           setTimeout(() => setShowOptions(true), 800);
         }, 600);
       } else {
-        // Start generating snapshot in background, go to email capture
         setTimeout(() => {
           setPhase("email");
           snapshotRef.current = generateSnapshot(newAnswers);
@@ -668,8 +667,6 @@ export default function ETFMAssessment() {
   const handleEmailSubmit = async (info) => {
     setUserData(info);
     setPhase("result");
-    // If snapshot already finished, loading is already false — no need to force it
-    // Just await in case it is still in flight
     if (snapshotRef.current) await snapshotRef.current;
   };
 
@@ -731,7 +728,7 @@ export default function ETFMAssessment() {
 
           <div style={{ background: C.white, borderRadius: 16, border: `1px solid ${C.border}`, padding: "24px", marginBottom: 24 }}>
             {[
-              ["6 questions", "Takes about 5 minutes"],
+              ["6 questions", "Takes about 2 minutes"],
               ["No numbers required", "No income, debt totals, or personal data"],
               ["Immediate insight", "AI-generated snapshot at the end"],
             ].map(([bold, light], i) => (
@@ -756,7 +753,7 @@ export default function ETFMAssessment() {
             Begin the Conversation →
           </button>
           <p style={{ textAlign: "center", color: C.muted, fontSize: 12, marginTop: 12, fontFamily: "'DM Sans', sans-serif" }}>
-            Your responses are used only to generate your personalized snapshot.
+            Your responses are used only to generate your personalized snapshot and will never be sold or shared.
           </p>
         </div>
       </div>
