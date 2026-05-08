@@ -138,9 +138,13 @@ export default function ETFMAssessment() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          type: "subscribe",
           firstName,
           email,
-          answers,
+          answers: answers.map((value, i) => ({
+            question: QUESTIONS[i].bot,
+            answer: value,
+          })),
         }),
       });
 
