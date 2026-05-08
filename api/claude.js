@@ -102,8 +102,8 @@ Use a professional but warm tone. Format with simple HTML — headings, paragrap
     try {
       const transporter = nodemailer.createTransport({
         host: "mail.privateemail.com",
-        port: 465,
-        secure: true,
+        port: 587,
+        secure: false,
         auth: {
           user: SMTP_USER,
           pass: SMTP_PASSWORD,
@@ -124,8 +124,8 @@ Use a professional but warm tone. Format with simple HTML — headings, paragrap
   </div>
   <div style="margin-top: 32px; padding: 24px; background: #1a1a2e; border-radius: 16px; text-align: center;">
     <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin: 0 0 16px;">Ready to go deeper into your financial system?</p>
-    <a href="https://buy.stripe.com/9B6dRad5653g7d77028Vi0b" style="display: inline-block; background: #c9973a; color: #1a1a2e; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 15px;">Get Your Full Blueprint — \$47 →</a>
-    <p style="color: rgba(255,255,255,0.4); font-size: 11px; margin: 16px 0 0;">Or book a 1-on-1 Strategic Reset Session with Robert: <a href="https://buy.stripe.com/7sY14o7KMbrE693ckm8Vi0c" style="color: #c9973a;">\$499</a></p>
+    <a href="https://buy.stripe.com/9B6dRad5653g7d77028Vi0b" style="display: inline-block; background: #c9973a; color: #1a1a2e; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 15px;">Get Your Full Blueprint — \\$47 →</a>
+    <p style="color: rgba(255,255,255,0.4); font-size: 11px; margin: 16px 0 0;">Or book a 1-on-1 Strategic Reset Session with Robert: <a href="https://buy.stripe.com/7sY14o7KMbrE693ckm8Vi0c" style="color: #c9973a;">\\$499</a></p>
   </div>
   <p style="text-align: center; color: #7a7a8a; font-size: 11px; margin-top: 24px;">© ETFM · Escape The Financial Matrix · <a href="mailto:info@etfm.systems" style="color: #7a7a8a;">info@etfm.systems</a></p>
 </body>
