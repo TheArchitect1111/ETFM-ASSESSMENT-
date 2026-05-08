@@ -102,7 +102,7 @@ Use a professional but warm tone. Format with simple HTML — headings, paragrap
       const resend = new Resend(RESEND_API_KEY);
 
       await resend.emails.send({
-        from: "ETFM Assessment <info@etfm.systems>",
+        from: "ETFM Assessment <onboarding@resend.dev>",
         to: email,
         subject: `${firstName}, your Financial Matrix Snapshot is here`,
         html: `
