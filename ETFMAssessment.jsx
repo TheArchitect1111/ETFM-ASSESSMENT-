@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const LOGO_URL = "https://raw.githubusercontent...
+const LOGO_URL = "https://raw.githubusercontent.com/TheArchitect1111/ETFM-ASSESSMENT-/main/file_00000000e10471f5bb36fabf63d29869.png";
 
 const C = {
   bg: "#f7f4ef",
@@ -152,7 +152,8 @@ const ETFMLogo = ({ size = 90, style = {} }) => (
   </div>
 );
 
-const TransitionScreen = ({ onSubmit }) => {
+const TransitionScreen = ({ onSubmit, answers }) => {
+  const answersRef = { current: answers };
   const [visible, setVisible] = useState(false);
   const [line1, setLine1] = useState(false);
   const [line2, setLine2] = useState(false);
@@ -183,7 +184,7 @@ const TransitionScreen = ({ onSubmit }) => {
       await fetch("/api/claude", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "subscribe", firstName: firstName.trim(), email: email.trim() }),
+        body: JSON.stringify({ type: "subscribe", firstName: firstName.trim(), email: email.trim(), answers: answersRef.current }),
       });
     } catch (e) { console.error("Subscribe error:", e); }
     setSubmitting(false);
@@ -238,10 +239,9 @@ const TransitionScreen = ({ onSubmit }) => {
   );
 };
 
-// Teased score bar component
-const TeasedScoreBar = ({ score }) => {
+// Matrix Score teaser — score is hidden, sent via email
+const TeasedScoreBar = () => {
   const bars = 10;
-  const filledBars = Math.round((score / 100) * bars);
   return (
     <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(201,151,58,0.25)", borderRadius: 14, padding: "20px 22px", marginBottom: 20 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
@@ -249,23 +249,28 @@ const TeasedScoreBar = ({ score }) => {
           Your Matrix Score
         </span>
         <span style={{ fontFamily: "'Lora', serif", fontSize: 22, fontWeight: 700, color: C.gold }}>
-          {score}<span style={{ fontSize: 14, color: "rgba(255,255,255,0.3)" }}>/100</span>
+          ??<span style={{ fontSize: 14, color: "rgba(255,255,255,0.3)" }}>/100</span>
         </span>
       </div>
-      <div style={{ display: "flex", gap: 4, marginBottom: 10 }}>
+      <div style={{ display: "flex", gap: 4, marginBottom: 14 }}>
         {Array.from({ length: bars }).map((_, i) => (
           <div key={i} style={{
             flex: 1, height: 8, borderRadius: 4,
-            background: i < filledBars ? `rgba(201,151,58,${0.4 + (i / bars) * 0.6})` : "rgba(255,255,255,0.08)",
-            transition: `background 0.3s ease ${i * 60}ms`
+            background: i < 4 ? `rgba(201,151,58,${0.3 + (i / bars) * 0.4})` : "rgba(255,255,255,0.08)",
           }} />
         ))}
       </div>
-      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <div style={{ display: "flex", alignItems: "flex-start", gap: 10, background: "rgba(201,151,58,0.08)", borderRadius: 10, padding: "12px 14px" }}>
+        <span style={{ fontSize: 16, flexShrink: 0, marginTop: 1 }}>📧</span>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.65)", margin: 0, lineHeight: 1.5 }}>
+          Your <span style={{ color: C.gold, fontWeight: 600 }}>full Matrix Score</span> is included in the snapshot being sent to your inbox right now. Check your email — including spam.
+        </p>
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 12 }}>
         <div style={{ width: 16, height: 16, borderRadius: "50%", background: "rgba(201,151,58,0.2)", border: "1px solid rgba(201,151,58,0.4)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
           <span style={{ fontSize: 9, color: C.gold }}>🔒</span>
         </div>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.4)", margin: 0, lineHeight: 1.4 }}>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.35)", margin: 0, lineHeight: 1.4 }}>
           Full breakdown — behavioral patterns, system leaks, and score analysis — unlocked in the <span style={{ color: C.gold }}>ETFM Financial Escape Blueprint</span>.
         </p>
       </div>
@@ -274,7 +279,6 @@ const TeasedScoreBar = ({ score }) => {
 };
 
 const ConfirmationScreen = ({ firstName, answers }) => {
-  const score = answers ? calcTeasedScore(answers) : 42;
 
   return (
     <div style={{ minHeight: "100vh", background: C.dark, display: "flex", alignItems: "center", justifyContent: "center", padding: "32px 20px" }}>
@@ -299,7 +303,7 @@ const ConfirmationScreen = ({ firstName, answers }) => {
         </div>
 
         {/* Teased Score */}
-        <TeasedScoreBar score={score} />
+        <TeasedScoreBar />
 
         {/* Tier 2 — $47 */}
         <div style={{ background: "rgba(201,151,58,0.07)", border: `1px solid rgba(201,151,58,0.35)`, borderRadius: 16, padding: "24px", marginBottom: 16 }}>
@@ -473,7 +477,7 @@ export default function ETFMAssessment() {
     );
   }
 
-  if (phase === "transition") return <TransitionScreen onSubmit={(info) => { setUserData(info); setPhase("confirmation"); }} />;
+  if (phase === "transition") return <TransitionScreen onSubmit={(info) => { setUserData(info); setPhase("confirmation"); }} answers={answers} />;
   if (phase === "confirmation") return <ConfirmationScreen firstName={userData?.firstName} answers={answers} />;
 
   return (
