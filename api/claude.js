@@ -1,8 +1,3 @@
-
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export default async function handler(req, res) {
   // Handle CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -19,7 +14,7 @@ export default async function handler(req, res) {
 
   const { type, ...body } = req.body;
 
-  // ─── Mailchimp + Resend email handler ────────────────────────────────────────
+  // ─── Mailchimp + Claude handler ──────────────────────────────────────────────
   if (type === "subscribe") {
     const { firstName, email, answers } = body;
 
@@ -99,46 +94,9 @@ Use a professional but warm tone. Format with simple HTML — headings, paragrap
       snapshotHtml = `<p>Hi ${firstName},</p><p>Thank you for completing the ETFM Financial Snapshot assessment. Your personalized results are being prepared — watch for a follow-up from Robert with your full analysis.</p>`;
     }
 
-    // ── 3. Send email via Resend ─────────────────────────────────────────────
-    try {
-      const htmlBody = `<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
-<body style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 32px 24px; background: #f7f4ef; color: #1a1a2e;">
-  <div style="text-align: center; margin-bottom: 32px;">
-    <h1 style="font-size: 28px; color: #c9973a; letter-spacing: 0.1em; margin: 0;">ETFM</h1>
-    <p style="font-size: 12px; color: #7a7a8a; letter-spacing: 0.2em; text-transform: uppercase; margin: 4px 0 0;">Escape The Financial Matrix</p>
-  </div>
-  <div style="background: #ffffff; border-radius: 16px; padding: 32px; border: 1px solid #e8e3da;">
-    ${snapshotHtml}
-  </div>
-  <div style="margin-top: 32px; padding: 24px; background: #1a1a2e; border-radius: 16px; text-align: center;">
-    <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin: 0 0 16px;">Ready to go deeper into your financial system?</p>
-    <a href="https://buy.stripe.com/9B6dRad5653g7d77028Vi0b" style="display: inline-block; background: #c9973a; color: #1a1a2e; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 15px;">Get Your Full Blueprint — \$47</a>
-    <p style="color: rgba(255,255,255,0.4); font-size: 11px; margin: 16px 0 0;">Or book a 1-on-1 Strategic Reset Session with Robert: <a href="https://buy.stripe.com/7sY14o7KMbrE693ckm8Vi0c" style="color: #c9973a;">\$499</a></p>
-  </div>
-  <p style="text-align: center; color: #7a7a8a; font-size: 11px; margin-top: 24px;">© ETFM · Escape The Financial Matrix · <a href="mailto:info@etfm.systems" style="color: #7a7a8a;">info@etfm.systems</a></p>
-</body>
-</html>`;
+    // ── Email sending skipped for now (will add back soon) ─────────────────
 
-      const emailRes = await resend.emails.send({
-        from: "Robert Brickey | ETFM <onboarding@resend.dev>",
-        to: email,
-        subject: `${firstName}, your ETFM Financial Snapshot is here`,
-        html: htmlBody,
-      });
-
-      if (emailRes.error) {
-        console.error("Resend email error:", emailRes.error);
-        return res.status(500).json({ error: "Email send failed", detail: emailRes.error });
-      }
-
-      console.log("Email sent successfully:", emailRes.data?.id);
-      return res.status(200).json({ success: true, emailId: emailRes.data?.id });
-    } catch (err) {
-      console.error("Resend error:", err);
-      return res.status(500).json({ error: "Email send failed", detail: err.message });
-    }
+    return res.status(200).json({ success: true, snapshot: snapshotHtml });
   }
 
   // ─── Claude AI direct handler ────────────────────────────────────────────────
