@@ -1,3 +1,5 @@
+import nodemailer from "nodemailer";
+
 export default async function handler(req, res) {
   // Handle CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -14,14 +16,15 @@ export default async function handler(req, res) {
 
   const { type, ...body } = req.body;
 
-  // ─── Mailchimp subscriber + Resend email handler ─────────────────────────────
+  // ─── Mailchimp + SMTP email handler ──────────────────────────────────────────
   if (type === "subscribe") {
     const { firstName, email, answers } = body;
 
     const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
     const MAILCHIMP_AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID;
-    const RESEND_API_KEY = process.env.RESEND_API_KEY;
     const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+    const SMTP_USER = process.env.SMTP_USER;
+    const SMTP_PASSWORD = process.env.SMTP_PASSWORD;
     const dc = MAILCHIMP_API_KEY.split("-").pop();
 
     // ── 1. Add to Mailchimp ──────────────────────────────────────────────────
@@ -42,7 +45,6 @@ export default async function handler(req, res) {
           }),
         }
       );
-
       const mcData = await mcRes.json();
       if (!mcRes.ok && mcData.title !== "Member Exists") {
         console.error("Mailchimp error:", mcData);
@@ -80,7 +82,7 @@ Write the snapshot in HTML format suitable for an email. Include:
 2. Their Financial Identity label (e.g. "The Reactive Spender", "The Aware but Stuck", "The Disciplined Builder" — pick the most fitting one based on their answers)
 3. One key system insight about their financial patterns (2-3 sentences, specific to their answers)
 4. One immediate action step they can take this week (concrete and specific)
-5. A note that their full Matrix Score is revealed in this email — calculate a score from 0-100 based on their answers and show it clearly (higher scores = more financial awareness/control)
+5. Their Matrix Score — calculate a score from 0-100 based on their answers and show it clearly (higher scores = more financial awareness/control)
 6. A closing line encouraging them to go deeper
 
 Use a professional but warm tone. Format with simple HTML — headings, paragraphs, bold text. No CSS styles needed. Keep it under 400 words total.`,
@@ -93,22 +95,22 @@ Use a professional but warm tone. Format with simple HTML — headings, paragrap
       snapshotHtml = claudeData?.content?.[0]?.text || "";
     } catch (err) {
       console.error("Claude snapshot error:", err);
-      snapshotHtml = `<p>Hi ${firstName},</p><p>Thank you for completing the ETFM Financial Snapshot assessment. Your results are being processed — watch for a follow-up from Robert with your full analysis.</p>`;
+      snapshotHtml = `<p>Hi ${firstName},</p><p>Thank you for completing the ETFM Financial Snapshot assessment. Your personalized results are being prepared — watch for a follow-up from Robert with your full analysis.</p>`;
     }
 
-    // ── 3. Send email via Resend ─────────────────────────────────────────────
+    // ── 3. Send email via Namecheap SMTP ────────────────────────────────────
     try {
-      const emailRes = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${RESEND_API_KEY}`,
+      const transporter = nodemailer.createTransport({
+        host: "mail.privateemail.com",
+        port: 465,
+        secure: true,
+        auth: {
+          user: SMTP_USER,
+          pass: SMTP_PASSWORD,
         },
-        body: JSON.stringify({
-          from: "Robert Brickey <info@etfm.systems>",
-          to: [email],
-          subject: `${firstName}, your ETFM Financial Snapshot is here`,
-          html: `
+      });
+
+      const htmlBody = `
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
@@ -123,24 +125,23 @@ Use a professional but warm tone. Format with simple HTML — headings, paragrap
   <div style="margin-top: 32px; padding: 24px; background: #1a1a2e; border-radius: 16px; text-align: center;">
     <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin: 0 0 16px;">Ready to go deeper into your financial system?</p>
     <a href="https://buy.stripe.com/9B6dRad5653g7d77028Vi0b" style="display: inline-block; background: #c9973a; color: #1a1a2e; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 15px;">Get Your Full Blueprint — $47 →</a>
-    <p style="color: rgba(255,255,255,0.4); font-size: 11px; margin: 16px 0 0;">Or book a 1-on-1 Strategic Reset Session with Robert at <a href="https://buy.stripe.com/7sY14o7KMbrE693ckm8Vi0c" style="color: #c9973a;">$499</a></p>
+    <p style="color: rgba(255,255,255,0.4); font-size: 11px; margin: 16px 0 0;">Or book a 1-on-1 Strategic Reset Session with Robert: <a href="https://buy.stripe.com/7sY14o7KMbrE693ckm8Vi0c" style="color: #c9973a;">$499</a></p>
   </div>
   <p style="text-align: center; color: #7a7a8a; font-size: 11px; margin-top: 24px;">© ETFM · Escape The Financial Matrix · <a href="mailto:info@etfm.systems" style="color: #7a7a8a;">info@etfm.systems</a></p>
 </body>
-</html>`,
-        }),
-      });
+</html>`;
 
-      const emailData = await emailRes.json();
-      if (!emailRes.ok) {
-        console.error("Resend error:", emailData);
-        return res.status(500).json({ error: "Failed to send email" });
-      }
+      await transporter.sendMail({
+        from: `"Robert Brickey | ETFM" <${SMTP_USER}>`,
+        to: email,
+        subject: `${firstName}, your ETFM Financial Snapshot is here`,
+        html: htmlBody,
+      });
 
       return res.status(200).json({ success: true });
     } catch (err) {
-      console.error("Resend error:", err);
-      return res.status(500).json({ error: "Email send failed" });
+      console.error("SMTP email error:", err);
+      return res.status(500).json({ error: "Email send failed", detail: err.message });
     }
   }
 
