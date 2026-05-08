@@ -94,6 +94,21 @@ const QUESTIONS = [
   },
 ];
 
+// Calculates a teased partial score (0–100) based on tone patterns
+function calcTeasedScore(answers) {
+  const scoreMap = {
+    high_stress: 10, stuck: 20, avoidant: 15, uncertain: 35, motivated: 50, growth: 85,
+    reactive: 15, awareness: 40, structure: 60, structured: 80,
+    impulsive: 15, inconsistent: 30, avoidant_habits: 20, partial: 50, disciplined: 80,
+    scarcity: 10, fear: 20, learning: 45, confident: 75,
+    income: 20, debt: 25, stress: 20, education: 35, behavior: 30, external: 40,
+    resilient: 70, resourceful: 70, momentum: 75,
+    support: 60,
+  };
+  const total = answers.reduce((sum, a) => sum + (scoreMap[a.tone] || 30), 0);
+  return Math.round(total / answers.length);
+}
+
 const ProgressBar = ({ current, total }) => (
   <div style={{ display: "flex", gap: 6, marginBottom: 32 }}>
     {Array.from({ length: total }).map((_, i) => (
@@ -110,7 +125,7 @@ const BotMessage = ({ text, subtext, animate }) => {
   return (
     <div style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(12px)", transition: "all 0.5s ease", marginBottom: 24 }}>
       <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: subtext ? 8 : 0 }}>
-        <div style={{ width: 36, height: 36, borderRadius: "50%", background: C.dark, flexShrink: 0, overflow: "hidden" }}>
+        <div style={{ width: 36, height: 36, borderRadius: "50%", background: C.dark, flexShrink: 0, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <img src={LOGO_URL} alt="ETFM" style={{ width: 36, height: 36, objectFit: "cover" }} />
         </div>
         <div style={{ background: C.dark, color: C.white, borderRadius: "4px 18px 18px 18px", padding: "14px 18px", fontSize: 16, lineHeight: 1.6, fontFamily: "'Lora', serif", maxWidth: "85%" }}>{text}</div>
@@ -127,6 +142,13 @@ const OptionButton = ({ label, selected, onClick, disabled }) => (
 const UserBubble = ({ text }) => (
   <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 24 }}>
     <div style={{ background: C.gold, color: C.dark, borderRadius: "18px 4px 18px 18px", padding: "12px 18px", fontSize: 15, lineHeight: 1.5, fontFamily: "'Lora', serif", fontWeight: 600, maxWidth: "80%" }}>{text}</div>
+  </div>
+);
+
+// Logo component — always renders on dark background to prevent white bleed
+const ETFMLogo = ({ size = 90, style = {} }) => (
+  <div style={{ width: size, height: size, borderRadius: 16, background: C.dark, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", flexShrink: 0, ...style }}>
+    <img src={LOGO_URL} alt="ETFM" style={{ width: size, height: size, objectFit: "contain" }} />
   </div>
 );
 
@@ -175,7 +197,7 @@ const TransitionScreen = ({ onSubmit }) => {
       <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
       <div style={{ maxWidth: 480, width: "100%", textAlign: "center" }}>
         <div style={{ marginBottom: 32, ...fadeIn(line1) }}>
-          <img src={LOGO_URL} alt="ETFM" style={{ width: 90, height: 90, objectFit: "contain", margin: "0 auto 24px", display: "block" }} />
+          <ETFMLogo size={90} style={{ margin: "0 auto 24px" }} />
           <p style={{ fontFamily: "'Lora', serif", fontSize: 24, color: C.white, lineHeight: 1.5, margin: 0, fontWeight: 600 }}>
             You just did something most people never do.
           </p>
@@ -216,35 +238,161 @@ const TransitionScreen = ({ onSubmit }) => {
   );
 };
 
-const ConfirmationScreen = ({ firstName }) => (
-  <div style={{ minHeight: "100vh", background: C.dark, display: "flex", alignItems: "center", justifyContent: "center", padding: 32 }}>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-    <div style={{ maxWidth: 480, width: "100%", textAlign: "center" }}>
-      <img src={LOGO_URL} alt="ETFM" style={{ width: 110, height: 110, objectFit: "contain", margin: "0 auto 28px", display: "block" }} />
-      <div style={{ background: "rgba(201,151,58,0.12)", border: `1px solid ${C.gold}40`, borderRadius: 16, padding: "32px 24px", marginBottom: 24 }}>
-        <div style={{ fontSize: 36, marginBottom: 16 }}>🌱</div>
-        <h2 style={{ fontFamily: "'Lora', serif", fontSize: 24, color: C.white, margin: "0 0 16px", lineHeight: 1.3 }}>
-          {firstName ? `You're on your way, ${firstName}.` : "You're on your way."}
-        </h2>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: "rgba(255,255,255,0.7)", lineHeight: 1.7, margin: "0 0 12px" }}>
-          Your personalized ETFM Financial Snapshot is on its way to your inbox. Check your email — including your spam folder.
-        </p>
-        <p style={{ fontFamily: "'Lora', serif", fontSize: 15, color: C.gold, lineHeight: 1.7, margin: 0, fontStyle: "italic" }}>
-          "The first step toward change is awareness. The second step is acceptance."
-        </p>
+// Teased score bar component
+const TeasedScoreBar = ({ score }) => {
+  const bars = 10;
+  const filledBars = Math.round((score / 100) * bars);
+  return (
+    <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(201,151,58,0.25)", borderRadius: 14, padding: "20px 22px", marginBottom: 20 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+        <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)" }}>
+          Your Matrix Score
+        </span>
+        <span style={{ fontFamily: "'Lora', serif", fontSize: 22, fontWeight: 700, color: C.gold }}>
+          {score}<span style={{ fontSize: 14, color: "rgba(255,255,255,0.3)" }}>/100</span>
+        </span>
       </div>
-      <div style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 16, padding: "24px" }}>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "0.1em", margin: "0 0 12px" }}>Ready to go deeper?</p>
-        <p style={{ fontFamily: "'Lora', serif", fontSize: 15, color: "rgba(255,255,255,0.8)", lineHeight: 1.6, margin: "0 0 20px" }}>
-          Book a free call with Robert to discuss your snapshot and build your personalized financial roadmap.
+      <div style={{ display: "flex", gap: 4, marginBottom: 10 }}>
+        {Array.from({ length: bars }).map((_, i) => (
+          <div key={i} style={{
+            flex: 1, height: 8, borderRadius: 4,
+            background: i < filledBars ? `rgba(201,151,58,${0.4 + (i / bars) * 0.6})` : "rgba(255,255,255,0.08)",
+            transition: `background 0.3s ease ${i * 60}ms`
+          }} />
+        ))}
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div style={{ width: 16, height: 16, borderRadius: "50%", background: "rgba(201,151,58,0.2)", border: "1px solid rgba(201,151,58,0.4)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <span style={{ fontSize: 9, color: C.gold }}>🔒</span>
+        </div>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.4)", margin: 0, lineHeight: 1.4 }}>
+          Full breakdown — behavioral patterns, system leaks, and score analysis — unlocked in the <span style={{ color: C.gold }}>ETFM Financial Escape Blueprint</span>.
         </p>
-        <button onClick={() => window.open("https://calendly.com/rbrickey", "_blank")} style={{ width: "100%", padding: "16px", background: C.gold, color: C.dark, border: "none", borderRadius: 10, fontSize: 16, fontWeight: 700, cursor: "pointer", fontFamily: "'Lora', serif" }}>
-          Book a Free Call with Robert →
-        </button>
       </div>
     </div>
-  </div>
-);
+  );
+};
+
+const ConfirmationScreen = ({ firstName, answers }) => {
+  const score = answers ? calcTeasedScore(answers) : 42;
+
+  return (
+    <div style={{ minHeight: "100vh", background: C.dark, display: "flex", alignItems: "center", justifyContent: "center", padding: "32px 20px" }}>
+      <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+      <div style={{ maxWidth: 500, width: "100%" }}>
+
+        {/* Header */}
+        <div style={{ textAlign: "center", marginBottom: 28 }}>
+          <ETFMLogo size={90} style={{ margin: "0 auto 20px" }} />
+          <div style={{ background: "rgba(201,151,58,0.12)", border: `1px solid ${C.gold}40`, borderRadius: 16, padding: "28px 24px" }}>
+            <div style={{ fontSize: 32, marginBottom: 12 }}>🌱</div>
+            <h2 style={{ fontFamily: "'Lora', serif", fontSize: 22, color: C.white, margin: "0 0 12px", lineHeight: 1.3 }}>
+              {firstName ? `You're on your way, ${firstName}.` : "You're on your way."}
+            </h2>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.65)", lineHeight: 1.7, margin: "0 0 10px" }}>
+              Your ETFM Financial Snapshot is on its way to your inbox. Check your email — including spam.
+            </p>
+            <p style={{ fontFamily: "'Lora', serif", fontSize: 14, color: C.gold, lineHeight: 1.7, margin: 0, fontStyle: "italic" }}>
+              "The first step toward change is awareness. The second step is acceptance."
+            </p>
+          </div>
+        </div>
+
+        {/* Teased Score */}
+        <TeasedScoreBar score={score} />
+
+        {/* Tier 2 — $47 */}
+        <div style={{ background: "rgba(201,151,58,0.07)", border: `1px solid rgba(201,151,58,0.35)`, borderRadius: 16, padding: "24px", marginBottom: 16 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
+            <div>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: C.gold, margin: "0 0 4px" }}>Most Popular</p>
+              <h3 style={{ fontFamily: "'Lora', serif", fontSize: 17, color: C.white, margin: 0, lineHeight: 1.3 }}>ETFM Financial Escape Blueprint</h3>
+            </div>
+            <div style={{ textAlign: "right", flexShrink: 0, marginLeft: 12 }}>
+              <span style={{ fontFamily: "'Lora', serif", fontSize: 24, fontWeight: 700, color: C.gold }}>$47</span>
+            </div>
+          </div>
+
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.55)", lineHeight: 1.6, margin: "0 0 14px" }}>
+            Go beyond the snapshot. 8 additional deep-dive questions unlock a full AI-generated report built around your exact financial patterns.
+          </p>
+
+          {[
+            "Full Matrix Score with complete breakdown",
+            "Financial Identity deep analysis",
+            "Behavioral pattern profile",
+            "System leak identification — where money is silently escaping",
+            "\"What This Is Costing You\" projection",
+            "Personalized 30-day action plan",
+          ].map((item, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 8 }}>
+              <span style={{ color: C.gold, fontSize: 14, flexShrink: 0, marginTop: 1 }}>✓</span>
+              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.75)", lineHeight: 1.5 }}>{item}</span>
+            </div>
+          ))}
+
+          <button
+            onClick={() => window.open("https://buy.stripe.com/9B6dRad5653g7d77028Vi0b", "_blank")}
+            style={{ width: "100%", padding: "15px", background: C.gold, color: C.dark, border: "none", borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "'Lora', serif", marginTop: 16 }}
+          >
+            Get My Full Blueprint — $47 →
+          </button>
+        </div>
+
+        {/* Tier 3 — $499 */}
+        <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 16, padding: "24px", marginBottom: 24 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
+            <div>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", margin: "0 0 4px" }}>Premium</p>
+              <h3 style={{ fontFamily: "'Lora', serif", fontSize: 17, color: C.white, margin: 0, lineHeight: 1.3 }}>ETFM Strategic Reset Session</h3>
+            </div>
+            <div style={{ textAlign: "right", flexShrink: 0, marginLeft: 12 }}>
+              <span style={{ fontFamily: "'Lora', serif", fontSize: 24, fontWeight: 700, color: C.white }}>$499</span>
+            </div>
+          </div>
+
+          {[
+            {
+              title: "Strategic Wealth Blueprint Session",
+              desc: "A personalized financial game plan to identify hidden leaks, restructure money flow, prioritize debt and ownership moves, uncover overlooked opportunities, and build long-term financial stability and leverage."
+            },
+            {
+              title: "Pre-Session Financial Audit Form",
+              desc: "Robert reviews your current financial structure, habits, and challenges before the session so time is focused on strategy, not discovery."
+            },
+            {
+              title: "Custom 90-Day Execution Roadmap",
+              desc: "A personalized action roadmap outlining your next 90 days of financial moves, priorities, and system adjustments."
+            },
+            {
+              title: "Priority Email Access",
+              desc: "30 days of follow-up support and strategic Q&A with Robert after the session."
+            },
+          ].map((item, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 12 }}>
+              <span style={{ color: C.gold, fontSize: 14, flexShrink: 0, marginTop: 2 }}>✦</span>
+              <div>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 700, color: "rgba(255,255,255,0.9)", display: "block", marginBottom: 2 }}>{item.title}</span>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.5)", lineHeight: 1.5 }}>{item.desc}</span>
+              </div>
+            </div>
+          ))}
+
+          <button
+            onClick={() => window.open("https://buy.stripe.com/7sY14o7KMbrE693ckm8Vi0c", "_blank")}
+            style={{ width: "100%", padding: "15px", background: "transparent", color: C.white, border: `1.5px solid rgba(255,255,255,0.25)`, borderRadius: 10, fontSize: 15, fontWeight: 600, cursor: "pointer", fontFamily: "'Lora', serif", marginTop: 8 }}
+          >
+            Book My Strategic Reset Session — $499 →
+          </button>
+        </div>
+
+        <p style={{ textAlign: "center", color: "rgba(255,255,255,0.2)", fontSize: 11, fontFamily: "'DM Sans', sans-serif", margin: 0 }}>
+          Questions? Email us at info@etfm.systems
+        </p>
+      </div>
+    </div>
+  );
+};
 
 export default function ETFMAssessment() {
   const [phase, setPhase] = useState("intro");
@@ -298,7 +446,10 @@ export default function ETFMAssessment() {
         <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
         <div style={{ maxWidth: 480, width: "100%" }}>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
-            <img src={LOGO_URL} alt="ETFM Logo" style={{ width: 120, height: 120, objectFit: "contain", margin: "0 auto 20px", display: "block", mixBlendMode: "multiply" }} />
+            {/* Logo on dark pill so it never bleeds on light bg */}
+            <div style={{ display: "inline-block", background: C.dark, borderRadius: 20, padding: 8, marginBottom: 20 }}>
+              <img src={LOGO_URL} alt="ETFM Logo" style={{ width: 104, height: 104, objectFit: "contain", display: "block" }} />
+            </div>
             <div style={{ color: C.gold, fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 8, fontFamily: "'DM Sans', sans-serif" }}>Escaping the Financial Matrix</div>
             <h1 style={{ fontFamily: "'Lora', serif", fontSize: 28, color: C.dark, margin: "0 0 12px", lineHeight: 1.3 }}>Your ETFM Financial Snapshot</h1>
             <p style={{ color: C.muted, fontSize: 15, lineHeight: 1.7, fontFamily: "'DM Sans', sans-serif", margin: 0 }}>A guided self-awareness conversation — not a quiz, not a judgment. Just clarity about where you are and what's possible.</p>
@@ -323,14 +474,17 @@ export default function ETFMAssessment() {
   }
 
   if (phase === "transition") return <TransitionScreen onSubmit={(info) => { setUserData(info); setPhase("confirmation"); }} />;
-  if (phase === "confirmation") return <ConfirmationScreen firstName={userData?.firstName} />;
+  if (phase === "confirmation") return <ConfirmationScreen firstName={userData?.firstName} answers={answers} />;
 
   return (
     <div style={{ minHeight: "100vh", background: C.bg, padding: "24px 20px 120px" }}>
       <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
       <div style={{ maxWidth: 520, margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
-          <img src={LOGO_URL} alt="ETFM" style={{ height: 32, objectFit: "contain", mixBlendMode: "multiply" }} />
+          {/* Logo in dark container for chat header */}
+          <div style={{ background: C.dark, borderRadius: 10, padding: 4, display: "inline-flex" }}>
+            <img src={LOGO_URL} alt="ETFM" style={{ height: 28, width: 28, objectFit: "contain" }} />
+          </div>
           <div style={{ color: C.muted, fontSize: 12, fontFamily: "'DM Sans', sans-serif" }}>{currentQ + 1} of {QUESTIONS.length}</div>
         </div>
         <ProgressBar current={currentQ + (selectedOption ? 1 : 0)} total={QUESTIONS.length} />
