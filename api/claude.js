@@ -1,4 +1,7 @@
-import nodemailer from "nodemailer";
+
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function handler(req, res) {
   // Handle CORS
@@ -16,7 +19,7 @@ export default async function handler(req, res) {
 
   const { type, ...body } = req.body;
 
-  // ─── Mailchimp + SMTP email handler ──────────────────────────────────────────
+  // ─── Mailchimp + Resend email handler ────────────────────────────────────────
   if (type === "subscribe") {
     const { firstName, email, answers } = body;
 
@@ -96,18 +99,8 @@ Use a professional but warm tone. Format with simple HTML — headings, paragrap
       snapshotHtml = `<p>Hi ${firstName},</p><p>Thank you for completing the ETFM Financial Snapshot assessment. Your personalized results are being prepared — watch for a follow-up from Robert with your full analysis.</p>`;
     }
 
-    // ── 3. Send email via Namecheap SMTP ────────────────────────────────────
+    // ── 3. Send email via Resend ─────────────────────────────────────────────
     try {
-      const transporter = nodemailer.createTransport({
-        host: "mail.privateemail.com",
-        port: 587,
-        secure: false,
-        auth: {
-          user: "info@etfm.systems",
-          pass: "Svrgn1111",
-        },
-      });
-
       const htmlBody = `<!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
@@ -128,16 +121,22 @@ Use a professional but warm tone. Format with simple HTML — headings, paragrap
 </body>
 </html>`;
 
-      await transporter.sendMail({
-        from: `"Robert Brickey | ETFM" <info@etfm.systems>`,
+      const emailRes = await resend.emails.send({
+        from: "Robert Brickey | ETFM <onboarding@resend.dev>",
         to: email,
         subject: `${firstName}, your ETFM Financial Snapshot is here`,
         html: htmlBody,
       });
 
-      return res.status(200).json({ success: true });
+      if (emailRes.error) {
+        console.error("Resend email error:", emailRes.error);
+        return res.status(500).json({ error: "Email send failed", detail: emailRes.error });
+      }
+
+      console.log("Email sent successfully:", emailRes.data?.id);
+      return res.status(200).json({ success: true, emailId: emailRes.data?.id });
     } catch (err) {
-      console.error("SMTP email error:", err);
+      console.error("Resend error:", err);
       return res.status(500).json({ error: "Email send failed", detail: err.message });
     }
   }
