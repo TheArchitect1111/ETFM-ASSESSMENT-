@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
-const LOGO_URL = "data:image/png;base64,iVBOR...
+const LOGO_URL = "https://raw.githubusercontent.com/TheArchitect1111/ETFM-ASSESSMENT-/main/file_00000000e10471f5bb36fabf63d29869.png";
+
 const C = {
   bg: "#f7f4ef",
   dark: "#1a1a2e",
