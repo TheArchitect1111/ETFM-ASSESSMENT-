@@ -136,7 +136,7 @@ Use a professional but warm tone. Format with simple HTML — headings, paragrap
                           Ready to break free from the financial matrix?
                         </p>
                         <a href="https://buy.stripe.com/9B6dRad5653g7d77028Vi0b"
-                           style="display:inline-block;background-color:#c9973a;color:#ffffff;text-decoration:none;padding:14px 32px;border-radius:6px;font-weight:bold;font-size:15px;margin-bottom:12px;">
+                           style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 32px;border-radius:6px;font-weight:bold;font-size:15px;margin-bottom:12px;">
                           Get Your Full Blueprint — $47
                         </a>
                         <br />
@@ -175,7 +175,7 @@ Use a professional but warm tone. Format with simple HTML — headings, paragrap
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "ETFM Assessment <onboarding@resend.dev>",
+          from: "ETFM Assessment <noreply@etfm.systems>",
           to: email,
           subject: `${firstName}, your Financial Matrix Snapshot is here`,
           html: emailHtml,
