@@ -66,23 +66,46 @@ export default async function handler(req, res) {
         },
         body: JSON.stringify({
           model: "claude-opus-4-5",
-          max_tokens: 1024,
+          max_tokens: 2048,
           messages: [
             {
               role: "user",
-              content: `You are a financial coach for the ETFM (Escape The Financial Matrix) program. Based on the following assessment answers, write a personalized Financial Snapshot for ${firstName}.
+              content: `You are Robert Brickey, a licensed financial advisor with Prudential and the creator of ETFM (Escape The Financial Matrix). You speak with authority, warmth, and real talk — not generic advice. You've worked with people who feel stuck, overwhelmed, and behind, and you know how to meet them where they are.
 
+Based on the following assessment answers from ${firstName}, write their personalized Financial Snapshot email body in HTML. This is the content section only — no <html>, <head>, or <body> tags.
+
+ASSESSMENT ANSWERS:
 ${answersText}
 
-Write the snapshot in HTML format suitable for an email. Include:
-1. A warm, personalized greeting using their first name
-2. Their Financial Identity label (e.g. "The Reactive Spender", "The Aware but Stuck", "The Disciplined Builder" — pick the most fitting one based on their answers)
-3. One key system insight about their financial patterns (2-3 sentences, specific to their answers)
-4. One immediate action step they can take this week (concrete and specific)
-5. Their Matrix Score — calculate a score from 0-100 based on their answers and show it clearly (higher scores = more financial awareness/control)
-6. A closing line encouraging them to go deeper
+Write the content in this EXACT order using simple inline-styled HTML:
 
-Use a professional but warm tone. Format with simple HTML — headings, paragraphs, bold text. No CSS styles needed. Keep it under 400 words total.`,
+1. GREETING
+   A warm, direct 2-sentence opening using their first name. Acknowledge what it took to be honest with themselves today.
+
+2. FINANCIAL IDENTITY LABEL
+   Assign them one of these identities based on their answers — pick the most accurate fit:
+   "The Reactive Survivor" | "The Aware but Stuck" | "The Motivated but Directionless" | "The Inconsistent Starter" | "The Avoidant" | "The Disciplined Builder"
+   Display it prominently. Write 2-3 sentences explaining what this identity means and why it fits them specifically based on their answers. Be specific — reference what they said.
+
+3. MATRIX SCORE
+   Calculate a score from 0–100 based on their answers (higher = more awareness and control). Show it as:
+   <h2 style="color:#c9973a;font-size:36px;margin:24px 0 8px;">Your Matrix Score: [XX]/100</h2>
+   Follow with 2 sentences interpreting what this score means for them right now — honest but encouraging.
+
+4. KEY PATTERN INSIGHT
+   Write 3–4 sentences identifying the core financial pattern their answers reveal. Be specific. Name the cycle they're in. Don't be generic — connect it directly to their answers about money flow, habits, and mindset.
+
+5. YOUR STRENGTH
+   Reference the strength they identified. 2 sentences affirming it and connecting it specifically to their financial journey — this is real, not flattery.
+
+6. ONE ACTION STEP THIS WEEK
+   Give one concrete, specific action they can take in the next 7 days. Make it achievable. Name the exact thing to do — not vague advice like "make a budget." Something like "Open a separate savings account this week and move $25 into it — even if it's all you have. Name it your Freedom Fund."
+
+7. CLOSING LINE
+   One powerful sentence that creates forward momentum. Something that feels like a coach who believes in them.
+
+Tone: Warm, direct, real. Like a trusted advisor who has seen this before and knows the way out. Never preachy. Never generic. Always specific to their answers.
+Use simple HTML: <h3>, <p>, <strong>, <hr style="border:none;border-top:1px solid #e8e3da;margin:28px 0;"> between sections. Inline styles only. Keep total under 550 words.`,
             },
           ],
         }),
@@ -129,20 +152,60 @@ Use a professional but warm tone. Format with simple HTML — headings, paragrap
                       </td>
                     </tr>
 
-                    <!-- CTA -->
+                    <!-- Divider -->
                     <tr>
-                      <td style="padding:0 40px 40px;text-align:center;">
-                        <p style="color:#7a7a8a;font-size:14px;margin-bottom:24px;">
-                          Ready to break free from the financial matrix?
+                      <td style="padding:0 40px;">
+                        <hr style="border:none;border-top:2px solid #e8e3da;margin:0;" />
+                      </td>
+                    </tr>
+
+                    <!-- $47 Blueprint Offer -->
+                    <tr>
+                      <td style="padding:40px;background-color:#1a1a2e;text-align:center;">
+                        <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 12px;">Want to go deeper?</p>
+                        <h2 style="color:#ffffff;font-family:Georgia,serif;font-size:22px;margin:0 0 16px;line-height:1.4;">
+                          Get Your Full Financial Blueprint
+                        </h2>
+                        <p style="color:#a0a0b8;font-size:14px;margin:0 0 20px;line-height:1.7;">
+                          Your snapshot shows <em>where</em> you are. The Blueprint takes you through 10 deeper questions — then delivers a personalized escape roadmap, the 3 financial systems you need to build first, and Robert's exact framework for breaking the cycle.
                         </p>
+                        <table cellpadding="0" cellspacing="0" style="margin:0 auto 16px;">
+                          <tr>
+                            <td style="padding:4px 0;color:#c8c8d8;font-size:13px;">✓ &nbsp;10-question deep-dive diagnostic</td>
+                          </tr>
+                          <tr>
+                            <td style="padding:4px 0;color:#c8c8d8;font-size:13px;">✓ &nbsp;Personalized step-by-step escape roadmap</td>
+                          </tr>
+                          <tr>
+                            <td style="padding:4px 0;color:#c8c8d8;font-size:13px;">✓ &nbsp;The 3 financial systems to build first</td>
+                          </tr>
+                          <tr>
+                            <td style="padding:4px 0;color:#c8c8d8;font-size:13px;">✓ &nbsp;Robert's personal framework for breaking the cycle</td>
+                          </tr>
+                        </table>
                         <a href="https://buy.stripe.com/9B6dRad5653g7d77028Vi0b"
-                           style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 32px;border-radius:6px;font-weight:bold;font-size:15px;margin-bottom:12px;">
-                          Get Your Full Blueprint — $47
+                           style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 36px;border-radius:6px;font-weight:bold;font-size:16px;margin-top:8px;">
+                          Get the Full Blueprint — $47
                         </a>
-                        <br />
+                      </td>
+                    </tr>
+
+                    <!-- $499 Strategy Session Offer -->
+                    <tr>
+                      <td style="padding:36px 40px;background-color:#ffffff;text-align:center;border-top:2px solid #c9973a;">
+                        <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 10px;">Premium Option</p>
+                        <h2 style="color:#1a1a2e;font-family:Georgia,serif;font-size:20px;margin:0 0 12px;">
+                          Work Directly With Robert
+                        </h2>
+                        <p style="color:#7a7a8a;font-size:14px;margin:0 0 8px;line-height:1.7;">
+                          Robert Brickey is a licensed financial advisor with Prudential. The $499 Strategy Session isn't generic coaching — it's a real, personalized financial plan built around your life, your numbers, and your goals.
+                        </p>
+                        <p style="color:#7a7a8a;font-size:14px;margin:0 0 20px;line-height:1.7;">
+                          If you're ready to stop guessing and start building — this is the session that changes everything.
+                        </p>
                         <a href="https://buy.stripe.com/7sY14o7KMbrE693ckm8Vi0c"
-                           style="display:inline-block;margin-top:12px;color:#c9973a;font-size:13px;text-decoration:underline;">
-                          Or book a 1-on-1 Strategy Session ($499)
+                           style="display:inline-block;background-color:#ffffff;color:#c9973a;border:2px solid #c9973a;text-decoration:none;padding:12px 32px;border-radius:6px;font-weight:bold;font-size:15px;">
+                          Book Your Strategy Session — $499
                         </a>
                       </td>
                     </tr>
