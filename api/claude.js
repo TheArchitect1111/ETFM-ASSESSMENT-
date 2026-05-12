@@ -1,17 +1,18 @@
 import { createClient } from "@supabase/supabase-js";
- 
+
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_ANON_KEY
 );
- 
+
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const STRIPE_47 = "https://buy.stripe.com/9B6dRad5653g7d77028Vi0b";
 const STRIPE_499 = "https://buy.stripe.com/7sY14o7KMbrE693ckm8Vi0c";
 const CALENDLY = "https://calendly.com/exit-etfm/etfm-strategic-reset-session";
+const FRAMEWORK_URL = "https://etfm-assessment.vercel.app/framework.html";
 const LOGO = "https://raw.githubusercontent.com/TheArchitect1111/ETFM-ASSESSMENT-/main/file_00000000e10471f5bb36fabf63d29869.png";
- 
+
 async function callClaude(prompt, maxTokens = 2048) {
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
@@ -29,7 +30,7 @@ async function callClaude(prompt, maxTokens = 2048) {
   const data = await res.json();
   return data?.content?.[0]?.text || "";
 }
- 
+
 async function sendEmail(to, subject, html) {
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -48,7 +49,7 @@ async function sendEmail(to, subject, html) {
   if (!res.ok) console.error("Resend error:", data);
   return data;
 }
- 
+
 function emailWrapper(content) {
   return `<!DOCTYPE html>
 <html>
@@ -80,7 +81,7 @@ function emailWrapper(content) {
 </body>
 </html>`;
 }
- 
+
 // ── SCORING ENGINE ────────────────────────────────────────────────────────────
 function calculateAwarenessScore(answers) {
   const scoreMap = {
@@ -98,7 +99,7 @@ function calculateAwarenessScore(answers) {
   const scores = answers.map((a) => scoreMap[a] || 40);
   return Math.round(scores.reduce((sum, s) => sum + s, 0) / scores.length);
 }
- 
+
 function assignArchetype(answers, awarenessScore) {
   if (awarenessScore < 25) return "Financial Avoider";
   if (awarenessScore < 40) return "Drifter";
@@ -109,56 +110,56 @@ function assignArchetype(answers, awarenessScore) {
   if (awarenessScore >= 70) return "Builder";
   return "Directionless Earner";
 }
- 
+
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   if (req.method === "OPTIONS") return res.status(200).end();
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
- 
+
   const { type, ...body } = req.body;
- 
+
   // ── LEVEL 1: Free Snapshot Email ──────────────────────────────────────────
   if (type === "subscribe") {
     const { firstName, email, answers } = body;
- 
+
     const answerValues = answers.map((a) => a.answer);
     const awarenessScore = calculateAwarenessScore(answerValues);
     const archetype = assignArchetype(answerValues, awarenessScore);
- 
+
     const answersText = answers
       .map((a, i) => `Q${i + 1}: ${a.question}\nAnswer: ${a.answer}`)
       .join("\n\n");
- 
+
     let snapshotHtml = "";
     try {
       snapshotHtml = await callClaude(`You are Robert Brickey, a licensed financial advisor and creator of ETFM (Escape The Financial Matrix). You speak with calm authority — strategic, observational, never preachy or salesy.
- 
+
 ${firstName}'s Financial Archetype: ${archetype}
 ${firstName}'s Awareness Score: ${awarenessScore}/100
- 
+
 Assessment answers:
 ${answersText}
- 
+
 Write their personalized ETFM Snapshot in HTML. Content sections only — no html/head/body tags. Use simple inline-styled HTML.
- 
+
 Follow this EXACT structure:
- 
+
 1. OPENING (2 sentences) — acknowledge what it means that they stopped and looked honestly. Warm but not sentimental.
- 
+
 2. FINANCIAL IDENTITY — display their archetype: "${archetype}" in bold gold. 2-3 sentences explaining exactly what this means for them based on their specific answers. Be precise — reference what they actually said.
- 
+
 3. AWARENESS SCORE — display: <h2 style="color:#c9973a;font-size:42px;font-family:Georgia,serif;margin:20px 0 4px;">${awarenessScore}/100</h2><p style="color:#7a7a8a;font-size:13px;margin:0 0 24px;">Awareness Score</p> Then 2 sentences interpreting what this score means right now.
- 
+
 4. KEY PATTERN OBSERVATION — 3 sentences. Name the specific financial cycle their answers reveal. This should feel like an advisor who has seen this pattern before and knows it well. Reference their actual answers.
- 
+
 5. THE AHA MOMENT — one single observation that makes them feel: "How did this know that?" Something deeply accurate about their specific situation that most people never name. This is the most important part.
- 
+
 6. ONE ACTION THIS WEEK — one concrete specific action. Not vague. Example: "Open a separate savings account today and name it Freedom Fund. Move $25 into it before Friday — not because $25 changes everything, but because the decision does."
- 
+
 7. CLOSING LINE — one powerful forward-momentum sentence.
- 
+
 Tone: calm, strategic, observational, intelligent. Never motivational. Never generic. Always specific.
 Use: <h3>, <p>, <strong>, <hr style="border:none;border-top:1px solid #e8e3da;margin:28px 0;">
 Keep under 500 words total.`);
@@ -166,7 +167,7 @@ Keep under 500 words total.`);
       console.error("Claude snapshot error:", err);
       snapshotHtml = `<p>Hi ${firstName},</p><p>Your ETFM Financial Snapshot has been prepared. Your Awareness Score is <strong>${awarenessScore}/100</strong> and your financial archetype is <strong>${archetype}</strong>. A follow-up from Robert will provide your full analysis.</p>`;
     }
- 
+
     const emailHtml = emailWrapper(`
       <tr><td style="padding:40px;color:#1a1a2e;font-size:15px;line-height:1.8;">
         ${snapshotHtml}
@@ -198,60 +199,60 @@ Keep under 500 words total.`);
         </td>
       </tr>
     `);
- 
+
     try {
       await sendEmail(email, `${firstName}, your ETFM Financial Snapshot is here`, emailHtml);
     } catch (err) {
       console.error("Email send error:", err);
     }
- 
+
     return res.status(200).json({ success: true, awarenessScore, archetype });
   }
- 
+
   // ── LEVEL 2: Blueprint Deep Dive Report ───────────────────────────────────
   if (type === "blueprint_report") {
     const { firstName, email, freeAnswers, blueprintAnswers } = body;
- 
+
     const allAnswersText = [
       "=== LEVEL 1 SNAPSHOT ANSWERS ===",
       ...Object.entries(freeAnswers || {}).map(([q, a]) => `${q}: ${a}`),
       "\n=== LEVEL 2 BLUEPRINT ANSWERS ===",
       ...blueprintAnswers.map((a, i) => `Q${i + 1}: ${a.question}\nAnswer: ${a.answer}`),
     ].join("\n");
- 
+
     let reportHtml = "";
     try {
       reportHtml = await callClaude(`You are Robert Brickey, a licensed financial advisor and creator of ETFM. You are writing a private Strategic Financial Blueprint — a premium advisor-grade document, not an AI report.
- 
+
 CLIENT: ${firstName}
 ALL ASSESSMENT DATA:
 ${allAnswersText}
- 
+
 Write the Strategic Financial Blueprint in HTML. This document follows a FIXED ARCHITECTURE — you personalize the language within each section based on their specific answers.
- 
+
 FIXED REPORT STRUCTURE — follow exactly:
- 
+
 1. OPENING OBSERVATION
 One paragraph. Observational, calm, precise. Name something specific about their financial situation that most people never articulate clearly. This should feel like an advisor who has studied their file.
- 
+
 2. PATTERN DIAGNOSIS
 What is the specific financial pattern their answers reveal? Name the cycle. Be precise. 2-3 sentences that make them feel deeply understood.
- 
+
 3. STRUCTURAL WEAKNESS ANALYSIS
 Based on their answers about money organization, automation, emergency fund, and debt — what is the primary structural gap? What is it costing them? 2-3 sentences.
- 
+
 4. SYSTEM FRICTION POINTS
 What are the 2-3 specific areas where their financial system is breaking down? Reference their actual answers about income predictability, financial pressure areas, and stress responses.
- 
+
 5. OWNERSHIP POSITIONING
 Based on what they're currently building (or not building) — where are they on the spectrum from survival to ownership? What does this mean for their trajectory? 2-3 sentences.
- 
+
 6. FUTURE TRAJECTORY
 If nothing changes, where does their current pattern lead in 5 years? Be honest but not harsh. Reference their answer about how they'd feel if nothing changed.
- 
+
 7. IMMEDIATE PRIORITIES — THE FIRST 3 MOVES
 List exactly 3 specific actions they should take first. Not general advice — specific, sequenced, actionable. Format as a numbered list.
- 
+
 8. 30-DAY STRATEGIC RESET PROTOCOL
 This is a critical deliverable. Provide a structured 30-day framework:
 - Week 1: Visibility (what to see and measure)
@@ -259,13 +260,13 @@ This is a critical deliverable. Provide a structured 30-day framework:
 - Week 3: Structure (first automations and protections)
 - Week 4: Momentum (first ownership moves)
 Keep each week to 2-3 specific actions.
- 
+
 9. STRATEGIC RECOMMENDATION
 One clear paragraph. Based on everything — what is the most important strategic move for ${firstName} right now? Be direct. This is the advisor speaking plainly.
- 
+
 10. LEVEL 3 TRANSITION
 Natural, not salesy. Acknowledge that what's been revealed is complex. Note that a real financial plan — built around their actual numbers, structure, and goals — is the logical next step. Mention Robert works with a limited number of clients each month on exactly this. Include the Calendly link styled as a button.
- 
+
 TONE RULES:
 - Calm, strategic, observational
 - Never motivational or emotional
@@ -273,7 +274,7 @@ TONE RULES:
 - Always specific to their answers
 - Feels like a private document, not an email
 - Professional but human
- 
+
 HTML formatting: use <h3 style="color:#1a1a2e;font-family:Georgia,serif;">, <p>, <strong style="color:#c9973a;">, <ol>, <li>
 Section dividers: <hr style="border:none;border-top:1px solid #e8e3da;margin:32px 0;">
 Keep under 900 words.`, 3000);
@@ -281,7 +282,7 @@ Keep under 900 words.`, 3000);
       console.error("Blueprint Claude error:", err);
       reportHtml = `<p>Hi ${firstName}, your Strategic Financial Blueprint is being finalized. Robert will follow up directly with your complete report.</p>`;
     }
- 
+
     const emailHtml = emailWrapper(`
       <tr>
         <td style="padding:32px 40px 0;text-align:center;">
@@ -297,22 +298,24 @@ Keep under 900 words.`, 3000);
         <td style="padding:32px 40px;background-color:#1a1a2e;text-align:center;">
           <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 12px;">Ready for a Real Plan?</p>
           <h2 style="color:#ffffff;font-family:Georgia,serif;font-size:20px;margin:0 0 12px;">Book Your Strategic Reset Session</h2>
+          <p style="color:#a0a0b8;font-size:14px;margin:0 0 12px;line-height:1.7;">Your 5-Step ETFM Framework guide is ready to view and save:</p>
+          <a href="${FRAMEWORK_URL}" style="display:inline-block;background-color:rgba(201,151,58,0.15);color:#c9973a;border:1px solid #c9973a;text-decoration:none;padding:10px 24px;border-radius:6px;font-size:14px;margin-bottom:24px;">View Your Framework Guide →</a>
           <p style="color:#a0a0b8;font-size:14px;margin:0 0 20px;line-height:1.7;">Robert works with a limited number of clients each month on a complete financial architecture — built around your actual numbers, structure, and goals. This is where implementation begins.</p>
           <a href="${CALENDLY}" style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 32px;border-radius:6px;font-weight:bold;font-size:15px;">Book Your Session — $499</a>
         </td>
       </tr>
     `);
- 
+
     try {
       await sendEmail(email, `${firstName}, your ETFM Strategic Blueprint is ready`, emailHtml);
       console.log(`Blueprint report sent to ${email}`);
     } catch (err) {
       console.error("Blueprint email error:", err);
     }
- 
+
     return res.status(200).json({ success: true });
   }
- 
+
   // ── Direct Claude passthrough ─────────────────────────────────────────────
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
