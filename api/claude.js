@@ -206,6 +206,49 @@ Keep under 500 words total.`);
       console.error("Email send error:", err);
     }
 
+    // ── Admin Notification ────────────────────────────────────────────────────
+    try {
+      const adminHtml = emailWrapper(`
+        <tr>
+          <td style="padding:32px 40px;">
+            <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 16px;">New Assessment Completed</p>
+            <h2 style="color:#1a1a2e;font-family:Georgia,serif;font-size:22px;margin:0 0 24px;">New Lead — ETFM Snapshot</h2>
+            <table style="width:100%;border-collapse:collapse;">
+              <tr style="border-bottom:1px solid #e8e3da;">
+                <td style="padding:10px 0;font-size:13px;color:#7a7a8a;width:140px;">Name</td>
+                <td style="padding:10px 0;font-size:14px;color:#1a1a2e;font-weight:500;">${firstName}</td>
+              </tr>
+              <tr style="border-bottom:1px solid #e8e3da;">
+                <td style="padding:10px 0;font-size:13px;color:#7a7a8a;">Email</td>
+                <td style="padding:10px 0;font-size:14px;color:#c9973a;">${email}</td>
+              </tr>
+              <tr style="border-bottom:1px solid #e8e3da;">
+                <td style="padding:10px 0;font-size:13px;color:#7a7a8a;">Archetype</td>
+                <td style="padding:10px 0;font-size:14px;color:#1a1a2e;font-weight:500;">${archetype}</td>
+              </tr>
+              <tr style="border-bottom:1px solid #e8e3da;">
+                <td style="padding:10px 0;font-size:13px;color:#7a7a8a;">Awareness Score</td>
+                <td style="padding:10px 0;font-size:24px;color:#c9973a;font-family:Georgia,serif;font-weight:bold;">${awarenessScore}/100</td>
+              </tr>
+            </table>
+            <p style="margin:24px 0 8px;font-size:13px;color:#7a7a8a;text-transform:uppercase;letter-spacing:1px;">Assessment Answers</p>
+            ${answers.map((a, i) => `
+              <div style="padding:10px 0;border-bottom:1px solid #e8e3da;">
+                <p style="font-size:12px;color:#7a7a8a;margin:0 0 4px;">Q${i+1}: ${a.question}</p>
+                <p style="font-size:13px;color:#1a1a2e;margin:0;font-weight:500;">${a.answer}</p>
+              </div>
+            `).join("")}
+            <div style="margin-top:28px;text-align:center;">
+              <a href="mailto:${email}" style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:12px 28px;border-radius:6px;font-weight:bold;font-size:14px;">Reply to ${firstName}</a>
+            </div>
+          </td>
+        </tr>
+      `);
+      await sendEmail("info@etfm.systems", `New Lead: ${firstName} — ${archetype} (${awarenessScore}/100)`, adminHtml);
+    } catch (err) {
+      console.error("Admin notification error:", err);
+    }
+
     return res.status(200).json({ success: true, awarenessScore, archetype });
   }
 
