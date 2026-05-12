@@ -70,7 +70,7 @@ function emailWrapper(content) {
         ${content}
         <tr>
           <td style="background-color:#f7f4ef;padding:24px 40px;text-align:center;border-top:1px solid #e8e3da;">
-            <p style="margin:0 0 8px;color:#7a7a8a;font-size:12px;">Questions? <a href="mailto:info@etfm.systems" style="color:#c9973a;">info@etfm.systems</a></p>
+            <p style="margin:0 0 8px;color:#7a7a8a;font-size:12px;">Questions? <a href="mailto:exit@etfm.systems" style="color:#c9973a;">exit@etfm.systems</a></p>
             <p style="margin:0;color:#a0a0a8;font-size:11px;font-style:italic;">ETFM provides educational and strategic financial guidance designed to support clarity, structure, and decision-making. This does not constitute individualized investment, legal, or tax advice.</p>
             <p style="margin:8px 0 0;color:#7a7a8a;font-size:11px;">© ${new Date().getFullYear()} Escape The Financial Matrix. All rights reserved.</p>
           </td>
@@ -244,7 +244,7 @@ Keep under 500 words total.`);
           </td>
         </tr>
       `);
-      await sendEmail("info@etfm.systems", `New Lead: ${firstName} — ${archetype} (${awarenessScore}/100)`, adminHtml);
+      await sendEmail("exit@etfm.systems", `New Lead: ${firstName} — ${archetype} (${awarenessScore}/100)`, adminHtml);
     } catch (err) {
       console.error("Admin notification error:", err);
     }
