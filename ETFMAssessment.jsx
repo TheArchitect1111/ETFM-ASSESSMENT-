@@ -628,56 +628,20 @@ export default function ETFMAssessment() {
 
   // ── CONFIRMATION ─────────────────────────────────────────────────────────────
   if (screen === "confirmation") return (
-    <div style={{ minHeight: "100vh", backgroundColor: C.bg, padding: "40px 20px" }}>
-      <div style={{ maxWidth: "680px", margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: "40px" }}>
-          <p style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "3px", color: C.gold, marginBottom: "16px" }}>Snapshot Delivered</p>
-          <h2 style={{ fontSize: "36px", fontFamily: "Georgia, serif", color: C.text, marginBottom: "16px", lineHeight: "1.3" }}>
-            Your Snapshot is on its way.
-          </h2>
-          <p style={{ fontSize: "16px", color: C.muted, lineHeight: "1.7" }}>
-            Check your inbox for your Financial Archetype, Awareness Score, and personalized strategic insight.
-          </p>
-        </div>
-
-        {/* Unlock Blueprint CTA */}
-        <div style={{ backgroundColor: C.dark, borderRadius: "12px", padding: "40px 36px", marginBottom: "16px", textAlign: "center" }}>
-          <p style={{ color: C.gold, fontSize: "11px", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "12px" }}>The next step</p>
-          <h3 style={{ color: C.white, fontFamily: "Georgia, serif", fontSize: "24px", marginBottom: "16px", lineHeight: "1.4" }}>
-            Unlock Your Strategic Financial Blueprint
-          </h3>
-          <p style={{ color: "#a0a0b8", fontSize: "14px", marginBottom: "24px", lineHeight: "1.7" }}>
-            Your Snapshot identifies where you are. The Blueprint diagnoses exactly why — and delivers your personalized escape roadmap, the 5-step ETFM framework PDF, Robert's video message, and your 30-Day Strategic Reset Protocol.
-          </p>
-          <ul style={{ listStyle: "none", padding: 0, margin: "0 0 28px", textAlign: "left", display: "inline-block" }}>
-            {["18-question strategic diagnostic", "Personalized escape roadmap", "5-Step ETFM Framework PDF", "Robert's personal video message", "30-Day Strategic Reset Protocol"].map((item, i) => (
-              <li key={i} style={{ fontSize: "14px", color: "#c8c8d8", marginBottom: "10px", paddingLeft: "22px", position: "relative" }}>
-                <span style={{ position: "absolute", left: 0, color: C.gold }}>✓</span>{item}
-              </li>
-            ))}
-          </ul>
-          <button onClick={handleBlueprintStart} disabled={loading}
-            style={{ display: "inline-block", backgroundColor: C.gold, color: C.dark, border: "none", padding: "14px 36px", borderRadius: "6px", fontWeight: "bold", fontSize: "16px", cursor: "pointer" }}>
-            {loading ? "Preparing..." : "Get the Strategic Blueprint — $47"}
-          </button>
-        </div>
-
-        {/* $499 Option */}
-        <div style={{ backgroundColor: C.white, border: `2px solid ${C.gold}`, borderRadius: "12px", padding: "28px 32px", marginBottom: "40px", textAlign: "center" }}>
-          <p style={{ color: C.gold, fontSize: "11px", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "8px" }}>Premium</p>
-          <h3 style={{ fontSize: "18px", fontFamily: "Georgia, serif", color: C.text, marginBottom: "10px" }}>Work Directly With Robert</h3>
-          <p style={{ fontSize: "14px", color: C.muted, marginBottom: "20px", lineHeight: "1.7" }}>
-            Robert is a licensed financial advisor. The $499 Strategic Reset Session is a real, personalized financial plan built around your numbers and your life.
-          </p>
-          <a href={STRIPE_499} target="_blank" rel="noopener noreferrer"
-            style={{ display: "inline-block", backgroundColor: "transparent", color: C.gold, border: `2px solid ${C.gold}`, textDecoration: "none", padding: "12px 28px", borderRadius: "6px", fontWeight: "bold", fontSize: "14px" }}>
-            Book Your Session — $499
-          </a>
-        </div>
-
-        <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: "24px", textAlign: "center", fontSize: "13px", color: C.muted }}>
+    <div style={{ minHeight: "100vh", backgroundColor: C.bg, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "40px 20px", textAlign: "center" }}>
+      <div style={{ maxWidth: "520px" }}>
+        <p style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "3px", color: C.gold, marginBottom: "16px" }}>Snapshot Delivered</p>
+        <h2 style={{ fontSize: "36px", fontFamily: "Georgia, serif", color: C.text, marginBottom: "20px", lineHeight: "1.3" }}>
+          Your Snapshot is on its way.
+        </h2>
+        <p style={{ fontSize: "16px", color: C.muted, lineHeight: "1.7", marginBottom: "16px" }}>
+          Check your inbox for your Financial Archetype, Awareness Score, and personalized strategic insight.
+        </p>
+        <p style={{ fontSize: "14px", color: C.muted, lineHeight: "1.7" }}>
+          Your next steps and upgrade options will be inside the email.
+        </p>
+        <div style={{ borderTop: `1px solid ${C.border}`, marginTop: "40px", paddingTop: "24px", fontSize: "13px", color: C.muted }}>
           <p>Questions? <strong>info@etfm.systems</strong></p>
-          <p style={{ marginTop: "8px", fontSize: "11px" }}>© {new Date().getFullYear()} Escape The Financial Matrix. All rights reserved.</p>
         </div>
       </div>
     </div>
