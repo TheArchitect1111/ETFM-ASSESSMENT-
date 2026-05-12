@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The 5 Steps to Escape Your Financial Matrix — ETFM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #1a1a2e;
+      --navy-mid: #252545;
+      --gold: #c9973a;
+      --gold-soft: #f0c97a;
+      --gold-pale: #f7e8cc;
+      --cream: #f7f4ef;
+      --ivory: #faf8f4;
+      --muted: #7a7a8a;
+      --border: #e8e3da;
+      --body: #2d2d4a;
+      --charcoal: #3a3a4a;
+      --white: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--body);
+      line-height: 1.7;
+    }
+
+    /* ── PRINT BUTTON ── */
+    .print-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--navy);
+      padding: 10px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 2px solid var(--gold);
+    }
+    .print-bar span { color: var(--gold); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+    .print-btn {
+      background: var(--gold); color: var(--navy);
+      border: none; padding: 8px 20px; font-family: 'DM Sans', sans-serif;
+      font-size: 12px; font-weight: 500; cursor: pointer; border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+    .print-btn:hover { background: var(--gold-soft); }
+
+    /* ── COVER ── */
+    .cover {
+      background: var(--navy);
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 80px 40px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 42px;
+    }
+    .cover::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: var(--gold);
+    }
+    .cover::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+      background: var(--gold);
+    }
+    .cover-logo { width: 160px; height: 160px; object-fit: contain; margin-bottom: 32px; }
+    .cover-label { font-size: 10px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 16px; }
+    .cover-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .cover-sub { font-size: 15px; color: #a0a0b8; max-width: 520px; margin: 0 auto 40px; line-height: 1.8; }
+    .cover-divider {
+      width: 200px; height: 1px; background: var(--gold);
+      margin: 0 auto 32px; position: relative;
+    }
+    .cover-divider::before {
+      content: '◆'; position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--gold); font-size: 10px;
+      background: var(--navy); padding: 0 8px;
+    }
+    .cover-author { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--gold); }
+    .cover-author-title { font-size: 12px; color: #a0a0b8; margin-top: 6px; }
+
+    /* ── SECTIONS ── */
+    .section { max-width: 780px; margin: 0 auto; padding: 80px 24px; }
+    .section + .section { border-top: 1px solid var(--border); }
+
+    .section-label {
+      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px;
+    }
+    h2.section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 4vw, 40px);
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+    .gold-rule {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 32px;
+    }
+    .gold-rule::before, .gold-rule::after {
+      content: ''; flex: 1; height: 1px; background: var(--gold); opacity: 0.4;
+    }
+    .gold-rule span { color: var(--gold); font-size: 10px; }
+
+    p { margin-bottom: 16px; font-size: 15px; color: var(--body); line-height: 1.85; }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      background: var(--navy);
+      border-left: 5px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 28px 32px;
+      margin: 32px 0;
+      position: relative;
+    }
+    .pull-quote::before {
+      content: '\201C';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 80px;
+      color: rgba(201,151,58,0.2);
+      position: absolute;
+      top: -10px; left: 16px;
+      line-height: 1;
+    }
+    .pull-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--gold-soft);
+      line-height: 1.6;
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    /* ── ACTION BOX ── */
+    .action-box {
+      background: var(--ivory);
+      border-left: 5px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 24px 28px;
+      margin: 24px 0;
+    }
+    .action-label {
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px; font-weight: 500;
+    }
+    .action-box p { font-style: italic; color: var(--charcoal); margin: 0; font-size: 14px; }
+
+    /* ── SCORE SECTION ── */
+    .score-display {
+      background: var(--navy);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      margin: 32px 0;
+    }
+    .score-label-sm { font-size: 10px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+    .score-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 72px;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .score-sub-text { font-size: 12px; color: #6a6a7a; }
+    .score-bars { margin-top: 36px; }
+    .score-bar-row {
+      display: grid; grid-template-columns: 140px 1fr 40px;
+      align-items: center; gap: 16px; margin-bottom: 16px;
+    }
+    .score-bar-label { font-size: 13px; color: var(--white); text-align: right; }
+    .score-bar-track {
+      height: 6px; background: rgba(255,255,255,0.1);
+      border-radius: 3px; overflow: hidden;
+    }
+    .score-bar-fill { height: 100%; background: var(--gold); border-radius: 3px; }
+    .score-bar-num { font-size: 13px; color: var(--gold); font-weight: 500; }
+    .score-insight {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,151,58,0.2);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-top: 12px;
+    }
+    .score-insight p { color: #a0a0b8; font-size: 13px; margin: 0; line-height: 1.7; }
+    .score-insight strong { color: var(--gold-soft); }
+
+    /* ── ARCHETYPE CARDS ── */
+    .archetype-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+    @media(max-width: 600px) { .archetype-grid { grid-template-columns: 1fr; } }
+    .archetype-card {
+      background: var(--ivory);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 20px;
+    }
+    .archetype-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 600;
+      color: var(--navy); margin-bottom: 4px;
+    }
+    .archetype-tagline { font-size: 11px; color: var(--gold); font-style: italic; margin-bottom: 14px; }
+    .archetype-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .archetype-col-label { font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+    .archetype-col-text { font-size: 11px; color: var(--charcoal); line-height: 1.5; }
+
+    /* ── LEAK ITEMS ── */
+    .leak-item {
+      background: var(--ivory);
+      border-left: 3px solid var(--gold);
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      border-radius: 0 6px 6px 0;
+    }
+    .leak-title { font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 3px; }
+    .leak-desc { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.5; }
+
+    /* ── STAGES ── */
+    .stages-list { margin-top: 8px; }
+    .stage-row {
+      display: grid; grid-template-columns: 48px 1fr;
+      gap: 16px; padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .stage-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 700;
+      color: var(--gold); line-height: 1;
+    }
+    .stage-name { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+    .stage-desc { font-size: 13px; color: var(--charcoal); line-height: 1.6; margin: 0; }
+
+    /* ── PROJECTION ── */
+    .projection-item {
+      display: grid; grid-template-columns: 160px 1fr;
+      gap: 20px; padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .projection-title { font-size: 13px; font-weight: 500; color: var(--navy); }
+    .projection-body { font-size: 13px; color: var(--charcoal); line-height: 1.65; margin: 0; }
+    @media(max-width:600px) { .projection-item { grid-template-columns: 1fr; gap: 6px; } }
+
+    /* ── STEP BADGE ── */
+    .step-badge {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; margin-bottom: 24px;
+    }
+    .step-dot {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 600;
+      position: relative; z-index: 1;
+    }
+    .step-dot.done { background: var(--gold); color: var(--navy); }
+    .step-dot.active {
+      background: var(--navy); color: var(--gold);
+      box-shadow: 0 0 0 3px var(--gold);
+      width: 42px; height: 42px; font-size: 15px;
+    }
+    .step-dot.pending { background: var(--border); color: var(--muted); }
+    .step-line { flex: 1; height: 1px; max-width: 48px; }
+    .step-line.done-line { background: var(--gold); }
+    .step-line.pending-line { background: var(--border); }
+
+    /* ── DARK SECTION ── */
+    .dark-section {
+      background: var(--navy);
+      padding: 80px 24px;
+    }
+    .dark-section .section { border-top: none; }
+    .dark-section h2.section-title { color: var(--white); }
+    .dark-section p { color: #a0a0b8; }
+    .dark-section .section-label { color: var(--gold); }
+
+    /* ── WEEK BLOCKS ── */
+    .week-block { margin-bottom: 24px; }
+    .week-header {
+      background: var(--navy);
+      color: var(--gold);
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      font-weight: 500;
+      padding: 12px 16px;
+      border-radius: 4px 4px 0 0;
+    }
+    .week-body {
+      background: var(--ivory);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 4px 4px;
+      padding: 20px;
+    }
+    .week-desc { font-size: 13px; color: var(--charcoal); margin-bottom: 14px; }
+    .week-actions li {
+      font-size: 13px; color: var(--body);
+      padding: 4px 0; list-style: none;
+      padding-left: 16px; position: relative;
+    }
+    .week-actions li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--gold); font-size: 11px;
+    }
+
+    /* ── SESSION ITEMS ── */
+    .session-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,151,58,0.2);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-bottom: 10px;
+    }
+    .session-title { font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+    .session-desc { font-size: 12px; color: #6a6a7a; margin: 0; line-height: 1.5; }
+
+    /* ── NOTE ── */
+    .note-section { background: var(--ivory); }
+    .note-photo { width: 100%; max-height: 420px; object-fit: cover; object-position: center top; border-radius: 8px; margin-bottom: 40px; }
+    .note-open {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 600;
+      color: var(--navy); margin-bottom: 20px;
+    }
+    .note-emph {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 18px;
+      color: var(--gold); margin: 20px 0;
+    }
+    .note-sig {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 20px;
+      color: var(--navy); margin-top: 32px; margin-bottom: 4px;
+    }
+    .note-title { font-size: 12px; color: var(--muted); }
+
+    /* ── CTA BOX ── */
+    .cta-box {
+      text-align: center; padding: 40px;
+      background: var(--ivory);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin: 32px 0;
+    }
+    .cta-box a {
+      display: inline-block;
+      background: var(--gold); color: var(--navy);
+      text-decoration: none; padding: 14px 36px;
+      border-radius: 6px; font-weight: 500; font-size: 15px;
+      margin-top: 16px;
+    }
+    .cta-box a:hover { background: var(--gold-soft); }
+    .cta-url { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      max-width: 780px; margin: 0 auto;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      font-size: 11px; color: var(--muted);
+      font-style: italic; line-height: 1.7;
+      text-align: center;
+    }
+
+    /* ── TOC ── */
+    .toc-list { margin-top: 8px; }
+    .toc-item {
+      display: grid; grid-template-columns: 48px 1fr;
+      gap: 12px; padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+    .toc-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 700; color: var(--gold);
+    }
+    .toc-title { font-size: 14px; color: var(--navy); }
+
+    /* ── PRINT ── */
+    @media print {
+      .print-bar { display: none; }
+      .cover { margin-top: 0; }
+      body { background: white; }
+      .pull-quote { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .score-display { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .week-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Print Bar -->
+<div class="print-bar">
+  <span>ETFM · Strategic Financial Framework</span>
+  <button class="print-btn" onclick="window.print()">⬇ Save as PDF</button>
+</div>
+
+<!-- COVER -->
+<div class="cover">
+  <img src="https://raw.githubusercontent.com/TheArchitect1111/ETFM-ASSESSMENT-/main/file_00000000e10471f5bb36fabf63d29869.png" alt="ETFM" class="cover-logo" />
+  <p class="cover-label">Escape The Financial Matrix</p>
+  <h1 class="cover-title">The 5 Steps to Escape<br/>Your Financial Matrix</h1>
+  <p class="cover-sub">A strategic framework for moving from financial reaction to financial structure — and from survival to ownership.</p>
+  <div class="cover-divider"></div>
+  <p class="cover-author">Robert Brickey</p>
+  <p class="cover-author-title">Licensed Financial Advisor · Creator of ETFM</p>
+</div>
+
+<!-- PHILOSOPHY -->
+<div class="section">
+  <p class="section-label">The Philosophy</p>
+  <h2 class="section-title">Most people don't lack effort.<br/>They lack structure.</h2>
+  <div class="gold-rule"><span>◆</span></div>
+  <p>ETFM exists because financial struggle is almost never what it appears to be on the surface. It is not laziness. It is not irresponsibility. It is not a lack of intelligence or intention.</p>
+  <p>It is a structural problem. A systems problem. The absence of architecture in a domain that requires it — and the presence of reactive patterns that develop when structure is absent.</p>
+  <div class="pull-quote"><p>The financial system is designed to keep you spending. This framework is designed to help you build.</p></div>
+  <p>This document is a strategic financial framework — not a budgeting guide, not a motivational resource. It is a diagnostic and implementation architecture designed to help you see the system clearly, identify your pattern, and begin building the structure that creates real financial momentum.</p>
+  <div class="toc-list">
+    <p class="section-label" style="margin-top:32px;">The 5-Step Framework</p>
+    <div class="toc-item"><span class="toc-num">01</span><span class="toc-title">See the Matrix Clearly</span></div>
+    <div class="toc-item"><span class="toc-num">02</span><span class="toc-title">Identify Your Pattern</span></div>
+    <div class="toc-item"><span class="toc-num">03</span><span class="toc-title">Build Your 3 Foundation Systems</span></div>
+    <div class="toc-item"><span class="toc-num">04</span><span class="toc-title">Break the Cycle, Not Just the Habit</span></div>
+    <div class="toc-item"><span class="toc-num">05</span><span class="toc-title">Build Toward Freedom, Not Just Stability</span></div>
+  </div>
+</div>
+
+<!-- SCORE -->
+<div class="section">
+  <p class="section-label">Diagnostic Framework</p>
+  <h2 class="section-title">The Financial Matrix Score</h2>
+  <div class="gold-rule"><span>◆</span></div>
+  <p>The Financial Matrix Score is not a grade. It is a diagnostic map — a structured way of seeing where your financial operating system is strong, where it is fragile, and where the most important work needs to happen first.</p>
+  <div class="score-display">
+    <p class="score-label-sm">Financial Matrix Score</p>
+    <div class="score-number">63<span style="font-size:36px;opacity:0.5">/100</span></div>
+    <p class="score-sub-text">Based on your ETFM Snapshot assessment</p>
+    <div class="score-bars">
+      <div class="score-bar-row"><span class="score-bar-label">Awareness</span><div class="score-bar-track"><div class="score-bar-fill" style="width:82%"></div></div><span class="score-bar-num">82</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">Structure</span><div class="score-bar-track"><div class="score-bar-fill" style="width:41%"></div></div><span class="score-bar-num">41</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">Stability</span><div class="score-bar-track"><div class="score-bar-fill" style="width:58%"></div></div><span class="score-bar-num">58</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">Ownership</span><div class="score-bar-track"><div class="score-bar-fill" style="width:35%"></div></div><span class="score-bar-num">35</span></div>
+      <div class="score-bar-row"><span class="score-bar-label">Momentum</span><div class="score-bar-track"><div class="score-bar-fill" style="width:49%"></div></div><span class="score-bar-num">49</span></div>
+    </div>
+    <div class="score-insight" style="margin-top:28px;">
+      <p><strong>High Awareness, Low Structure</strong> — You understand money intellectually but still operate reactively. The knowledge is present. The architecture is not. This is the most common pattern among capable earners who feel stuck.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ARCHETYPES -->
+<div class="section">
+  <p class="section-label">Behavioral Intelligence</p>
+  <h2 class="section-title">Financial Identity Archetypes</h2>
+  <div class="gold-rule"><span>◆</span></div>
+  <p>A financial archetype is not a personality label. It is an operational pattern — a recurring set of behaviors, responses, and structural tendencies that shape how money moves through your life.</p>
+  <div class="archetype-grid">
+    <div class="archetype-card">
+      <div class="archetype-name">The Reactor</div>
+      <div class="archetype-tagline">Responds to financial pressure rather than directing financial movement.</div>
+      <div class="archetype-cols">
+        <div><div class="archetype-col-label">Strength</div><div class="archetype-col-text">High adaptability, survives disruption</div></div>
+        <div><div class="archetype-col-label">Risk</div><div class="archetype-col-text">No proactive structure, exhaustion builds</div></div>
+        <div><div class="archetype-col-label">Pattern</div><div class="archetype-col-text">Bills get paid. Goals get delayed. Indefinitely.</div></div>
+      </div>
+    </div>
+    <div class="archetype-card">
+      <div class="archetype-name">The Silent Leaker</div>
+      <div class="archetype-tagline">Earns adequately but experiences unexplained financial depletion.</div>
+      <div class="archetype-cols">
+        <div><div class="archetype-col-label">Strength</div><div class="archetype-col-text">Often disciplined in other domains</div></div>
+        <div><div class="archetype-col-label">Risk</div><div class="archetype-col-text">Invisible spending patterns drain momentum</div></div>
+        <div><div class="archetype-col-label">Pattern</div><div class="archetype-col-text">Money arrives, disappears, cycle resets.</div></div>
+      </div>
+    </div>
+    <div class="archetype-card">
+      <div class="archetype-name">The Overextended Achiever</div>
+      <div class="archetype-tagline">Earns enough to build wealth but operates without structural margin.</div>
+      <div class="archetype-cols">
+        <div><div class="archetype-col-label">Strength</div><div class="archetype-col-text">Income capacity, high ambition</div></div>
+        <div><div class="archetype-col-label">Risk</div><div class="archetype-col-text">Complexity rises with income, no architecture</div></div>
+        <div><div class="archetype-col-label">Pattern</div><div class="archetype-col-text">More money, same financial stress.</div></div>
+      </div>
+    </div>
+    <div class="archetype-card">
+      <div class="archetype-name">The Financial Avoider</div>
+      <div class="archetype-tagline">Manages financial anxiety by minimizing engagement with money.</div>
+      <div class="archetype-cols">
+        <div><div class="archetype-col-label">Strength</div><div class="archetype-col-text">Low emotional expenditure on finances</div></div>
+        <div><div class="archetype-col-label">Risk</div><div class="archetype-col-text">Avoidance compounds structural problems</div></div>
+        <div><div class="archetype-col-label">Pattern</div><div class="archetype-col-text">Accounts unchecked. Problems grow quietly.</div></div>
+      </div>
+    </div>
+    <div class="archetype-card">
+      <div class="archetype-name">The Rebuilder</div>
+      <div class="archetype-tagline">Has experienced financial disruption and is working toward stability.</div>
+      <div class="archetype-cols">
+        <div><div class="archetype-col-label">Strength</div><div class="archetype-col-text">Resilience, learned financial humility</div></div>
+        <div><div class="archetype-col-label">Risk</div><div class="archetype-col-text">Emotional weight of past slows movement</div></div>
+        <div><div class="archetype-col-label">Pattern</div><div class="archetype-col-text">Progress is real but feels fragile.</div></div>
+      </div>
+    </div>
+    <div class="archetype-card">
+      <div class="archetype-name">The Builder</div>
+      <div class="archetype-tagline">Operates with intentional financial architecture and directional momentum.</div>
+      <div class="archetype-cols">
+        <div><div class="archetype-col-label">Strength</div><div class="archetype-col-text">Structural discipline, ownership orientation</div></div>
+        <div><div class="archetype-col-label">Risk</div><div class="archetype-col-text">Scaling complexity without updated systems</div></div>
+        <div><div class="archetype-col-label">Pattern</div><div class="archetype-col-text">Systems compound. Wealth accumulates.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STRUCTURAL LEAKS -->
+<div class="section">
+  <p class="section-label">Diagnostic Intelligence</p>
+  <h2 class="section-title">The Hidden Structural Leaks</h2>
+  <div class="gold-rule"><span>◆</span></div>
+  <p>Most financial problems are not income problems. They are structural problems — invisible architectural gaps that quietly drain financial momentum regardless of how much comes in.</p>
+  <div class="pull-quote"><p>Your income may not be your primary issue. The absence of directional systems may be.</p></div>
+  <div class="leak-item"><div class="leak-title">No Automated Financial Systems</div><div class="leak-desc">Manual management creates inconsistency. Automation creates permanence.</div></div>
+  <div class="leak-item"><div class="leak-title">Unclear Cash Flow Architecture</div><div class="leak-desc">Without knowing exactly what moves and when, every month becomes improvisation.</div></div>
+  <div class="leak-item"><div class="leak-title">Reactive Financial Decision-Making</div><div class="leak-desc">Decisions made under pressure consistently produce worse outcomes than planned decisions.</div></div>
+  <div class="leak-item"><div class="leak-title">Lifestyle Expansion Without Architecture</div><div class="leak-desc">Income increases absorbed by lifestyle before systems capture the difference.</div></div>
+  <div class="leak-item"><div class="leak-title">Fragmented Account Structure</div><div class="leak-desc">One account for everything eliminates visibility, separation, and intentional direction.</div></div>
+  <div class="leak-item"><div class="leak-title">Debt Normalization</div><div class="leak-desc">When debt becomes background noise, it stops feeling urgent — and stops being addressed.</div></div>
+  <div class="leak-item"><div class="leak-title">No Ownership Strategy</div><div class="leak-desc">Income without asset accumulation is a financial treadmill — movement without destination.</div></div>
+  <div class="leak-item"><div class="leak-title">Financial Avoidance Patterns</div><div class="leak-desc">Avoidance is not rest. It is compounding. Every week of avoidance costs future options.</div></div>
+  <div class="leak-item"><div class="leak-title">Income Dependence Without Asset Building</div><div class="leak-desc">Trading time for money without building assets that generate money is a structural ceiling.</div></div>
+  <div class="leak-item"><div class="leak-title">No Monthly Financial Review System</div><div class="leak-desc">What is not measured is not managed. Review creates visibility. Visibility creates control.</div></div>
+</div>
+
+<!-- STAGES -->
+<div class="section">
+  <p class="section-label">Positioning Intelligence</p>
+  <h2 class="section-title">Where Are You Right Now?</h2>
+  <div class="gold-rule"><span>◆</span></div>
+  <p>Understanding your current financial stage is not about ranking. It is about clarity — knowing exactly where you are so you can build the right systems for where you are, not where you think you should be.</p>
+  <div class="stages-list">
+    <div class="stage-row"><span class="stage-num">01</span><div><div class="stage-name">Surviving</div><p class="stage-desc">Month-to-month financial management. Primary focus is covering obligations. Little to no forward financial movement. Structural systems are absent or fragmented.</p></div></div>
+    <div class="stage-row"><span class="stage-num">02</span><div><div class="stage-name">Stabilizing</div><p class="stage-desc">Reaction begins slowing. Some structure is emerging, but survival behavior has not yet been fully replaced. Progress feels fragile and inconsistent.</p></div></div>
+    <div class="stage-row"><span class="stage-num">03</span><div><div class="stage-name">Rebuilding</div><p class="stage-desc">Recovery from financial disruption. The emotional weight of previous patterns is present. Foundational systems are being reconstructed. Progress is real but cautious.</p></div></div>
+    <div class="stage-row"><span class="stage-num">04</span><div><div class="stage-name">Building</div><p class="stage-desc">Foundational systems are in place. Directional movement is intentional. Ownership is beginning. The shift from reaction to architecture is underway.</p></div></div>
+    <div class="stage-row"><span class="stage-num">05</span><div><div class="stage-name">Positioning</div><p class="stage-desc">Systems are functioning. Capital is accumulating. Strategic decisions about assets, investments, and long-term wealth are becoming the primary focus.</p></div></div>
+    <div class="stage-row"><span class="stage-num">06</span><div><div class="stage-name">Expanding</div><p class="stage-desc">Multiple systems operating simultaneously. Wealth architecture is active. Protection, legacy, and generational considerations become relevant.</p></div></div>
+  </div>
+</div>
+
+<!-- IF NOTHING CHANGES -->
+<div class="section">
+  <p class="section-label">Trajectory Intelligence</p>
+  <h2 class="section-title">If Nothing Changes</h2>
+  <div class="gold-rule"><span>◆</span></div>
+  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:var(--gold);">This is not a fear statement. It is a clarity statement.</p>
+  <p>If your current financial pattern continues unchanged, the likely outcome is not catastrophe. Most people operating without financial structure don't collapse suddenly. They experience something quieter — and in many ways more costly.</p>
+  <div class="projection-item"><span class="projection-title">Prolonged Reaction</span><p class="projection-body">Without structural systems, every financial decision continues to be made under pressure. Emergency after emergency. Month after month. The fatigue compounds even when the income is sufficient.</p></div>
+  <div class="projection-item"><span class="projection-title">Delayed Ownership</span><p class="projection-body">Every month without an ownership strategy is a month where income converts to expenses rather than assets. The gap between earning and building widens slowly, then suddenly.</p></div>
+  <div class="projection-item"><span class="projection-title">Continued Financial Fatigue</span><p class="projection-body">Operating without structure creates a specific kind of exhaustion — not from lack of effort, but from the constant weight of financial uncertainty. This fatigue affects decisions, relationships, and long-term capacity.</p></div>
+  <div class="projection-item"><span class="projection-title">Erosion of Future Flexibility</span><p class="projection-body">Options require capital. Capital requires systems. Systems require time. Every year without structural financial architecture is a year of compounding constraint — not crisis, but narrowing possibility.</p></div>
+  <div class="pull-quote" style="margin-top:32px;"><p>The cost of no structure is not dramatic. It is cumulative. And it is reversible — but only with action.</p></div>
+</div>
+
+<!-- THE 5 STEPS -->
+<div id="step1" class="section">
+  <div class="step-badge">
+    <div class="step-dot active">1</div>
+    <div class="step-line pending-line"></div>
+    <div class="step-dot pending">2</div>
+    <div class="step-line pending-line"></div>
+    <div class="step-dot pending">3</div>
+    <div class="step-line pending-line"></div>
+    <div class="step-dot pending">4</div>
+    <div class="step-line pending-line"></div>
+    <div class="step-dot pending">5</div>
+  </div>
+  <p class="section-label">Step 1 of 5</p>
+  <h2 class="section-title">See the Matrix Clearly</h2>
+  <div class="gold-rule"><span>◆</span></div>
+  <p>Most people are managing symptoms, not the system. The first step is not budgeting — it is awareness. Getting brutally honest about your numbers means looking at income, expenses, debt, and the gap between where you are and where you want to be. Not to judge yourself. To see the actual terrain.</p>
+  <p>Financial clarity begins with a complete picture — income, monthly obligations, debt balances, subscriptions, savings, and what is left over. All of it. At once. Most people avoid this because the truth feels heavy. But the truth is also the only thing that sets you free.</p>
+  <p><strong>Real-world example:</strong> You earn $5,200 a month. You know rent is $1,400, car is $480, and you 'pay the bills.' But you have no clear picture of the remaining $3,320 — where it goes, what it's doing, or whether any of it is moving forward. That invisible $3,320 is where most financial leverage lives.</p>
+  <div class="pull-quote"><p>You cannot escape something you cannot see.</p></div>
+  <div class="action-box"><div class="action-label">What This Looks Like</div><p>Write down your actual monthly take-home, fixed expenses, all debt balances, and what remains. No estimates — real numbers from actual statements. If you don't know a number, finding it is your first move. This single act shifts you from reactive to aware.</p></div>
+</div>
+
+<div id="step2" class="section">
+  <div class="step-badge">
+    <div class="step-dot done">1</div>
+    <div class="step-line done-line"></div>
+    <div class="step-dot active">2</div>
+    <div class="step-line pending-line"></div>
+    <div class="step-dot pending">3</div>
+    <div class="step-line pending-line"></div>
+    <div class="step-dot pending">4</div>
+    <div class="step-line pending-line"></div>
+    <div class="step-dot pending">5</div>
+  </div>
+  <p class="section-label">Step 2 of 5</p>
+  <h2 class="section-title">Identify Your Pattern</h2>
+  <div class="gold-rule"><span>◆</span></div>
+  <p>Every person stuck in the financial matrix has a recurring cycle — a way money arrives and disappears that repeats month after month. For some it is lifestyle creep that absorbs every income increase. For others it is debt that never meaningfully decreases. For others it is income that never grows because the focus is always on immediate survival.</p>
+  <p>The pattern is not a character flaw. It is structural — built by circumstance, environment, and the absence of a system. That means it can be rebuilt. But only after it is named clearly.</p>
+  <p><strong>Real-world example:</strong> Extra money arrives — a bonus, a tax refund, a side income. Two weeks later, it's gone. You're not sure where. This is a pattern, not an accident. It reflects the absence of a system that captures and directs extra capital before it dissolves into the existing flow.</p>
+  <div class="pull-quote"><p>Your financial situation isn't random. It's a pattern. And patterns can be changed.</p></div>
+  <div class="action-box"><div class="action-label">What This Looks Like</div><p>Review the last 3 months of bank statements. What repeats? Where does money go that surprises you? What happens when extra money appears? Write your pattern in one sentence: 'My pattern is ___.' That sentence is the foundation of changing it.</p></div>
+</div>
+
+<div id="step3" class="section">
+  <div class="step-badge">
+    <div class="step-dot done">1</div>
+    <div class="step-line done-line"></div>
+    <div class="step-dot done">2</div>
+    <div class="step-line done-line"></div>
+    <div class="step-dot active">3</div>
+    <div class="step-line pending-line"></div>
+    <div class="step-dot pending">4</div>
+    <div class="step-line pending-line"></div>
+    <div class="step-dot pending">5</div>
+  </div>
+  <p class="section-label">Step 3 of 5</p>
+  <h2 class="section-title">Build Your 3 Foundation Systems</h2>
+  <div class="gold-rule"><span>◆</span></div>
+  <p>Before investing, before aggressive debt payoff, before any advanced strategy — you need 3 foundational systems. Without them, every other financial move is built on sand.</p>
+  <p><strong>System 1 — Cash Flow Architecture:</strong> You know exactly what comes in, what goes out, and what remains — every single month, without guessing. This is the operational foundation of every financial decision you make.</p>
+  <p><strong>System 2 — Protection Infrastructure:</strong> A dedicated emergency fund — even $500 to $1,000 — that exists exclusively for genuine emergencies. This system stops one bad day from dismantling months of progress.</p>
+  <p><strong>System 3 — Directional Account:</strong> At least one account that exists purely for your future. Not bills. Not emergencies. A single account moving in one direction: forward. Automation is what makes all three systems permanent.</p>
+  <div class="pull-quote"><p>Freedom isn't a feeling — it's a structure.</p></div>
+  <div class="action-box"><div class="action-label">What This Looks Like</div><p>Open a dedicated savings account this week. Name it your Freedom Fund. Set up an automatic transfer — even $25 — to move into it the day after payday. Not because $25 changes everything. Because the decision and the structure do.</p></div>
+</div>
+
+<div id="step4" class="section">
+  <div class="step-badge">
+    <div class="step-dot done">1</div>
+    <div class="step-line done-line"></div>
+    <div class="step-dot done">2</div>
+    <div class="step-line done-line"></div>
+    <div class="step-dot done">3</div>
+    <div class="step-line done-line"></div>
+    <div class="step-dot active">4</div>
+    <div class="step-line pending-line"></div>
+    <div class="step-dot pending">5</div>
+  </div>
+  <p class="section-label">Step 4 of 5</p>
+  <h2 class="section-title">Break the Cycle, Not Just the Habit</h2>
+  <div class="gold-rule"><span>◆</span></div>
+  <p>Most financial advice prescribes discipline — stop spending on things you enjoy, white-knuckle your way to a budget. That approach fails because it treats the symptom, not the structural cause of the cycle.</p>
+  <p>The cycle breaks when two things change simultaneously: the behavior is automated so it no longer depends on willpower, and the belief driving the behavior is identified and examined.</p>
+  <p>Reactive financial behavior is almost always rooted in a belief — about what is possible, about what you deserve, about whether building really works for someone in your specific situation. The behavior is the surface. The belief is the engine. Both require attention.</p>
+  <p><strong>Real-world example:</strong> You overspend consistently after stressful weeks. The behavior is spending. The belief underneath may be: 'I work hard. I deserve relief. There will be more money later.' Addressing only the spending without examining the belief produces temporary results.</p>
+  <div class="pull-quote"><p>Willpower is not a financial strategy. Structure is.</p></div>
+  <div class="action-box"><div class="action-label">What This Looks Like</div><p>Identify the one financial behavior you repeat that you know holds you back. Write it down. Then write: 'The belief underneath this behavior is ___.' That belief is where the structural work begins. Automate one positive financial behavior this week — regardless of how you feel.</p></div>
+</div>
+
+<div id="step5" class="section">
+  <div class="step-badge">
+    <div class="step-dot done">1</div>
+    <div class="step-line done-line"></div>
+    <div class="step-dot done">2</div>
+    <div class="step-line done-line"></div>
+    <div class="step-dot done">3</div>
+    <div class="step-line done-line"></div>
+    <div class="step-dot done">4</div>
+    <div class="step-line done-line"></div>
+    <div class="step-dot active">5</div>
+  </div>
+  <p class="section-label">Step 5 of 5</p>
+  <h2 class="section-title">Build Toward Freedom, Not Just Stability</h2>
+  <div class="gold-rule"><span>◆</span></div>
+  <p>Once the foundation systems are in place, the objective shifts — from 'stop the bleeding' to 'build the future.' This is where investing, asset accumulation, income diversification, and real financial planning become primary.</p>
+  <p>Financial freedom looks different for every person. For some it is the elimination of all consumer debt. For others it is never feeling anxious about an unexpected bill. For others it is building enough to walk away from work they don't choose — or to leave something meaningful behind.</p>
+  <p>A real financial plan — built around your actual numbers, your specific situation, and your defined goals — is the most powerful tool available at this stage. Not a template. Not a calculator. A custom architecture built by someone who understands both the framework and your specific reality.</p>
+  <div class="pull-quote"><p>Stability is surviving. Freedom is living on your own terms.</p></div>
+  <div class="action-box"><div class="action-label">What This Looks Like</div><p>Define what financial freedom means for you in one precise sentence. Not a feeling — a specific outcome. Write it down. That sentence becomes the north star for every financial decision from this point forward.</p></div>
+</div>
+
+<!-- IMPLEMENTATION -->
+<div class="section">
+  <p class="section-label">Implementation Architecture</p>
+  <h2 class="section-title">Your 30-Day Financial Reset</h2>
+  <div class="gold-rule"><span>◆</span></div>
+  <p>Understanding a framework is not the same as implementing one. This 30-day structure converts the framework into executable movement.</p>
+  <div class="week-block">
+    <div class="week-header">WEEK 1 — VISIBILITY</div>
+    <div class="week-body">
+      <p class="week-desc">Complete a full financial inventory: all income, all expenses, all debt balances, all subscriptions. Write down your net cash flow. Identify your pattern in one sentence. Name your current financial stage.</p>
+      <ul class="week-actions">
+        <li>Pull 3 months of bank statements</li>
+        <li>List every debt with balance and interest rate</li>
+        <li>Calculate exact monthly take-home and total outflows</li>
+        <li>Identify your top 3 spending categories</li>
+      </ul>
+    </div>
+  </div>
+  <div class="week-block">
+    <div class="week-header">WEEK 2 — STABILIZATION</div>
+    <div class="week-body">
+      <p class="week-desc">Open a dedicated emergency account. Set up the first automatic transfer. Begin a simple cash flow tracking system.</p>
+      <ul class="week-actions">
+        <li>Open a dedicated savings account and name it</li>
+        <li>Fund it with any amount — the decision matters more than the number</li>
+        <li>Set up 1 automatic transfer post-payday</li>
+        <li>Write down your one highest-priority financial goal</li>
+      </ul>
+    </div>
+  </div>
+  <div class="week-block">
+    <div class="week-header">WEEK 3 — STRUCTURE</div>
+    <div class="week-body">
+      <p class="week-desc">Begin automating the right behaviors. Create simple decision rules for discretionary spending. Identify your primary structural leak.</p>
+      <ul class="week-actions">
+        <li>Automate savings or debt payment</li>
+        <li>Establish a simple monthly review date</li>
+        <li>Identify the one structural leak to address first</li>
+        <li>Create a spending rule for your highest-friction category</li>
+      </ul>
+    </div>
+  </div>
+  <div class="week-block">
+    <div class="week-header">WEEK 4 — MOMENTUM</div>
+    <div class="week-body">
+      <p class="week-desc">Review Week 1–3 progress. Identify the next ownership move. Define what the next 90 days should accomplish structurally.</p>
+      <ul class="week-actions">
+        <li>Review all Week 1–3 actions and what held</li>
+        <li>Identify first ownership priority — retirement, investment, or debt payoff</li>
+        <li>Set a 90-day financial target</li>
+        <li>Book a financial review or advisory session</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- LEVEL 3 TRANSITION -->
+<div style="background:var(--navy);padding:1px 0;">
+<div class="section" style="border-top:none;">
+  <p class="section-label" style="color:var(--gold);">The Next Level</p>
+  <h2 class="section-title" style="color:var(--white);">From Framework to Financial Architecture</h2>
+  <div class="gold-rule"><span>◆</span></div>
+  <p style="color:#a0a0b8;">This framework gives you the diagnostic intelligence and the structural philosophy. But there is a meaningful difference between understanding a framework and implementing one correctly inside the complexity of a real life.</p>
+  <p style="color:#a0a0b8;">Implementation requires precision. It requires knowing your actual numbers — not estimates. It requires sequencing the right moves in the right order for your specific situation. It requires someone who has sat across from real people in real financial circumstances and built real plans that work.</p>
+  <div class="pull-quote"><p>The session doesn't deliver motivation. It delivers a financial architecture built around your actual life.</p></div>
+  <p class="section-label" style="margin-top:32px;">What the Strategic Reset Session Includes</p>
+  <div class="session-item"><div class="session-title">Complete Financial Architecture Review</div><div class="session-desc">A structured review of your actual numbers, current systems, and structural gaps.</div></div>
+  <div class="session-item"><div class="session-title">Personalized Implementation Sequencing</div><div class="session-desc">The specific order of financial moves that makes sense for your situation — not a template.</div></div>
+  <div class="session-item"><div class="session-title">Cash Flow and Account Architecture</div><div class="session-desc">A custom account structure, automation framework, and cash flow system built for your life.</div></div>
+  <div class="session-item"><div class="session-title">Debt and Stability Strategy</div><div class="session-desc">A sequenced approach to debt reduction and emergency infrastructure aligned with your income.</div></div>
+  <div class="session-item"><div class="session-title">Ownership Roadmap</div><div class="session-desc">A directional strategy for moving from income dependence toward asset accumulation.</div></div>
+  <div class="session-item"><div class="session-title">30-Day Execution Plan</div><div class="session-desc">Specific first moves, sequenced for immediate implementation.</div></div>
+  <div style="text-align:center;margin-top:40px;">
+    <p style="color:#6a6a7a;font-size:13px;margin-bottom:16px;">Book your Strategic Reset Session</p>
+    <a href="https://calendly.com/exit-etfm/etfm-strategic-reset-session" target="_blank" style="display:inline-block;background:var(--gold);color:var(--navy);text-decoration:none;padding:14px 36px;border-radius:6px;font-weight:500;font-size:15px;">Book Your Session — $499</a>
+    <p style="color:#4a4a5a;font-size:12px;margin-top:12px;">calendly.com/exit-etfm/etfm-strategic-reset-session</p>
+  </div>
+</div>
+</div>
+
+<!-- PERSONAL NOTE -->
+<div class="section note-section">
+  <img src="https://raw.githubusercontent.com/TheArchitect1111/ETFM-ASSESSMENT-/main/54fc28f1-22d8-4392-9c01-3d3f5a5c420b.png" alt="Robert Brickey" class="note-photo" onerror="this.style.display='none'" />
+  <p class="section-label">A Personal Note</p>
+  <div class="gold-rule"><span>◆</span></div>
+  <p class="note-open">I want to be honest with you about something.</p>
+  <p>When I built ETFM, I wasn't thinking about a product. I was thinking about the people I kept sitting across from — people who were working hard, doing their best, and still feeling like they were falling behind. People who weren't lazy or irresponsible. People who simply never had a real system — and nobody had ever given them one.</p>
+  <p>The framework in this document is built from those conversations. It reflects the patterns I have seen repeatedly across hundreds of real financial situations — the structural gaps, the behavioral cycles, the quiet erosion of options that happens when good people operate without architecture.</p>
+  <p>If you've made it to the end of this document, something in you is ready to change. That readiness is not small. Most people stay stuck not because they don't want better — but because they never took the first step of actually seeing where they are.</p>
+  <p class="note-emph">You did that. That matters.</p>
+  <p>The steps in this framework are real. They work. But I also know that reading about a system and implementing one inside the complexity of real life are two very different things. That's exactly why I do what I do.</p>
+  <p>If you're ready to stop studying the framework and start building the architecture — I'd be honored to work with you directly. Not as a coach. As a licensed financial advisor who will look at your actual numbers and build an actual plan for your actual life.</p>
+  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:var(--navy);margin-top:24px;">You've already taken the hardest step. The rest is structure.</p>
+  <p class="note-sig">— Robert Brickey</p>
+  <p class="note-title">Licensed Financial Advisor · Escape The Financial Matrix</p>
+</div>
+
+<div class="disclaimer">
+  <p>ETFM provides educational and strategic financial guidance designed to support clarity, structure, and decision-making. This document does not constitute individualized investment advice, legal advice, or tax advice. All financial decisions should be evaluated within the context of your personal financial situation with appropriate professional guidance.</p>
+  <p style="margin-top:8px;">© 2025 Escape The Financial Matrix · All rights reserved · info@etfm.systems</p>
+</div>
+
+</body>
+</html>
