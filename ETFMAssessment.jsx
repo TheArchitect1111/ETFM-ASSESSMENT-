@@ -519,8 +519,10 @@ export default function ETFMAssessment() {
   // ── INTRO ───────────────────────────────────────────────────────────────────
   if (screen === "intro") return (
     <div style={{ minHeight: "100vh", backgroundColor: C.bg, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "20px", textAlign: "center" }}>
-      <img src={LOGO_URL} alt="ETFM" style={{ width: "80px", marginBottom: "30px", filter: "drop-shadow(0px 4px 10px rgba(0,0,0,0.45))" }}
+      <div style={{ width: "110px", height: "110px", borderRadius: "50%", backgroundColor: C.dark, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "30px", boxShadow: "0 4px 24px rgba(0,0,0,0.18)" }}>
+        <img src={LOGO_URL} alt="ETFM" style={{ width: "86px", height: "86px", objectFit: "contain" }}
         onError={(e) => e.target.style.display = "none"} />
+      </div>
       <p style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "3px", color: C.gold, marginBottom: "16px" }}>Escape The Financial Matrix</p>
       <h1 style={{ fontSize: "42px", fontFamily: "Georgia, serif", marginBottom: "20px", color: C.text, lineHeight: "1.2", maxWidth: "600px" }}>
         Your financial life has a pattern. It's time to see it clearly.
@@ -641,7 +643,7 @@ export default function ETFMAssessment() {
           Your next steps and upgrade options will be inside the email.
         </p>
         <div style={{ borderTop: `1px solid ${C.border}`, marginTop: "40px", paddingTop: "24px", fontSize: "13px", color: C.muted }}>
-          <p>Questions? <strong>info@etfm.systems</strong></p>
+          <p>Questions? <strong>exit@etfm.systems</strong></p>
         </div>
       </div>
     </div>
@@ -700,7 +702,7 @@ export default function ETFMAssessment() {
             Book Your Session — $499
           </a>
         </div>
-        <p style={{ fontSize: "13px", color: C.muted }}>Questions? <strong>info@etfm.systems</strong></p>
+        <p style={{ fontSize: "13px", color: C.muted }}>Questions? <strong>exit@etfm.systems</strong></p>
       </div>
     </div>
   );
