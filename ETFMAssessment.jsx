@@ -99,7 +99,6 @@ const FREE_QUESTIONS = [
 
 // ── LEVEL 2 — 18 BLUEPRINT QUESTIONS ─────────────────────────────────────────
 const BLUEPRINT_QUESTIONS = [
-  // SECTION 1 — Financial Visibility
   {
     id: "full_review",
     section: "Financial Visibility",
@@ -141,7 +140,6 @@ const BLUEPRINT_QUESTIONS = [
       { label: "I feel generally organized financially", value: "organized" },
     ],
   },
-  // SECTION 2 — Pattern Recognition
   {
     id: "extra_money_pattern",
     section: "Pattern Recognition",
@@ -199,7 +197,6 @@ const BLUEPRINT_QUESTIONS = [
       { label: "Fear of failure financially", value: "fear_failure" },
     ],
   },
-  // SECTION 3 — System Architecture
   {
     id: "income_predictability",
     section: "System Architecture",
@@ -281,7 +278,6 @@ const BLUEPRINT_QUESTIONS = [
       { label: "Not knowing what to prioritize", value: "no_priority" },
     ],
   },
-  // SECTION 4 — Ownership & Positioning
   {
     id: "actively_building",
     section: "Ownership & Positioning",
@@ -325,7 +321,6 @@ const BLUEPRINT_QUESTIONS = [
       { label: "I feel financially aligned and strategic", value: "aligned_strategic" },
     ],
   },
-  // SECTION 5 — Future Trajectory
   {
     id: "five_year_feeling",
     section: "Future Trajectory",
@@ -368,7 +363,10 @@ const optionBtn = {
 };
 
 export default function ETFMAssessment() {
-  const [screen, setScreen] = useState("intro");
+  const params = new URLSearchParams(window.location.search);
+  const hasSid = params.get("session");
+
+  const [screen, setScreen] = useState(hasSid ? "loading" : "intro");
   const [freeIndex, setFreeIndex] = useState(0);
   const [freeAnswers, setFreeAnswers] = useState([]);
   const [blueprintIndex, setBlueprintIndex] = useState(0);
@@ -385,11 +383,10 @@ export default function ETFMAssessment() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [screen, freeIndex, blueprintIndex]);
 
-  // Check for returning blueprint user
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const sid = params.get("session");
-    const cancelled = params.get("cancelled");
+    const p = new URLSearchParams(window.location.search);
+    const sid = p.get("session");
+    const cancelled = p.get("cancelled");
     if (sid) {
       setSessionId(sid);
       if (cancelled) {
@@ -409,6 +406,8 @@ export default function ETFMAssessment() {
         setEmail(data.email || "");
         setSessionValid(true);
         setScreen("blueprint_chat");
+      } else if (data.status === "pending_payment") {
+        setScreen("blueprint_unpaid");
       } else {
         setScreen("blueprint_unpaid");
       }
@@ -516,6 +515,13 @@ export default function ETFMAssessment() {
     }
   };
 
+  // ── LOADING ─────────────────────────────────────────────────────────────────
+  if (screen === "loading") return (
+    <div style={{ minHeight: "100vh", backgroundColor: C.bg, display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <p style={{ color: C.muted, fontSize: "14px", fontFamily: "Georgia, serif" }}>Loading your session...</p>
+    </div>
+  );
+
   // ── INTRO ───────────────────────────────────────────────────────────────────
   if (screen === "intro") return (
     <div style={{ minHeight: "100vh", backgroundColor: C.bg, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "20px", textAlign: "center" }}>
@@ -581,8 +587,6 @@ export default function ETFMAssessment() {
         <p style={{ fontSize: "16px", color: C.muted, marginBottom: "40px", lineHeight: "1.7" }}>
           What you've uncovered today is not a reflection of your potential. It's a reflection of the systems currently shaping your financial life.
         </p>
-
-        {/* Partial Score Display */}
         <div style={{ backgroundColor: C.dark, borderRadius: "12px", padding: "36px 30px", marginBottom: "30px", textAlign: "left" }}>
           <p style={{ color: C.gold, fontSize: "11px", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "24px", textAlign: "center" }}>Your ETFM Strategic Score</p>
           <div style={{ marginBottom: "16px", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", backgroundColor: "rgba(201,151,58,0.1)", borderRadius: "6px", border: "1px solid rgba(201,151,58,0.3)" }}>
@@ -599,8 +603,6 @@ export default function ETFMAssessment() {
             Your full Strategic Score and Snapshot will be delivered to your inbox.
           </p>
         </div>
-
-        {/* Email Capture */}
         <div style={{ backgroundColor: C.white, border: `1px solid ${C.border}`, borderRadius: "12px", padding: "36px 30px" }}>
           <h3 style={{ fontSize: "18px", fontFamily: "Georgia, serif", color: C.text, marginBottom: "8px" }}>
             Send my Snapshot and Strategic Score
@@ -684,30 +686,74 @@ export default function ETFMAssessment() {
 
   // ── BLUEPRINT COMPLETE ────────────────────────────────────────────────────────
   if (screen === "blueprint_complete") return (
-    <div style={{ minHeight: "100vh", backgroundColor: C.bg, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "40px 20px", textAlign: "center" }}>
-      <div style={{ maxWidth: "560px" }}>
-        <p style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "3px", color: C.gold, marginBottom: "16px" }}>Blueprint Complete</p>
-        <h2 style={{ fontSize: "36px", fontFamily: "Georgia, serif", color: C.text, marginBottom: "20px", lineHeight: "1.3" }}>
-          Your Strategic Blueprint is being prepared.
-        </h2>
-        <p style={{ fontSize: "16px", color: C.muted, lineHeight: "1.7", marginBottom: "32px" }}>
-          Your personalized report, escape roadmap, 30-Day Reset Protocol, and Strategic Score breakdown will be delivered to your inbox shortly. This typically takes 3–5 minutes.
-        </p>
-        <div style={{ backgroundColor: C.dark, borderRadius: "10px", padding: "24px", textAlign: "center", marginBottom: "32px" }}>
-          <p style={{ color: "#a0a0b8", fontSize: "14px", margin: 0, lineHeight: "1.7" }}>
-            While your Blueprint is being generated — if you're ready to work directly with Robert on a complete financial plan, you can book your Strategic Reset Session now.
-          </p>
-          <a href="https://calendly.com/exit-etfm/etfm-strategic-reset-session" target="_blank" rel="noopener noreferrer"
-            style={{ display: "inline-block", marginTop: "20px", backgroundColor: C.gold, color: C.dark, textDecoration: "none", padding: "12px 28px", borderRadius: "6px", fontWeight: "bold", fontSize: "14px" }}>
-            Book Your Session — $499
-          </a>
+    <div style={{ minHeight: "100vh", backgroundColor: C.bg, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "40px 20px" }}>
+      <div style={{ maxWidth: "620px", width: "100%" }}>
+
+        <div style={{ textAlign: "center", marginBottom: "40px" }}>
+          <img src={LOGO_URL} alt="ETFM" style={{ width: "64px", display: "block", margin: "0 auto 16px" }} />
+          <p style={{ margin: 0, color: C.gold, fontSize: "11px", letterSpacing: "3px", textTransform: "uppercase" }}>Escape The Financial Matrix</p>
         </div>
-        <p style={{ fontSize: "13px", color: C.muted }}>Questions? <strong>exit@etfm.systems</strong></p>
+
+        <div style={{ backgroundColor: C.white, borderRadius: "12px", border: `1px solid ${C.border}`, overflow: "hidden" }}>
+
+          <div style={{ backgroundColor: C.dark, padding: "32px 40px", textAlign: "center" }}>
+            <p style={{ margin: "0 0 12px", color: C.gold, fontSize: "11px", letterSpacing: "3px", textTransform: "uppercase" }}>Blueprint Complete</p>
+            <h1 style={{ margin: 0, color: C.white, fontSize: "26px", fontFamily: "Georgia, serif", fontWeight: "normal", lineHeight: "1.4" }}>
+              Your Strategic Blueprint<br />has been prepared.
+            </h1>
+          </div>
+
+          <div style={{ padding: "40px" }}>
+            <p style={{ margin: "0 0 16px", color: C.text, fontSize: "16px", lineHeight: "1.8" }}>
+              You took an important step today.
+            </p>
+            <p style={{ margin: "0 0 32px", color: C.muted, fontSize: "15px", lineHeight: "1.9" }}>
+              Most people avoid looking closely at their financial patterns. You didn't. You completed the diagnostic, identified where your system may be breaking down, and started the process of building with more clarity.
+            </p>
+
+            <hr style={{ border: "none", borderTop: `1px solid ${C.border}`, margin: "0 0 32px" }} />
+
+            <div style={{ backgroundColor: C.bg, borderRadius: "8px", padding: "24px 28px", marginBottom: "32px", borderLeft: `3px solid ${C.gold}` }}>
+              <p style={{ margin: "0 0 8px", color: C.text, fontSize: "12px", fontWeight: "bold", letterSpacing: "1px", textTransform: "uppercase" }}>Check your inbox</p>
+              <p style={{ margin: 0, color: C.muted, fontSize: "14px", lineHeight: "1.8" }}>
+                Your personalized report, escape roadmap, 30-Day Reset Protocol, and Strategic Score breakdown will be delivered to your inbox shortly. This typically takes 3–5 minutes.
+              </p>
+            </div>
+
+            <hr style={{ border: "none", borderTop: `1px solid ${C.border}`, margin: "0 0 32px" }} />
+
+            <p style={{ margin: "0 0 12px", color: C.gold, fontSize: "11px", letterSpacing: "3px", textTransform: "uppercase" }}>What happens next</p>
+            <p style={{ margin: "0 0 32px", color: C.muted, fontSize: "15px", lineHeight: "1.9" }}>
+              Review your Blueprint with an open mind. Look for the patterns, not just the numbers. Your next move is not about perfection. It is about direction.
+            </p>
+
+            <div style={{ textAlign: "center", padding: "24px 0" }}>
+              <p style={{ margin: 0, color: C.text, fontSize: "16px", lineHeight: "2.2", fontFamily: "Georgia, serif", fontStyle: "italic" }}>
+                Clarity creates control.<br />
+                Control creates momentum.<br />
+                Momentum creates freedom.
+              </p>
+            </div>
+          </div>
+
+          <div style={{ backgroundColor: C.bg, padding: "20px 40px", textAlign: "center", borderTop: `1px solid ${C.border}` }}>
+            <p style={{ margin: 0, color: C.muted, fontSize: "13px" }}>
+              Questions?{" "}
+              <a href="mailto:exit@etfm.systems" style={{ color: C.gold, textDecoration: "none" }}>exit@etfm.systems</a>
+            </p>
+          </div>
+
+        </div>
+
+        <p style={{ marginTop: "24px", textAlign: "center", color: "#a0a0a8", fontSize: "11px", lineHeight: "1.6", fontStyle: "italic" }}>
+          ETFM provides educational and strategic financial guidance. This does not constitute individualized investment, legal, or tax advice.
+        </p>
+
       </div>
     </div>
   );
 
-  // ── BLUEPRINT UNPAID (accessed without payment) ───────────────────────────────
+  // ── BLUEPRINT UNPAID ──────────────────────────────────────────────────────────
   if (screen === "blueprint_unpaid") return (
     <div style={{ minHeight: "100vh", backgroundColor: C.bg, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "40px 20px", textAlign: "center" }}>
       <div style={{ maxWidth: "500px" }}>
