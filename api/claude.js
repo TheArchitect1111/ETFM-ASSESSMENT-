@@ -8,7 +8,7 @@ const supabase = createClient(
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-const STRIPE_47 = "https://buy.stripe.com/bJe7sM5CE9jwbtnace8Vi0d";
+const STRIPE_47 = "https://etfm-assessment.vercel.app/api/blueprint-session";
 const STRIPE_499 = "https://buy.stripe.com/7sY14o7KMbrE693ckm8Vi0c";
 const CALENDLY = "https://calendly.com/exit-etfm/etfm-strategic-reset-session";
 const FRAMEWORK_URL = "https://etfm-assessment.vercel.app/framework.html";
@@ -207,7 +207,7 @@ Keep under 500 words total.`);
             <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">✓ &nbsp;Robert's personal video message</td></tr>
             <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">✓ &nbsp;30-Day Strategic Reset Protocol</td></tr>
           </table>
-          <a href="${STRIPE_47}" class="cta-btn" style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 36px;border-radius:6px;font-weight:bold;font-size:16px;">Get the Strategic Blueprint — $47</a>
+          <a href="https://etfm-assessment.vercel.app/api/blueprint-session?action=create&email=${email}&firstName=${encodeURIComponent(firstName)}" class="cta-btn" style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 36px;border-radius:6px;font-weight:bold;font-size:16px;">Get the Strategic Blueprint — $47</a>
         </td>
       </tr>
       <tr>
