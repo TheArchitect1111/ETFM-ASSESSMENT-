@@ -726,7 +726,7 @@ export default function ETFMAssessment() {
       <div style={{ maxWidth: "500px" }}>
         <h2 style={{ fontSize: "28px", fontFamily: "Georgia, serif", color: C.text, marginBottom: "16px" }}>No problem.</h2>
         <p style={{ fontSize: "16px", color: C.muted, marginBottom: "32px", lineHeight: "1.7" }}>Your Snapshot is still in your inbox. When you're ready to go deeper, the Blueprint will be here.</p>
-        <a href="https://buy.stripe.com/9B6dRad5653g7d77028Vi0b" style={{ display: "inline-block", backgroundColor: C.gold, color: C.dark, textDecoration: "none", padding: "14px 36px", borderRadius: "6px", fontWeight: "bold", fontSize: "16px" }}>
+        <a href="https://buy.stripe.com/bJe7sM5CE9jwbtnace8Vi0d" style={{ display: "inline-block", backgroundColor: C.gold, color: C.dark, textDecoration: "none", padding: "14px 36px", borderRadius: "6px", fontWeight: "bold", fontSize: "16px" }}>
           Unlock the Strategic Blueprint — $47
         </a>
       </div>
