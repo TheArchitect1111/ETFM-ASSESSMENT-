@@ -353,7 +353,7 @@ TONE RULES:
 
 HTML formatting: use <h3 style="color:#1a1a2e;font-family:Georgia,serif;">, <p>, <strong style="color:#c9973a;">, <ol>, <li>
 Section dividers: <hr style="border:none;border-top:1px solid #e8e3da;margin:32px 0;">
-Keep under 900 words.`, 3000);
+Keep under 900 words.`, 1500);
     } catch (err) {
       console.error("Blueprint Claude error:", err);
       reportHtml = `<p>Hi ${firstName}, your Strategic Financial Blueprint is being finalized. Robert will follow up directly with your complete report.</p>`;
