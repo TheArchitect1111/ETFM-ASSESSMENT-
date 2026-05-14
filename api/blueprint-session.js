@@ -38,7 +38,7 @@ export default async function handler(req, res) {
                 name: "ETFM Strategic Financial Blueprint",
                 description: "18-question deep diagnostic + personalized AI report + 5-step framework PDF + 30-Day Reset Protocol",
               },
-              unit_amount: 25, // $.25
+              unit_amount: 50, // $.50
             },
             quantity: 1,
           }],
