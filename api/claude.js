@@ -56,22 +56,37 @@ function emailWrapper(content) {
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <style>
+    @media only screen and (max-width:600px){
+      .email-outer{padding:8px 0!important;}
+      .email-table{width:100%!important;border-radius:0!important;}
+      .email-pad{padding:24px 20px!important;}
+      .email-hero{padding:24px 20px!important;}
+      .email-body{padding:24px 20px!important;}
+      .offer-dark{padding:24px 20px!important;}
+      .offer-light{padding:24px 20px!important;}
+      .score-text{font-size:32px!important;}
+      .cta-btn{padding:14px 20px!important;font-size:15px!important;display:block!important;text-align:center!important;box-sizing:border-box!important;}
+      .checklist-td{font-size:13px!important;}
+      h1,h2,h3{font-size:18px!important;}
+    }
+  </style>
 </head>
 <body style="margin:0;padding:0;background-color:#f7f4ef;font-family:Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f7f4ef;padding:40px 0;">
+  <table width="100%" cellpadding="0" cellspacing="0" class="email-outer" style="background-color:#f7f4ef;padding:40px 0;">
     <tr><td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e8e3da;">
+      <table class="email-table" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e8e3da;">
         <tr>
-          <td style="background-color:#1a1a2e;padding:32px 40px;text-align:center;">
-            <img src="${LOGO}" alt="ETFM" width="100" style="display:block;margin:0 auto 16px;"/>
+          <td class="email-hero" style="background-color:#1a1a2e;padding:32px 40px;text-align:center;">
+            <img src="${LOGO}" alt="ETFM" width="80" style="display:block;margin:0 auto 16px;max-width:80px;"/>
             <p style="margin:0;color:#c9973a;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-family:Georgia,serif;">Escape The Financial Matrix</p>
           </td>
         </tr>
         ${content}
         <tr>
-          <td style="background-color:#f7f4ef;padding:24px 40px;text-align:center;border-top:1px solid #e8e3da;">
+          <td class="email-pad" style="background-color:#f7f4ef;padding:24px 40px;text-align:center;border-top:1px solid #e8e3da;">
             <p style="margin:0 0 8px;color:#7a7a8a;font-size:12px;">Questions? <a href="mailto:exit@etfm.systems" style="color:#c9973a;">exit@etfm.systems</a></p>
-            <p style="margin:0;color:#a0a0a8;font-size:11px;font-style:italic;">ETFM provides educational and strategic financial guidance designed to support clarity, structure, and decision-making. This does not constitute individualized investment, legal, or tax advice.</p>
+            <p style="margin:0;color:#a0a0a8;font-size:11px;font-style:italic;line-height:1.6;">ETFM provides educational and strategic financial guidance designed to support clarity, structure, and decision-making. This does not constitute individualized investment, legal, or tax advice.</p>
             <p style="margin:8px 0 0;color:#7a7a8a;font-size:11px;">© ${new Date().getFullYear()} Escape The Financial Matrix. All rights reserved.</p>
           </td>
         </tr>
@@ -169,33 +184,50 @@ Keep under 500 words total.`);
     }
 
     const emailHtml = emailWrapper(`
-      <tr><td style="padding:40px;color:#1a1a2e;font-size:15px;line-height:1.8;">
-        ${snapshotHtml}
-      </td></tr>
-      <tr><td style="padding:0 40px 40px;">
-        <hr style="border:none;border-top:2px solid #e8e3da;margin:0 0 32px;"/>
-      </td></tr>
       <tr>
-        <td style="padding:0 40px 40px;background-color:#1a1a2e;text-align:center;">
-          <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:32px 0 12px;">Want to go deeper?</p>
-          <h2 style="color:#ffffff;font-family:Georgia,serif;font-size:22px;margin:0 0 16px;line-height:1.4;">Unlock Your Strategic Financial Blueprint</h2>
-          <p style="color:#a0a0b8;font-size:14px;margin:0 0 20px;line-height:1.7;">Your Snapshot shows where you are. The Blueprint diagnoses exactly why — with 18 questions that go into your real numbers, patterns, and structure. Then delivers a personalized escape roadmap, the 5-step ETFM framework PDF, Robert's video message, and your 30-Day Strategic Reset Protocol.</p>
-          <table cellpadding="0" cellspacing="0" style="margin:0 auto 24px;">
-            <tr><td style="padding:4px 0;color:#c8c8d8;font-size:13px;">✓ &nbsp;18-question strategic diagnostic</td></tr>
-            <tr><td style="padding:4px 0;color:#c8c8d8;font-size:13px;">✓ &nbsp;Personalized escape roadmap</td></tr>
-            <tr><td style="padding:4px 0;color:#c8c8d8;font-size:13px;">✓ &nbsp;5-Step ETFM Framework PDF</td></tr>
-            <tr><td style="padding:4px 0;color:#c8c8d8;font-size:13px;">✓ &nbsp;Robert's personal video message</td></tr>
-            <tr><td style="padding:4px 0;color:#c8c8d8;font-size:13px;">✓ &nbsp;30-Day Strategic Reset Protocol</td></tr>
-          </table>
-          <a href="${STRIPE_47}" style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 36px;border-radius:6px;font-weight:bold;font-size:16px;">Get the Strategic Blueprint — $47</a>
+        <td class="email-body" style="padding:40px;color:#1a1a2e;font-size:15px;line-height:1.8;">
+          ${snapshotHtml}
         </td>
       </tr>
       <tr>
-        <td style="padding:32px 40px;background-color:#ffffff;text-align:center;border-top:2px solid #c9973a;">
-          <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 8px;">Premium</p>
-          <h3 style="color:#1a1a2e;font-family:Georgia,serif;font-size:18px;margin:0 0 10px;">Work Directly With Robert</h3>
-          <p style="color:#7a7a8a;font-size:14px;margin:0 0 16px;line-height:1.7;">Robert is a licensed financial advisor. The $499 Strategic Reset Session isn't coaching — it's a real, personalized financial plan built around your life, your numbers, and your goals.</p>
-          <a href="${STRIPE_499}" style="display:inline-block;background-color:#ffffff;color:#c9973a;border:2px solid #c9973a;text-decoration:none;padding:12px 28px;border-radius:6px;font-weight:bold;font-size:14px;">Book Your Session — $499</a>
+        <td style="padding:0 40px 40px;">
+          <hr style="border:none;border-top:2px solid #e8e3da;margin:0 0 32px;"/>
+        </td>
+      </tr>
+      <tr>
+        <td class="offer-dark" style="padding:32px 40px 40px;background-color:#1a1a2e;text-align:center;">
+          <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 12px;">Want to go deeper?</p>
+          <h2 style="color:#ffffff;font-family:Georgia,serif;font-size:22px;margin:0 0 16px;line-height:1.4;">Unlock Your Strategic Financial Blueprint</h2>
+          <p style="color:#a0a0b8;font-size:14px;margin:0 0 20px;line-height:1.7;">Your Snapshot shows where you are. The Blueprint diagnoses exactly why — with 18 questions that go into your real numbers, patterns, and structure. Then delivers a personalized escape roadmap, the 5-step ETFM framework PDF, Robert's video message, and your 30-Day Strategic Reset Protocol.</p>
+          <table cellpadding="0" cellspacing="0" style="margin:0 auto 28px;text-align:left;">
+            <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">✓ &nbsp;18-question strategic diagnostic</td></tr>
+            <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">✓ &nbsp;Personalized escape roadmap</td></tr>
+            <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">✓ &nbsp;5-Step ETFM Framework PDF</td></tr>
+            <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">✓ &nbsp;Robert's personal video message</td></tr>
+            <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">✓ &nbsp;30-Day Strategic Reset Protocol</td></tr>
+          </table>
+          <a href="${STRIPE_47}" class="cta-btn" style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 36px;border-radius:6px;font-weight:bold;font-size:16px;">Get the Strategic Blueprint — $47</a>
+        </td>
+      </tr>
+      <tr>
+        <td class="offer-light" style="padding:32px 40px;background-color:#ffffff;border-top:2px solid #c9973a;">
+          <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 8px;text-align:center;">Premium</p>
+          <h3 style="color:#1a1a2e;font-family:Georgia,serif;font-size:20px;margin:0 0 12px;text-align:center;line-height:1.4;">Strategic Reset Partnership</h3>
+          <p style="color:#7a7a8a;font-size:14px;margin:0 0 20px;line-height:1.7;">Your Blueprint identified the pattern. Now it's time to build the structure. Work directly with Robert Brickey to analyze your current financial reality, close the structural gaps, and build a system that runs on intention — not pressure.</p>
+          <table cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 20px;">
+            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #f0ece4;">✓ &nbsp;<strong>Pre-Session Financial Intake & Discovery Review</strong> — detailed review of your snapshot, goals, income flow, and current structure before the session begins</td></tr>
+            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #f0ece4;">✓ &nbsp;<strong>60-Minute Private Strategic Reset Session</strong> with Robert Brickey, Licensed Financial Advisor & Creator of ETFM</td></tr>
+            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #f0ece4;">✓ &nbsp;<strong>Personalized Financial Plan & Strategic Framework</strong> — built around your current reality, priorities, pressure points, and long-term goals</td></tr>
+            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #f0ece4;">✓ &nbsp;<strong>Full Matrix Score & Structural Analysis</strong> — identify the financial behaviors, structural gaps, and decision-making patterns impacting your progress</td></tr>
+            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #f0ece4;">✓ &nbsp;<strong>Decision Rules & Financial Policy System</strong> — develop clear rules for spending, saving, debt, and investing so pressure stops controlling your choices</td></tr>
+            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #f0ece4;">✓ &nbsp;<strong>Custom 90-Day Strategic Reset Roadmap</strong> — a practical implementation plan with prioritized action steps and strategic focus areas</td></tr>
+            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #f0ece4;">✓ &nbsp;<strong>Session Recording</strong> — review your session anytime for clarity and reinforcement</td></tr>
+            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;">✓ &nbsp;<strong>30 Days of Priority Email Support</strong> — ongoing clarification, guidance, and accountability during implementation</td></tr>
+          </table>
+          <p style="color:#7a7a8a;font-size:12px;font-style:italic;margin:0 0 20px;text-align:center;">This is not coaching. This is private strategic partnership.</p>
+          <div style="text-align:center;">
+            <a href="${STRIPE_499}" class="cta-btn" style="display:inline-block;background-color:#ffffff;color:#c9973a;border:2px solid #c9973a;text-decoration:none;padding:12px 28px;border-radius:6px;font-weight:bold;font-size:14px;">Book Your Session — $499</a>
+          </div>
         </td>
       </tr>
     `);
@@ -210,7 +242,7 @@ Keep under 500 words total.`);
     try {
       const adminHtml = emailWrapper(`
         <tr>
-          <td style="padding:32px 40px;">
+          <td class="email-body" style="padding:32px 40px;">
             <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 16px;">New Assessment Completed</p>
             <h2 style="color:#1a1a2e;font-family:Georgia,serif;font-size:22px;margin:0 0 24px;">New Lead — ETFM Snapshot</h2>
             <table style="width:100%;border-collapse:collapse;">
@@ -328,23 +360,35 @@ Keep under 900 words.`, 3000);
 
     const emailHtml = emailWrapper(`
       <tr>
-        <td style="padding:32px 40px 0;text-align:center;">
+        <td class="email-body" style="padding:32px 40px 0;text-align:center;">
           <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:3px;margin:0 0 8px;">Strategic Financial Blueprint</p>
           <h1 style="color:#1a1a2e;font-family:Georgia,serif;font-size:26px;margin:0 0 8px;">Your Private Strategic Report</h1>
           <p style="color:#7a7a8a;font-size:13px;margin:0;">Prepared for ${firstName} — ETFM Strategic Diagnostic</p>
         </td>
       </tr>
-      <tr><td style="padding:40px;color:#1a1a2e;font-size:15px;line-height:1.8;">
-        ${reportHtml}
-      </td></tr>
       <tr>
-        <td style="padding:32px 40px;background-color:#1a1a2e;text-align:center;">
+        <td class="email-body" style="padding:40px;color:#1a1a2e;font-size:15px;line-height:1.8;">
+          ${reportHtml}
+        </td>
+      </tr>
+      <tr>
+        <td class="offer-dark" style="padding:32px 40px;background-color:#1a1a2e;text-align:center;">
           <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 12px;">Ready for a Real Plan?</p>
-          <h2 style="color:#ffffff;font-family:Georgia,serif;font-size:20px;margin:0 0 12px;">Book Your Strategic Reset Session</h2>
-          <p style="color:#a0a0b8;font-size:14px;margin:0 0 12px;line-height:1.7;">Your 5-Step ETFM Framework guide is ready to view and save:</p>
-          <a href="${FRAMEWORK_URL}" style="display:inline-block;background-color:rgba(201,151,58,0.15);color:#c9973a;border:1px solid #c9973a;text-decoration:none;padding:10px 24px;border-radius:6px;font-size:14px;margin-bottom:24px;">View Your Framework Guide →</a>
-          <p style="color:#a0a0b8;font-size:14px;margin:0 0 20px;line-height:1.7;">Robert works with a limited number of clients each month on a complete financial architecture — built around your actual numbers, structure, and goals. This is where implementation begins.</p>
-          <a href="${CALENDLY}" style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 32px;border-radius:6px;font-weight:bold;font-size:15px;">Book Your Session — $499</a>
+          <h2 style="color:#ffffff;font-family:Georgia,serif;font-size:20px;margin:0 0 12px;">Strategic Reset Partnership</h2>
+          <p style="color:#a0a0b8;font-size:14px;margin:0 0 8px;line-height:1.7;">Your Blueprint identified the pattern. Now it's time to build the structure with Robert directly.</p>
+          <table cellpadding="0" cellspacing="0" style="margin:0 auto 20px;text-align:left;">
+            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Pre-session financial intake & discovery review</td></tr>
+            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;60-minute private session with Robert Brickey</td></tr>
+            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Personalized financial plan & strategic framework</td></tr>
+            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Decision rules & financial policy system</td></tr>
+            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Custom 90-day strategic reset roadmap</td></tr>
+            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Session recording</td></tr>
+            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;30 days of priority email support</td></tr>
+          </table>
+          <p style="color:#a0a0b8;font-size:13px;font-style:italic;margin:0 0 20px;">Your 5-Step ETFM Framework guide is also ready to view:</p>
+          <a href="${FRAMEWORK_URL}" class="cta-btn" style="display:inline-block;background-color:rgba(201,151,58,0.15);color:#c9973a;border:1px solid #c9973a;text-decoration:none;padding:10px 24px;border-radius:6px;font-size:14px;margin-bottom:20px;">View Your Framework Guide →</a>
+          <br/>
+          <a href="${STRIPE_499}" class="cta-btn" style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 32px;border-radius:6px;font-weight:bold;font-size:15px;margin-top:8px;">Book Your Session — $499</a>
         </td>
       </tr>
     `);
