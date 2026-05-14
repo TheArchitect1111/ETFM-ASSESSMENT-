@@ -38,7 +38,7 @@ export default async function handler(req, res) {
                 name: "ETFM Strategic Financial Blueprint",
                 description: "18-question deep diagnostic + personalized AI report + 5-step framework PDF + 30-Day Reset Protocol",
               },
-              unit_amount: 100,
+              unit_amount: 4700, // $47.00
             },
             quantity: 1,
           }],
@@ -104,7 +104,7 @@ export default async function handler(req, res) {
               name: "ETFM Strategic Financial Blueprint",
               description: "18-question deep diagnostic + personalized AI report + 5-step framework PDF + Robert's video message + 30-Day Reset Protocol",
             },
-            unit_amount: 100,
+            unit_amount: 4700, // $47.00
           },
           quantity: 1,
         }],
@@ -142,6 +142,7 @@ export default async function handler(req, res) {
 
     if (updateError) return res.status(500).json({ error: "Failed to save answers" });
 
+    // Fire-and-forget — do not await, Vercel will not block on this
     fetch(`https://etfm-assessment.vercel.app/api/claude`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -152,7 +153,7 @@ export default async function handler(req, res) {
         freeAnswers: session.free_answers,
         blueprintAnswers,
       }),
-    }).catch(console.error);
+    }).catch((err) => console.error("Blueprint report trigger error:", err));
 
     return res.status(200).json({ success: true });
   }
