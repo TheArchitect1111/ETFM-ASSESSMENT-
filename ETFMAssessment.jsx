@@ -1020,7 +1020,97 @@ export default function ETFMAssessment() {
     );
   }
 
-  if (screen === "snapshot_confirmed") {
+ if (screen === "snapshot_confirmed") {
+  return (
+    <PageWrap maxWidth="720px">
+      <GoldLabel text="Your Next Step" />
+
+      <h2 style={{ fontSize: "36px", fontFamily: "Georgia, serif", color: C.text, marginBottom: "20px", lineHeight: "1.3" }}>
+        {firstName ? `${firstName}, your Snapshot has been delivered.` : "Your Snapshot has been delivered."}
+      </h2>
+
+      <p style={{ fontSize: "16px", color: C.muted, lineHeight: "1.7", marginBottom: "40px" }}>
+        Your Financial Snapshot, Archetype, and Awareness Score have already been delivered to your inbox.
+        Choose the next level of clarity, structure, and strategy below.
+      </p>
+
+      <div style={{ display: "flex", gap: "20px", flexDirection: "column" }}>
+
+        <div style={{ backgroundColor: C.dark, borderRadius: "10px", padding: "32px", textAlign: "left" }}>
+          <p style={{ color: C.gold, fontSize: "11px", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "8px" }}>
+            Strategic Blueprint
+          </p>
+
+          <h3 style={{ color: C.white, fontFamily: "Georgia, serif", fontSize: "24px", marginBottom: "12px", lineHeight: "1.3" }}>
+            Unlock the $47 Strategic Blueprint
+          </h3>
+
+          <p style={{ color: "#a0a0b8", fontSize: "15px", marginBottom: "20px", lineHeight: "1.7" }}>
+            Go beyond your Snapshot with a deeper diagnostic that reveals the patterns, system leaks, and next actions behind your financial situation.
+          </p>
+
+          {[
+            "18-question deeper financial diagnostic",
+            "Personalized Strategic Blueprint report",
+            "Financial pattern and system-leak analysis",
+            "30-Day Reset Protocol",
+            "Personalized escape roadmap",
+            "ETFM 5-Step Framework PDF",
+            "$47 credit toward the $499 Strategic Reset Session",
+          ].map((item) => (
+            <div key={item} style={{ color: "#d8d8e8", fontSize: "14px", lineHeight: "1.7", padding: "7px 0", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+              ✓ {item}
+            </div>
+          ))}
+
+          <button onClick={() => setScreen("blueprint_bridge")} style={{ width: "100%", marginTop: "24px", padding: "14px", backgroundColor: C.gold, color: C.dark, border: "none", borderRadius: "6px", fontWeight: "bold", fontSize: "15px", cursor: "pointer" }}>
+            Unlock Your Strategic Blueprint — $47 →
+          </button>
+        </div>
+
+        <div style={{ backgroundColor: C.white, border: `2px solid ${C.gold}`, borderRadius: "10px", padding: "32px", textAlign: "left" }}>
+          <p style={{ color: C.gold, fontSize: "11px", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "8px" }}>
+            Premium Strategic Reset
+          </p>
+
+          <h3 style={{ color: C.dark, fontFamily: "Georgia, serif", fontSize: "24px", marginBottom: "12px", lineHeight: "1.3" }}>
+            Work Directly With Robert — $499
+          </h3>
+
+          <p style={{ color: C.muted, fontSize: "15px", marginBottom: "20px", lineHeight: "1.7" }}>
+            A private strategy experience built around your actual income, obligations, goals, pressure points, and long-term financial direction.
+          </p>
+
+          {[
+            "Pre-session financial intake review",
+            "60-minute private Strategic Reset Session",
+            "Personalized financial plan and strategy",
+            "Full Matrix Score and structural analysis",
+            "Custom 90-day execution roadmap",
+            "Decision rules and financial policy framework",
+            "Session recording",
+            "30 days of priority email support",
+            "$47 Blueprint credit applied if previously purchased",
+          ].map((item) => (
+            <div key={item} style={{ color: C.text, fontSize: "14px", lineHeight: "1.7", padding: "7px 0", borderBottom: `1px solid ${C.border}` }}>
+              ✓ {item}
+            </div>
+          ))}
+
+          <button onClick={() => setScreen("session_bridge")} style={{ width: "100%", marginTop: "24px", padding: "14px", backgroundColor: C.white, color: C.gold, border: `2px solid ${C.gold}`, borderRadius: "6px", fontWeight: "bold", fontSize: "15px", cursor: "pointer" }}>
+            Apply for the Strategic Reset Session — $499 →
+          </button>
+        </div>
+      </div>
+
+      <Divider />
+
+      <p style={{ fontSize: "13px", color: C.muted }}>
+        Questions? <strong>exit@etfm.systems</strong>
+      </p>
+    </PageWrap>
+  );
+}
     return (
       <PageWrap>
         <GoldLabel text="Your Next Step" />
