@@ -412,10 +412,7 @@ export default function ETFMAssessment(){
         style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
         Book Your Session on Calendly →
       </a>
-      <BtnPrimary onClick={paySession} disabled={loading}>
-        {loading?"Setting up payment...":blueprintClient?"Complete Payment — $425":"Complete Payment — $499"}
-      </BtnPrimary>
-      <p style={{fontSize:"13px",color:C.muted,marginBottom:"24px",lineHeight:"1.6"}}>Book your session on Calendly first, then complete payment below. Your session is confirmed once payment is received.</p>
+
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
     </Wrap>
