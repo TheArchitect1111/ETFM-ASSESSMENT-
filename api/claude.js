@@ -226,8 +226,7 @@ Keep under 500 words total.`);
           </table>
           <p style="color:#7a7a8a;font-size:12px;font-style:italic;margin:0 0 20px;text-align:center;">This is not coaching. This is private strategic partnership.</p>
           <div style="text-align:center;">
-            <a href="${CALENDLY}" class="cta-btn" style="display:inline-block;background-color:#ffffff;color:#c9973a;border:2px solid #c9973a;text-decoration:none;padding:12px 28px;border-radius:6px;font-weight:bold;font-size:14px;">Book Your Session — $499</a>
-          </div>
+            href="https://etfm-assessment.vercel.app/?email=${encodeURIComponent(email)}&firstName=${encodeURIComponent(firstName)}&showSession=true"
         </td>
       </tr>
     `);
@@ -388,7 +387,7 @@ Keep under 900 words.`, 1500);
           <p style="color:#a0a0b8;font-size:13px;font-style:italic;margin:0 0 20px;">Your 5-Step ETFM Framework guide is also ready to view:</p>
           <a href="${FRAMEWORK_URL}" class="cta-btn" style="display:inline-block;background-color:rgba(201,151,58,0.15);color:#c9973a;border:1px solid #c9973a;text-decoration:none;padding:10px 24px;border-radius:6px;font-size:14px;margin-bottom:20px;">View Your Framework Guide →</a>
           <br/>
-          <a href="${CALENDLY}" class="cta-btn" style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 32px;border-radius:6px;font-weight:bold;font-size:15px;margin-top:8px;">Book Your Session — $499</a>
+<href="https://etfm-assessment.vercel.app/?email=${encodeURIComponent(email)}&firstName=${encodeURIComponent(firstName)}&showSession=true&hasBlueprint=true"
         </td>
       </tr>
     `);
