@@ -409,7 +409,7 @@ if (screen === "snapshot_confirmed") return (
     <PageWrap>
       <GoldLabel text="Snapshot Delivered" />
       <h2 style={{ fontSize: "36px", fontFamily: "Georgia, serif", color: C.text, marginBottom: "20px", lineHeight: "1.3" }}>
-        {firstName ? `${firstName}, your Snapshot is on its way.` : "Your Snapshot is on its way."}
+      {firstName ? `${firstName}, your Snapshot has been delivered.` : "Your Snapshot has been delivered."}
       </h2>
       <p style={{ fontSize: "16px", color: C.muted, lineHeight: "1.7", marginBottom: "16px" }}>
         Check your inbox for your Financial Archetype, Awareness Score, and personalized strategic insight. If you don't see it within 5 minutes, check your spam folder.
