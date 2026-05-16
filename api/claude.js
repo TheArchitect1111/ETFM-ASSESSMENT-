@@ -226,7 +226,7 @@ Keep under 500 words total.`);
           </table>
           <p style="color:#7a7a8a;font-size:12px;font-style:italic;margin:0 0 20px;text-align:center;">This is not coaching. This is private strategic partnership.</p>
           <div style="text-align:center;">
-            href="https://etfm-assessment.vercel.app/?email=${encodeURIComponent(email)}&firstName=${encodeURIComponent(firstName)}&showSession=true"
+<a href="https://etfm-assessment.vercel.app/?email=${encodeURIComponent(email)}&firstName=${encodeURIComponent(firstName)}&showSession=true" class="cta-btn" style="display:inline-block;background-color:#ffffff;color:#c9973a;border:2px solid #c9973a;text-decoration:none;padding:14px 32px;border-radius:6px;font-size:16px;font-weight:bold;">Book Your Strategic Reset Session — $499 →</a>
         </td>
       </tr>
     `);
