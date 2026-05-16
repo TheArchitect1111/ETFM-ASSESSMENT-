@@ -294,11 +294,12 @@ export default function ETFMAssessment() {
       <p style={{ color: C.muted, fontSize: "14px", fontFamily: "Georgia, serif" }}>Loading your session...</p>
     </PageWrap>
   );
-
+if (screen === "snapshot_confirmed") return (
   // ── INTRO ─────────────────────────────────────────────────────────────────
   if (screen === "intro") return (
     <PageWrap maxWidth="600px">
-      <div style={{ width: "110px", height: "110px", borderRadius: "50%", backgroundColor: C.dark, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 30px", boxShadow: "0 4px 24px rgba(0,0,0,0.18)" }}>
+      <div style={{
+      width: "110px", height: "110px", borderRadius: "50%", backgroundColor: C.dark, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 30px", boxShadow: "0 4px 24px rgba(0,0,0,0.18)" }}>
         <img src={LOGO_URL} alt="ETFM" style={{ width: "86px", height: "86px", objectFit: "contain" }} onError={(e) => e.target.style.display = "none"} />
       </div>
       <GoldLabel text="Escape The Financial Matrix" />
@@ -396,6 +397,15 @@ export default function ETFMAssessment() {
   // ── SNAPSHOT CONFIRMED ────────────────────────────────────────────────────
   // Shows after email submitted OR when returning from email deep link
   if (screen === "snapshot_confirmed") return (
+  <PageWrap>
+    <GoldLabel text="Your Next Step" />
+<h2 style={{ fontSize: "36px", fontFamily: "Georgia, serif", color: C.text, marginBottom: "20px", lineHeight: "1.3" }}>
+  {firstName ? `${firstName}, ready to go deeper?` : "Ready to go deeper?"}
+</h2>
+<p style={{ fontSize: "16px", color: C.muted, lineHeight: "1.7", marginBottom: "40px" }}>
+  Your Snapshot has been delivered to your inbox. Choose your next step below.
+</p>
+    </p>
     <PageWrap>
       <GoldLabel text="Snapshot Delivered" />
       <h2 style={{ fontSize: "36px", fontFamily: "Georgia, serif", color: C.text, marginBottom: "20px", lineHeight: "1.3" }}>
