@@ -402,7 +402,7 @@ if (screen === "snapshot_confirmed") return (
 <h2 style={{ fontSize: "36px", fontFamily: "Georgia, serif", color: C.text, marginBottom: "20px", lineHeight: "1.3" }}>
   {firstName ? `${firstName}, ready to go deeper?` : "Ready to go deeper?"}
 </h2>
-<p style={{ fontSize: "16px", color: C.muted, lineHeight: "1.7", marginBottom: "40px" }}>
+Your Financial Snapshot, Archetype, and Awareness Score have already been delivered to your inbox. Your next step is choosing to get additional clarity and direction.
   Your Snapshot has been delivered to your inbox. Choose your next step below.
 </p>
     </p>
