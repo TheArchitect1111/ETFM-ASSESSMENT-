@@ -10,7 +10,6 @@ const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const STRIPE_47 = "https://buy.stripe.com/bJe7sM5CE9jwbtnace8Vi0d";
 const CALENDLY = "https://calendly.com/exit-etfm/etfm-strategic-reset-session";
-const CALENDLY = "https://calendly.com/exit-etfm/etfm-strategic-reset-session";
 const FRAMEWORK_URL = "https://etfm-assessment.vercel.app/framework.html";
 const LOGO = "https://raw.githubusercontent.com/TheArchitect1111/ETFM-ASSESSMENT-/main/file_00000000e10471f5bb36fabf63d29869.png";
 
