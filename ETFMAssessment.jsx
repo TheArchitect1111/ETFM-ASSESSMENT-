@@ -1,8 +1,3 @@
-# Clean ETFMAssessment.jsx Replacement
-
-Replace the ENTIRE contents of `ETFMAssessment.jsx` with the code below.
-
-```jsx
 import { useState } from "react";
 
 const C = {
@@ -15,65 +10,8 @@ const C = {
   white: "#ffffff",
 };
 
-const FREE_QUESTIONS = [
-  {
-    bot: "How aware are you of where your money goes each month?",
-    options: [
-      "No clear idea",
-      "Some awareness",
-      "Rough mental tracking",
-      "Mostly tracked",
-      "Precisely tracked",
-    ],
-  },
-  {
-    bot: "When extra money appears, what usually happens to it?",
-    options: [
-      "Bills consume it",
-      "I spend it quickly",
-      "I try to save it",
-      "I use it intentionally",
-      "I invest/save it",
-    ],
-  },
-  {
-    bot: "When financial pressure rises, what happens?",
-    options: [
-      "I avoid it",
-      "I react emotionally",
-      "I work more",
-      "I ask for advice",
-      "I make a plan",
-    ],
-  },
-  {
-    bot: "Which area feels least under control?",
-    options: [
-      "Debt",
-      "Spending",
-      "Saving",
-      "Income",
-      "Planning",
-      "Investing",
-    ],
-  },
-  {
-    bot: "What are you trying to create financially?",
-    options: [
-      "Stability",
-      "Peace of mind",
-      "Freedom from debt",
-      "Time freedom",
-      "Ownership & wealth",
-      "Family security",
-    ],
-  },
-];
-
 export default function ETFMAssessment() {
   const [screen, setScreen] = useState("snapshot_confirmed");
-  const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState([]);
 
   const firstName = "Robert";
 
@@ -152,6 +90,8 @@ export default function ETFMAssessment() {
             gap: "24px",
           }}
         >
+          {/* $47 Blueprint */}
+
           <div
             style={{
               backgroundColor: C.dark,
@@ -237,6 +177,8 @@ export default function ETFMAssessment() {
               Unlock Your Strategic Blueprint — $47 →
             </button>
           </div>
+
+          {/* $499 Session */}
 
           <div
             style={{
@@ -345,7 +287,12 @@ export default function ETFMAssessment() {
   if (screen === "blueprint") {
     return (
       <PageWrap>
-        <h2 style={{ fontFamily: "Georgia, serif", color: C.text }}>
+        <h2
+          style={{
+            fontFamily: "Georgia, serif",
+            color: C.text,
+          }}
+        >
           Blueprint Page Placeholder
         </h2>
       </PageWrap>
@@ -355,7 +302,12 @@ export default function ETFMAssessment() {
   if (screen === "session") {
     return (
       <PageWrap>
-        <h2 style={{ fontFamily: "Georgia, serif", color: C.text }}>
+        <h2
+          style={{
+            fontFamily: "Georgia, serif",
+            color: C.text,
+          }}
+        >
           Session Page Placeholder
         </h2>
       </PageWrap>
@@ -364,4 +316,3 @@ export default function ETFMAssessment() {
 
   return null;
 }
-```
