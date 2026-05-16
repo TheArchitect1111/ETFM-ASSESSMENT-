@@ -52,6 +52,16 @@ const BQ=[
 
 const OPT={display:"block",width:"100%",padding:"16px",marginBottom:"12px",backgroundColor:"#ffffff",color:"#1a1a2e",border:"1px solid #e8e3da",borderRadius:"8px",cursor:"pointer",fontSize:"15px",textAlign:"left",transition:"all 0.2s ease"};
 
+// ── CREDIT NOTE — same message used in both blueprint_offer and session_offer ─
+const CreditNote=({dark=false})=>(
+  <div style={{marginTop:"20px",padding:"16px",backgroundColor:dark?"rgba(201,151,58,0.12)":C.goldSoft,borderRadius:"6px",border:"1px solid rgba(201,151,58,0.3)"}}>
+    <p style={{color:C.gold,fontSize:"14px",margin:"0 0 10px",lineHeight:"1.6",fontWeight:"bold"}}>🧩 Thank you for investing in your ETFM Blueprint.</p>
+    <p style={{color:dark?"#c8c8d8":C.body,fontSize:"14px",margin:0,lineHeight:"1.8"}}>
+      Your Blueprint is more than a standalone assessment. It becomes the foundation for deeper strategic planning if you decide to continue. When you upgrade to the Strategic Reset Partnership, your original $47 investment will be fully credited and will activate an additional upgrade incentive, reducing your total investment for Package 3 to just $425. This allows you to begin with clarity and move into full implementation without losing the value of your first step.
+    </p>
+  </div>
+);
+
 export default function ETFMAssessment(){
   const p=new URLSearchParams(window.location.search);
   const hasSid=p.get("session");
@@ -160,7 +170,6 @@ export default function ETFMAssessment(){
     }catch(e){console.error(e);}
   };
 
-  // SHARED UI
   const Wrap=({children,max="560px"})=>(
     <div style={{minHeight:"100vh",backgroundColor:C.bg,display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",padding:"40px 20px"}}>
       <div style={{maxWidth:max,width:"100%",textAlign:"center"}}>{children}</div>
@@ -174,10 +183,10 @@ export default function ETFMAssessment(){
     </button>
   );
 
-  // ── LOADING
+  // LOADING
   if(screen==="loading") return <Wrap><p style={{color:C.muted,fontFamily:"Georgia, serif"}}>Loading your session...</p></Wrap>;
 
-  // ── INTRO
+  // INTRO
   if(screen==="intro") return(
     <Wrap max="600px">
       <div style={{width:"110px",height:"110px",borderRadius:"50%",backgroundColor:C.dark,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 30px",boxShadow:"0 4px 24px rgba(0,0,0,0.18)"}}>
@@ -191,7 +200,7 @@ export default function ETFMAssessment(){
     </Wrap>
   );
 
-  // ── FREE CHAT
+  // FREE CHAT
   if(screen==="chat"){
     const q=FQ[freeIdx];
     const prog=((freeIdx+1)/FQ.length)*100;
@@ -221,7 +230,7 @@ export default function ETFMAssessment(){
     );
   }
 
-  // ── TRANSITION
+  // TRANSITION
   if(screen==="transition") return(
     <div style={{minHeight:"100vh",backgroundColor:C.bg,padding:"40px 20px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
       <div style={{maxWidth:"580px",width:"100%",textAlign:"center"}}>
@@ -264,7 +273,7 @@ export default function ETFMAssessment(){
     </div>
   );
 
-  // ── SNAPSHOT CONFIRMED — no paid offers
+  // SNAPSHOT CONFIRMED — no paid offers
   if(screen==="snapshot_confirmed") return(
     <Wrap>
       <div style={{fontSize:"48px",marginBottom:"16px"}}>🎉</div>
@@ -289,7 +298,7 @@ export default function ETFMAssessment(){
     </Wrap>
   );
 
-  // ── BLUEPRINT OFFER — from email $47 link
+  // BLUEPRINT OFFER — from email $47 link
   if(screen==="blueprint_offer") return(
     <Wrap>
       <Tag t="Strategic Blueprint"/>
@@ -300,9 +309,7 @@ export default function ETFMAssessment(){
         {["18-question deep strategic diagnostic","Personalized financial escape roadmap","5-Step ETFM Framework PDF","Robert's personal video message","30-Day Strategic Reset Protocol"].map(item=>(
           <div key={item} style={{padding:"8px 0",color:"#c8c8d8",fontSize:"15px",lineHeight:"1.6",borderBottom:"1px solid rgba(255,255,255,0.06)"}}>✓ &nbsp;{item}</div>
         ))}
-        <div style={{marginTop:"20px",padding:"14px",backgroundColor:"rgba(201,151,58,0.12)",borderRadius:"6px",border:"1px solid rgba(201,151,58,0.3)"}}>
-          <p style={{color:C.gold,fontSize:"14px",margin:0,lineHeight:"1.6"}}>★ <strong>Upgrade Credit:</strong> Your $47 will be fully credited toward the $425 Strategic Reset Session if you choose to work directly with Robert.</p>
-        </div>
+        <CreditNote dark={true}/>
       </div>
       <p style={{fontSize:"14px",color:C.muted,marginBottom:"20px",lineHeight:"1.7"}}>After payment you'll answer 18 diagnostic questions. Robert's team then generates your personalized Blueprint report and delivers it to your inbox within minutes.</p>
       {!email&&(
@@ -317,7 +324,7 @@ export default function ETFMAssessment(){
     </Wrap>
   );
 
-  // ── BLUEPRINT CHAT
+  // BLUEPRINT CHAT
   if(screen==="blueprint_chat"){
     const q=BQ[bpIdx];
     const prog=((bpIdx+1)/BQ.length)*100;
@@ -347,7 +354,7 @@ export default function ETFMAssessment(){
     );
   }
 
-  // ── BLUEPRINT COMPLETE
+  // BLUEPRINT COMPLETE
   if(screen==="blueprint_complete") return(
     <Wrap max="620px">
       <div style={{textAlign:"center",marginBottom:"32px"}}>
@@ -362,8 +369,8 @@ export default function ETFMAssessment(){
           <p style={{color:C.text,fontSize:"16px",lineHeight:"1.8",marginBottom:"16px"}}>You took an important step today.</p>
           <p style={{color:C.muted,fontSize:"15px",lineHeight:"1.9",marginBottom:"32px"}}>Most people avoid looking closely at their financial patterns. You didn't. Your personalized report, escape roadmap, and 30-Day Reset Protocol will be in your inbox shortly — typically within 3–5 minutes. Check your spam folder if you don't see it.</p>
           <div style={{backgroundColor:C.bg,borderRadius:"8px",padding:"20px 24px",marginBottom:"32px",borderLeft:`3px solid ${C.gold}`}}>
-            <p style={{margin:0,color:C.gold,fontSize:"14px",fontWeight:"bold",lineHeight:"1.6"}}>★ Ready to go further?</p>
-            <p style={{margin:"8px 0 0",color:C.muted,fontSize:"14px",lineHeight:"1.7"}}>Your Blueprint email includes an opportunity to book a private Strategic Reset Session with Robert. As a Blueprint client, your session is just <strong>$425</strong> — a $74 credit for your Blueprint investment.</p>
+            <p style={{margin:"0 0 10px",color:C.gold,fontSize:"14px",fontWeight:"bold",lineHeight:"1.6"}}>🧩 Thank you for investing in your ETFM Blueprint.</p>
+            <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>Your Blueprint is more than a standalone assessment. It becomes the foundation for deeper strategic planning if you decide to continue. When you upgrade to the Strategic Reset Partnership, your original $47 investment will be fully credited and will activate an additional upgrade incentive, reducing your total investment for Package 3 to just $425. This allows you to begin with clarity and move into full implementation without losing the value of your first step.</p>
           </div>
           <div style={{textAlign:"center",padding:"24px 0",borderTop:`1px solid ${C.border}`}}>
             <p style={{margin:0,color:C.text,fontSize:"16px",lineHeight:"2.2",fontFamily:"Georgia, serif",fontStyle:"italic"}}>Clarity creates control.<br/>Control creates momentum.<br/>Momentum creates freedom.</p>
@@ -376,7 +383,7 @@ export default function ETFMAssessment(){
     </Wrap>
   );
 
-  // ── SESSION OFFER — from $499 link in either email
+  // SESSION OFFER — from $499 link in either email
   if(screen==="session_offer") return(
     <Wrap>
       <Tag t="Strategic Reset Session"/>
@@ -387,12 +394,7 @@ export default function ETFMAssessment(){
         {["Pre-session financial intake & discovery review","60-minute private strategy session with Robert Brickey","Personalized financial plan & strategic framework","Full Matrix Score & structural analysis","Decision rules & financial policy system","Custom 90-day strategic reset roadmap","Session recording","30 days of priority email support"].map(item=>(
           <div key={item} style={{padding:"8px 0",color:C.text,fontSize:"14px",lineHeight:"1.6",borderBottom:`1px solid ${C.border}`}}>✓ &nbsp;{item}</div>
         ))}
-        <div style={{marginTop:"20px",padding:"14px",backgroundColor:C.goldSoft,borderRadius:"6px",border:`1px solid rgba(201,151,58,0.3)`}}>
-          {blueprintClient
-            ?<p style={{color:C.dark,fontSize:"14px",margin:0,lineHeight:"1.6"}}>★ <strong>Blueprint client discount applied.</strong> Your $47 Blueprint investment has been credited — you pay just $425 today.</p>
-            :<p style={{color:C.dark,fontSize:"14px",margin:0,lineHeight:"1.6"}}>★ <strong>Already purchased the Blueprint?</strong> Your $47 will be credited — you pay just $425. This will be applied automatically.</p>
-          }
-        </div>
+        <CreditNote dark={false}/>
       </div>
       <div style={{backgroundColor:C.bg,borderRadius:"8px",padding:"20px 24px",marginBottom:"24px",textAlign:"left",border:`1px solid ${C.border}`}}>
         <p style={{color:C.dark,fontSize:"14px",fontWeight:"bold",marginBottom:"8px"}}>How it works:</p>
@@ -419,7 +421,7 @@ export default function ETFMAssessment(){
     </Wrap>
   );
 
-  // ── SESSION CONFIRMED
+  // SESSION CONFIRMED
   if(screen==="session_confirmed") return(
     <Wrap>
       <div style={{fontSize:"48px",marginBottom:"16px"}}>✅</div>
@@ -443,7 +445,7 @@ export default function ETFMAssessment(){
     </Wrap>
   );
 
-  // ── BLUEPRINT UNPAID
+  // BLUEPRINT UNPAID
   if(screen==="blueprint_unpaid") return(
     <Wrap max="500px">
       <h2 style={{fontSize:"28px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px"}}>Payment Required</h2>
@@ -452,7 +454,7 @@ export default function ETFMAssessment(){
     </Wrap>
   );
 
-  // ── BLUEPRINT CANCELLED
+  // BLUEPRINT CANCELLED
   if(screen==="blueprint_cancelled") return(
     <Wrap max="500px">
       <h2 style={{fontSize:"28px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px"}}>No problem.</h2>
