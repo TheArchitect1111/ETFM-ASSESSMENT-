@@ -363,9 +363,8 @@ const optionBtn = {
 };
 
 export default function ETFMAssessment() {
-  // ── Detect URL params before setting initial screen ───────────────────────
   const urlParams = new URLSearchParams(window.location.search);
-  const hasSid         = urlParams.get("session");
+  const hasSid          = urlParams.get("session");
   const hasEmailDeepLink = urlParams.get("showBlueprint") && urlParams.get("email");
 
   const getInitialScreen = () => {
@@ -374,31 +373,34 @@ export default function ETFMAssessment() {
     return "intro";
   };
 
-  const [screen, setScreen] = useState(getInitialScreen());
-  const [freeIndex, setFreeIndex] = useState(0);
-  const [freeAnswers, setFreeAnswers] = useState([]);
+  const [screen, setScreen]               = useState(getInitialScreen());
+  const [freeIndex, setFreeIndex]         = useState(0);
+  const [freeAnswers, setFreeAnswers]     = useState([]);
   const [blueprintIndex, setBlueprintIndex] = useState(0);
   const [blueprintAnswers, setBlueprintAnswers] = useState([]);
-  const [firstName, setFirstName] = useState(
+  const [firstName, setFirstName]         = useState(
     urlParams.get("firstName") ? decodeURIComponent(urlParams.get("firstName")) : ""
   );
-  const [email, setEmail] = useState(
+  const [email, setEmail]                 = useState(
     urlParams.get("email") ? decodeURIComponent(urlParams.get("email")) : ""
   );
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading]             = useState(false);
   const [awarenessScore, setAwarenessScore] = useState(null);
-  const [archetype, setArchetype] = useState("");
-  const [sessionId, setSessionId] = useState(null);
-  const [sessionValid, setSessionValid] = useState(false);
+  const [archetype, setArchetype]         = useState("");
+  const [sessionId, setSessionId]         = useState(null);
+  const [sessionValid, setSessionValid]   = useState(false);
+
+  // Track whether user arrived from email link
+  const fromEmail = !!hasEmailDeepLink;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [screen, freeIndex, blueprintIndex]);
 
-  // ── Handle session return from Stripe ────────────────────────────────────
+  // Handle session return from Stripe
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const sid = params.get("session");
+    const sid      = params.get("session");
     const cancelled = params.get("cancelled");
     if (sid) {
       setSessionId(sid);
@@ -412,15 +414,13 @@ export default function ETFMAssessment() {
 
   const checkSession = async (sid) => {
     try {
-      const res = await fetch(`/api/blueprint-session?session_id=${sid}`);
+      const res  = await fetch(`/api/blueprint-session?session_id=${sid}`);
       const data = await res.json();
       if (data.status === "paid") {
         setFirstName(data.first_name || "");
         setEmail(data.email || "");
         setSessionValid(true);
         setScreen("blueprint_chat");
-      } else if (data.status === "pending_payment") {
-        setScreen("blueprint_unpaid");
       } else {
         setScreen("blueprint_unpaid");
       }
@@ -447,7 +447,7 @@ export default function ETFMAssessment() {
     if (!firstName.trim() || !email.trim()) return alert("Please fill in both fields");
     setLoading(true);
     try {
-      const res = await fetch("/api/claude", {
+      const res  = await fetch("/api/claude", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -474,7 +474,7 @@ export default function ETFMAssessment() {
     if (!firstName.trim() || !email.trim()) return alert("Please fill in both fields");
     setLoading(true);
     try {
-      const res = await fetch("/api/blueprint-session", {
+      const res  = await fetch("/api/blueprint-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -488,9 +488,7 @@ export default function ETFMAssessment() {
         }),
       });
       const data = await res.json();
-      if (data.checkoutUrl) {
-        window.location.href = data.checkoutUrl;
-      }
+      if (data.checkoutUrl) window.location.href = data.checkoutUrl;
     } catch (err) {
       alert("Something went wrong. Please try again.");
     } finally {
@@ -558,7 +556,7 @@ export default function ETFMAssessment() {
 
   // ── FREE CHAT ───────────────────────────────────────────────────────────────
   if (screen === "chat") {
-    const q = FREE_QUESTIONS[freeIndex];
+    const q        = FREE_QUESTIONS[freeIndex];
     const progress = ((freeIndex + 1) / FREE_QUESTIONS.length) * 100;
     return (
       <div style={{ minHeight: "100vh", backgroundColor: C.bg, padding: "40px 20px" }}>
@@ -644,26 +642,36 @@ export default function ETFMAssessment() {
   );
 
   // ── CONFIRMATION ─────────────────────────────────────────────────────────────
-  // This screen shows after free snapshot AND when returning from email deep link
+  // Serves two entry points:
+  // 1. After completing the free 5 questions (fromEmail = false)
+  // 2. Clicking the Blueprint button in the snapshot email (fromEmail = true)
   if (screen === "confirmation") return (
     <div style={{ minHeight: "100vh", backgroundColor: C.bg, padding: "40px 20px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
       <div style={{ maxWidth: "580px", width: "100%", textAlign: "center" }}>
-        <p style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "3px", color: C.gold, marginBottom: "16px" }}>Snapshot Delivered</p>
+
+        <p style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "3px", color: C.gold, marginBottom: "16px" }}>
+          Your Next Step
+        </p>
         <h2 style={{ fontSize: "32px", fontFamily: "Georgia, serif", color: C.text, marginBottom: "16px", lineHeight: "1.3" }}>
-          {firstName ? `${firstName}, your Snapshot is on its way.` : "Your Snapshot is on its way."}
+          {firstName ? `${firstName}, ready to go deeper?` : "Ready to go deeper?"}
         </h2>
         <p style={{ fontSize: "16px", color: C.muted, lineHeight: "1.7", marginBottom: "40px" }}>
-          Check your inbox for your Financial Archetype, Awareness Score, and personalized strategic insight.
+          {fromEmail
+            ? "Your Snapshot has been delivered. The Blueprint is the next step — a deeper diagnostic that identifies exactly where your financial system is breaking down and delivers your personalized escape roadmap."
+            : "Your Snapshot is on its way. While you wait, here's how to take the next step and unlock your full Strategic Blueprint."
+          }
         </p>
 
-        {/* Blueprint Upsell */}
+        {/* Blueprint Upsell Card */}
         <div style={{ backgroundColor: C.dark, borderRadius: "12px", padding: "36px 30px", textAlign: "left", marginBottom: "20px" }}>
-          <p style={{ color: C.gold, fontSize: "11px", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "12px", textAlign: "center" }}>Want to go deeper?</p>
+          <p style={{ color: C.gold, fontSize: "11px", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "12px", textAlign: "center" }}>
+            Unlock Your Strategic Blueprint
+          </p>
           <h2 style={{ color: C.white, fontFamily: "Georgia, serif", fontSize: "22px", marginBottom: "16px", lineHeight: "1.4", textAlign: "center" }}>
-            Unlock Your Strategic Financial Blueprint
+            18 Questions. Your Personalized Escape Roadmap.
           </h2>
           <p style={{ color: "#a0a0b8", fontSize: "14px", marginBottom: "20px", lineHeight: "1.7", textAlign: "center" }}>
-            Your Snapshot shows where you are. The Blueprint diagnoses exactly why — with 18 questions that go into your real numbers, patterns, and structure. Then delivers a personalized escape roadmap and your 30-Day Strategic Reset Protocol.
+            Your Snapshot shows where you are. The Blueprint diagnoses exactly why — and delivers the structure, roadmap, and reset protocol to start changing it.
           </p>
           {[
             "18-question strategic diagnostic",
@@ -672,14 +680,20 @@ export default function ETFMAssessment() {
             "Robert's personal video message",
             "30-Day Strategic Reset Protocol",
           ].map((item) => (
-            <div key={item} style={{ padding: "5px 0", color: "#c8c8d8", fontSize: "14px", lineHeight: "1.6" }}>
+            <div key={item} style={{ padding: "6px 0", color: "#c8c8d8", fontSize: "14px", lineHeight: "1.6" }}>
               ✓ &nbsp;{item}
             </div>
           ))}
           <button
             onClick={handleBlueprintStart}
             disabled={loading}
-            style={{ display: "block", width: "100%", marginTop: "24px", backgroundColor: loading ? C.muted : C.gold, color: C.dark, border: "none", padding: "16px", borderRadius: "6px", fontWeight: "bold", fontSize: "16px", cursor: loading ? "not-allowed" : "pointer" }}>
+            style={{
+              display: "block", width: "100%", marginTop: "24px",
+              backgroundColor: loading ? C.muted : C.gold,
+              color: C.dark, border: "none", padding: "16px",
+              borderRadius: "6px", fontWeight: "bold", fontSize: "16px",
+              cursor: loading ? "not-allowed" : "pointer",
+            }}>
             {loading ? "Setting up your Blueprint..." : "Get the Strategic Blueprint — $47"}
           </button>
         </div>
@@ -693,7 +707,7 @@ export default function ETFMAssessment() {
 
   // ── BLUEPRINT CHAT (Q1-18 after payment) ─────────────────────────────────────
   if (screen === "blueprint_chat") {
-    const q = BLUEPRINT_QUESTIONS[blueprintIndex];
+    const q        = BLUEPRINT_QUESTIONS[blueprintIndex];
     const progress = ((blueprintIndex + 1) / BLUEPRINT_QUESTIONS.length) * 100;
     return (
       <div style={{ minHeight: "100vh", backgroundColor: C.bg, padding: "40px 20px" }}>
