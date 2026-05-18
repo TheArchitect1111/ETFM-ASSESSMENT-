@@ -52,7 +52,6 @@ const BQ=[
 
 const OPT={display:"block",width:"100%",padding:"16px",marginBottom:"12px",backgroundColor:"#ffffff",color:"#1a1a2e",border:"1px solid #e8e3da",borderRadius:"8px",cursor:"pointer",fontSize:"15px",textAlign:"left",transition:"all 0.2s ease"};
 
-// ── CREDIT NOTE — same message used in both blueprint_offer and session_offer ─
 const CreditNote=({dark=false})=>(
   <div style={{marginTop:"20px",padding:"16px",backgroundColor:dark?"rgba(201,151,58,0.12)":C.goldSoft,borderRadius:"6px",border:"1px solid rgba(201,151,58,0.3)"}}>
     <p style={{color:C.gold,fontSize:"14px",margin:"0 0 10px",lineHeight:"1.6",fontWeight:"bold"}}>🧩 Thank you for investing in your ETFM Blueprint.</p>
@@ -186,7 +185,7 @@ export default function ETFMAssessment(){
   // LOADING
   if(screen==="loading") return <Wrap><p style={{color:C.muted,fontFamily:"Georgia, serif"}}>Loading your session...</p></Wrap>;
 
-  // INTRO
+  // ── INTRO ──────────────────────────────────────────────────────────────────
   if(screen==="intro") return(
     <Wrap max="600px">
       <div style={{width:"110px",height:"110px",borderRadius:"50%",backgroundColor:C.dark,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 30px",boxShadow:"0 4px 24px rgba(0,0,0,0.18)"}}>
@@ -195,6 +194,31 @@ export default function ETFMAssessment(){
       <Tag t="Escape The Financial Matrix"/>
       <h1 style={{fontSize:"42px",fontFamily:"Georgia, serif",marginBottom:"20px",color:C.text,lineHeight:"1.2"}}>Your financial life has a pattern. It's time to see it clearly.</h1>
       <p style={{fontSize:"17px",color:C.muted,marginBottom:"40px",lineHeight:"1.7"}}>The ETFM Snapshot is a 5-question diagnostic that identifies your financial archetype, calculates your Awareness Score, and delivers a personalized strategic insight — free.</p>
+
+      {/* ── WHO IS ROBERT BRICKEY ── */}
+      <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"32px",marginBottom:"36px",textAlign:"left"}}>
+        <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"3px",color:C.gold,marginBottom:"20px",textAlign:"center"}}>Who Built This</p>
+        <p style={{fontSize:"16px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.8",marginBottom:"20px",fontStyle:"italic"}}>
+          "I've spent 12 years watching people do everything right and still feel lost when it comes to money. They work hard. They try to save. They Google their questions at midnight. But nobody ever sat down with them, looked at their actual situation, and helped them build something real. That's why I created this."
+        </p>
+        <p style={{fontSize:"14px",color:C.muted,marginBottom:"20px",lineHeight:"1.7",fontWeight:"bold",textAlign:"right"}}>— Robert Brickey, Creator of ETFM</p>
+        <div style={{borderTop:`1px solid ${C.border}`,paddingTop:"20px",display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
+          {[
+            {icon:"🎓", text:"Duke University Graduate"},
+            {icon:"🏀", text:"Former Basketball Team Captain"},
+            {icon:"📊", text:"12 Years in Financial Advisory"},
+            {icon:"🎙️", text:"Radio Host — WIDU 1600 AM"},
+            {icon:"🏟️", text:"Seminar Speaker, The Carolinas"},
+            {icon:"💡", text:"Creator of ETFM"},
+          ].map((item,i)=>(
+            <div key={i} style={{display:"flex",alignItems:"center",gap:"10px",padding:"10px 12px",backgroundColor:C.bg,borderRadius:"8px"}}>
+              <span style={{fontSize:"18px"}}>{item.icon}</span>
+              <span style={{fontSize:"13px",color:C.text,lineHeight:"1.4"}}>{item.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <button onClick={()=>setScreen("chat")} style={{backgroundColor:C.gold,color:C.dark,border:"none",padding:"16px 44px",fontSize:"16px",fontWeight:"bold",borderRadius:"8px",cursor:"pointer"}}>Begin Your Snapshot →</button>
       <p style={{fontSize:"12px",color:C.muted,marginTop:"16px"}}>5 questions · 2 minutes · No obligation</p>
     </Wrap>
@@ -251,6 +275,32 @@ export default function ETFMAssessment(){
           ))}
           <p style={{color:"#6a6a7a",fontSize:"12px",textAlign:"center",marginTop:"20px",marginBottom:0}}>Your full Strategic Score and Snapshot will be delivered to your inbox.</p>
         </div>
+
+        {/* ── ROBERT NOTE ON RESULTS ── */}
+        <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"28px",marginBottom:"30px",textAlign:"left"}}>
+          <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",color:C.gold,marginBottom:"16px"}}>A Note From Robert</p>
+          <p style={{fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.8",marginBottom:"16px",fontStyle:"italic"}}>
+            "I've worked with hundreds of people who had scores just like yours. Where you are right now is not the full story — what matters is what you do next. That's exactly what the Strategic Reset Session is designed for."
+          </p>
+          <div style={{borderTop:`1px solid ${C.border}`,paddingTop:"16px",display:"flex",flexWrap:"wrap",gap:"8px"}}>
+            {["🎓 Duke Graduate","🏀 Former Team Captain","📊 12 Yrs Advisory","🎙️ WIDU 1600 AM"].map((c,i)=>(
+              <span key={i} style={{fontSize:"12px",color:C.muted,backgroundColor:C.bg,padding:"6px 12px",borderRadius:"20px",border:`1px solid ${C.border}`}}>{c}</span>
+            ))}
+          </div>
+          <div style={{marginTop:"20px",padding:"16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`}}>
+            <p style={{margin:"0 0 6px",fontSize:"13px",color:C.muted,fontStyle:"italic"}}>
+              "I left that call knowing exactly what to do for the first time."
+            </p>
+            <p style={{margin:0,fontSize:"12px",color:C.gold}}>— Strategic Reset Client</p>
+          </div>
+          <div style={{marginTop:"12px",padding:"16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`}}>
+            <p style={{margin:"0 0 6px",fontSize:"13px",color:C.muted,fontStyle:"italic"}}>
+              "Most advisors talk at you. Robert actually looked at my situation."
+            </p>
+            <p style={{margin:0,fontSize:"12px",color:C.gold}}>— ETFM Client</p>
+          </div>
+        </div>
+
         <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"36px 30px"}}>
           <h3 style={{fontSize:"18px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"8px"}}>Send my Snapshot and Strategic Score</h3>
           <p style={{fontSize:"14px",color:C.muted,marginBottom:"24px"}}>Enter your details to receive your personalized results.</p>
@@ -273,7 +323,7 @@ export default function ETFMAssessment(){
     </div>
   );
 
-  // SNAPSHOT CONFIRMED — no paid offers
+  // SNAPSHOT CONFIRMED
   if(screen==="snapshot_confirmed") return(
     <Wrap>
       <div style={{fontSize:"48px",marginBottom:"16px"}}>🎉</div>
@@ -298,7 +348,7 @@ export default function ETFMAssessment(){
     </Wrap>
   );
 
-  // BLUEPRINT OFFER — from email $47 link
+  // BLUEPRINT OFFER
   if(screen==="blueprint_offer") return(
     <Wrap>
       <Tag t="Strategic Blueprint"/>
@@ -383,25 +433,72 @@ export default function ETFMAssessment(){
     </Wrap>
   );
 
-  // SESSION OFFER — from $499 link in either email
+  // ── SESSION OFFER ───────────────────────────────────────────────────────────
   if(screen==="session_offer") return(
     <Wrap>
       <Tag t="Strategic Reset Session"/>
       <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Work directly with Robert Brickey.</h2>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"32px"}}>A private 60-minute Strategic Reset Session built around your actual numbers, patterns, and financial structure. Robert reviews your situation before the call and arrives with a tailored plan.</p>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"24px"}}>Two private 30-minute strategy calls — one before, one after — built entirely around your numbers, your patterns, and your life. Robert reviews your situation before you ever speak. You leave with a real plan.</p>
+
+      {/* Who is Robert — trust bridge */}
+      <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"28px",marginBottom:"24px",textAlign:"left"}}>
+        <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",color:C.gold,marginBottom:"16px"}}>Who Is Robert Brickey?</p>
+        <p style={{fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.8",marginBottom:"20px",fontStyle:"italic"}}>
+          "I've spent 12 years watching people do everything right and still feel lost when it comes to money. Nobody ever sat down with them, looked at their actual situation, and helped them build something real. That's what this session is."
+        </p>
+        <div style={{display:"flex",flexWrap:"wrap",gap:"8px",marginBottom:"20px"}}>
+          {["🎓 Duke Graduate","🏀 Former Team Captain","📊 12 Yrs Advisory","🎙️ WIDU 1600 AM","🏟️ Seminar Speaker"].map((c,i)=>(
+            <span key={i} style={{fontSize:"12px",color:C.muted,backgroundColor:C.bg,padding:"6px 12px",borderRadius:"20px",border:`1px solid ${C.border}`}}>{c}</span>
+          ))}
+        </div>
+        <div style={{padding:"16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`,marginBottom:"10px"}}>
+          <p style={{margin:"0 0 6px",fontSize:"13px",color:C.muted,fontStyle:"italic"}}>"I left that call knowing exactly what to do for the first time."</p>
+          <p style={{margin:0,fontSize:"12px",color:C.gold}}>— Strategic Reset Client</p>
+        </div>
+        <div style={{padding:"16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`}}>
+          <p style={{margin:"0 0 6px",fontSize:"13px",color:C.muted,fontStyle:"italic"}}>"Most advisors talk at you. Robert actually looked at my situation."</p>
+          <p style={{margin:0,fontSize:"12px",color:C.gold}}>— ETFM Client</p>
+        </div>
+      </div>
+
+      {/* What you get */}
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"20px"}}>
         <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px"}}>{blueprintClient?"What's included — $425 (Blueprint client rate)":"What's included — $499"}</p>
-        {["Pre-session financial intake & discovery review","60-minute private strategy session with Robert Brickey","Personalized financial plan & strategic framework","Full Matrix Score & structural analysis","Decision rules & financial policy system","Custom 90-day strategic reset roadmap","Session recording","30 days of priority email support"].map(item=>(
-          <div key={item} style={{padding:"8px 0",color:C.text,fontSize:"14px",lineHeight:"1.6",borderBottom:`1px solid ${C.border}`}}>✓ &nbsp;{item}</div>
+        {[
+          {title:"Robert studies your situation before you ever speak",body:"You fill out a short intake form. He reviews it. You don't waste time explaining yourself — he already knows where you are."},
+          {title:"Pre-session strategy call — just you and Robert",body:"No group calls. No assistants. The first 30 minutes are focused entirely on your money, your patterns, and what needs to change."},
+          {title:"A plan built for your life — not a template",body:"Not 'spend less, save more.' A real plan with real steps written specifically for your situation."},
+          {title:"Your financial score — and what it actually means",body:"See exactly where you stand. Most people have never seen this clearly before. It changes how you make decisions."},
+          {title:"Your personal money rules",body:"Know exactly what to do — and what not to do — when financial decisions come up. No more second-guessing at midnight."},
+          {title:"A 90-day roadmap so you know what to do first",body:"You walk away knowing what to do in the next 30, 60, and 90 days — in order."},
+          {title:"Post-session strategy call to lock in your direction",body:"The second 30-minute call happens after you've had time to review your plan. Robert checks in, answers questions, and makes sure you're moving with confidence."},
+          {title:"Both sessions recorded and sent to you",body:"Go back and watch anytime. The clarity doesn't expire."},
+          {title:"30 days of direct email access to Robert's team",body:"Questions come up after the calls. We're there when they do."},
+        ].map((item,i)=>(
+          <div key={i} style={{padding:"12px 0",borderBottom:`1px solid ${C.border}`}}>
+            <p style={{margin:"0 0 4px",color:C.text,fontSize:"14px",fontWeight:"bold"}}>✓ &nbsp;{item.title}</p>
+            <p style={{margin:"0 0 0 20px",color:C.muted,fontSize:"13px",lineHeight:"1.6"}}>{item.body}</p>
+          </div>
         ))}
         <CreditNote dark={false}/>
       </div>
+
+      {/* How it works */}
       <div style={{backgroundColor:C.bg,borderRadius:"8px",padding:"20px 24px",marginBottom:"24px",textAlign:"left",border:`1px solid ${C.border}`}}>
-        <p style={{color:C.dark,fontSize:"14px",fontWeight:"bold",marginBottom:"8px"}}>How it works:</p>
-        {["Book your session time using the button below","Complete your secure payment","Robert's team sends your pre-session intake materials within 24 hours","Complete the intake before your session so Robert arrives prepared","Attend your private 60-minute strategy session"].map((step,i)=>(
+        <p style={{color:C.dark,fontSize:"14px",fontWeight:"bold",marginBottom:"12px"}}>How it works:</p>
+        {[
+          "Book your pre-session call using the button below",
+          "Complete your secure payment",
+          "Robert's team sends your intake form within 24 hours",
+          "Complete the intake so Robert arrives fully prepared",
+          "Attend your first 30-minute pre-session strategy call",
+          "Review your personalized plan and roadmap",
+          "Attend your second 30-minute post-session call to lock in your direction",
+        ].map((step,i)=>(
           <div key={i} style={{padding:"6px 0",color:C.muted,fontSize:"14px"}}>{i+1}. &nbsp;{step}</div>
         ))}
       </div>
+
       {!email&&(
         <div style={{marginBottom:"20px",textAlign:"left"}}>
           <label style={{display:"block",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"8px",color:C.muted}}>Your email</label>
@@ -410,15 +507,15 @@ export default function ETFMAssessment(){
       )}
       <a href={`${CALENDLY}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(firstName)}`} target="_blank" rel="noopener noreferrer"
         style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
-        Book Your Session on Calendly →
+        Book Your Pre-Session Call →
       </a>
-
+      <p style={{fontSize:"13px",color:C.muted,textAlign:"center",marginBottom:"24px"}}>One session. One plan. No more fog.</p>
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
     </Wrap>
   );
 
-  // SESSION CONFIRMED
+  // ── SESSION CONFIRMED ───────────────────────────────────────────────────────
   if(screen==="session_confirmed") return(
     <Wrap>
       <div style={{fontSize:"48px",marginBottom:"16px"}}>✅</div>
@@ -426,16 +523,24 @@ export default function ETFMAssessment(){
       <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"20px",lineHeight:"1.3"}}>
         {firstName?`${firstName}, you're all set.`:"You're all set."}
       </h2>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"32px"}}>Your Strategic Reset Session with Robert Brickey is confirmed and your payment has been received. Check your Calendly confirmation email for your appointment date and time.</p>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"32px"}}>Your Strategic Reset Session with Robert Brickey is confirmed and your payment has been received. Check your Calendly confirmation email for your pre-session call date and time.</p>
       <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"20px"}}>
         <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px"}}>What happens next</p>
-        {["Check your email for your Calendly appointment confirmation","Robert's team will send your pre-session intake materials within 24 hours","Complete the intake form thoroughly before your session","Attend your private 60-minute strategy session with Robert","Receive your personalized plan, roadmap, and session recording"].map((step,i)=>(
-          <div key={i} style={{padding:"8px 0",color:"#c8c8d8",fontSize:"14px",lineHeight:"1.6",borderBottom:i<4?"1px solid rgba(255,255,255,0.06)":"none"}}>{i+1}. &nbsp;{step}</div>
+        {[
+          "Check your email for your Calendly pre-session call confirmation",
+          "Robert's team will send your intake form within 24 hours",
+          "Complete the intake thoroughly before your first call",
+          "Attend your first 30-minute pre-session strategy call with Robert",
+          "Review your personalized plan, roadmap, and financial score",
+          "Attend your second 30-minute post-session call to lock in your direction",
+          "Receive your session recordings within 24 hours of each call",
+        ].map((step,i)=>(
+          <div key={i} style={{padding:"8px 0",color:"#c8c8d8",fontSize:"14px",lineHeight:"1.6",borderBottom:i<6?"1px solid rgba(255,255,255,0.06)":"none"}}>{i+1}. &nbsp;{step}</div>
         ))}
       </div>
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"20px 24px",textAlign:"left"}}>
         <p style={{color:C.text,fontSize:"14px",fontWeight:"bold",marginBottom:"8px"}}>Your session includes:</p>
-        <p style={{color:C.muted,fontSize:"14px",lineHeight:"1.7",margin:0}}>Personalized financial plan · Full Matrix Score analysis · Decision rules system · 90-day reset roadmap · Session recording · 30 days of priority email support</p>
+        <p style={{color:C.muted,fontSize:"14px",lineHeight:"1.7",margin:0}}>Two 30-minute strategy calls (pre & post) · Personalized financial plan · Full financial score analysis · Decision rules system · 90-day reset roadmap · Session recordings · 30 days of priority email support</p>
       </div>
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <a href="mailto:exit@etfm.systems" style={{color:C.gold,textDecoration:"none"}}>exit@etfm.systems</a></p>
