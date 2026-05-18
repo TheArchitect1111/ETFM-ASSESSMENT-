@@ -299,17 +299,7 @@ export default function ETFMAssessment(){
           <p style={{fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.8",marginBottom:"16px",fontStyle:"italic"}}>
             "Most people never take the time to look honestly at their financial patterns. You just did. That step matters more than you know. Where you are right now is not where you have to stay. Awareness is always where real movement begins."
           </p>
-          <div style={{borderTop:`0.5px solid ${C.border}`,paddingTop:"16px",display:"flex",flexWrap:"wrap",gap:"16px"}}>
-            {[["Duke University Graduate","Former Basketball Team Captain"],["Financial Advisor","12 years"],["Radio Host","WIDU 1600 AM"],["Speaker & Educator","The Carolinas"]].map(([label,sub],i)=>(
-              <div key={i} style={{display:"flex",alignItems:"flex-start",gap:"6px"}}>
-                <span style={{width:"4px",height:"4px",borderRadius:"50%",background:C.gold,flexShrink:0,marginTop:"6px",opacity:0.7}}/>
-                <div>
-                  <span style={{fontSize:"12px",color:C.text,fontWeight:"500"}}>{label}</span>
-                  <span style={{fontSize:"11px",color:C.muted,display:"block"}}>{sub}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+
           <div style={{marginTop:"20px",padding:"16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`}}>
             <p style={{margin:"0 0 6px",fontSize:"13px",color:C.muted,fontStyle:"italic"}}>
               "I left that conversation knowing exactly what to do for the first time."
