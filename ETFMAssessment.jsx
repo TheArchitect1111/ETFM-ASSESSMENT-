@@ -76,11 +76,13 @@ const Spinner=()=>(
   </div>
 );
 
-// CHANGE #1: Premium credential badge (no emoji, text only)
-const CredBadge=({label,sub})=>(
-  <div style={{padding:"12px 16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`,textAlign:"left"}}>
-    <p style={{margin:0,fontSize:"13px",fontWeight:"bold",color:C.text,lineHeight:"1.3"}}>{label}</p>
-    {sub&&<p style={{margin:"2px 0 0",fontSize:"11px",color:C.muted}}>{sub}</p>}
+const DotCred=({label,sub})=>(
+  <div style={{display:"flex",alignItems:"flex-start",gap:"10px",padding:"10px 0",borderBottom:`0.5px solid ${C.border}`}}>
+    <span style={{width:"5px",height:"5px",borderRadius:"50%",background:C.gold,flexShrink:0,marginTop:"7px",opacity:0.7}}/>
+    <div>
+      <p style={{margin:0,fontSize:"14px",fontWeight:"500",color:C.text,lineHeight:"1.4"}}>{label}</p>
+      {sub&&<p style={{margin:"2px 0 0",fontSize:"12px",color:C.muted,fontWeight:"300"}}>{sub}</p>}
+    </div>
   </div>
 );
 
@@ -224,13 +226,12 @@ export default function ETFMAssessment(){
           "I've spent 12 years watching people do everything right and still feel lost when it comes to money. They work hard. They try to save. They search for answers at midnight. But nobody ever sat down with them, looked at their actual situation, and helped them build something real. That's why I created this."
         </p>
         <p style={{fontSize:"14px",color:C.muted,marginBottom:"24px",fontWeight:"bold",textAlign:"right"}}>Robert Brickey, Creator of ETFM</p>
-        <div style={{borderTop:`1px solid ${C.border}`,paddingTop:"20px",display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px"}}>
-          <CredBadge label="Duke University Graduate"/>
-          <CredBadge label="Former Basketball Team Captain"/>
-          <CredBadge label="Financial Advisor" sub="12 Years of Client Work"/>
-          <CredBadge label="Radio Host" sub="WIDU 1600 AM"/>
-          <CredBadge label="Seminar Speaker" sub="Across the Carolinas"/>
-          <CredBadge label="Creator of ETFM"/>
+        <div style={{borderTop:`0.5px solid ${C.border}`,paddingTop:"20px"}}>
+          <DotCred label="Duke University Graduate" sub="Former Basketball Team Captain"/>
+          <DotCred label="Financial Advisor" sub="12 years of client advisory work"/>
+          <DotCred label="Radio Host" sub="WIDU 1600 AM, Fayetteville NC"/>
+          <DotCred label="Speaker & Educator" sub="Financial literacy across the Carolinas"/>
+          <DotCred label="Creator of ETFM" sub="A financial operating system built for real life"/>
         </div>
       </div>
 
@@ -298,9 +299,15 @@ export default function ETFMAssessment(){
           <p style={{fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.8",marginBottom:"16px",fontStyle:"italic"}}>
             "Most people never take the time to look honestly at their financial patterns. You just did. That step matters more than you know. Where you are right now is not where you have to stay. Awareness is always where real movement begins."
           </p>
-          <div style={{borderTop:`1px solid ${C.border}`,paddingTop:"16px",display:"flex",flexWrap:"wrap",gap:"8px"}}>
-            {["Duke Graduate","Former Team Captain","Financial Advisor","WIDU 1600 AM"].map((c,i)=>(
-              <span key={i} style={{fontSize:"12px",color:C.muted,backgroundColor:C.bg,padding:"6px 12px",borderRadius:"20px",border:`1px solid ${C.border}`}}>{c}</span>
+          <div style={{borderTop:`0.5px solid ${C.border}`,paddingTop:"16px",display:"flex",flexWrap:"wrap",gap:"16px"}}>
+            {[["Duke University Graduate","Former Basketball Team Captain"],["Financial Advisor","12 years"],["Radio Host","WIDU 1600 AM"],["Speaker & Educator","The Carolinas"]].map(([label,sub],i)=>(
+              <div key={i} style={{display:"flex",alignItems:"flex-start",gap:"6px"}}>
+                <span style={{width:"4px",height:"4px",borderRadius:"50%",background:C.gold,flexShrink:0,marginTop:"6px",opacity:0.7}}/>
+                <div>
+                  <span style={{fontSize:"12px",color:C.text,fontWeight:"500"}}>{label}</span>
+                  <span style={{fontSize:"11px",color:C.muted,display:"block"}}>{sub}</span>
+                </div>
+              </div>
             ))}
           </div>
           <div style={{marginTop:"20px",padding:"16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`}}>
@@ -477,13 +484,12 @@ export default function ETFMAssessment(){
         <p style={{fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.8",marginBottom:"20px",fontStyle:"italic"}}>
           "I've spent 12 years watching people do everything right and still feel lost when it comes to money. Nobody ever sat down with them, looked at their actual situation, and helped them build something real. That's what these calls are."
         </p>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px",marginBottom:"20px"}}>
-          <CredBadge label="Duke University Graduate"/>
-          <CredBadge label="Former Basketball Team Captain"/>
-          <CredBadge label="Financial Advisor" sub="12 Years of Client Work"/>
-          <CredBadge label="Radio Host" sub="WIDU 1600 AM"/>
-          <CredBadge label="Seminar Speaker" sub="Across the Carolinas"/>
-          <CredBadge label="Creator of ETFM"/>
+        <div style={{marginBottom:"20px"}}>
+          <DotCred label="Duke University Graduate" sub="Former Basketball Team Captain"/>
+          <DotCred label="Financial Advisor" sub="12 years of client advisory work"/>
+          <DotCred label="Radio Host" sub="WIDU 1600 AM, Fayetteville NC"/>
+          <DotCred label="Speaker & Educator" sub="Financial literacy across the Carolinas"/>
+          <DotCred label="Creator of ETFM" sub="A financial operating system built for real life"/>
         </div>
         <div style={{padding:"16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`,marginBottom:"10px"}}>
           <p style={{margin:"0 0 6px",fontSize:"13px",color:C.muted,fontStyle:"italic"}}>"I left that conversation knowing exactly what to do for the first time."</p>
