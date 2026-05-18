@@ -22,24 +22,24 @@ function calcScore(answers){
 }
 
 const FQ=[
-  {id:"awareness",bot:"How aware are you of where your money actually goes each month?",subtext:"Awareness is the first step. Be honest — there's no judgment here.",options:[{label:"I honestly have no clear idea",value:"no_idea"},{label:"I know some of it, but not consistently",value:"some_inconsistent"},{label:"I roughly track things mentally",value:"track_mentally"},{label:"I track most of my spending",value:"track_most"},{label:"I know exactly where my money goes",value:"know_exactly"}]},
-  {id:"extra_money",bot:"When extra money shows up unexpectedly, what usually happens to it?",subtext:"Where money goes when there's 'extra' reveals the real pattern.",options:[{label:"It disappears into bills and expenses",value:"disappears_bills"},{label:"I spend it quickly",value:"spend_quickly"},{label:"I try to save it, but something usually comes up",value:"try_save"},{label:"I use it intentionally toward goals",value:"use_intentionally"},{label:"I usually save or invest it",value:"save_invest"}]},
+  {id:"awareness",bot:"How aware are you of where your money actually goes each month?",subtext:"Awareness is the first step. Be honest. There is no judgment here.",options:[{label:"I honestly have no clear idea",value:"no_idea"},{label:"I know some of it, but not consistently",value:"some_inconsistent"},{label:"I roughly track things mentally",value:"track_mentally"},{label:"I track most of my spending",value:"track_most"},{label:"I know exactly where my money goes",value:"know_exactly"}]},
+  {id:"extra_money",bot:"When extra money shows up unexpectedly, what usually happens to it?",subtext:"Where money goes when there is extra reveals the real pattern.",options:[{label:"It disappears into bills and expenses",value:"disappears_bills"},{label:"I spend it quickly",value:"spend_quickly"},{label:"I try to save it, but something usually comes up",value:"try_save"},{label:"I use it intentionally toward goals",value:"use_intentionally"},{label:"I usually save or invest it",value:"save_invest"}]},
   {id:"stress_response",bot:"When financial pressure increases, what usually happens?",subtext:"Your stress response shapes your financial decisions more than income does.",options:[{label:"I avoid thinking about it",value:"avoid"},{label:"I make emotional or impulsive decisions",value:"emotional_decisions"},{label:"I try to work more to compensate",value:"work_more"},{label:"I ask others for advice but still feel uncertain",value:"ask_others"},{label:"I slow down and make a plan",value:"slow_plan"}]},
   {id:"structural_weakness",bot:"Which part of your financial life currently feels least under control?",subtext:"This identifies where the system is breaking first.",options:[{label:"Debt",value:"debt"},{label:"Spending",value:"spending"},{label:"Saving",value:"saving"},{label:"Income consistency",value:"income_consistency"},{label:"Planning for the future",value:"planning_future"},{label:"Investing",value:"investing"},{label:"I feel fairly organized financially",value:"fairly_organized"}]},
   {id:"future_vision",bot:"What are you ultimately trying to create financially?",subtext:"Defining your destination is the first act of financial strategy.",options:[{label:"Stability",value:"stability"},{label:"Peace of mind",value:"peace_of_mind"},{label:"Freedom from debt",value:"freedom_from_debt"},{label:"Time freedom",value:"time_freedom"},{label:"Ownership and wealth",value:"ownership_wealth"},{label:"Security for my family",value:"security_family"},{label:"I honestly don't know yet",value:"dont_know"}]},
 ];
 
 const BQ=[
-  {id:"full_review",section:"Financial Visibility",bot:"When was the last time you reviewed ALL of your financial obligations and resources together?",subtext:"Income, bills, debt, savings, subscriptions, investments — all of it at once.",options:[{label:"Never",value:"never"},{label:"More than 12 months ago",value:"over_12mo"},{label:"Within the last few months",value:"few_months"},{label:"Within the last 30 days",value:"last_30_days"},{label:"I review everything consistently",value:"consistent"}]},
+  {id:"full_review",section:"Financial Visibility",bot:"When was the last time you reviewed ALL of your financial obligations and resources together?",subtext:"Income, bills, debt, savings, subscriptions, investments. All of it at once.",options:[{label:"Never",value:"never"},{label:"More than 12 months ago",value:"over_12mo"},{label:"Within the last few months",value:"few_months"},{label:"Within the last 30 days",value:"last_30_days"},{label:"I review everything consistently",value:"consistent"}]},
   {id:"income_expense_accuracy",section:"Financial Visibility",bot:"If you had to estimate your total monthly income and total monthly spending right now, how accurate would you be?",subtext:"This reveals the gap between awareness and actual knowledge.",options:[{label:"I honestly would not know",value:"would_not_know"},{label:"I could estimate income, but not spending",value:"income_only"},{label:"I know most of it, but not precisely",value:"most_not_precise"},{label:"I know both fairly accurately",value:"fairly_accurate"},{label:"I track both consistently and precisely",value:"precise"}]},
   {id:"least_control",section:"Financial Visibility",bot:"Which part of your financial life currently feels the least under control?",subtext:"Where your system breaks first is where we start building.",options:[{label:"Debt",value:"debt"},{label:"Spending",value:"spending"},{label:"Saving",value:"saving"},{label:"Income consistency",value:"income_consistency"},{label:"Investing",value:"investing"},{label:"Planning for the future",value:"planning"},{label:"I feel generally organized financially",value:"organized"}]},
   {id:"extra_money_pattern",section:"Pattern Recognition",bot:"The last time you had extra money available, what happened to it?",subtext:"This is one of the most revealing questions about your financial pattern.",options:[{label:"It disappeared into everyday expenses",value:"disappeared"},{label:"I spent it on things I wanted or felt I deserved",value:"spent_deserved"},{label:"An emergency or unexpected situation consumed it",value:"emergency"},{label:"I partially saved or invested it",value:"partially_saved"},{label:"I intentionally allocated it toward a goal",value:"intentional"}]},
-  {id:"repeated_behavior",section:"Pattern Recognition",bot:"Which financial behavior has repeated most often in your life?",subtext:"Patterns repeat because they're structural — not because of willpower.",options:[{label:"Starting plans but not maintaining them",value:"not_maintaining"},{label:"Spending emotionally or impulsively",value:"emotional_spending"},{label:"Avoiding financial decisions until pressure builds",value:"avoidance"},{label:"Helping others financially at my own expense",value:"helping_others"},{label:"Constantly restarting financially",value:"restarting"},{label:"Feeling stuck despite working hard",value:"stuck_working"},{label:"I've built fairly consistent habits",value:"consistent_habits"}]},
+  {id:"repeated_behavior",section:"Pattern Recognition",bot:"Which financial behavior has repeated most often in your life?",subtext:"Patterns repeat because they are structural, not because of willpower.",options:[{label:"Starting plans but not maintaining them",value:"not_maintaining"},{label:"Spending emotionally or impulsively",value:"emotional_spending"},{label:"Avoiding financial decisions until pressure builds",value:"avoidance"},{label:"Helping others financially at my own expense",value:"helping_others"},{label:"Constantly restarting financially",value:"restarting"},{label:"Feeling stuck despite working hard",value:"stuck_working"},{label:"I've built fairly consistent habits",value:"consistent_habits"}]},
   {id:"pressure_response",section:"Pattern Recognition",bot:"When financial pressure increases, what is your typical response?",subtext:"Your response pattern under pressure is your most important financial habit.",options:[{label:"Avoid it completely",value:"avoid"},{label:"Make fast emotional decisions",value:"fast_emotional"},{label:"Try to work more to compensate",value:"work_more"},{label:"Talk to others but still feel uncertain",value:"talk_uncertain"},{label:"Step back and create a plan",value:"step_back_plan"},{label:"Stay structured and respond intentionally",value:"structured_response"}]},
   {id:"emotional_stress",section:"Pattern Recognition",bot:"Which financial situation creates the most emotional stress for you?",subtext:"Emotional stress reveals where your system feels most fragile.",options:[{label:"Unexpected expenses",value:"unexpected_expenses"},{label:"Debt balances",value:"debt_balances"},{label:"Not having savings",value:"no_savings"},{label:"Feeling behind compared to others",value:"feeling_behind"},{label:"Uncertainty about the future",value:"future_uncertainty"},{label:"Not knowing what move to make next",value:"dont_know_move"},{label:"Fear of failure financially",value:"fear_failure"}]},
   {id:"income_predictability",section:"System Architecture",bot:"How predictable is your income from month to month?",subtext:"Income volatility changes your emergency fund size, debt strategy, and automation approach.",options:[{label:"Extremely unpredictable",value:"extremely_unpredictable"},{label:"Somewhat inconsistent",value:"somewhat_inconsistent"},{label:"Mostly stable",value:"mostly_stable"},{label:"Very stable",value:"very_stable"},{label:"Multiple stable income sources",value:"multiple_stable"}]},
-  {id:"consumer_debt",section:"System Architecture",bot:"Approximately how much consumer debt do you currently carry?",subtext:"Credit cards, personal loans, auto loans — not mortgage.",options:[{label:"Under $5,000",value:"under_5k"},{label:"$5,000 – $25,000",value:"5k_25k"},{label:"$25,000 – $75,000",value:"25k_75k"},{label:"Over $75,000",value:"over_75k"},{label:"I'm currently debt free",value:"debt_free"}]},
-  {id:"income_runway",section:"System Architecture",bot:"If your income stopped today, how long could you maintain your current lifestyle?",subtext:"This is your financial runway — one of the most important numbers to know.",options:[{label:"Less than 1 month",value:"under_1mo"},{label:"1 – 3 months",value:"1_3mo"},{label:"3 – 6 months",value:"3_6mo"},{label:"6 – 12 months",value:"6_12mo"},{label:"Over 12 months",value:"over_12mo"}]},
+  {id:"consumer_debt",section:"System Architecture",bot:"Approximately how much consumer debt do you currently carry?",subtext:"Credit cards, personal loans, auto loans. Not mortgage.",options:[{label:"Under $5,000",value:"under_5k"},{label:"$5,000 to $25,000",value:"5k_25k"},{label:"$25,000 to $75,000",value:"25k_75k"},{label:"Over $75,000",value:"over_75k"},{label:"I'm currently debt free",value:"debt_free"}]},
+  {id:"income_runway",section:"System Architecture",bot:"If your income stopped today, how long could you maintain your current lifestyle?",subtext:"This is your financial runway. One of the most important numbers to know.",options:[{label:"Less than 1 month",value:"under_1mo"},{label:"1 to 3 months",value:"1_3mo"},{label:"3 to 6 months",value:"3_6mo"},{label:"6 to 12 months",value:"6_12mo"},{label:"Over 12 months",value:"over_12mo"}]},
   {id:"money_organization",section:"System Architecture",bot:"How is your money currently organized?",subtext:"Structure determines behavior more than intention does.",options:[{label:"Everything flows through one account",value:"one_account"},{label:"Multiple accounts but no real structure",value:"multiple_no_structure"},{label:"Basic budgeting system",value:"basic_budget"},{label:"Organized accounts for specific purposes",value:"organized_accounts"},{label:"Automated and intentionally structured",value:"automated_structured"}]},
   {id:"automation_level",section:"System Architecture",bot:"How much of your financial life currently operates automatically?",subtext:"Automation is the difference between reacting and building.",options:[{label:"Almost nothing",value:"almost_nothing"},{label:"A few bills only",value:"few_bills"},{label:"Some savings or investing",value:"some_savings"},{label:"Most major systems are automated",value:"most_automated"},{label:"My finances are intentionally systemized",value:"fully_systemized"}]},
   {id:"most_pressure",section:"System Architecture",bot:"Which area currently creates the MOST financial pressure in your life?",subtext:"This is where your system breaks first.",options:[{label:"Monthly bills",value:"monthly_bills"},{label:"Debt payments",value:"debt_payments"},{label:"Inconsistent income",value:"inconsistent_income"},{label:"Lack of savings",value:"lack_savings"},{label:"Taxes",value:"taxes"},{label:"Spending habits",value:"spending_habits"},{label:"Supporting others financially",value:"supporting_others"},{label:"Not knowing what to prioritize",value:"no_priority"}]},
@@ -52,12 +52,36 @@ const BQ=[
 
 const OPT={display:"block",width:"100%",padding:"16px",marginBottom:"12px",backgroundColor:"#ffffff",color:"#1a1a2e",border:"1px solid #e8e3da",borderRadius:"8px",cursor:"pointer",fontSize:"15px",textAlign:"left",transition:"all 0.2s ease"};
 
+// CHANGE #7: Rewritten CreditNote with Financial Freedom Discount framing
 const CreditNote=({dark=false})=>(
   <div style={{marginTop:"20px",padding:"16px",backgroundColor:dark?"rgba(201,151,58,0.12)":C.goldSoft,borderRadius:"6px",border:"1px solid rgba(201,151,58,0.3)"}}>
-    <p style={{color:C.gold,fontSize:"14px",margin:"0 0 10px",lineHeight:"1.6",fontWeight:"bold"}}>🧩 Thank you for investing in your ETFM Blueprint.</p>
-    <p style={{color:dark?"#c8c8d8":C.body,fontSize:"14px",margin:0,lineHeight:"1.8"}}>
-      Your Blueprint is more than a standalone assessment. It becomes the foundation for deeper strategic planning if you decide to continue. When you upgrade to the Strategic Reset Partnership, your original $47 investment will be fully credited and will activate an additional upgrade incentive, reducing your total investment for Package 3 to just $425. This allows you to begin with clarity and move into full implementation without losing the value of your first step.
+    <p style={{color:C.gold,fontSize:"14px",margin:"0 0 10px",lineHeight:"1.6",fontWeight:"bold"}}>Your Financial Freedom Discount</p>
+    <p style={{color:dark?"#c8c8d8":"#555",fontSize:"14px",margin:0,lineHeight:"1.8"}}>
+      If and when you decide to invest in the $499 Strategic Reset Session, your $47 Blueprint investment will be fully credited toward your total. That credit also unlocks an additional discount, bringing your final investment down to just $425. Your first step never loses its value. It builds on it.
     </p>
+  </div>
+);
+
+// CHANGE #3: Spinner component
+const Spinner=()=>(
+  <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"32px 0"}}>
+    <div style={{
+      width:"44px",height:"44px",borderRadius:"50%",
+      border:`4px solid ${C.border}`,
+      borderTopColor:C.gold,
+      animation:"etfm-spin 0.9s linear infinite",
+      marginBottom:"16px"
+    }}/>
+    <style>{`@keyframes etfm-spin{to{transform:rotate(360deg)}}`}</style>
+    <p style={{color:C.muted,fontSize:"14px",margin:0}}>Preparing your Snapshot. This will only take a moment...</p>
+  </div>
+);
+
+// CHANGE #1: Premium credential badge (no emoji, text only)
+const CredBadge=({label,sub})=>(
+  <div style={{padding:"12px 16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`,textAlign:"left"}}>
+    <p style={{margin:0,fontSize:"13px",fontWeight:"bold",color:C.text,lineHeight:"1.3"}}>{label}</p>
+    {sub&&<p style={{margin:"2px 0 0",fontSize:"11px",color:C.muted}}>{sub}</p>}
   </div>
 );
 
@@ -182,10 +206,10 @@ export default function ETFMAssessment(){
     </button>
   );
 
-  // LOADING
   if(screen==="loading") return <Wrap><p style={{color:C.muted,fontFamily:"Georgia, serif"}}>Loading your session...</p></Wrap>;
 
   // ── INTRO ──────────────────────────────────────────────────────────────────
+  // CHANGES: #1 premium credential grid, no emoji, added Financial Advisor, no Strategic Reset mention
   if(screen==="intro") return(
     <Wrap max="600px">
       <div style={{width:"110px",height:"110px",borderRadius:"50%",backgroundColor:C.dark,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 30px",boxShadow:"0 4px 24px rgba(0,0,0,0.18)"}}>
@@ -193,34 +217,26 @@ export default function ETFMAssessment(){
       </div>
       <Tag t="Escape The Financial Matrix"/>
       <h1 style={{fontSize:"42px",fontFamily:"Georgia, serif",marginBottom:"20px",color:C.text,lineHeight:"1.2"}}>Your financial life has a pattern. It's time to see it clearly.</h1>
-      <p style={{fontSize:"17px",color:C.muted,marginBottom:"40px",lineHeight:"1.7"}}>The ETFM Snapshot is a 5-question diagnostic that identifies your financial archetype, calculates your Awareness Score, and delivers a personalized strategic insight — free.</p>
+      <p style={{fontSize:"17px",color:C.muted,marginBottom:"40px",lineHeight:"1.7"}}>The ETFM Snapshot is a 5-question diagnostic that identifies your financial archetype, calculates your Awareness Score, and delivers a personalized strategic insight. Free.</p>
 
-      {/* ── WHO IS ROBERT BRICKEY ── */}
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"32px",marginBottom:"36px",textAlign:"left"}}>
         <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"3px",color:C.gold,marginBottom:"20px",textAlign:"center"}}>Who Built This</p>
         <p style={{fontSize:"16px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.8",marginBottom:"20px",fontStyle:"italic"}}>
-          "I've spent 12 years watching people do everything right and still feel lost when it comes to money. They work hard. They try to save. They Google their questions at midnight. But nobody ever sat down with them, looked at their actual situation, and helped them build something real. That's why I created this."
+          "I've spent 12 years watching people do everything right and still feel lost when it comes to money. They work hard. They try to save. They search for answers at midnight. But nobody ever sat down with them, looked at their actual situation, and helped them build something real. That's why I created this."
         </p>
-        <p style={{fontSize:"14px",color:C.muted,marginBottom:"20px",lineHeight:"1.7",fontWeight:"bold",textAlign:"right"}}>— Robert Brickey, Creator of ETFM</p>
-        <div style={{borderTop:`1px solid ${C.border}`,paddingTop:"20px",display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
-          {[
-            {icon:"🎓", text:"Duke University Graduate"},
-            {icon:"🏀", text:"Former Basketball Team Captain"},
-            {icon:"📊", text:"12 Years in Financial Advisory"},
-            {icon:"🎙️", text:"Radio Host — WIDU 1600 AM"},
-            {icon:"🏟️", text:"Seminar Speaker, The Carolinas"},
-            {icon:"💡", text:"Creator of ETFM"},
-          ].map((item,i)=>(
-            <div key={i} style={{display:"flex",alignItems:"center",gap:"10px",padding:"10px 12px",backgroundColor:C.bg,borderRadius:"8px"}}>
-              <span style={{fontSize:"18px"}}>{item.icon}</span>
-              <span style={{fontSize:"13px",color:C.text,lineHeight:"1.4"}}>{item.text}</span>
-            </div>
-          ))}
+        <p style={{fontSize:"14px",color:C.muted,marginBottom:"24px",fontWeight:"bold",textAlign:"right"}}>Robert Brickey, Creator of ETFM</p>
+        <div style={{borderTop:`1px solid ${C.border}`,paddingTop:"20px",display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px"}}>
+          <CredBadge label="Duke University Graduate"/>
+          <CredBadge label="Former Basketball Team Captain"/>
+          <CredBadge label="Financial Advisor" sub="12 Years of Client Work"/>
+          <CredBadge label="Radio Host" sub="WIDU 1600 AM"/>
+          <CredBadge label="Seminar Speaker" sub="Across the Carolinas"/>
+          <CredBadge label="Creator of ETFM"/>
         </div>
       </div>
 
       <button onClick={()=>setScreen("chat")} style={{backgroundColor:C.gold,color:C.dark,border:"none",padding:"16px 44px",fontSize:"16px",fontWeight:"bold",borderRadius:"8px",cursor:"pointer"}}>Begin Your Snapshot →</button>
-      <p style={{fontSize:"12px",color:C.muted,marginTop:"16px"}}>5 questions · 2 minutes · No obligation</p>
+      <p style={{fontSize:"12px",color:C.muted,marginTop:"16px"}}>5 questions. 2 minutes. No obligation.</p>
     </Wrap>
   );
 
@@ -255,12 +271,13 @@ export default function ETFMAssessment(){
   }
 
   // TRANSITION
+  // CHANGES: #2 generic forward-looking Robert note, #3 spinner on submit, #9 no dashes in body text
   if(screen==="transition") return(
     <div style={{minHeight:"100vh",backgroundColor:C.bg,padding:"40px 20px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
       <div style={{maxWidth:"580px",width:"100%",textAlign:"center"}}>
         <Tag t="Snapshot Complete"/>
         <h2 style={{fontSize:"32px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Your evaluation has been processed.</h2>
-        <p style={{fontSize:"16px",color:C.muted,marginBottom:"40px",lineHeight:"1.7"}}>What you've uncovered today is not a reflection of your potential — it's a reflection of the systems currently shaping your financial life.</p>
+        <p style={{fontSize:"16px",color:C.muted,marginBottom:"40px",lineHeight:"1.7"}}>What you've uncovered today is not a reflection of your potential. It's a reflection of the systems currently shaping your financial life.</p>
         <div style={{backgroundColor:C.dark,borderRadius:"12px",padding:"36px 30px",marginBottom:"30px",textAlign:"left"}}>
           <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"24px",textAlign:"center"}}>Your ETFM Strategic Score</p>
           <div style={{marginBottom:"16px",display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 16px",backgroundColor:"rgba(201,151,58,0.1)",borderRadius:"6px",border:"1px solid rgba(201,151,58,0.3)"}}>
@@ -276,47 +293,50 @@ export default function ETFMAssessment(){
           <p style={{color:"#6a6a7a",fontSize:"12px",textAlign:"center",marginTop:"20px",marginBottom:0}}>Your full Strategic Score and Snapshot will be delivered to your inbox.</p>
         </div>
 
-        {/* ── ROBERT NOTE ON RESULTS ── */}
+        {/* CHANGE #2: Generic, forward-looking, no product pitch */}
         <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"28px",marginBottom:"30px",textAlign:"left"}}>
           <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",color:C.gold,marginBottom:"16px"}}>A Note From Robert</p>
           <p style={{fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.8",marginBottom:"16px",fontStyle:"italic"}}>
-            "I've worked with hundreds of people who had scores just like yours. Where you are right now is not the full story — what matters is what you do next. That's exactly what the Strategic Reset Session is designed for."
+            "Most people never take the time to look honestly at their financial patterns. You just did. That step matters more than you know. Where you are right now is not where you have to stay. Awareness is always where real movement begins."
           </p>
           <div style={{borderTop:`1px solid ${C.border}`,paddingTop:"16px",display:"flex",flexWrap:"wrap",gap:"8px"}}>
-            {["🎓 Duke Graduate","🏀 Former Team Captain","📊 12 Yrs Advisory","🎙️ WIDU 1600 AM"].map((c,i)=>(
+            {["Duke Graduate","Former Team Captain","Financial Advisor","WIDU 1600 AM"].map((c,i)=>(
               <span key={i} style={{fontSize:"12px",color:C.muted,backgroundColor:C.bg,padding:"6px 12px",borderRadius:"20px",border:`1px solid ${C.border}`}}>{c}</span>
             ))}
           </div>
           <div style={{marginTop:"20px",padding:"16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`}}>
             <p style={{margin:"0 0 6px",fontSize:"13px",color:C.muted,fontStyle:"italic"}}>
-              "I left that call knowing exactly what to do for the first time."
+              "I left that conversation knowing exactly what to do for the first time."
             </p>
-            <p style={{margin:0,fontSize:"12px",color:C.gold}}>— Strategic Reset Client</p>
+            <p style={{margin:0,fontSize:"12px",color:C.gold}}>Strategic Reset Client</p>
           </div>
           <div style={{marginTop:"12px",padding:"16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`}}>
             <p style={{margin:"0 0 6px",fontSize:"13px",color:C.muted,fontStyle:"italic"}}>
               "Most advisors talk at you. Robert actually looked at my situation."
             </p>
-            <p style={{margin:0,fontSize:"12px",color:C.gold}}>— ETFM Client</p>
+            <p style={{margin:0,fontSize:"12px",color:C.gold}}>ETFM Client</p>
           </div>
         </div>
 
         <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"36px 30px"}}>
           <h3 style={{fontSize:"18px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"8px"}}>Send my Snapshot and Strategic Score</h3>
           <p style={{fontSize:"14px",color:C.muted,marginBottom:"24px"}}>Enter your details to receive your personalized results.</p>
-          <form onSubmit={submitFree}>
-            <div style={{marginBottom:"16px",textAlign:"left"}}>
-              <label style={{display:"block",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"8px",color:C.muted}}>First Name</label>
-              <input type="text" value={firstName} onChange={e=>setFirstName(e.target.value)} placeholder="Your first name" style={{width:"100%",padding:"12px",backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"6px",fontSize:"15px",boxSizing:"border-box"}}/>
-            </div>
-            <div style={{marginBottom:"20px",textAlign:"left"}}>
-              <label style={{display:"block",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"8px",color:C.muted}}>Email Address</label>
-              <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="your@email.com" style={{width:"100%",padding:"12px",backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"6px",fontSize:"15px",boxSizing:"border-box"}}/>
-            </div>
-            <button type="submit" disabled={loading} style={{width:"100%",padding:"14px",backgroundColor:loading?C.muted:C.gold,color:C.dark,border:"none",borderRadius:"6px",fontSize:"16px",fontWeight:"bold",cursor:loading?"not-allowed":"pointer"}}>
-              {loading?"Processing...":"Send My Snapshot →"}
-            </button>
-          </form>
+          {/* CHANGE #3: Show spinner while loading */}
+          {loading ? <Spinner/> : (
+            <form onSubmit={submitFree}>
+              <div style={{marginBottom:"16px",textAlign:"left"}}>
+                <label style={{display:"block",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"8px",color:C.muted}}>First Name</label>
+                <input type="text" value={firstName} onChange={e=>setFirstName(e.target.value)} placeholder="Your first name" style={{width:"100%",padding:"12px",backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"6px",fontSize:"15px",boxSizing:"border-box"}}/>
+              </div>
+              <div style={{marginBottom:"20px",textAlign:"left"}}>
+                <label style={{display:"block",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"8px",color:C.muted}}>Email Address</label>
+                <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="your@email.com" style={{width:"100%",padding:"12px",backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"6px",fontSize:"15px",boxSizing:"border-box"}}/>
+              </div>
+              <button type="submit" style={{width:"100%",padding:"14px",backgroundColor:C.gold,color:C.dark,border:"none",borderRadius:"6px",fontSize:"16px",fontWeight:"bold",cursor:"pointer"}}>
+                Send My Snapshot →
+              </button>
+            </form>
+          )}
           <p style={{fontSize:"11px",color:C.muted,marginTop:"16px",textAlign:"center"}}>Your information is never sold or shared.</p>
         </div>
       </div>
@@ -324,15 +344,16 @@ export default function ETFMAssessment(){
   );
 
   // SNAPSHOT CONFIRMED
+  // CHANGE #9: No dashes in body text
   if(screen==="snapshot_confirmed") return(
     <Wrap>
       <div style={{fontSize:"48px",marginBottom:"16px"}}>🎉</div>
       <Tag t="Congratulations"/>
       <h2 style={{fontSize:"36px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"20px",lineHeight:"1.3"}}>
-        {firstName?`${firstName}, your Snapshot is on its way!`:"Your Snapshot is on its way!"}
+        Your Snapshot is on its way.
       </h2>
       <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"16px"}}>
-        You just completed something most people never do — you took an honest look at your financial patterns. That awareness is where real change begins.
+        You just completed something most people never do. You took an honest look at your financial patterns. That awareness is where real change begins.
       </p>
       <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"40px"}}>
         Your Financial Archetype, Awareness Score, and personalized strategic insight are heading to your inbox right now. Check your spam folder if you don't see it within 5 minutes.
@@ -349,11 +370,12 @@ export default function ETFMAssessment(){
   );
 
   // BLUEPRINT OFFER
+  // CHANGE #7: Financial Freedom Discount framing in CreditNote
   if(screen==="blueprint_offer") return(
     <Wrap>
       <Tag t="Strategic Blueprint"/>
       <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Go deeper with the 18-question diagnostic.</h2>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"32px"}}>Your Snapshot showed you where you are. The Blueprint identifies exactly <em>why</em> — and delivers a personalized escape roadmap and 30-Day Strategic Reset Protocol built around your specific patterns.</p>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"32px"}}>Your Snapshot showed you where you are. The Blueprint identifies exactly why. It delivers a personalized escape roadmap and 30-Day Strategic Reset Protocol built around your specific patterns.</p>
       <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"20px"}}>
         <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px"}}>What's included — $47</p>
         {["18-question deep strategic diagnostic","Personalized financial escape roadmap","5-Step ETFM Framework PDF","Robert's personal video message","30-Day Strategic Reset Protocol"].map(item=>(
@@ -361,7 +383,7 @@ export default function ETFMAssessment(){
         ))}
         <CreditNote dark={true}/>
       </div>
-      <p style={{fontSize:"14px",color:C.muted,marginBottom:"20px",lineHeight:"1.7"}}>After payment you'll answer 18 diagnostic questions. Robert's team then generates your personalized Blueprint report and delivers it to your inbox within minutes.</p>
+      <p style={{fontSize:"14px",color:C.muted,marginBottom:"20px",lineHeight:"1.7"}}>After payment you will answer 18 diagnostic questions. Robert's team then generates your personalized Blueprint report and delivers it to your inbox within minutes.</p>
       {!email&&(
         <div style={{marginBottom:"20px",textAlign:"left"}}>
           <label style={{display:"block",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"8px",color:C.muted}}>Confirm your email</label>
@@ -417,10 +439,10 @@ export default function ETFMAssessment(){
         </div>
         <div style={{padding:"40px"}}>
           <p style={{color:C.text,fontSize:"16px",lineHeight:"1.8",marginBottom:"16px"}}>You took an important step today.</p>
-          <p style={{color:C.muted,fontSize:"15px",lineHeight:"1.9",marginBottom:"32px"}}>Most people avoid looking closely at their financial patterns. You didn't. Your personalized report, escape roadmap, and 30-Day Reset Protocol will be in your inbox shortly — typically within 3–5 minutes. Check your spam folder if you don't see it.</p>
+          <p style={{color:C.muted,fontSize:"15px",lineHeight:"1.9",marginBottom:"32px"}}>Most people avoid looking closely at their financial patterns. You didn't. Your personalized report, escape roadmap, and 30-Day Reset Protocol will be in your inbox shortly. Typically within 3 to 5 minutes. Check your spam folder if you don't see it.</p>
           <div style={{backgroundColor:C.bg,borderRadius:"8px",padding:"20px 24px",marginBottom:"32px",borderLeft:`3px solid ${C.gold}`}}>
-            <p style={{margin:"0 0 10px",color:C.gold,fontSize:"14px",fontWeight:"bold",lineHeight:"1.6"}}>🧩 Thank you for investing in your ETFM Blueprint.</p>
-            <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>Your Blueprint is more than a standalone assessment. It becomes the foundation for deeper strategic planning if you decide to continue. When you upgrade to the Strategic Reset Partnership, your original $47 investment will be fully credited and will activate an additional upgrade incentive, reducing your total investment for Package 3 to just $425. This allows you to begin with clarity and move into full implementation without losing the value of your first step.</p>
+            <p style={{margin:"0 0 10px",color:C.gold,fontSize:"14px",fontWeight:"bold",lineHeight:"1.6"}}>Your Financial Freedom Discount</p>
+            <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>If and when you decide to invest in the $499 Strategic Reset Session, your $47 Blueprint investment will be fully credited toward your total. That credit also unlocks an additional discount, bringing your final investment down to just $425. Your first step never loses its value. It builds on it.</p>
           </div>
           <div style={{textAlign:"center",padding:"24px 0",borderTop:`1px solid ${C.border}`}}>
             <p style={{margin:0,color:C.text,fontSize:"16px",lineHeight:"2.2",fontFamily:"Georgia, serif",fontStyle:"italic"}}>Clarity creates control.<br/>Control creates momentum.<br/>Momentum creates freedom.</p>
@@ -434,30 +456,35 @@ export default function ETFMAssessment(){
   );
 
   // ── SESSION OFFER ───────────────────────────────────────────────────────────
+  // CHANGES: #4 emotional hook headline, #5 less transactional how-it-works, #6 recording line, #9 no dashes
   if(screen==="session_offer") return(
     <Wrap>
       <Tag t="Strategic Reset Session"/>
-      <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Work directly with Robert Brickey.</h2>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"24px"}}>Two private 30-minute strategy calls — one before, one after — built entirely around your numbers, your patterns, and your life. Robert reviews your situation before you ever speak. You leave with a real plan.</p>
+      {/* CHANGE #4: Emotional hook headline, Robert's name removed from title */}
+      <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>You've been figuring it out alone long enough.</h2>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"24px"}}>Two private 30-minute strategy calls built entirely around your numbers, your patterns, and your life. One before to build your plan. One after to lock in your direction.</p>
 
-      {/* Who is Robert — trust bridge */}
+      {/* Trust bridge */}
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"28px",marginBottom:"24px",textAlign:"left"}}>
         <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",color:C.gold,marginBottom:"16px"}}>Who Is Robert Brickey?</p>
         <p style={{fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.8",marginBottom:"20px",fontStyle:"italic"}}>
-          "I've spent 12 years watching people do everything right and still feel lost when it comes to money. Nobody ever sat down with them, looked at their actual situation, and helped them build something real. That's what this session is."
+          "I've spent 12 years watching people do everything right and still feel lost when it comes to money. Nobody ever sat down with them, looked at their actual situation, and helped them build something real. That's what these calls are."
         </p>
-        <div style={{display:"flex",flexWrap:"wrap",gap:"8px",marginBottom:"20px"}}>
-          {["🎓 Duke Graduate","🏀 Former Team Captain","📊 12 Yrs Advisory","🎙️ WIDU 1600 AM","🏟️ Seminar Speaker"].map((c,i)=>(
-            <span key={i} style={{fontSize:"12px",color:C.muted,backgroundColor:C.bg,padding:"6px 12px",borderRadius:"20px",border:`1px solid ${C.border}`}}>{c}</span>
-          ))}
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px",marginBottom:"20px"}}>
+          <CredBadge label="Duke University Graduate"/>
+          <CredBadge label="Former Basketball Team Captain"/>
+          <CredBadge label="Financial Advisor" sub="12 Years of Client Work"/>
+          <CredBadge label="Radio Host" sub="WIDU 1600 AM"/>
+          <CredBadge label="Seminar Speaker" sub="Across the Carolinas"/>
+          <CredBadge label="Creator of ETFM"/>
         </div>
         <div style={{padding:"16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`,marginBottom:"10px"}}>
-          <p style={{margin:"0 0 6px",fontSize:"13px",color:C.muted,fontStyle:"italic"}}>"I left that call knowing exactly what to do for the first time."</p>
-          <p style={{margin:0,fontSize:"12px",color:C.gold}}>— Strategic Reset Client</p>
+          <p style={{margin:"0 0 6px",fontSize:"13px",color:C.muted,fontStyle:"italic"}}>"I left that conversation knowing exactly what to do for the first time."</p>
+          <p style={{margin:0,fontSize:"12px",color:C.gold}}>Strategic Reset Client</p>
         </div>
         <div style={{padding:"16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`}}>
           <p style={{margin:"0 0 6px",fontSize:"13px",color:C.muted,fontStyle:"italic"}}>"Most advisors talk at you. Robert actually looked at my situation."</p>
-          <p style={{margin:0,fontSize:"12px",color:C.gold}}>— ETFM Client</p>
+          <p style={{margin:0,fontSize:"12px",color:C.gold}}>ETFM Client</p>
         </div>
       </div>
 
@@ -465,15 +492,16 @@ export default function ETFMAssessment(){
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"20px"}}>
         <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px"}}>{blueprintClient?"What's included — $425 (Blueprint client rate)":"What's included — $499"}</p>
         {[
-          {title:"Robert studies your situation before you ever speak",body:"You fill out a short intake form. He reviews it. You don't waste time explaining yourself — he already knows where you are."},
+          {title:"Robert studies your situation before you ever speak",body:"You complete a short intake form. He reviews it before the call. You don't waste time explaining yourself. He already knows where you are."},
           {title:"Pre-session strategy call — just you and Robert",body:"No group calls. No assistants. The first 30 minutes are focused entirely on your money, your patterns, and what needs to change."},
-          {title:"A plan built for your life — not a template",body:"Not 'spend less, save more.' A real plan with real steps written specifically for your situation."},
-          {title:"Your financial score — and what it actually means",body:"See exactly where you stand. Most people have never seen this clearly before. It changes how you make decisions."},
-          {title:"Your personal money rules",body:"Know exactly what to do — and what not to do — when financial decisions come up. No more second-guessing at midnight."},
-          {title:"A 90-day roadmap so you know what to do first",body:"You walk away knowing what to do in the next 30, 60, and 90 days — in order."},
-          {title:"Post-session strategy call to lock in your direction",body:"The second 30-minute call happens after you've had time to review your plan. Robert checks in, answers questions, and makes sure you're moving with confidence."},
-          {title:"Both sessions recorded and sent to you",body:"Go back and watch anytime. The clarity doesn't expire."},
-          {title:"30 days of direct email access to Robert's team",body:"Questions come up after the calls. We're there when they do."},
+          {title:"A plan built for your life, not a template",body:"Not spend less, save more. A real plan with real steps written specifically for your situation."},
+          {title:"Your financial score and what it actually means",body:"See exactly where you stand. Most people have never seen this clearly before. It changes how you make decisions."},
+          {title:"Your personal money rules",body:"Know exactly what to do and what not to do when financial decisions come up. No more second-guessing at midnight."},
+          {title:"A 90-day roadmap so you know what to do first",body:"You walk away knowing what to do in the next 30, 60, and 90 days. In order."},
+          {title:"Post-session strategy call to lock in your direction",body:"The second 30-minute call happens after you have had time to review your plan. Robert checks in, answers questions, and makes sure you are moving forward with confidence."},
+          // CHANGE #6: Meeting notes line, recording for Robert's use only
+          {title:"Detailed meeting notes sent after both sessions",body:"Comprehensive notes from each call will be sent directly to you. Both sessions are recorded for reference."},
+          {title:"30 days of direct email access to Robert's team",body:"Questions come up after the calls. We are there when they do."},
         ].map((item,i)=>(
           <div key={i} style={{padding:"12px 0",borderBottom:`1px solid ${C.border}`}}>
             <p style={{margin:"0 0 4px",color:C.text,fontSize:"14px",fontWeight:"bold"}}>✓ &nbsp;{item.title}</p>
@@ -483,19 +511,18 @@ export default function ETFMAssessment(){
         <CreditNote dark={false}/>
       </div>
 
-      {/* How it works */}
+      {/* CHANGE #5: Less transactional how-it-works */}
       <div style={{backgroundColor:C.bg,borderRadius:"8px",padding:"20px 24px",marginBottom:"24px",textAlign:"left",border:`1px solid ${C.border}`}}>
-        <p style={{color:C.dark,fontSize:"14px",fontWeight:"bold",marginBottom:"12px"}}>How it works:</p>
+        <p style={{color:C.dark,fontSize:"14px",fontWeight:"bold",marginBottom:"12px"}}>Your path forward:</p>
         {[
-          "Book your pre-session call using the button below",
-          "Complete your secure payment",
-          "Robert's team sends your intake form within 24 hours",
-          "Complete the intake so Robert arrives fully prepared",
-          "Attend your first 30-minute pre-session strategy call",
-          "Review your personalized plan and roadmap",
-          "Attend your second 30-minute post-session call to lock in your direction",
+          "Book your pre-session call below and choose a time that works for you",
+          "Complete your secure payment to confirm your spot",
+          "You will receive a short intake form within 24 hours. Complete it so Robert arrives fully prepared",
+          "Your first 30-minute call with Robert. He has already reviewed your situation",
+          "Receive your personalized plan, financial score, and 90-day roadmap",
+          "Your second 30-minute call. Review your plan together and lock in your next move",
         ].map((step,i)=>(
-          <div key={i} style={{padding:"6px 0",color:C.muted,fontSize:"14px"}}>{i+1}. &nbsp;{step}</div>
+          <div key={i} style={{padding:"8px 0",color:C.muted,fontSize:"14px",lineHeight:"1.6",borderBottom:i<5?`1px solid ${C.border}`:"none"}}>{i+1}. &nbsp;{step}</div>
         ))}
       </div>
 
@@ -509,38 +536,38 @@ export default function ETFMAssessment(){
         style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
         Book Your Pre-Session Call →
       </a>
-      <p style={{fontSize:"13px",color:C.muted,textAlign:"center",marginBottom:"24px"}}>One session. One plan. No more fog.</p>
+      <p style={{fontSize:"13px",color:C.muted,textAlign:"center",marginBottom:"24px"}}>One plan. Real steps. No more fog.</p>
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
     </Wrap>
   );
 
   // ── SESSION CONFIRMED ───────────────────────────────────────────────────────
+  // CHANGES: #6 meeting notes language, #9 no dashes
   if(screen==="session_confirmed") return(
     <Wrap>
       <div style={{fontSize:"48px",marginBottom:"16px"}}>✅</div>
       <Tag t="Session Confirmed"/>
       <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"20px",lineHeight:"1.3"}}>
-        {firstName?`${firstName}, you're all set.`:"You're all set."}
+        You're all set.
       </h2>
       <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"32px"}}>Your Strategic Reset Session with Robert Brickey is confirmed and your payment has been received. Check your Calendly confirmation email for your pre-session call date and time.</p>
       <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"20px"}}>
         <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px"}}>What happens next</p>
         {[
           "Check your email for your Calendly pre-session call confirmation",
-          "Robert's team will send your intake form within 24 hours",
-          "Complete the intake thoroughly before your first call",
+          "You will receive a short intake form within 24 hours. Complete it before your first call",
           "Attend your first 30-minute pre-session strategy call with Robert",
-          "Review your personalized plan, roadmap, and financial score",
-          "Attend your second 30-minute post-session call to lock in your direction",
-          "Receive your session recordings within 24 hours of each call",
+          "Receive your personalized plan, roadmap, and financial score",
+          "Attend your second 30-minute post-session call to review and lock in your direction",
+          "Detailed meeting notes will be sent to you following both sessions",
         ].map((step,i)=>(
-          <div key={i} style={{padding:"8px 0",color:"#c8c8d8",fontSize:"14px",lineHeight:"1.6",borderBottom:i<6?"1px solid rgba(255,255,255,0.06)":"none"}}>{i+1}. &nbsp;{step}</div>
+          <div key={i} style={{padding:"8px 0",color:"#c8c8d8",fontSize:"14px",lineHeight:"1.6",borderBottom:i<5?"1px solid rgba(255,255,255,0.06)":"none"}}>{i+1}. &nbsp;{step}</div>
         ))}
       </div>
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"20px 24px",textAlign:"left"}}>
         <p style={{color:C.text,fontSize:"14px",fontWeight:"bold",marginBottom:"8px"}}>Your session includes:</p>
-        <p style={{color:C.muted,fontSize:"14px",lineHeight:"1.7",margin:0}}>Two 30-minute strategy calls (pre & post) · Personalized financial plan · Full financial score analysis · Decision rules system · 90-day reset roadmap · Session recordings · 30 days of priority email support</p>
+        <p style={{color:C.muted,fontSize:"14px",lineHeight:"1.7",margin:0}}>Two 30-minute strategy calls (pre and post). Personalized financial plan. Full financial score analysis. Decision rules system. 90-day reset roadmap. Detailed meeting notes from both sessions. 30 days of priority email support.</p>
       </div>
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <a href="mailto:exit@etfm.systems" style={{color:C.gold,textDecoration:"none"}}>exit@etfm.systems</a></p>
@@ -551,7 +578,7 @@ export default function ETFMAssessment(){
   if(screen==="blueprint_unpaid") return(
     <Wrap max="500px">
       <h2 style={{fontSize:"28px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px"}}>Payment Required</h2>
-      <p style={{fontSize:"16px",color:C.muted,marginBottom:"32px",lineHeight:"1.7"}}>This session hasn't been activated yet. Complete your payment to unlock the Strategic Blueprint.</p>
+      <p style={{fontSize:"16px",color:C.muted,marginBottom:"32px",lineHeight:"1.7"}}>This session has not been activated yet. Complete your payment to unlock the Strategic Blueprint.</p>
       <a href="https://buy.stripe.com/bJe7sM5CE9jwbtnace8Vi0d" style={{display:"inline-block",backgroundColor:C.gold,color:C.dark,textDecoration:"none",padding:"14px 36px",borderRadius:"6px",fontWeight:"bold",fontSize:"16px"}}>Get the Strategic Blueprint — $47</a>
     </Wrap>
   );
@@ -560,7 +587,7 @@ export default function ETFMAssessment(){
   if(screen==="blueprint_cancelled") return(
     <Wrap max="500px">
       <h2 style={{fontSize:"28px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px"}}>No problem.</h2>
-      <p style={{fontSize:"16px",color:C.muted,marginBottom:"32px",lineHeight:"1.7"}}>Your Snapshot is still in your inbox. When you're ready to go deeper, the Blueprint will be here.</p>
+      <p style={{fontSize:"16px",color:C.muted,marginBottom:"32px",lineHeight:"1.7"}}>Your Snapshot is still in your inbox. When you are ready to go deeper, the Blueprint will be here.</p>
       <a href="https://buy.stripe.com/bJe7sM5CE9jwbtnace8Vi0d" style={{display:"inline-block",backgroundColor:C.gold,color:C.dark,textDecoration:"none",padding:"14px 36px",borderRadius:"6px",fontWeight:"bold",fontSize:"16px"}}>Unlock the Strategic Blueprint — $47</a>
     </Wrap>
   );
