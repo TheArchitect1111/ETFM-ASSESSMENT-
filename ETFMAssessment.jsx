@@ -52,12 +52,11 @@ const BQ=[
 
 const OPT={display:"block",width:"100%",padding:"16px",marginBottom:"12px",backgroundColor:"#ffffff",color:"#1a1a2e",border:"1px solid #e8e3da",borderRadius:"8px",cursor:"pointer",fontSize:"15px",textAlign:"left",transition:"all 0.2s ease"};
 
-// CHANGE #7: Rewritten CreditNote with Financial Freedom Discount framing
 const CreditNote=({dark=false})=>(
   <div style={{marginTop:"20px",padding:"16px",backgroundColor:dark?"rgba(201,151,58,0.12)":C.goldSoft,borderRadius:"6px",border:"1px solid rgba(201,151,58,0.3)"}}>
     <p style={{color:C.gold,fontSize:"14px",margin:"0 0 10px",lineHeight:"1.6",fontWeight:"bold"}}>Your Financial Freedom Discount</p>
     <p style={{color:dark?"#c8c8d8":"#555",fontSize:"14px",margin:0,lineHeight:"1.8"}}>
-      If and when you decide to invest in the $499 Strategic Reset Session, your $47 Blueprint investment will be fully credited toward your total. That credit also unlocks an additional discount, bringing your final investment down to just $425. Your first step never loses its value. It builds on it.
+      If and when you decide to invest in the ETFM Financial Reset ($499), your $47 Blueprint investment will be fully credited toward your total. That credit also unlocks an additional discount, bringing your final investment down to just $425. Your first step never loses its value. It builds on it.
     </p>
   </div>
 );
@@ -370,27 +369,36 @@ export default function ETFMAssessment(){
   );
 
   // BLUEPRINT OFFER
-  // CHANGE #7: Financial Freedom Discount framing in CreditNote
   if(screen==="blueprint_offer") return(
     <Wrap>
-      <Tag t="Strategic Blueprint"/>
-      <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Go deeper with the 18-question diagnostic.</h2>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"32px"}}>Your Snapshot showed you where you are. The Blueprint identifies exactly why. It delivers a personalized escape roadmap and 30-Day Strategic Reset Protocol built around your specific patterns.</p>
+      <Tag t="ETFM Strategic Blueprint"/>
+      <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Go deeper. See the full picture.</h2>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"32px"}}>Your Snapshot identified your patterns. The Blueprint goes further. It gives you the tools to understand exactly what is driving your financial life and what to do about it.</p>
       <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"20px"}}>
-        <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px"}}>What's included — $47</p>
-        {["18-question deep strategic diagnostic","Personalized financial escape roadmap","5-Step ETFM Framework PDF","Robert's personal video message","30-Day Strategic Reset Protocol"].map(item=>(
-          <div key={item} style={{padding:"8px 0",color:"#c8c8d8",fontSize:"15px",lineHeight:"1.6",borderBottom:"1px solid rgba(255,255,255,0.06)"}}>✓ &nbsp;{item}</div>
+        <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"20px"}}>What You Receive — $47</p>
+        {[
+          {title:"Personalized Financial Snapshot Analysis",body:"Understand the patterns, pressures, and behaviors shaping your financial life."},
+          {title:"Financial Pattern Identification",body:"Identify the financial archetype and operating patterns influencing your decisions."},
+          {title:"Personalized Strategic Blueprint",body:"A customized breakdown of where your financial structure is strong, weak, and misaligned."},
+          {title:"ETFM Financial Operating System Guide",body:"A practical framework for organizing your financial life around clarity, priorities, structure, and intentional decisions."},
+          {title:"30-Day Strategic Reset Protocol",body:"A guided implementation system to help you reduce financial chaos, build momentum, and apply your Blueprint in real life."},
+          {title:"Immediate Priority Action Steps",body:"Clear next-step recommendations so you know what to focus on first."},
+        ].map((item,i)=>(
+          <div key={i} style={{padding:"12px 0",borderBottom:"1px solid rgba(255,255,255,0.08)"}}>
+            <p style={{margin:"0 0 4px",color:C.white,fontSize:"14px",fontWeight:"bold"}}>✅ &nbsp;{item.title}</p>
+            <p style={{margin:"0 0 0 24px",color:"#a0a0b0",fontSize:"13px",lineHeight:"1.6"}}>{item.body}</p>
+          </div>
         ))}
         <CreditNote dark={true}/>
       </div>
-      <p style={{fontSize:"14px",color:C.muted,marginBottom:"20px",lineHeight:"1.7"}}>After payment you will answer 18 diagnostic questions. Robert's team then generates your personalized Blueprint report and delivers it to your inbox within minutes.</p>
+      <p style={{fontSize:"14px",color:C.muted,marginBottom:"20px",lineHeight:"1.7"}}>After payment you will answer 18 diagnostic questions. Robert's team generates your personalized Blueprint and delivers it to your inbox within minutes.</p>
       {!email&&(
         <div style={{marginBottom:"20px",textAlign:"left"}}>
           <label style={{display:"block",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"8px",color:C.muted}}>Confirm your email</label>
           <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="your@email.com" style={{width:"100%",padding:"12px",backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"6px",fontSize:"15px",boxSizing:"border-box"}}/>
         </div>
       )}
-      <BtnPrimary onClick={payBlueprint} disabled={loading}>{loading?"Setting up your Blueprint...":"Get the Strategic Blueprint — $47"}</BtnPrimary>
+      <BtnPrimary onClick={payBlueprint} disabled={loading}>{loading?"Setting up your Blueprint...":"Get Your Blueprint — $47"}</BtnPrimary>
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
     </Wrap>
@@ -439,10 +447,10 @@ export default function ETFMAssessment(){
         </div>
         <div style={{padding:"40px"}}>
           <p style={{color:C.text,fontSize:"16px",lineHeight:"1.8",marginBottom:"16px"}}>You took an important step today.</p>
-          <p style={{color:C.muted,fontSize:"15px",lineHeight:"1.9",marginBottom:"32px"}}>Most people avoid looking closely at their financial patterns. You didn't. Your personalized report, escape roadmap, and 30-Day Reset Protocol will be in your inbox shortly. Typically within 3 to 5 minutes. Check your spam folder if you don't see it.</p>
+          <p style={{color:C.muted,fontSize:"15px",lineHeight:"1.9",marginBottom:"32px"}}>Most people avoid looking closely at their financial patterns. You didn't. Your personalized Blueprint, roadmap, and 30-Day Reset Protocol will be in your inbox shortly. Typically within 3 to 5 minutes. Check your spam folder if you don't see it.</p>
           <div style={{backgroundColor:C.bg,borderRadius:"8px",padding:"20px 24px",marginBottom:"32px",borderLeft:`3px solid ${C.gold}`}}>
             <p style={{margin:"0 0 10px",color:C.gold,fontSize:"14px",fontWeight:"bold",lineHeight:"1.6"}}>Your Financial Freedom Discount</p>
-            <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>If and when you decide to invest in the $499 Strategic Reset Session, your $47 Blueprint investment will be fully credited toward your total. That credit also unlocks an additional discount, bringing your final investment down to just $425. Your first step never loses its value. It builds on it.</p>
+            <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>If and when you decide to invest in the ETFM Financial Reset ($499), your $47 Blueprint investment will be fully credited toward your total. That credit also unlocks an additional discount, bringing your final investment down to just $425. Your first step never loses its value. It builds on it.</p>
           </div>
           <div style={{textAlign:"center",padding:"24px 0",borderTop:`1px solid ${C.border}`}}>
             <p style={{margin:0,color:C.text,fontSize:"16px",lineHeight:"2.2",fontFamily:"Georgia, serif",fontStyle:"italic"}}>Clarity creates control.<br/>Control creates momentum.<br/>Momentum creates freedom.</p>
@@ -459,10 +467,9 @@ export default function ETFMAssessment(){
   // CHANGES: #4 emotional hook headline, #5 less transactional how-it-works, #6 recording line, #9 no dashes
   if(screen==="session_offer") return(
     <Wrap>
-      <Tag t="Strategic Reset Session"/>
-      {/* CHANGE #4: Emotional hook headline, Robert's name removed from title */}
+      <Tag t="ETFM Financial Reset"/>
       <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>You've been figuring it out alone long enough.</h2>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"24px"}}>Two private 30-minute strategy calls built entirely around your numbers, your patterns, and your life. One before to build your plan. One after to lock in your direction.</p>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"24px"}}>Most people have never had someone actually sit down with their real numbers. Not to judge. Not to sell them something. Just to look clearly at where they are, find what's creating the pressure, and build a plan that fits their actual life. That's what this is.</p>
 
       {/* Trust bridge */}
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"28px",marginBottom:"24px",textAlign:"left"}}>
@@ -490,22 +497,19 @@ export default function ETFMAssessment(){
 
       {/* What you get */}
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"20px"}}>
-        <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px"}}>{blueprintClient?"What's included — $425 (Blueprint client rate)":"What's included — $499"}</p>
+        <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px"}}>{blueprintClient?"What You Receive — $425 (Blueprint client rate)":"What You Receive — $499"}</p>
         {[
-          {title:"Robert studies your situation before you ever speak",body:"You complete a short intake form. He reviews it before the call. You don't waste time explaining yourself. He already knows where you are."},
-          {title:"Pre-session strategy call — just you and Robert",body:"No group calls. No assistants. The first 30 minutes are focused entirely on your money, your patterns, and what needs to change."},
-          {title:"A plan built for your life, not a template",body:"Not spend less, save more. A real plan with real steps written specifically for your situation."},
-          {title:"Your financial score and what it actually means",body:"See exactly where you stand. Most people have never seen this clearly before. It changes how you make decisions."},
-          {title:"Your personal money rules",body:"Know exactly what to do and what not to do when financial decisions come up. No more second-guessing at midnight."},
-          {title:"A 90-day roadmap so you know what to do first",body:"You walk away knowing what to do in the next 30, 60, and 90 days. In order."},
-          {title:"Post-session strategy call to lock in your direction",body:"The second 30-minute call happens after you have had time to review your plan. Robert checks in, answers questions, and makes sure you are moving forward with confidence."},
-          // CHANGE #6: Meeting notes line, recording for Robert's use only
-          {title:"Detailed meeting notes sent after both sessions",body:"Comprehensive notes from each call will be sent directly to you. Both sessions are recorded for reference."},
-          {title:"30 days of direct email access to Robert's team",body:"Questions come up after the calls. We are there when they do."},
+          {title:"Pre-session financial intake review",body:"You complete a short intake form before the first call. Robert reviews your actual situation so he arrives prepared and focused on what matters most for you."},
+          {title:"Two private 1-on-1 strategy sessions with Robert",body:"No group calls. No assistants. A pre-session call to build your plan and a post-session call to review it, answer questions, and lock in your direction."},
+          {title:"Personalized financial action plan",body:"A real plan built around your income, obligations, goals, lifestyle, and long-term direction. Not a template. Something written specifically for your life."},
+          {title:"Financial structure recommendations",body:"Clear guidance on how to organize your financial life so decisions get easier, pressure decreases, and progress becomes consistent."},
+          {title:"Strategic next-step planning",body:"You leave knowing exactly what to do first and in what order. No more guessing. No more reacting. Just a clear path forward."},
+          {title:"Detailed meeting notes from both sessions",body:"Comprehensive notes sent directly to you after each call so you can revisit and stay on track."},
+          {title:"90-day priority follow-up support",body:"Questions come up after the calls. Robert's team is available for 90 days to make sure you keep moving forward."},
         ].map((item,i)=>(
           <div key={i} style={{padding:"12px 0",borderBottom:`1px solid ${C.border}`}}>
-            <p style={{margin:"0 0 4px",color:C.text,fontSize:"14px",fontWeight:"bold"}}>✓ &nbsp;{item.title}</p>
-            <p style={{margin:"0 0 0 20px",color:C.muted,fontSize:"13px",lineHeight:"1.6"}}>{item.body}</p>
+            <p style={{margin:"0 0 4px",color:C.text,fontSize:"14px",fontWeight:"bold"}}>✅ &nbsp;{item.title}</p>
+            <p style={{margin:"0 0 0 24px",color:C.muted,fontSize:"13px",lineHeight:"1.6"}}>{item.body}</p>
           </div>
         ))}
         <CreditNote dark={false}/>
@@ -536,7 +540,7 @@ export default function ETFMAssessment(){
         style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
         Book Your Pre-Session Call →
       </a>
-      <p style={{fontSize:"13px",color:C.muted,textAlign:"center",marginBottom:"24px"}}>One plan. Real steps. No more fog.</p>
+      <p style={{fontSize:"13px",color:C.muted,textAlign:"center",marginBottom:"24px"}}>A plan built for your real life. Starting now.</p>
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
     </Wrap>
@@ -547,11 +551,11 @@ export default function ETFMAssessment(){
   if(screen==="session_confirmed") return(
     <Wrap>
       <div style={{fontSize:"48px",marginBottom:"16px"}}>✅</div>
-      <Tag t="Session Confirmed"/>
+      <Tag t="ETFM Financial Reset"/>
       <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"20px",lineHeight:"1.3"}}>
         You're all set.
       </h2>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"32px"}}>Your Strategic Reset Session with Robert Brickey is confirmed and your payment has been received. Check your Calendly confirmation email for your pre-session call date and time.</p>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"32px"}}>Your ETFM Financial Reset with Robert Brickey is confirmed and your payment has been received. Check your Calendly confirmation email for your pre-session call date and time.</p>
       <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"20px"}}>
         <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px"}}>What happens next</p>
         {[
@@ -567,7 +571,7 @@ export default function ETFMAssessment(){
       </div>
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"20px 24px",textAlign:"left"}}>
         <p style={{color:C.text,fontSize:"14px",fontWeight:"bold",marginBottom:"8px"}}>Your session includes:</p>
-        <p style={{color:C.muted,fontSize:"14px",lineHeight:"1.7",margin:0}}>Two 30-minute strategy calls (pre and post). Personalized financial plan. Full financial score analysis. Decision rules system. 90-day reset roadmap. Detailed meeting notes from both sessions. 30 days of priority email support.</p>
+        <p style={{color:C.muted,fontSize:"14px",lineHeight:"1.7",margin:0}}>Two private 1-on-1 strategy sessions. Personalized financial action plan. Financial structure recommendations. Strategic next-step planning. Detailed meeting notes from both sessions. 90-day priority follow-up support.</p>
       </div>
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <a href="mailto:exit@etfm.systems" style={{color:C.gold,textDecoration:"none"}}>exit@etfm.systems</a></p>
