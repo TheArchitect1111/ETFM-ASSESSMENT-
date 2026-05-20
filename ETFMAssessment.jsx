@@ -395,6 +395,11 @@ export default function ETFMAssessment(){
           <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="your@email.com" style={{width:"100%",padding:"12px",backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"6px",fontSize:"15px",boxSizing:"border-box"}}/>
         </div>
       )}
+      <div style={{backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"20px 24px",marginBottom:"20px",textAlign:"left"}}>
+        <p style={{color:C.dark,fontSize:"12px",fontWeight:"bold",marginBottom:"10px",textTransform:"uppercase",letterSpacing:"1px"}}>Before You Continue</p>
+        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}>The ETFM Strategic Blueprint is designed for educational and awareness purposes only. The content, scores, and recommendations generated are not individualized financial advice and do not constitute a professional advisory relationship. For advice specific to your financial situation, please consult a licensed financial professional.</p>
+        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:0}}>All sales are final. Due to the personalized and immediately delivered nature of the Blueprint, refunds are not available once your diagnostic has been processed. By completing payment you acknowledge you have read and agree to these terms.</p>
+      </div>
       <BtnPrimary onClick={payBlueprint} disabled={loading}>{loading?"Setting up your Blueprint...":"Get Your Blueprint — $47"}</BtnPrimary>
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
@@ -529,6 +534,12 @@ export default function ETFMAssessment(){
           <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="your@email.com" style={{width:"100%",padding:"12px",backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"6px",fontSize:"15px",boxSizing:"border-box"}}/>
         </div>
       )}
+      <div style={{backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"20px 24px",marginBottom:"20px",textAlign:"left"}}>
+        <p style={{color:C.dark,fontSize:"12px",fontWeight:"bold",marginBottom:"10px",textTransform:"uppercase",letterSpacing:"1px"}}>Before You Book</p>
+        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}>The ETFM Financial Reset is designed for educational and strategic awareness purposes only. The content, plans, and recommendations provided during your sessions are not individualized financial advice and do not constitute a formal advisory or fiduciary relationship. For regulated financial advice specific to your situation, please consult a licensed financial professional.</p>
+        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}><strong style={{color:C.text}}>Cancellation and Rescheduling:</strong> Sessions may be rescheduled up to 48 hours before your scheduled call at no charge. Cancellations made less than 48 hours before your call are non-refundable. No-shows are non-refundable. If Robert needs to reschedule, you will be offered a full rescheduling option or a complete refund.</p>
+        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:0}}><strong style={{color:C.text}}>Refund Policy:</strong> Due to the personalized, preparation-intensive nature of this program, refunds are not available once your intake form has been reviewed and your first session has been completed. Refund requests submitted before intake review will be considered on a case-by-case basis. By completing payment you acknowledge you have read and agree to these terms.</p>
+      </div>
       <a href={`${CALENDLY}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(firstName)}`} target="_blank" rel="noopener noreferrer"
         style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
         Book Your Pre-Session Call
