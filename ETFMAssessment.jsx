@@ -340,12 +340,14 @@ export default function ETFMAssessment(){
   const showSession=p.get("showSession")==="true";
   const showReset=p.get("showReset")==="true";
   const sessionPaid=p.get("sessionPaid")==="true";
+  const resetPaid=p.get("resetPaid")==="true";
   const hasBlueprint=p.get("hasBlueprint")==="true";
 
   const initScreen=()=>{
     if(hasSid&&p.get("cancelled")==="true") return "blueprint_cancelled";
     if(hasSid) return "loading";
     if(sessionPaid) return "session_confirmed";
+    if(resetPaid) return "reset_confirmed";
     if(showBlueprint) return "blueprint_offer";
     if(showSession) return "session_offer";
     if(showReset) return "reset_offer";
@@ -870,6 +872,44 @@ export default function ETFMAssessment(){
       <h2 style={{fontSize:"28px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px"}}>Completely fine.</h2>
       <p style={{fontSize:"16px",color:C.muted,marginBottom:"32px",lineHeight:"1.7"}}>Your Snapshot is still in your inbox. Whenever you're ready to go deeper — to understand the patterns behind the patterns — the Blueprint will be right here waiting.</p>
       <a href="https://buy.stripe.com/bJe7sM5CE9jwbtnace8Vi0d" style={{display:"inline-block",backgroundColor:C.gold,color:C.dark,textDecoration:"none",padding:"14px 36px",borderRadius:"6px",fontWeight:"bold",fontSize:"16px"}}>Unlock Your Blueprint — $47</a>
+    </Wrap>
+  );
+
+  // RESET CONFIRMED
+  if(screen==="reset_confirmed") return(
+    <Wrap>
+      <div style={{fontSize:"48px",marginBottom:"16px"}}>&#10003;</div>
+      <Tag t="ETFM Financial Reset — Package 3"/>
+      <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"20px",lineHeight:"1.3"}}>
+        Your Reset Experience is confirmed.
+      </h2>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"32px"}}>
+        Your purchase is complete. You now have access to the ETFM Financial Reset — a guided operating system built to replace the patterns keeping you stuck with structure that actually holds.
+      </p>
+      <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"24px"}}>
+        <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"20px"}}>The 4 Phases You're About to Work Through</p>
+        {[
+          {phase:"Phase 1",title:"Stabilize",body:"Reduce pressure and confusion. This phase is about getting clear on where things actually stand before trying to change them."},
+          {phase:"Phase 2",title:"Organize",body:"Build visibility and structure. You'll establish the financial architecture your decisions can flow through reliably."},
+          {phase:"Phase 3",title:"Simplify",body:"Create repeatable systems. Complexity is replaced with routines you can sustain without willpower."},
+          {phase:"Phase 4",title:"Execute",body:"Build consistency and momentum. You stop restarting and start compounding — one intentional week at a time."},
+        ].map((item,i)=>(
+          <div key={i} style={{padding:"14px 0",borderBottom:i<3?"1px solid rgba(255,255,255,0.08)":"none"}}>
+            <p style={{margin:"0 0 4px",color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px"}}>{item.phase}</p>
+            <p style={{margin:"0 0 4px",color:C.white,fontSize:"14px",fontWeight:"bold"}}>{item.title}</p>
+            <p style={{margin:0,color:"#a0a0b0",fontSize:"13px",lineHeight:"1.6"}}>{item.body}</p>
+          </div>
+        ))}
+      </div>
+      <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"18px 22px",marginBottom:"24px",textAlign:"left"}}>
+        <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>Your dashboard access will be delivered to your email within <strong style={{color:C.text}}>24 hours</strong>. Check your inbox — and your spam folder if you don't see it.</p>
+      </div>
+      <a href="https://reset.etfm.systems"
+        style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
+        Begin Your Reset Experience
+      </a>
+      <Hr/>
+      <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
     </Wrap>
   );
 
