@@ -614,6 +614,11 @@ export default function ETFMAssessment(){
       <h2 style={{fontSize:"36px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"20px",lineHeight:"1.3"}}>
         Your Snapshot is on its way.
       </h2>
+      <div style={{backgroundColor:C.goldSoft,border:`1px solid rgba(201,151,58,0.35)`,borderRadius:"8px",padding:"16px 20px",marginBottom:"24px",textAlign:"left"}}>
+        <p style={{margin:0,color:C.gold,fontSize:"14px",lineHeight:"1.8"}}>
+          <strong>Check your spam or junk folder</strong> if you don't see your Snapshot email within 2 minutes. Add <strong>exit@etfm.systems</strong> to your contacts to ensure future emails reach your inbox.
+        </p>
+      </div>
       <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"16px"}}>
         You just did something most people never do — you took an honest look at your own financial patterns. That kind of awareness is the foundation of everything that changes next.
       </p>
