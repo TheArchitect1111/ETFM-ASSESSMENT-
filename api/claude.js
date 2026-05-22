@@ -210,6 +210,16 @@ Keep under 500 words total.`);
         </td>
       </tr>
       <tr>
+        <td style="padding:32px 40px;background-color:#f7f4ef;border-top:2px solid #e8e3da;text-align:center;">
+          <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 8px;">Package 3</p>
+          <h3 style="color:#1a1a2e;font-family:Georgia,serif;font-size:20px;margin:0 0 12px;text-align:center;line-height:1.4;">Build the Systems That Create Stability</h3>
+          <p style="color:#7a7a8a;font-size:14px;margin:0 0 20px;line-height:1.7;text-align:left;">You understand the pattern. Now build structure around it. Five practical systems designed to reduce chaos and create consistency.</p>
+          <div style="text-align:center;">
+            <a href="https://etfm-assessment.vercel.app/?showReset=true" class="cta-btn" style="display:inline-block;background-color:#1a1a2e;color:#c9973a;border:2px solid #1a1a2e;text-decoration:none;padding:14px 32px;border-radius:6px;font-size:16px;font-weight:bold;">Begin Your Reset Experience — $99</a>
+          </div>
+        </td>
+      </tr>
+      <tr>
         <td class="offer-light" style="padding:32px 40px;background-color:#ffffff;border-top:2px solid #c9973a;">
           <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 8px;text-align:center;">Premium</p>
           <h3 style="color:#1a1a2e;font-family:Georgia,serif;font-size:20px;margin:0 0 12px;text-align:center;line-height:1.4;">Strategic Reset Partnership</h3>
@@ -387,7 +397,7 @@ Keep under 900 words.`, 1500);
           <p style="color:#a0a0b8;font-size:13px;font-style:italic;margin:0 0 20px;">Your 5-Step ETFM Framework guide is also ready to view:</p>
           <a href="${FRAMEWORK_URL}" class="cta-btn" style="display:inline-block;background-color:rgba(201,151,58,0.15);color:#c9973a;border:1px solid #c9973a;text-decoration:none;padding:10px 24px;border-radius:6px;font-size:14px;margin-bottom:20px;">View Your Framework Guide →</a>
           <br/>
-<href="https://etfm-assessment.vercel.app/?email=${encodeURIComponent(email)}&firstName=${encodeURIComponent(firstName)}&showSession=true&hasBlueprint=true"
+<a href="https://etfm-assessment.vercel.app/?email=${encodeURIComponent(email)}&firstName=${encodeURIComponent(firstName)}&showSession=true&hasBlueprint=true" class="cta-btn" style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 36px;border-radius:6px;font-weight:bold;font-size:16px;">Book Your Strategic Reset Session — $499 →</a>
         </td>
       </tr>
     `);
