@@ -479,7 +479,7 @@ export default function ETFMAssessment(){
         <p style={{fontSize:"14px",color:C.muted,marginBottom:"24px",fontWeight:"bold",textAlign:"right"}}>Robert Brickey, Creator of ETFM</p>
         <div style={{borderTop:`0.5px solid ${C.border}`,paddingTop:"20px"}}>
           <DotCred label="Duke University Graduate" sub="Former Basketball Team Captain"/>
-          <DotCred label="Financial Advisor" sub="12 years of client advisory work"/>
+          <DotCred label="Financial Strategist" sub="12 years of client strategic guidance"/>
           <DotCred label="Radio Host" sub="WIDU 1600 AM, Fayetteville NC"/>
           <DotCred label="Speaker & Educator" sub="Financial literacy across the Carolinas"/>
           <DotCred label="Creator of ETFM" sub="A financial operating system built for real life"/>
@@ -664,7 +664,7 @@ export default function ETFMAssessment(){
           </div>
         ))}
         <div style={{marginTop:"20px",padding:"16px",backgroundColor:"rgba(201,151,58,0.08)",borderRadius:"6px",border:"1px solid rgba(201,151,58,0.2)"}}>
-          <p style={{color:"#c8c8d8",fontSize:"14px",margin:0,lineHeight:"1.8",fontStyle:"italic"}}>Comprehensive financial planning services can often cost thousands of dollars or require large investment minimums. The Blueprint is designed to give you diagnostic clarity and a structured starting framework at a fraction of that investment.</p>
+          <p style={{color:"#c8c8d8",fontSize:"14px",margin:0,lineHeight:"1.8",fontStyle:"italic"}}>Structured financial clarity and organization services can often cost thousands of dollars or require large investment minimums. The Blueprint is designed to give you diagnostic clarity and a structured starting framework at a fraction of that investment.</p>
         </div>
         <CreditNote dark={true}/>
       </div>
@@ -678,7 +678,7 @@ export default function ETFMAssessment(){
       )}
       <div style={{backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"20px 24px",marginBottom:"20px",textAlign:"left"}}>
         <p style={{color:C.dark,fontSize:"12px",fontWeight:"bold",marginBottom:"10px",textTransform:"uppercase",letterSpacing:"1px"}}>Before You Continue</p>
-        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}>The ETFM Strategic Blueprint is designed for educational and awareness purposes only. The content, scores, and recommendations generated are not individualized financial advice and do not constitute a professional advisory relationship. For advice specific to your financial situation, please consult a licensed financial professional.</p>
+        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}>The ETFM Strategic Blueprint is designed for educational and awareness purposes only. The content, scores, and recommendations generated are not individualized financial guidance and do not constitute a professional strategic guidance relationship. For guidance specific to your financial situation, please consult a licensed financial professional.</p>
         <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:0}}>All sales are final. Due to the personalized and immediately delivered nature of the Blueprint, refunds are not available once your diagnostic has been processed. By completing payment you acknowledge you have read and agree to these terms.</p>
       </div>
       <BtnPrimary onClick={payBlueprint} disabled={loading}>{loading?"One moment, setting up your Blueprint...":"Unlock Your Blueprint — $47"}</BtnPrimary>
@@ -752,7 +752,7 @@ export default function ETFMAssessment(){
       <Tag t="ETFM Financial Reset"/>
       <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>You've been figuring this out alone long enough.</h2>
       <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"16px"}}>Most people have never had someone actually sit down with their real numbers — not to judge, not to sell them something, but to look honestly at where they are, understand what's creating the pressure, and build a plan that fits their actual life.</p>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"24px"}}>Comprehensive financial planning can easily cost several thousand dollars — and often requires large investment minimums just to get started. The ETFM Financial Reset is designed to deliver the same personalized strategic clarity at a fraction of that.</p>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"24px"}}>Structured financial clarity and organization can easily cost several thousand dollars — and often requires large investment minimums just to get started. The ETFM Financial Reset is designed to deliver the same personalized strategic clarity at a fraction of that.</p>
 
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"28px",marginBottom:"24px",textAlign:"left"}}>
         <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",color:C.gold,marginBottom:"16px"}}>Who Is Robert Brickey?</p>
@@ -761,7 +761,7 @@ export default function ETFMAssessment(){
         </p>
         <div style={{marginBottom:"20px"}}>
           <DotCred label="Duke University Graduate" sub="Former Basketball Team Captain"/>
-          <DotCred label="Financial Advisor" sub="12 years of client advisory work"/>
+          <DotCred label="Financial Strategist" sub="12 years of client strategic guidance"/>
           <DotCred label="Radio Host" sub="WIDU 1600 AM, Fayetteville NC"/>
           <DotCred label="Speaker & Educator" sub="Financial literacy across the Carolinas"/>
           <DotCred label="Creator of ETFM" sub="A financial operating system built for real life"/>
@@ -817,7 +817,7 @@ export default function ETFMAssessment(){
       )}
       <div style={{backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"20px 24px",marginBottom:"20px",textAlign:"left"}}>
         <p style={{color:C.dark,fontSize:"12px",fontWeight:"bold",marginBottom:"10px",textTransform:"uppercase",letterSpacing:"1px"}}>Before You Book</p>
-        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}>The ETFM Financial Reset is designed for educational and strategic awareness purposes only. The content, plans, and recommendations provided during your sessions are not individualized financial advice and do not constitute a formal advisory or fiduciary relationship. For regulated financial advice specific to your situation, please consult a licensed financial professional.</p>
+        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}>The ETFM Financial Reset is designed for educational and organizational awareness purposes only. The content, plans, and recommendations provided during your sessions are not individualized financial guidance and do not constitute a formal strategic guidance relationship. For guidance specific to your situation, please consult a licensed financial professional.</p>
         <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}><strong style={{color:C.text}}>Cancellation and Rescheduling:</strong> Sessions may be rescheduled up to 48 hours before your scheduled call at no charge. Cancellations made less than 48 hours before your call are non-refundable. No-shows are non-refundable. If Robert needs to reschedule, you will be offered a full rescheduling option or a complete refund.</p>
         <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:0}}><strong style={{color:C.text}}>Refund Policy:</strong> Due to the personalized, preparation-intensive nature of this program, refunds are not available once your intake form has been reviewed and your first session has been completed. Refund requests submitted before intake review will be considered on a case-by-case basis. By completing payment you acknowledge you have read and agree to these terms.</p>
       </div>
@@ -846,7 +846,7 @@ export default function ETFMAssessment(){
           "Check your email for your Calendly pre-session call confirmation",
           "A short intake form will arrive within 24 hours — complete it before your first call",
           "Attend your first 30-minute strategy call with Robert — he'll arrive fully prepared",
-          "Receive your personalized financial plan, roadmap, and strategic score",
+          "Receive your personalized financial roadmap and strategic score",
           "Attend your second 30-minute call to review your plan and confirm your direction",
           "Detailed session notes will be sent to you after both calls",
         ].map((step,i)=>(
@@ -947,7 +947,7 @@ export default function ETFMAssessment(){
 
       <div style={{backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"20px 24px",marginBottom:"20px",textAlign:"left"}}>
         <p style={{color:C.dark,fontSize:"12px",fontWeight:"bold",marginBottom:"10px",textTransform:"uppercase",letterSpacing:"1px"}}>Before You Continue</p>
-        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}>The ETFM Financial Reset systems are designed for educational and awareness purposes only. The content, frameworks, and recommendations provided are not individualized financial advice and do not constitute a professional advisory relationship. For advice specific to your financial situation, please consult a licensed financial professional.</p>
+        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}>The ETFM Financial Reset systems are designed for educational and organizational awareness purposes only. The content, frameworks, and recommendations provided are not individualized financial guidance and do not constitute a professional strategic guidance relationship. For guidance specific to your financial situation, please consult a licensed financial professional.</p>
         <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:0}}>All sales are final. Due to the personalized and immediately delivered nature of this program, refunds are not available once your access has been provided. By completing payment you acknowledge you have read and agree to these terms.</p>
       </div>
       <a href="https://buy.stripe.com/fZueVee9agLY7d7esu8Vi0f"
