@@ -140,7 +140,7 @@ Inconsistent planning is almost never a motivation problem. It is a system probl
 The Weekly Reset Routine is designed specifically for this. It is a single repeatable structure — 15 minutes, once per week — that maintains momentum without requiring high effort. The Momentum Tracker reinforces consistency by making progress visible.
 
 **Mark this as a priority if:**
-You have restarted financial plans multiple times, feel like you "fall off track" regularly, or struggle to maintain financial habits beyond the first few weeks.
+You have restarted financial roadmaps multiple times, feel like you "fall off track" regularly, or struggle to maintain financial habits beyond the first few weeks.
 
 ---
 
@@ -166,7 +166,7 @@ Debt payments are your most consistent source of financial stress, you avoid loo
 Your income varies — month to month, season to season, or project to project. This unpredictability makes budgeting difficult, saving inconsistent, and financial planning feel nearly impossible. The irregular nature of your income may be creating a feast-or-famine pattern that is hard to break.
 
 **Why it creates pressure:**
-Variable income requires a different financial architecture than stable income. Most conventional financial advice is built for predictable paychecks. When income is irregular, the systems need to be designed around that reality — with buffer accounts, flexible allocation models, and priority sequencing that adjusts to what's actually available each month.
+Variable income requires a different financial architecture than stable income. Most conventional financial guidance is built for predictable paychecks. When income is irregular, the systems need to be designed around that reality — with buffer accounts, flexible allocation models, and priority sequencing that adjusts to what's actually available each month.
 
 **What this dashboard addresses:**
 The Priority Structure System is especially important for variable income situations — it provides a sequenced framework for allocating money regardless of how much arrives. The Opportunity Expansion System addresses income growth and stabilization directly.
@@ -372,7 +372,7 @@ A completed Priority Planner with every financial obligation and goal tiered and
 A single, repeatable weekly structure that maintains financial momentum without requiring significant time, energy, or willpower. Fifteen minutes. One day per week. The same structure, every time.
 
 **Why it matters:**
-Most financial plans fail not because they are wrong but because they require too much effort to maintain. The Weekly Reset Routine is designed to be the minimum viable financial habit — the one thing that, if done consistently, keeps everything else from drifting. It does not require you to be disciplined every day. It requires you to show up for 15 minutes, once a week, and do the same thing you did last week.
+Most financial roadmaps fail not because they are wrong but because they require too much effort to maintain. The Weekly Reset Routine is designed to be the minimum viable financial habit — the one thing that, if done consistently, keeps everything else from drifting. It does not require you to be disciplined every day. It requires you to show up for 15 minutes, once a week, and do the same thing you did last week.
 
 **How to implement:**
 1. Designate your reset day — the same day each week. Sunday evening and Monday morning are common choices. Choose what fits your rhythm.
