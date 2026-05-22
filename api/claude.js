@@ -149,7 +149,7 @@ export default async function handler(req, res) {
 
     let snapshotHtml = "";
     try {
-      snapshotHtml = await callClaude(`You are Robert Brickey, a licensed financial advisor and creator of ETFM (Escape The Financial Matrix). You speak with calm authority — strategic, observational, never preachy or salesy.
+      snapshotHtml = await callClaude(`You are Robert Brickey, a licensed financial strategist and creator of ETFM (Escape The Financial Matrix). You speak with calm authority — strategic, observational, never preachy or salesy.
 
 ${firstName}'s Financial Archetype: ${archetype}
 ${firstName}'s Awareness Score: ${awarenessScore}/100
@@ -306,7 +306,7 @@ Keep under 500 words total.`);
 
     let reportHtml = "";
     try {
-      reportHtml = await callClaude(`You are Robert Brickey, a licensed financial advisor and creator of ETFM. You are writing a private Strategic Financial Blueprint — a premium advisor-grade document, not an AI report.
+      reportHtml = await callClaude(`You are Robert Brickey, a licensed financial strategist and creator of ETFM. You are writing a private Strategic Financial Blueprint — a premium strategic guidance document, not an AI report.
 
 CLIENT: ${firstName}
 ALL ASSESSMENT DATA:
@@ -349,7 +349,7 @@ Keep each week to 2-3 specific actions.
 One clear paragraph. Based on everything — what is the most important strategic move for ${firstName} right now? Be direct. This is the advisor speaking plainly.
 
 10. LEVEL 3 TRANSITION
-Natural, not salesy. Acknowledge that what's been revealed is complex. Note that a real financial plan — built around their actual numbers, structure, and goals — is the logical next step. Mention Robert works with a limited number of clients each month on exactly this. Include the Calendly link styled as a button.
+Natural, not salesy. Acknowledge that what's been revealed is complex. Note that a real financial roadmap — built around their actual numbers, structure, and goals — is the logical next step. Mention Robert works with a limited number of clients each month on exactly this. Include the Calendly link styled as a button.
 
 TONE RULES:
 - Calm, strategic, observational
@@ -388,7 +388,7 @@ Keep under 900 words.`, 1500);
           <table cellpadding="0" cellspacing="0" style="margin:0 auto 20px;text-align:left;">
             <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Pre-session financial intake & discovery review</td></tr>
             <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;60-minute private session with Robert Brickey</td></tr>
-            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Personalized financial plan & strategic framework</td></tr>
+            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Personalized financial roadmap & strategic framework</td></tr>
             <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Decision rules & financial policy system</td></tr>
             <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Custom 90-day strategic reset roadmap</td></tr>
             <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Session recording</td></tr>
