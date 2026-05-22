@@ -338,6 +338,7 @@ export default function ETFMAssessment(){
   const hasSid=p.get("session");
   const showBlueprint=p.get("showBlueprint")==="true";
   const showSession=p.get("showSession")==="true";
+  const showReset=p.get("showReset")==="true";
   const sessionPaid=p.get("sessionPaid")==="true";
   const hasBlueprint=p.get("hasBlueprint")==="true";
 
@@ -347,6 +348,7 @@ export default function ETFMAssessment(){
     if(sessionPaid) return "session_confirmed";
     if(showBlueprint) return "blueprint_offer";
     if(showSession) return "session_offer";
+    if(showReset) return "reset_offer";
     return "intro";
   };
 
@@ -868,6 +870,47 @@ export default function ETFMAssessment(){
       <h2 style={{fontSize:"28px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px"}}>Completely fine.</h2>
       <p style={{fontSize:"16px",color:C.muted,marginBottom:"32px",lineHeight:"1.7"}}>Your Snapshot is still in your inbox. Whenever you're ready to go deeper — to understand the patterns behind the patterns — the Blueprint will be right here waiting.</p>
       <a href="https://buy.stripe.com/bJe7sM5CE9jwbtnace8Vi0d" style={{display:"inline-block",backgroundColor:C.gold,color:C.dark,textDecoration:"none",padding:"14px 36px",borderRadius:"6px",fontWeight:"bold",fontSize:"16px"}}>Unlock Your Blueprint — $47</a>
+    </Wrap>
+  );
+
+  // RESET OFFER
+  if(screen==="reset_offer") return(
+    <Wrap>
+      <Tag t="ETFM Financial Reset — Package 3"/>
+      <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>You understand the pattern. Now let's build systems around it.</h2>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"16px"}}>Package 3 is not a course. There are no modules to watch, no videos to sit through, and no generic content to consume at your own pace.</p>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"32px"}}>This is a guided financial operating system — five structured systems designed to replace the patterns that have been keeping you stuck with habits, routines, and frameworks built around how your real life actually works.</p>
+
+      <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"20px"}}>
+        <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"20px"}}>The 5 Reset Systems</p>
+        {[
+          {title:"Weekly Financial Awareness System",body:"A 15-minute weekly review designed to end the 'where did my money go' cycle. You stop wondering and start knowing."},
+          {title:"Decision Pause System",body:"A simple filter that interrupts reactive and emotional spending before it happens. This is where financial discipline becomes structural, not motivational."},
+          {title:"Priority Structure System",body:"Organizes your financial pressure into three clear categories: survival, stabilization, and growth. You stop reacting to everything equally and start moving in the right order."},
+          {title:"Weekly Reset Routine",body:"A consistency structure that builds financial momentum without overwhelm. One routine, repeated weekly, that compounds over time."},
+          {title:"Opportunity Expansion System",body:"Identifies income possibilities and growth directions specific to your life — your skills, your situation, your timeline. Not generic hustle advice. Real options mapped to where you actually are."},
+        ].map((item,i)=>(
+          <div key={i} style={{padding:"14px 0",borderBottom:"1px solid rgba(255,255,255,0.08)"}}>
+            <p style={{margin:"0 0 6px",color:C.white,fontSize:"14px",fontWeight:"bold"}}>{item.title}</p>
+            <p style={{margin:0,color:"#a0a0b0",fontSize:"13px",lineHeight:"1.6"}}>{item.body}</p>
+          </div>
+        ))}
+        <div style={{marginTop:"20px",padding:"16px",backgroundColor:"rgba(201,151,58,0.08)",borderRadius:"6px",border:"1px solid rgba(201,151,58,0.2)"}}>
+          <p style={{color:"#c8c8d8",fontSize:"14px",margin:0,lineHeight:"1.8",fontStyle:"italic"}}>These aren't frameworks you read about once and forget. They are repeatable systems you install into your weekly routine — and they build on each other.</p>
+        </div>
+      </div>
+
+      <div style={{backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"20px 24px",marginBottom:"20px",textAlign:"left"}}>
+        <p style={{color:C.dark,fontSize:"12px",fontWeight:"bold",marginBottom:"10px",textTransform:"uppercase",letterSpacing:"1px"}}>Before You Continue</p>
+        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}>The ETFM Financial Reset systems are designed for educational and awareness purposes only. The content, frameworks, and recommendations provided are not individualized financial advice and do not constitute a professional advisory relationship. For advice specific to your financial situation, please consult a licensed financial professional.</p>
+        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:0}}>All sales are final. Due to the personalized and immediately delivered nature of this program, refunds are not available once your access has been provided. By completing payment you acknowledge you have read and agree to these terms.</p>
+      </div>
+      <a href="https://buy.stripe.com/fZueVee9agLY7d7esu8Vi0f"
+        style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
+        Begin Your Reset — $99
+      </a>
+      <Hr/>
+      <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
     </Wrap>
   );
 
