@@ -24,20 +24,20 @@ function calcScore(answers){
 const FQ=[
   {id:"awareness",
    bot:"How clearly do you see where your money actually goes each month?",
-   subtext:"Awareness is the starting point. No judgment here — just honesty.",
+   subtext:"Awareness is the starting point. No judgment here, just honesty.",
    options:[
      {label:"Honestly? I have no real idea",value:"no_idea"},
      {label:"I know some of it, but not consistently",value:"some_inconsistent"},
-     {label:"I have a rough sense — mostly in my head",value:"track_mentally"},
+     {label:"I have a rough sense, mostly in my head",value:"track_mentally"},
      {label:"I track most of my spending",value:"track_most"},
      {label:"I know exactly where every dollar goes",value:"know_exactly"},
    ]},
   {id:"extra_money",
    bot:"When unexpected money comes in, what usually happens to it?",
-   subtext:"How you treat extra money reveals your real financial pattern — not your intentions.",
+   subtext:"How you treat extra money reveals your real financial pattern, not your intentions.",
    options:[
      {label:"It gets absorbed into bills and everyday expenses",value:"disappears_bills"},
-     {label:"I spend it — sometimes without thinking",value:"spend_quickly"},
+     {label:"I spend it, sometimes without thinking",value:"spend_quickly"},
      {label:"I try to save it, but something usually comes up",value:"try_save"},
      {label:"I put it toward something intentional",value:"use_intentionally"},
      {label:"I save or invest it without hesitation",value:"save_invest"},
@@ -47,7 +47,7 @@ const FQ=[
    subtext:"Your response under pressure shapes your financial life more than your income ever will.",
    options:[
      {label:"I avoid thinking about it as long as I can",value:"avoid"},
-     {label:"I react — emotionally or impulsively",value:"emotional_decisions"},
+     {label:"I react, emotionally or impulsively",value:"emotional_decisions"},
      {label:"I try to work more to compensate",value:"work_more"},
      {label:"I ask others, but still feel uncertain about what to do",value:"ask_others"},
      {label:"I slow down and make a plan",value:"slow_plan"},
@@ -65,7 +65,7 @@ const FQ=[
      {label:"Honestly, I feel fairly organized",value:"fairly_organized"},
    ]},
   {id:"future_vision",
-   bot:"What are you ultimately trying to build — financially?",
+   bot:"What are you ultimately trying to build, financially?",
    subtext:"Naming your destination is the first real act of financial strategy.",
    options:[
      {label:"Stability I can count on",value:"stability"},
@@ -81,7 +81,7 @@ const FQ=[
 const BQ=[
   {id:"full_review",
    section:"Financial Visibility",
-   bot:"When did you last look at all of your financial obligations and resources together — at the same time?",
+   bot:"When did you last look at all of your financial obligations and resources together, at the same time?",
    subtext:"Income, bills, debt, savings, subscriptions, investments. Everything in one honest picture.",
    options:[
      {label:"Never, that I can recall",value:"never"},
@@ -116,7 +116,7 @@ const BQ=[
    ]},
   {id:"extra_money_pattern",
    section:"Pattern Recognition",
-   bot:"The last time you had extra money available — what actually happened to it?",
+   bot:"The last time you had extra money available, what actually happened to it?",
    subtext:"This single question reveals more about your financial pattern than almost any other.",
    options:[
      {label:"It disappeared into everyday expenses",value:"disappeared"},
@@ -128,20 +128,20 @@ const BQ=[
   {id:"repeated_behavior",
    section:"Pattern Recognition",
    bot:"Which financial behavior has shown up most repeatedly throughout your life?",
-   subtext:"Patterns repeat because they are structural — not a willpower problem.",
+   subtext:"Patterns repeat because they are structural, not a willpower problem.",
    options:[
      {label:"Starting strong, then losing momentum",value:"not_maintaining"},
      {label:"Spending emotionally or in the moment",value:"emotional_spending"},
      {label:"Avoiding financial decisions until pressure forces action",value:"avoidance"},
      {label:"Putting others first financially, at my own expense",value:"helping_others"},
-     {label:"Restarting financially — again and again",value:"restarting"},
+     {label:"Restarting financially, again and again",value:"restarting"},
      {label:"Feeling stuck despite working hard",value:"stuck_working"},
      {label:"I've built fairly consistent financial habits",value:"consistent_habits"},
    ]},
   {id:"pressure_response",
    section:"Pattern Recognition",
    bot:"When financial pressure increases, what is your typical response?",
-   subtext:"How you respond under pressure is your most important financial habit — even if you've never named it.",
+   subtext:"How you respond under pressure is your most important financial habit, even if you've never named it.",
    options:[
      {label:"I avoid it completely",value:"avoid"},
      {label:"I make fast, emotionally driven decisions",value:"fast_emotional"},
@@ -166,10 +166,10 @@ const BQ=[
   {id:"income_predictability",
    section:"System Architecture",
    bot:"How predictable is your income from one month to the next?",
-   subtext:"Income stability shapes everything — your emergency fund, your debt strategy, your ability to automate.",
+   subtext:"Income stability shapes everything, your emergency fund, your debt strategy, your ability to automate.",
    options:[
      {label:"Extremely unpredictable",value:"extremely_unpredictable"},
-     {label:"It varies — some months are fine, others aren't",value:"somewhat_inconsistent"},
+     {label:"It varies, some months are fine, others aren't",value:"somewhat_inconsistent"},
      {label:"Mostly stable with occasional variation",value:"mostly_stable"},
      {label:"Very stable and reliable",value:"very_stable"},
      {label:"I have multiple stable income sources",value:"multiple_stable"},
@@ -177,7 +177,7 @@ const BQ=[
   {id:"consumer_debt",
    section:"System Architecture",
    bot:"How much consumer debt do you currently carry?",
-   subtext:"Credit cards, personal loans, auto loans — not your mortgage.",
+   subtext:"Credit cards, personal loans, auto loans, not your mortgage.",
    options:[
      {label:"Under $5,000",value:"under_5k"},
      {label:"$5,000 to $25,000",value:"5k_25k"},
@@ -188,7 +188,7 @@ const BQ=[
   {id:"income_runway",
    section:"System Architecture",
    bot:"If your income stopped today, how long could you maintain your current lifestyle?",
-   subtext:"This is your financial runway — one of the most important numbers you can know about yourself.",
+   subtext:"This is your financial runway, one of the most important numbers you can know about yourself.",
    options:[
      {label:"Less than 1 month",value:"under_1mo"},
      {label:"1 to 3 months",value:"1_3mo"},
@@ -198,7 +198,7 @@ const BQ=[
    ]},
   {id:"money_organization",
    section:"System Architecture",
-   bot:"How is your money currently organized — structurally?",
+   bot:"How is your money currently organized, structurally?",
    subtext:"Structure determines behavior more than intention does. This is where we look first.",
    options:[
      {label:"Everything runs through one account",value:"one_account"},
@@ -213,7 +213,7 @@ const BQ=[
    subtext:"Automation is what separates reacting to your finances from intentionally building with them.",
    options:[
      {label:"Almost nothing is automated",value:"almost_nothing"},
-     {label:"A few bills — that's it",value:"few_bills"},
+     {label:"A few bills, that's it",value:"few_bills"},
      {label:"Some savings or investing is automated",value:"some_savings"},
      {label:"Most major systems run automatically",value:"most_automated"},
      {label:"My finances are fully and intentionally systemized",value:"fully_systemized"},
@@ -243,7 +243,7 @@ const BQ=[
      {label:"A business",value:"business"},
      {label:"Real estate or property",value:"real_estate"},
      {label:"Passive income streams",value:"passive_income"},
-     {label:"Nothing consistently — not yet",value:"none"},
+     {label:"Nothing consistently, not yet",value:"none"},
    ]},
   {id:"financial_freedom_meaning",
    section:"Ownership & Positioning",
@@ -271,7 +271,7 @@ const BQ=[
    ]},
   {id:"five_year_feeling",
    section:"Future Trajectory",
-   bot:"If nothing financially changed over the next five years — how would you honestly feel?",
+   bot:"If nothing financially changed over the next five years, how would you honestly feel?",
    subtext:"This is your compass. Let yourself be honest.",
    options:[
      {label:"Scared",value:"scared"},
@@ -468,7 +468,7 @@ export default function ETFMAssessment(){
       </div>
       <Tag t="Escape The Financial Matrix"/>
       <h1 style={{fontSize:"42px",fontFamily:"Georgia, serif",marginBottom:"20px",color:C.text,lineHeight:"1.2"}}>Most people don't have a money problem. They have a pattern problem.</h1>
-      <p style={{fontSize:"17px",color:C.muted,marginBottom:"16px",lineHeight:"1.8"}}>The same cycles repeat. The same pressure returns. The same intentions don't stick — not because of effort or character, but because nobody has ever helped you see the underlying pattern driving your financial decisions.</p>
+      <p style={{fontSize:"17px",color:C.muted,marginBottom:"16px",lineHeight:"1.8"}}>The same cycles repeat. The same pressure returns. The same intentions don't stick, not because of effort or character, but because nobody has ever helped you see the underlying pattern driving your financial decisions.</p>
       <p style={{fontSize:"17px",color:C.muted,marginBottom:"40px",lineHeight:"1.8"}}>The ETFM Snapshot is a 5-question financial awareness assessment. It identifies your Financial Archetype, calculates your personal Awareness Score, and delivers a targeted strategic insight straight to your inbox. It takes about two minutes. It is completely free.</p>
 
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"32px",marginBottom:"36px",textAlign:"left"}}>
@@ -487,7 +487,7 @@ export default function ETFMAssessment(){
       </div>
 
       <button onClick={()=>setScreen("chat")} style={{backgroundColor:C.gold,color:C.dark,border:"none",padding:"16px 44px",fontSize:"16px",fontWeight:"bold",borderRadius:"8px",cursor:"pointer"}}>Start Your Snapshot</button>
-      <p style={{fontSize:"12px",color:C.muted,marginTop:"16px"}}>Five questions. Two minutes. Free — no strings attached.</p>
+      <p style={{fontSize:"12px",color:C.muted,marginTop:"16px"}}>Five questions. Two minutes. Free, no strings attached.</p>
     </Wrap>
   );
 
@@ -501,7 +501,7 @@ export default function ETFMAssessment(){
           {freeIdx===0&&(
             <div style={{marginBottom:"28px",padding:"18px 22px",backgroundColor:C.white,borderRadius:"10px",border:`1px solid ${C.border}`,textAlign:"left"}}>
               <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",margin:"0 0 8px"}}>What you'll receive</p>
-              <p style={{color:C.text,fontSize:"14px",lineHeight:"1.75",margin:0}}>After these 5 questions, you'll receive your <strong>Financial Archetype</strong>, your <strong>Awareness Score</strong> (rated 0–100), and a <strong>personalized strategic insight</strong> — all delivered to your inbox, completely free.</p>
+              <p style={{color:C.text,fontSize:"14px",lineHeight:"1.75",margin:0}}>After these 5 questions, you'll receive your <strong>Financial Archetype</strong>, your <strong>Awareness Score</strong> (rated 0–100), and a <strong>personalized strategic insight</strong>, all delivered to your inbox, completely free.</p>
             </div>
           )}
           <div style={{marginBottom:"8px",display:"flex",justifyContent:"space-between"}}>
@@ -539,13 +539,9 @@ export default function ETFMAssessment(){
       <div style={{maxWidth:"580px",width:"100%",textAlign:"center"}}>
         <Tag t="Snapshot Complete"/>
         <h2 style={{fontSize:"32px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Your pattern has been identified.</h2>
-        <p style={{fontSize:"16px",color:C.muted,marginBottom:"40px",lineHeight:"1.7"}}>What you've uncovered isn't a reflection of your potential — it's a reflection of the patterns currently shaping your financial decisions. Seeing them clearly is always where real movement begins.</p>
+        <p style={{fontSize:"16px",color:C.muted,marginBottom:"40px",lineHeight:"1.7"}}>What you've uncovered isn't a reflection of your potential, it's a reflection of the patterns currently shaping your financial decisions. Seeing them clearly is always where real movement begins.</p>
         <div style={{backgroundColor:C.dark,borderRadius:"12px",padding:"36px 30px",marginBottom:"30px",textAlign:"left"}}>
           <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"20px",textAlign:"center"}}>Your ETFM Awareness Score</p>
-          <div style={{marginBottom:"24px",display:"flex",justifyContent:"space-between",alignItems:"center",padding:"14px 18px",backgroundColor:"rgba(201,151,58,0.15)",borderRadius:"8px",border:"1px solid rgba(201,151,58,0.4)"}}>
-            <span style={{color:C.white,fontSize:"15px",fontWeight:"bold"}}>Overall Score</span>
-            <span style={{color:C.gold,fontSize:"30px",fontFamily:"Georgia, serif",fontWeight:"bold"}}>{score}<span style={{fontSize:"16px",opacity:0.6}}>/100</span></span>
-          </div>
           <p style={{color:"#6a6a7a",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"12px",textAlign:"center"}}>How your score was calculated</p>
           {breakdown.map((item,i)=>(
             <div key={i} style={{marginBottom:"8px",padding:"10px 14px",backgroundColor:"rgba(255,255,255,0.04)",borderRadius:"6px",border:"1px solid rgba(255,255,255,0.07)",display:"flex",justifyContent:"space-between",alignItems:"center",gap:"12px"}}>
@@ -553,7 +549,7 @@ export default function ETFMAssessment(){
                 <p style={{color:"#7a7a8a",fontSize:"10px",textTransform:"uppercase",letterSpacing:"1px",margin:"0 0 3px"}}>{item.category}</p>
                 <p style={{color:"#c8c8d8",fontSize:"13px",margin:0,lineHeight:"1.4",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{item.answer}</p>
               </div>
-              <span style={{color:C.gold,fontSize:"17px",fontWeight:"bold",flexShrink:0}}>{item.score}</span>
+              {i===0&&<span style={{color:C.gold,fontSize:"17px",fontWeight:"bold",flexShrink:0}}>{item.score}</span>}
             </div>
           ))}
           <div style={{marginTop:"16px",padding:"10px 0 0",borderTop:"1px solid rgba(255,255,255,0.07)"}}>
@@ -620,7 +616,7 @@ export default function ETFMAssessment(){
         </p>
       </div>
       <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"16px"}}>
-        You just did something most people never do — you took an honest look at your own financial patterns. That kind of awareness is the foundation of everything that changes next.
+        You just did something most people never do, you took an honest look at your own financial patterns. That kind of awareness is the foundation of everything that changes next.
       </p>
       <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"40px"}}>
         Your Financial Archetype, Awareness Score, and personalized strategic insight are on their way to your inbox now. Check your spam folder if you don't see it within a few minutes.
@@ -645,9 +641,9 @@ export default function ETFMAssessment(){
   if(screen==="blueprint_offer") return(
     <Wrap>
       <Tag t="ETFM Strategic Blueprint"/>
-      <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Now that you can see the pattern — it's time to understand it fully.</h2>
+      <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Now that you can see the pattern, it's time to understand it fully.</h2>
       <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"16px"}}>Most people spend years reacting financially without ever identifying the underlying patterns driving their decisions. They try harder, restart plans, and still find themselves in the same place.</p>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"32px"}}>The ETFM Blueprint is an 18-question diagnostic designed to surface the habits, blind spots, behavioral patterns, and system gaps shaping your financial life. Not to give you generic advice. To help you finally understand why the same cycles keep repeating — and what to do differently.</p>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"32px"}}>The ETFM Blueprint is an 18-question diagnostic designed to surface the habits, blind spots, behavioral patterns, and system gaps shaping your financial life. Not to give you generic advice. To help you finally understand why the same cycles keep repeating, and what to do differently.</p>
 
       <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"20px"}}>
         <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"20px"}}>What Changes After Your Blueprint</p>
@@ -669,7 +665,7 @@ export default function ETFMAssessment(){
         <CreditNote dark={true}/>
       </div>
 
-      <p style={{fontSize:"14px",color:C.muted,marginBottom:"20px",lineHeight:"1.7"}}>After payment, you'll answer 18 diagnostic questions. Robert's team generates your personalized Blueprint and delivers it to your inbox — typically within minutes.</p>
+      <p style={{fontSize:"14px",color:C.muted,marginBottom:"20px",lineHeight:"1.7"}}>After payment, you'll answer 18 diagnostic questions. Robert's team generates your personalized Blueprint and delivers it to your inbox, typically within minutes.</p>
       {!email&&(
         <div style={{marginBottom:"20px",textAlign:"left"}}>
           <label style={{display:"block",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"8px",color:C.muted}}>Confirm your email</label>
@@ -681,7 +677,7 @@ export default function ETFMAssessment(){
         <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}>The ETFM Strategic Blueprint is designed for educational and awareness purposes only. The content, scores, and recommendations generated are not individualized financial guidance and do not constitute a professional strategic guidance relationship. For guidance specific to your financial situation, please consult a licensed financial professional.</p>
         <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:0}}>All sales are final. Due to the personalized and immediately delivered nature of the Blueprint, refunds are not available once your diagnostic has been processed. By completing payment you acknowledge you have read and agree to these terms.</p>
       </div>
-      <BtnPrimary onClick={payBlueprint} disabled={loading}>{loading?"One moment, setting up your Blueprint...":"Unlock Your Blueprint — $47"}</BtnPrimary>
+      <BtnPrimary onClick={payBlueprint} disabled={loading}>{loading?"One moment, setting up your Blueprint...":"Unlock Your Blueprint: $47"}</BtnPrimary>
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
     </Wrap>
@@ -729,8 +725,8 @@ export default function ETFMAssessment(){
           <h1 style={{margin:0,color:C.white,fontSize:"26px",fontFamily:"Georgia, serif",fontWeight:"normal",lineHeight:"1.4"}}>Your Strategic Blueprint<br/>has been prepared.</h1>
         </div>
         <div style={{padding:"40px"}}>
-          <p style={{color:C.text,fontSize:"16px",lineHeight:"1.8",marginBottom:"16px"}}>What you did today took honesty — and that matters.</p>
-          <p style={{color:C.muted,fontSize:"15px",lineHeight:"1.9",marginBottom:"32px"}}>Most people avoid looking closely at their financial patterns. You didn't. Your personalized Blueprint, strategic roadmap, and 30-Day Reset Protocol will be in your inbox shortly — typically within a few minutes. Check your spam folder if you don't see it right away.</p>
+          <p style={{color:C.text,fontSize:"16px",lineHeight:"1.8",marginBottom:"16px"}}>What you did today took honesty, and that matters.</p>
+          <p style={{color:C.muted,fontSize:"15px",lineHeight:"1.9",marginBottom:"32px"}}>Most people avoid looking closely at their financial patterns. You didn't. Your personalized Blueprint, strategic roadmap, and 30-Day Reset Protocol will be in your inbox shortly, typically within a few minutes. Check your spam folder if you don't see it right away.</p>
           <div style={{backgroundColor:C.bg,borderRadius:"8px",padding:"20px 24px",marginBottom:"32px",borderLeft:`3px solid ${C.gold}`}}>
             <p style={{margin:"0 0 10px",color:C.gold,fontSize:"14px",fontWeight:"bold",lineHeight:"1.6"}}>Your Blueprint Investment Carries Forward</p>
             <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>If you decide to invest in the ETFM Financial Reset ($499), your $47 Blueprint investment is fully credited toward your total. That credit also unlocks an additional discount, bringing your final investment to $425. Your first step toward clarity never loses its value. It builds on it.</p>
@@ -751,33 +747,26 @@ export default function ETFMAssessment(){
     <Wrap>
       <Tag t="ETFM Financial Reset"/>
       <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>You've been figuring this out alone long enough.</h2>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"16px"}}>Most people have never had someone actually sit down with their real numbers — not to judge, not to sell them something, but to look honestly at where they are, understand what's creating the pressure, and build a plan that fits their actual life.</p>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"24px"}}>Structured financial clarity and organization can easily cost several thousand dollars — and often requires large investment minimums just to get started. The ETFM Financial Reset is designed to deliver the same personalized strategic clarity at a fraction of that.</p>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"16px"}}>Most people have never had someone actually sit down with their real numbers, not to judge, not to sell them something, but to look honestly at where they are, understand what's creating the pressure, and build a plan that fits their actual life.</p>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"24px"}}>Structured financial clarity and organization can easily cost several thousand dollars, and often requires large investment minimums just to get started. The ETFM Financial Reset is designed to deliver the same personalized strategic clarity at a fraction of that.</p>
 
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"28px",marginBottom:"24px",textAlign:"left"}}>
-        <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",color:C.gold,marginBottom:"16px"}}>Who Is Robert Brickey?</p>
+        <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",color:C.gold,marginBottom:"16px"}}>A Personal Note From Robert</p>
         <p style={{fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.8",marginBottom:"20px",fontStyle:"italic"}}>
-          "I've spent 12 years watching people do everything right and still feel lost when it comes to money. Nobody ever sat down with them, looked at their actual situation, and helped them build something real. That's what these sessions are."
+          "You've already done the hard part. You stopped, looked honestly at your situation, and decided to take it seriously. That's not nothing. Most people never get there. What I want for you is simple: a plan that is real, clear, and built around your actual life. Not a template. Not generic guidance. Something you can actually follow. That's what this session is built to give you."
         </p>
         <div style={{marginBottom:"20px"}}>
-          <DotCred label="Duke University Graduate" sub="Former Basketball Team Captain"/>
           <DotCred label="Financial Strategist" sub="12 years of client strategic guidance"/>
-          <DotCred label="Radio Host" sub="WIDU 1600 AM, Fayetteville NC"/>
-          <DotCred label="Speaker & Educator" sub="Financial literacy across the Carolinas"/>
           <DotCred label="Creator of ETFM" sub="A financial operating system built for real life"/>
         </div>
-        <div style={{padding:"16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`,marginBottom:"10px"}}>
-          <p style={{margin:"0 0 6px",fontSize:"13px",color:C.muted,fontStyle:"italic"}}>"I left that conversation knowing exactly what to do for the first time."</p>
-          <p style={{margin:0,fontSize:"12px",color:C.gold}}>Strategic Reset Client</p>
-        </div>
-        <div style={{padding:"16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`}}>
-          <p style={{margin:"0 0 6px",fontSize:"13px",color:C.muted,fontStyle:"italic"}}>"Most advisors talk at you. Robert actually looked at my situation."</p>
-          <p style={{margin:0,fontSize:"12px",color:C.gold}}>ETFM Client</p>
+        <div style={{padding:"20px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`,borderLeft:`3px solid ${C.gold}`}}>
+          <p style={{margin:"0 0 8px",fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",fontStyle:"italic",lineHeight:"1.7"}}>"The moment you take charge of your financial life, everything else becomes possible. You don't need to be perfect. You just need a clear direction and the right structure to move in it."</p>
+          <p style={{margin:0,fontSize:"12px",color:C.gold,textTransform:"uppercase",letterSpacing:"1px"}}>Robert Brickey, Financial Strategist</p>
         </div>
       </div>
 
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"20px"}}>
-        <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px"}}>{blueprintClient?"What You Get — $425 (Blueprint client rate)":"What You Get — $499"}</p>
+        <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px"}}>{blueprintClient?"What You Get: $425 (Blueprint client rate)":"What You Get: $499"}</p>
         {[
           {title:"Your financial situation is fully reviewed before the first call",body:"You complete a short intake form in advance. Robert reviews your actual numbers, obligations, and goals before you speak so nothing is wasted and nothing is generic."},
           {title:"Two private 1-on-1 strategy sessions with Robert",body:"No group calls. No assistants. A focused pre-session call to build your plan and a post-session call to review it together, answer questions, and confirm your direction."},
@@ -844,8 +833,8 @@ export default function ETFMAssessment(){
         <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px"}}>What happens next</p>
         {[
           "Check your email for your Calendly pre-session call confirmation",
-          "A short intake form will arrive within 24 hours — complete it before your first call",
-          "Attend your first 30-minute strategy call with Robert — he'll arrive fully prepared",
+          "A short intake form will arrive within 24 hours, complete it before your first call",
+          "Attend your first 30-minute strategy call with Robert, he'll arrive fully prepared",
           "Receive your personalized financial roadmap and strategic score",
           "Attend your second 30-minute call to review your plan and confirm your direction",
           "Detailed session notes will be sent to you after both calls",
@@ -867,7 +856,7 @@ export default function ETFMAssessment(){
     <Wrap max="500px">
       <h2 style={{fontSize:"28px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px"}}>This session hasn't been activated yet.</h2>
       <p style={{fontSize:"16px",color:C.muted,marginBottom:"32px",lineHeight:"1.7"}}>Complete your payment to unlock your Strategic Blueprint and begin the diagnostic.</p>
-      <a href="https://buy.stripe.com/bJe7sM5CE9jwbtnace8Vi0d" style={{display:"inline-block",backgroundColor:C.gold,color:C.dark,textDecoration:"none",padding:"14px 36px",borderRadius:"6px",fontWeight:"bold",fontSize:"16px"}}>Unlock Your Blueprint — $47</a>
+      <a href="https://buy.stripe.com/bJe7sM5CE9jwbtnace8Vi0d" style={{display:"inline-block",backgroundColor:C.gold,color:C.dark,textDecoration:"none",padding:"14px 36px",borderRadius:"6px",fontWeight:"bold",fontSize:"16px"}}>Unlock Your Blueprint: $47</a>
     </Wrap>
   );
 
@@ -875,8 +864,8 @@ export default function ETFMAssessment(){
   if(screen==="blueprint_cancelled") return(
     <Wrap max="500px">
       <h2 style={{fontSize:"28px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px"}}>Completely fine.</h2>
-      <p style={{fontSize:"16px",color:C.muted,marginBottom:"32px",lineHeight:"1.7"}}>Your Snapshot is still in your inbox. Whenever you're ready to go deeper — to understand the patterns behind the patterns — the Blueprint will be right here waiting.</p>
-      <a href="https://buy.stripe.com/bJe7sM5CE9jwbtnace8Vi0d" style={{display:"inline-block",backgroundColor:C.gold,color:C.dark,textDecoration:"none",padding:"14px 36px",borderRadius:"6px",fontWeight:"bold",fontSize:"16px"}}>Unlock Your Blueprint — $47</a>
+      <p style={{fontSize:"16px",color:C.muted,marginBottom:"32px",lineHeight:"1.7"}}>Your Snapshot is still in your inbox. Whenever you're ready to go deeper, to understand the patterns behind the patterns, the Blueprint will be right here waiting.</p>
+      <a href="https://buy.stripe.com/bJe7sM5CE9jwbtnace8Vi0d" style={{display:"inline-block",backgroundColor:C.gold,color:C.dark,textDecoration:"none",padding:"14px 36px",borderRadius:"6px",fontWeight:"bold",fontSize:"16px"}}>Unlock Your Blueprint: $47</a>
     </Wrap>
   );
 
@@ -884,12 +873,12 @@ export default function ETFMAssessment(){
   if(screen==="reset_confirmed") return(
     <Wrap>
       <div style={{fontSize:"48px",marginBottom:"16px"}}>&#10003;</div>
-      <Tag t="ETFM Financial Reset — Package 3"/>
+      <Tag t="ETFM Financial Reset, Step 3"/>
       <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"20px",lineHeight:"1.3"}}>
         Your Reset Experience is confirmed.
       </h2>
       <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"32px"}}>
-        Your purchase is complete. You now have access to the ETFM Financial Reset — a guided operating system built to replace the patterns keeping you stuck with structure that actually holds.
+        Your purchase is complete. You now have access to the ETFM Financial Reset, a guided operating system built to replace the patterns keeping you stuck with structure that actually holds.
       </p>
       <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"24px"}}>
         <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"20px"}}>The 4 Phases You're About to Work Through</p>
@@ -897,7 +886,7 @@ export default function ETFMAssessment(){
           {phase:"Phase 1",title:"Stabilize",body:"Reduce pressure and confusion. This phase is about getting clear on where things actually stand before trying to change them."},
           {phase:"Phase 2",title:"Organize",body:"Build visibility and structure. You'll establish the financial architecture your decisions can flow through reliably."},
           {phase:"Phase 3",title:"Simplify",body:"Create repeatable systems. Complexity is replaced with routines you can sustain without willpower."},
-          {phase:"Phase 4",title:"Execute",body:"Build consistency and momentum. You stop restarting and start compounding — one intentional week at a time."},
+          {phase:"Phase 4",title:"Execute",body:"Build consistency and momentum. You stop restarting and start compounding, one intentional week at a time."},
         ].map((item,i)=>(
           <div key={i} style={{padding:"14px 0",borderBottom:i<3?"1px solid rgba(255,255,255,0.08)":"none"}}>
             <p style={{margin:"0 0 4px",color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px"}}>{item.phase}</p>
@@ -907,7 +896,7 @@ export default function ETFMAssessment(){
         ))}
       </div>
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"18px 22px",marginBottom:"24px",textAlign:"left"}}>
-        <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>Your dashboard access will be delivered to your email within <strong style={{color:C.text}}>24 hours</strong>. Check your inbox — and your spam folder if you don't see it.</p>
+        <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>Your dashboard access will be delivered to your email within <strong style={{color:C.text}}>24 hours</strong>. Check your inbox, and your spam folder if you don't see it.</p>
       </div>
       <a href="https://different-cow.super.site"
         style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
@@ -921,10 +910,10 @@ export default function ETFMAssessment(){
   // RESET OFFER
   if(screen==="reset_offer") return(
     <Wrap>
-      <Tag t="ETFM Financial Reset — Package 3"/>
+      <Tag t="ETFM Financial Reset, Step 3"/>
       <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>You understand the pattern. Now let's build systems around it.</h2>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"16px"}}>Package 3 is not a course. There are no modules to watch, no videos to sit through, and no generic content to consume at your own pace.</p>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"32px"}}>This is a guided financial operating system — five structured systems designed to replace the patterns that have been keeping you stuck with habits, routines, and frameworks built around how your real life actually works.</p>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"16px"}}>Step 3 is not a course. There are no modules to watch, no videos to sit through, and no generic content to consume at your own pace.</p>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"32px"}}>This is a guided financial operating system, five structured systems designed to replace the patterns that have been keeping you stuck with habits, routines, and frameworks built around how your real life actually works.</p>
 
       <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"20px"}}>
         <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"20px"}}>The 5 Reset Systems</p>
@@ -933,7 +922,7 @@ export default function ETFMAssessment(){
           {title:"Decision Pause System",body:"A simple filter that interrupts reactive and emotional spending before it happens. This is where financial discipline becomes structural, not motivational."},
           {title:"Priority Structure System",body:"Organizes your financial pressure into three clear categories: survival, stabilization, and growth. You stop reacting to everything equally and start moving in the right order."},
           {title:"Weekly Reset Routine",body:"A consistency structure that builds financial momentum without overwhelm. One routine, repeated weekly, that compounds over time."},
-          {title:"Opportunity Expansion System",body:"Identifies income possibilities and growth directions specific to your life — your skills, your situation, your timeline. Not generic hustle advice. Real options mapped to where you actually are."},
+          {title:"Opportunity Expansion System",body:"Identifies income possibilities and growth directions specific to your life, your skills, your situation, your timeline. Not generic hustle advice. Real options mapped to where you actually are."},
         ].map((item,i)=>(
           <div key={i} style={{padding:"14px 0",borderBottom:"1px solid rgba(255,255,255,0.08)"}}>
             <p style={{margin:"0 0 6px",color:C.white,fontSize:"14px",fontWeight:"bold"}}>{item.title}</p>
@@ -941,7 +930,7 @@ export default function ETFMAssessment(){
           </div>
         ))}
         <div style={{marginTop:"20px",padding:"16px",backgroundColor:"rgba(201,151,58,0.08)",borderRadius:"6px",border:"1px solid rgba(201,151,58,0.2)"}}>
-          <p style={{color:"#c8c8d8",fontSize:"14px",margin:0,lineHeight:"1.8",fontStyle:"italic"}}>These aren't frameworks you read about once and forget. They are repeatable systems you install into your weekly routine — and they build on each other.</p>
+          <p style={{color:"#c8c8d8",fontSize:"14px",margin:0,lineHeight:"1.8",fontStyle:"italic"}}>These aren't frameworks you read about once and forget. They are repeatable systems you install into your weekly routine, and they build on each other.</p>
         </div>
       </div>
 
@@ -952,7 +941,7 @@ export default function ETFMAssessment(){
       </div>
       <a href="https://buy.stripe.com/fZueVee9agLY7d7esu8Vi0f"
         style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
-        Begin Your Reset — $99
+        Begin Your Reset: $99
       </a>
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
