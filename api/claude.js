@@ -236,7 +236,7 @@ Keep under 250 words total.`, 1024);
         <td style="padding:32px 40px;background-color:#f7f4ef;border-top:2px solid #e8e3da;text-align:center;">
           <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 8px;">Step 3</p>
           <h3 style="color:#1a1a2e;font-family:Georgia,serif;font-size:20px;margin:0 0 12px;text-align:center;line-height:1.4;">Build the Systems That Create Stability</h3>
-          <p style="color:#7a7a8a;font-size:14px;margin:0 0 20px;line-height:1.7;text-align:left;">The ETFM Reset Experience is a guided implementation system designed to help you reduce financial chaos, organize your financial life, and create more consistency, visibility, and control through practical weekly structure. Inside the Reset Experience you will build the operational foundation that most people never create.</p>
+          <p style="color:#7a7a8a;font-size:14px;margin:0 0 20px;line-height:1.7;text-align:center;">The ETFM Reset Experience is a guided implementation system designed to help you reduce financial chaos, organize your financial life, and create more consistency, visibility, and control through practical weekly structure. Inside the Reset Experience you will build the operational foundation that most people never create.</p>
           <table cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 20px;text-align:left;">
             <tr><td style="padding:8px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #e8e3da;"><strong>Financial Reset Workbook</strong><br/><span style="color:#7a7a8a;">A structured workbook to map your current financial reality, clarify your numbers, and begin building your system from the ground up.</span></td></tr>
             <tr><td style="padding:8px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #e8e3da;"><strong>Financial Reality Audit</strong><br/><span style="color:#7a7a8a;">A guided audit to surface every income stream, expense, debt, and pattern so nothing stays hidden or unaccounted for.</span></td></tr>
@@ -253,7 +253,7 @@ Keep under 250 words total.`, 1024);
         </td>
       </tr>
       <tr>
-        <td class="offer-light" style="padding:32px 40px;background-color:#ffffff;border-top:2px solid #c9973a;">
+        <td class="offer-light" style="padding:32px 40px;background-color:#ffffff;border-top:2px solid #c9973a;text-align:center;">
           <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 8px;text-align:center;">Step 4</p>
           <h3 style="color:#1a1a2e;font-family:Georgia,serif;font-size:20px;margin:0 0 12px;text-align:center;line-height:1.4;">Strategic Reset Partnership</h3>
           <p style="color:#7a7a8a;font-size:14px;margin:0 0 20px;line-height:1.7;">Your Blueprint identified the pattern. Now it's time to build the structure. Work directly with Robert Brickey to analyze your current financial reality, close the structural gaps, and build a system that runs on intention, not pressure.</p>
