@@ -9,16 +9,16 @@ const C = {
 };
 
 const SCORE_MAP = {
-  no_idea:10,some_inconsistent:30,track_mentally:50,track_most:70,know_exactly:90,
-  disappears_bills:10,spend_quickly:20,try_save:40,use_intentionally:70,save_invest:90,
-  avoid:10,emotional_decisions:20,work_more:40,ask_others:50,slow_plan:85,
-  debt:30,spending:25,saving:35,income_consistency:40,planning_future:45,investing:50,fairly_organized:80,
-  stability:50,peace_of_mind:55,freedom_from_debt:60,time_freedom:65,ownership_wealth:75,security_family:70,dont_know:20,
+  no_idea:2,some_inconsistent:7,track_mentally:11,track_most:16,know_exactly:20,
+  disappears_bills:2,spend_quickly:4,try_save:9,use_intentionally:16,save_invest:20,
+  avoid:2,emotional_decisions:5,work_more:9,ask_others:12,slow_plan:20,
+  debt:6,spending:6,saving:9,income_consistency:10,planning_future:11,investing:13,fairly_organized:20,
+  stability:13,peace_of_mind:15,freedom_from_debt:16,time_freedom:17,ownership_wealth:20,security_family:19,dont_know:5,
 };
 
 function calcScore(answers){
-  const scores=answers.map(a=>SCORE_MAP[a]||40);
-  return Math.round(scores.reduce((s,n)=>s+n,0)/scores.length);
+  const scores=answers.map(a=>SCORE_MAP[a]||10);
+  return Math.min(100,scores.reduce((s,n)=>s+n,0));
 }
 
 const FQ=[
@@ -555,7 +555,7 @@ export default function ETFMAssessment(){
 
   // TRANSITION
   if(screen==="transition"){
-    const SCORE_CATEGORIES=["Awareness","Money Pattern","Stress Response","Financial Structure","Your Vision"];
+    const SCORE_CATEGORIES=["Awareness","Money Pattern","Stress Response","Financial Structure","System Readiness"];
     const breakdown=freeAns.map((val,i)=>{
       const opt=FQ[i].options.find(o=>o.value===val);
       return{category:SCORE_CATEGORIES[i],answer:opt?opt.label:val,score:SCORE_MAP[val]||40};
@@ -563,6 +563,7 @@ export default function ETFMAssessment(){
     return(
     <div style={{minHeight:"100vh",backgroundColor:C.bg,padding:"40px 20px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
       <div style={{maxWidth:"580px",width:"100%",textAlign:"center"}}>
+        <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'24px',textAlign:'left'}}>Congratulations. You have taken the first step most people avoid: slowing down long enough to see your financial patterns clearly. Your ETFM Awareness Score is a guided snapshot of how your current habits, structure, stress responses, and financial visibility are working together to shape your financial life today. This is not a judgment. It is a starting point. And awareness is where real change begins.</p>
         <Tag t="Snapshot Complete"/>
         <h2 style={{fontSize:"32px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Your pattern has been identified.</h2>
         <p style={{fontSize:"16px",color:C.muted,marginBottom:"40px",lineHeight:"1.7"}}>What you've uncovered isn't a reflection of your potential, it's a reflection of the patterns currently shaping your financial decisions. Seeing them clearly is always where real movement begins.</p>
@@ -572,13 +573,14 @@ export default function ETFMAssessment(){
           <p style={{color:"#6a6a7a",fontSize:"13px",marginBottom:"16px",textAlign:"center",lineHeight:"1.7",fontStyle:"italic"}}>Your Awareness Score is made up of five components: Financial Visibility, Money Patterns, Behavioral Awareness, Stress Response, and System Readiness. Each is scored individually. Your total score reflects where you are right now, not where you are going.</p>
           {breakdown.map((item,i)=>(
             <div key={i} style={{marginBottom:"8px",padding:"10px 14px",backgroundColor:"rgba(255,255,255,0.04)",borderRadius:"6px",border:"1px solid rgba(255,255,255,0.07)",display:"flex",justifyContent:"space-between",alignItems:"center",gap:"12px"}}>
-              <div style={{flex:1,minWidth:0}}>
-                <p style={{color:"#7a7a8a",fontSize:"10px",textTransform:"uppercase",letterSpacing:"1px",margin:"0 0 3px"}}>{item.category}</p>
-                <p style={{color:"#c8c8d8",fontSize:"13px",margin:0,lineHeight:"1.4",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{item.answer}</p>
-              </div>
-              {i===0&&<span style={{color:C.gold,fontSize:"17px",fontWeight:"bold",flexShrink:0}}>{item.score}</span>}
+              <p style={{color:"#c8c8d8",fontSize:"13px",margin:0}}>{item.category}</p>
+              <span style={{color:C.gold,fontSize:"17px",fontWeight:"bold",flexShrink:0}}>{item.score}</span>
             </div>
           ))}
+          <div style={{marginTop:"12px",padding:"10px 14px",backgroundColor:"rgba(201,151,58,0.1)",borderRadius:"6px",border:"1px solid rgba(201,151,58,0.3)",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+            <p style={{color:C.gold,fontSize:"13px",fontWeight:"bold",margin:0,textTransform:"uppercase",letterSpacing:"1px"}}>Total Awareness Score</p>
+            <span style={{color:C.gold,fontSize:"20px",fontWeight:"bold"}}>{score}/100</span>
+          </div>
           <div style={{marginTop:"16px",padding:"10px 0 0",borderTop:"1px solid rgba(255,255,255,0.07)"}}>
             {["Structure","Momentum","Ownership Positioning","System Strength"].map(cat=>(
               <div key={cat} style={{marginBottom:"6px",display:"flex",justifyContent:"space-between",alignItems:"center",padding:"8px 14px",backgroundColor:"rgba(255,255,255,0.02)",borderRadius:"6px"}}>
@@ -939,18 +941,7 @@ export default function ETFMAssessment(){
     <Wrap>
       <Tag t="ETFM Financial Reset, Step 3"/>
       <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>You understand the pattern. Now it is time to build the systems that create stability.</h2>
-      <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'12px'}}>You understand the pattern. Now it is time to build the systems that create stability.</p>
-      <ul style={{color:'#4A4A4A',fontSize:'14px',lineHeight:'2',paddingLeft:'20px',marginBottom:'12px'}}>
-        <li><strong>Financial Reset Workbook:</strong> identify the financial patterns and pressure points currently shaping your financial life</li>
-        <li><strong>Financial Reality Audit:</strong> organize your income, obligations, debt, and expenses into one clear picture</li>
-        <li><strong>Bill Organization System:</strong> centralize bills, due dates, and recurring obligations to reduce mental clutter</li>
-        <li><strong>Financial Calendar and Visibility System:</strong> create monthly structure so responsibilities never become surprises</li>
-        <li><strong>Spending Pattern Analysis:</strong> review the habits influencing where your money goes each month</li>
-        <li><strong>Weekly System Review Framework:</strong> a recurring weekly reset process to build consistency and operational control</li>
-        <li><strong>Guided Five-Phase Reset Journey:</strong> move step by step through Awareness, Stabilization, Control, Positioning, and Expansion</li>
-        <li><strong>Strategic Guidance from Robert Brickey:</strong> ongoing insight and implementation direction throughout the experience</li>
-      </ul>
-      <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9'}}>This is not another budgeting course. This is a practical financial operating system designed to help you move from reaction to structure, one step, one system, and one week at a time.</p>
+      <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'20px'}}>You understand the pattern. Now it is time to build the systems that create stability. The ETFM Reset Experience is a guided implementation system designed to help you reduce financial chaos, organize your financial life, and create more consistency, visibility, and control through practical weekly structure. Inside the Reset Experience you will build: Financial Reset Workbook, Financial Reality Audit, Bill Organization System, Financial Calendar and Visibility System, Spending Pattern Analysis, Weekly System Review Framework, Guided Five-Phase Reset Journey, and Strategic Guidance from Robert Brickey. This is not another budgeting course. This is a practical financial operating system designed to help you move from reaction to structure, one step, one system, and one week at a time.</p>
 
       <div style={{backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"20px 24px",marginBottom:"20px",textAlign:"left"}}>
         <p style={{color:C.dark,fontSize:"12px",fontWeight:"bold",marginBottom:"10px",textTransform:"uppercase",letterSpacing:"1px"}}>Before You Continue</p>
