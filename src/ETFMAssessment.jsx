@@ -771,7 +771,7 @@ export default function ETFMAssessment(){
     <Wrap>
       <Tag t="ETFM Financial Reset"/>
       <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>You've been figuring this out alone long enough.</h2>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"16px"}}>Most people have never had someone actually sit down with their real numbers, not to judge, not to sell them something, but to look honestly at where they are, understand what's creating the pressure, and build a plan that fits their actual life.</p>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"16px",textAlign:"center"}}>Most people have never had someone actually sit down with their real numbers, not to judge, not to sell them something, but to look honestly at where they are, understand what's creating the pressure, and build a plan that fits their actual life.</p>
       <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"24px"}}>Structured financial clarity and organization can easily cost several thousand dollars, and often requires large investment minimums just to get started. The ETFM Financial Reset is designed to deliver the same personalized strategic clarity at a fraction of that.</p>
 
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"28px",marginBottom:"24px",textAlign:"left"}}>
@@ -793,12 +793,12 @@ export default function ETFMAssessment(){
         <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px"}}>{blueprintClient?"What You Get: $425 (Blueprint client rate)":"What You Get: $499"}</p>
         {[
           {title:"Your financial situation is fully reviewed before the first call",body:"You complete a short intake form in advance. Robert reviews your actual numbers, obligations, and goals before you speak so nothing is wasted and nothing is generic."},
-          {title:"Two private 1-on-1 strategy sessions with Robert",body:"No group calls. No assistants. A focused pre-session call to build your plan and a post-session call to review it together, answer questions, and confirm your direction."},
-          {title:"A personalized financial action plan built around your real life",body:"Not a template. A plan built specifically around your income, obligations, goals, and lifestyle. Something you can actually follow."},
+          {title:"Two private 30-minute strategy sessions with Robert Brickey, Creator of ETFM",body:"A pre-session call to build your plan and a post-session call to review it together, answer questions, and confirm your direction. No group calls. No assistants."},
+          {title:"A personalized strategic action plan built around your current reality, priorities, pressure points, and long-term goals",body:"Not a template. A plan built specifically around your income, obligations, goals, and lifestyle. Something you can actually follow."},
           {title:"Clear financial structure recommendations",body:"Guidance on how to organize your accounts, allocate your income, and build a system that reduces decision fatigue and makes consistent progress possible."},
           {title:"Strategic next-step planning so you leave with clarity",body:"You end each session knowing exactly what to focus on next and in what order. No more guessing. No more starting over. A clear path forward."},
-          {title:"Detailed session notes delivered after both calls",body:"Comprehensive written notes sent directly to you after each session so you can revisit the plan, stay on track, and keep moving."},
-          {title:"90-day priority follow-up support",body:"Questions come up after the calls. Robert's team is available for 90 days to make sure momentum continues and you don't get stuck."},
+          {title:"Detailed session notes delivered to you after both calls for review and reference",body:"Comprehensive written notes sent directly to you after each session so you can revisit the plan, stay on track, and keep moving."},
+          {title:"60 Days of Priority Email Support",body:"Ongoing clarification, guidance, and accountability during implementation. Questions come up after the calls, and support is available to make sure momentum continues."},
         ].map((item,i)=>(
           <div key={i} style={{padding:"12px 0",borderBottom:`1px solid ${C.border}`}}>
             <p style={{margin:"0 0 4px",color:C.text,fontSize:"14px",fontWeight:"bold"}}>{item.title}</p>
@@ -808,7 +808,7 @@ export default function ETFMAssessment(){
         <CreditNote dark={false}/>
       </div>
 
-      <div style={{backgroundColor:C.bg,borderRadius:"8px",padding:"20px 24px",marginBottom:"24px",textAlign:"left",border:`1px solid ${C.border}`}}>
+      <div style={{backgroundColor:C.bg,borderRadius:"8px",padding:"20px 24px",marginBottom:"24px",textAlign:"center",border:`1px solid ${C.border}`}}>
         <p style={{color:C.dark,fontSize:"14px",fontWeight:"bold",marginBottom:"12px"}}>How it works</p>
         {[
           "Book your pre-session call and choose a time that works for you",
