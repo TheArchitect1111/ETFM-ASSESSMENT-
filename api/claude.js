@@ -150,7 +150,7 @@ export default async function handler(req, res) {
       <table cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 28px;border-collapse:collapse;background:#1a1a2e;border-radius:10px;overflow:hidden;">
         <tr><td colspan="2" style="padding:18px 20px 10px;text-align:center;"><p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0;">Your Awareness Score Breakdown</p></td></tr>
         <tr style="background:rgba(201,151,58,0.15);border-bottom:2px solid rgba(201,151,58,0.4);">
-          <td style="padding:12px 20px;color:#ffffff;font-size:15px;font-weight:bold;">Total Awareness Score</td>
+          <td style="padding:12px 20px;color:#ffffff;font-size:15px;font-weight:bold;">Total Score</td>
           <td style="padding:12px 20px;color:#c9973a;font-size:24px;font-family:Georgia,serif;font-weight:bold;text-align:right;">${awarenessScore}/100</td>
         </tr>
         ${SCORE_CATEGORIES.map((cat, i) => `

@@ -585,13 +585,6 @@ export default function ETFMAssessment(){
               }
             </div>
           ))}
-          <div style={{marginTop:"12px",padding:"12px 14px",backgroundColor:"rgba(201,151,58,0.1)",borderRadius:"6px",border:"1px solid rgba(201,151,58,0.3)",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-            <div>
-              <p style={{color:C.gold,fontSize:"13px",fontWeight:"bold",margin:"0 0 4px",textTransform:"uppercase",letterSpacing:"1px"}}>Total Score</p>
-              <p style={{color:"#6a6a7a",fontSize:"11px",margin:0}}>Your complete breakdown arrives in your email.</p>
-            </div>
-            <span style={{color:C.gold,fontSize:"20px",fontWeight:"bold"}}>{score}/100</span>
-          </div>
         </div>
 
         <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"28px",marginBottom:"30px",textAlign:"left"}}>
