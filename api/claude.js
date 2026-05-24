@@ -178,7 +178,7 @@ Follow this EXACT structure:
 
 2. FINANCIAL IDENTITY, display their archetype: "${archetype}" in bold gold. 2-3 sentences explaining exactly what this means for them based on their specific answers. Be precise, reference what they actually said.
 
-3. AWARENESS SCORE, display: <h2 style="color:#c9973a;font-size:42px;font-family:Georgia,serif;margin:20px 0 4px;">${awarenessScore}/100</h2><p style="color:#7a7a8a;font-size:13px;margin:0 0 24px;">Total Awareness Score</p> Then 2 sentences interpreting what this score means right now.
+3. AWARENESS SCORE, display: <h2 style="color:#c9973a;font-size:42px;font-family:Georgia,serif;margin:20px 0 4px;">${awarenessScore}/100</h2><p style="color:#7a7a8a;font-size:13px;margin:0 0 24px;">Total Score</p> Then 2 sentences interpreting what this score means right now.
 
 4. KEY PATTERN OBSERVATION, 3 sentences. Name the specific financial cycle their answers reveal. This should feel like an advisor who has seen this pattern before and knows it well. Reference their actual answers.
 
@@ -215,7 +215,7 @@ Keep under 250 words total.`, 1024);
         <td class="offer-dark" style="padding:32px 40px 40px;background-color:#1a1a2e;text-align:center;">
           <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 12px;">Want to go deeper?</p>
           <h2 style="color:#ffffff;font-family:Georgia,serif;font-size:22px;margin:0 0 16px;line-height:1.4;">Unlock Your Strategic Financial Blueprint</h2>
-          <p style="color:#a0a0b8;font-size:14px;margin:0 0 20px;line-height:1.7;">Your Snapshot shows where you are. The Blueprint diagnoses exactly why, with 18 questions that go into your real numbers, patterns, and structure. Then delivers a personalized escape roadmap, the 5-step ETFM framework PDF, Robert's video message, and your 30-Day Strategic Reset Protocol.</p>
+          <p style="color:#a0a0b8;font-size:14px;margin:0 0 20px;line-height:1.7;">Awareness is the first step. Structure is what changes the outcome. Your Snapshot revealed the pattern. The Strategic Financial Blueprint shows you the deeper systems, behaviors, and financial gaps driving it, and what to do next.</p>
           <table cellpadding="0" cellspacing="0" style="margin:0 auto 28px;text-align:left;">
             <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">✓ &nbsp;18-question strategic diagnostic</td></tr>
             <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">✓ &nbsp;Personalized escape roadmap</td></tr>
