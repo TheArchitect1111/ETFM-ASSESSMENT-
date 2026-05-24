@@ -213,6 +213,11 @@ Keep under 250 words total.`, 1024);
         </td>
       </tr>
       <tr>
+        <td style="padding:32px 40px 0;text-align:center;">
+          <p style="color:#4a4a4a;font-size:15px;line-height:1.9;margin:0;">Awareness is the first step. Structure is what changes the outcome. Your Snapshot revealed the pattern. The Strategic Financial Blueprint shows you the deeper systems, behaviors, and financial gaps driving it, and what to do next.</p>
+        </td>
+      </tr>
+      <tr>
         <td class="offer-dark" style="padding:32px 40px 40px;background-color:#1a1a2e;text-align:center;">
           <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 12px;">Want to go deeper?</p>
           <h2 style="color:#ffffff;font-family:Georgia,serif;font-size:22px;margin:0 0 16px;line-height:1.4;">Unlock Your Strategic Financial Blueprint</h2>
