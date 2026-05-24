@@ -520,14 +520,8 @@ export default function ETFMAssessment(){
       <div style={{minHeight:"100vh",backgroundColor:C.bg,padding:"40px 20px"}}>
         <div style={{maxWidth:"680px",margin:"0 auto"}}>
           {freeIdx===0&&(
-            <div>
-              <p style={{color:'#C4960F',fontSize:'11px',letterSpacing:'3px',marginBottom:'12px'}}>WHAT THIS EXPERIENCE IS</p>
-              <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'16px'}}>This is not a budgeting quiz. This is a guided financial awareness experience designed to help you see where your current system is helping you and where it may be quietly working against you. Most people are not financially stuck because they are lazy. They are stuck because they are operating without clarity, structure, and visibility. These 5 questions are designed to help you pause long enough to see your patterns clearly. No judgment. No shame. Just awareness.</p>
-              <p style={{color:'#C4960F',fontSize:'11px',letterSpacing:'3px',marginBottom:'12px'}}>WHAT YOU WILL RECEIVE</p>
-              <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'8px'}}><strong>Your Financial Archetype:</strong> A snapshot of how you currently operate financially and the patterns influencing your decisions.</p>
-              <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'8px'}}><strong>Your Awareness Score (0-100):</strong> A measurement of how much visibility, structure, and financial awareness currently exists in your system.</p>
-              <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'16px'}}><strong>Personalized Strategic Insight:</strong> A guided explanation of what may be creating financial pressure, disorganization, or inconsistency and where your reset should begin. Everything will be delivered directly to your inbox, completely free.</p>
-              <p style={{color:'#666',fontSize:'14px',fontStyle:'italic'}}>The goal here is not perfection. The goal is clarity. Because clarity is where real change begins.</p>
+            <div style={{marginBottom:"24px",padding:"20px 24px",backgroundColor:C.white,borderRadius:"10px",border:`1px solid ${C.border}`,borderLeft:`3px solid ${C.gold}`}}>
+              <p style={{color:C.text,fontSize:"15px",lineHeight:"1.9",margin:0}}>These 5 questions are designed to identify your current financial patterns and awareness level. Answer honestly. There are no right or wrong answers. At the end you will see a partial Awareness Score broken down by component, and your full score, Financial Archetype, and personalized insight will be delivered directly to your inbox, completely free.</p>
             </div>
           )}
           <div style={{marginBottom:"8px",display:"flex",justifyContent:"space-between"}}>
@@ -569,27 +563,29 @@ export default function ETFMAssessment(){
         <p style={{fontSize:"16px",color:C.muted,marginBottom:"40px",lineHeight:"1.7"}}>What you've uncovered isn't a reflection of your potential, it's a reflection of the patterns currently shaping your financial decisions. Seeing them clearly is always where real movement begins.</p>
         <p style={{color:'#4A4A4A',fontSize:'14px',lineHeight:'1.9',marginBottom:'16px'}}>Your Awareness Score is built from multiple behavioral and structural indicators across your responses, including visibility, consistency, organization, and financial decision-making patterns. What you see here is only a partial snapshot. Your complete score breakdown, Financial Archetype, and personalized strategic insights will be delivered to your inbox.</p>
         <div style={{backgroundColor:C.dark,borderRadius:"12px",padding:"36px 30px",marginBottom:"30px",textAlign:"left"}}>
-          <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"20px",textAlign:"center"}}>Your ETFM Awareness Score</p>
-          <p style={{color:"#6a6a7a",fontSize:"13px",marginBottom:"16px",textAlign:"center",lineHeight:"1.7",fontStyle:"italic"}}>Your Awareness Score is made up of five components: Financial Visibility, Money Patterns, Behavioral Awareness, Stress Response, and System Readiness. Each is scored individually. Your total score reflects where you are right now, not where you are going.</p>
-          {breakdown.map((item,i)=>(
-            <div key={i} style={{marginBottom:"8px",padding:"10px 14px",backgroundColor:"rgba(255,255,255,0.04)",borderRadius:"6px",border:"1px solid rgba(255,255,255,0.07)",display:"flex",justifyContent:"space-between",alignItems:"center",gap:"12px"}}>
-              <p style={{color:"#c8c8d8",fontSize:"13px",margin:0}}>{item.category}</p>
-              <span style={{color:C.gold,fontSize:"17px",fontWeight:"bold",flexShrink:0}}>{item.score}</span>
+          <p style={{color:"#e8e3da",fontSize:"15px",fontWeight:"600",marginBottom:"24px",textAlign:"center",lineHeight:"1.5"}}>Your score is built across five behavioral components.</p>
+          {[
+            {name:"Awareness",desc:"How clearly you see where your money goes and what drives your decisions."},
+            {name:"Money Pattern",desc:"How you consistently handle income, expenses, and unexpected funds."},
+            {name:"Stress Response",desc:"How you respond when financial pressure builds or problems arise."},
+            {name:"Financial Structure",desc:"The systems and habits you have in place to manage your finances."},
+            {name:"System Readiness",desc:"Your ability and mindset to build and follow a financial plan."},
+          ].map((comp,i)=>(
+            <div key={i} style={{marginBottom:"8px",padding:"12px 14px",backgroundColor:"rgba(255,255,255,0.04)",borderRadius:"6px",border:"1px solid rgba(255,255,255,0.07)",display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"12px"}}>
+              <div style={{flex:1}}>
+                <p style={{color:"#e8e3da",fontSize:"13px",fontWeight:"600",margin:"0 0 4px"}}>{comp.name}</p>
+                <p style={{color:"#6a6a7a",fontSize:"12px",margin:0,lineHeight:"1.5"}}>{comp.desc}</p>
+              </div>
+              <span style={{color:C.gold,fontSize:"17px",fontWeight:"bold",flexShrink:0}}>{breakdown[i]?.score??"-"}</span>
             </div>
           ))}
-          <div style={{marginTop:"12px",padding:"10px 14px",backgroundColor:"rgba(201,151,58,0.1)",borderRadius:"6px",border:"1px solid rgba(201,151,58,0.3)",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-            <p style={{color:C.gold,fontSize:"13px",fontWeight:"bold",margin:0,textTransform:"uppercase",letterSpacing:"1px"}}>Total Awareness Score</p>
+          <div style={{marginTop:"12px",padding:"12px 14px",backgroundColor:"rgba(201,151,58,0.1)",borderRadius:"6px",border:"1px solid rgba(201,151,58,0.3)",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+            <div>
+              <p style={{color:C.gold,fontSize:"13px",fontWeight:"bold",margin:"0 0 4px",textTransform:"uppercase",letterSpacing:"1px"}}>Partial Score</p>
+              <p style={{color:"#6a6a7a",fontSize:"11px",margin:0}}>Your full score arrives in your email.</p>
+            </div>
             <span style={{color:C.gold,fontSize:"20px",fontWeight:"bold"}}>{score}/100</span>
           </div>
-          <div style={{marginTop:"16px",padding:"10px 0 0",borderTop:"1px solid rgba(255,255,255,0.07)"}}>
-            {["Structure","Momentum","Ownership Positioning","System Strength"].map(cat=>(
-              <div key={cat} style={{marginBottom:"6px",display:"flex",justifyContent:"space-between",alignItems:"center",padding:"8px 14px",backgroundColor:"rgba(255,255,255,0.02)",borderRadius:"6px"}}>
-                <span style={{color:"#4a4a5a",fontSize:"13px"}}>{cat}</span>
-                <span style={{color:"#3a3a4a",fontSize:"12px",fontStyle:"italic"}}>Unlocked in your Blueprint</span>
-              </div>
-            ))}
-          </div>
-          <p style={{color:"#5a5a6a",fontSize:"12px",textAlign:"center",marginTop:"16px",marginBottom:0,lineHeight:"1.6"}}>Your full Strategic Score and personalized Snapshot will be delivered to your inbox.</p>
         </div>
 
         <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"28px",marginBottom:"30px",textAlign:"left"}}>
