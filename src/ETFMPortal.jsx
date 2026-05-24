@@ -480,13 +480,13 @@ function ToolCard({ phase, icon, name, what, why, time, status, completed, onCom
   const locked = status === "locked";
 
   return (
-    <div style={{ ...styles.toolCard, ...(status === "ready" && !completed ? styles.toolCardActive : {}), ...(completed ? styles.toolCardDone : {}), ...(locked ? styles.toolCardLocked : {}) }}>
+    <div style={{ ...styles.toolCard, ...(status === "ready" && !completed ? styles.toolCardActive : {}), ...(completed ? styles.toolCardDone : {}), ...(locked ? styles.toolCardLocked : {}), ...(open && !locked && !completed ? { background: "#FAFAF8", border: "1px solid #e8e3da" } : {}) }}>
       <div style={{ fontSize: 24, marginBottom: 10, opacity: locked ? 0.3 : 1 }}>{icon}</div>
-      <div style={{ color: locked ? "#2A2A2A" : "#C4960F", fontSize: 9, letterSpacing: 3, marginBottom: 8 }}>{phase}</div>
-      <div style={{ color: locked ? "#2A2A2A" : completed ? "#C4960F" : "#DDD", fontSize: 15, fontFamily: "Georgia, serif", marginBottom: 8 }}>{name}</div>
-      <p style={{ color: locked ? "#1E1E1E" : "#555", fontSize: 11, lineHeight: 1.6, marginBottom: 4, fontWeight: 300 }}>{what}</p>
-      <p style={{ color: locked ? "#141414" : "#3A3A3A", fontSize: 11, lineHeight: 1.5, fontStyle: "italic", marginBottom: 12, fontWeight: 300 }}>{why}</p>
-      <div style={{ color: locked ? "#1A1A1A" : "#333", fontSize: 10, letterSpacing: 1, marginBottom: 12 }}>{time}</div>
+      <div style={{ color: locked ? "#2A2A2A" : "#C4960F", fontSize: 11, letterSpacing: 3, marginBottom: 8 }}>{phase}</div>
+      <div style={{ color: locked ? "#2A2A2A" : completed ? "#C4960F" : open ? "#1a1a2e" : "#DDD", fontSize: 15, fontFamily: "Georgia, serif", marginBottom: 8 }}>{name}</div>
+      <p style={{ color: locked ? "#1E1E1E" : open ? "#4a4a4a" : "#555", fontSize: 13, lineHeight: 1.6, marginBottom: 4, fontWeight: 300 }}>{what}</p>
+      <p style={{ color: locked ? "#141414" : open ? "#4a4a4a" : "#3A3A3A", fontSize: 13, lineHeight: 1.5, fontStyle: "italic", marginBottom: 12, fontWeight: 300 }}>{why}</p>
+      <div style={{ color: locked ? "#1A1A1A" : open ? "#1a1a2e" : "#333", fontSize: 12, letterSpacing: 1, marginBottom: 12 }}>{time}</div>
 
       {completed ? (
         <div style={styles.completedBadge}>✓ COMPLETED</div>
@@ -659,7 +659,7 @@ const styles = {
   toolCardActive: { borderColor: "#C4960F" },
   toolCardDone: { borderColor: "#2A3A1A", background: "#0F110D" },
   toolCardLocked: { opacity: 0.5 },
-  toolContent: { marginTop: 20, marginLeft: -22, marginRight: -22, marginBottom: -22, borderTop: "1px solid #e8e3da", padding: "20px 22px 22px", background: "#FAFAF8" },
+  toolContent: { marginTop: 20, borderTop: "1px solid #e8e3da", paddingTop: 20 },
   toolBtn: { background: "#C4960F", color: "#0D0D0D", border: "none", padding: "10px 20px", fontSize: 10, letterSpacing: 2, cursor: "pointer", fontFamily: "Inter, sans-serif", fontWeight: 500, width: "100%" },
   completedBadge: { background: "#1A3A1A", border: "1px solid #2A5A2A", color: "#4A8A4A", fontSize: 10, letterSpacing: 2, padding: "6px 12px", display: "inline-block" },
   lockedBadge: { background: "#0F0F0F", border: "1px solid #141414", color: "#222", fontSize: 10, letterSpacing: 2, padding: "6px 12px", display: "inline-block" },
