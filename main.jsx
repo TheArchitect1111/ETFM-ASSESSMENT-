@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import ETFMAssessment from './ETFMAssessment.jsx'
+import App from './src/App.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ETFMAssessment />
+    <App />
   </React.StrictMode>
 )
