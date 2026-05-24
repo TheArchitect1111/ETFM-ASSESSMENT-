@@ -369,6 +369,12 @@ export default function ETFMAssessment(){
   useEffect(()=>{window.scrollTo({top:0,behavior:"smooth"});},[screen,freeIdx,bpIdx]);
 
   useEffect(()=>{
+    if(!loading) return;
+    const t=setTimeout(()=>setLoading(false),3000);
+    return()=>clearTimeout(t);
+  },[loading]);
+
+  useEffect(()=>{
     const params=new URLSearchParams(window.location.search);
     const s=params.get("session");
     const cancelled=params.get("cancelled");
@@ -486,8 +492,19 @@ export default function ETFMAssessment(){
         </div>
       </div>
 
-      <button onClick={()=>setScreen("chat")} style={{backgroundColor:C.gold,color:C.dark,border:"none",padding:"16px 44px",fontSize:"16px",fontWeight:"bold",borderRadius:"8px",cursor:"pointer"}}>Start Your Snapshot</button>
+      <button onClick={()=>setScreen("snapshot_intro")} style={{backgroundColor:C.gold,color:C.dark,border:"none",padding:"16px 44px",fontSize:"16px",fontWeight:"bold",borderRadius:"8px",cursor:"pointer"}}>Start Your Snapshot</button>
       <p style={{fontSize:"12px",color:C.muted,marginTop:"16px"}}>Five questions. Two minutes. Free, no strings attached.</p>
+    </Wrap>
+  );
+
+  // SNAPSHOT INTRO
+  if(screen==="snapshot_intro") return(
+    <Wrap max="600px">
+      <Tag t="Escape The Financial Matrix"/>
+      <h1 style={{fontSize:"34px",fontFamily:"Georgia, serif",marginBottom:"16px",color:C.text,lineHeight:"1.3"}}>Your Financial Clarity Snapshot</h1>
+      <p style={{fontSize:"16px",color:C.text,marginBottom:"20px",lineHeight:"1.7",fontWeight:"500"}}>Before we begin, here is what this is and why it matters.</p>
+      <p style={{fontSize:"16px",color:C.muted,marginBottom:"40px",lineHeight:"1.8"}}>This is a 5-question snapshot designed to identify your current financial patterns and awareness level. It takes about 2 minutes. There are no right or wrong answers. At the end you will receive your Financial Archetype, a portion of your Awareness Score, and a personalized insight. Your full score and complete breakdown will arrive in your email shortly after.</p>
+      <button onClick={()=>setScreen("chat")} style={{backgroundColor:C.gold,color:C.dark,border:"none",padding:"16px 44px",fontSize:"16px",fontWeight:"bold",borderRadius:"8px",cursor:"pointer"}}>Begin My Snapshot</button>
     </Wrap>
   );
 
@@ -540,9 +557,10 @@ export default function ETFMAssessment(){
         <Tag t="Snapshot Complete"/>
         <h2 style={{fontSize:"32px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Your pattern has been identified.</h2>
         <p style={{fontSize:"16px",color:C.muted,marginBottom:"40px",lineHeight:"1.7"}}>What you've uncovered isn't a reflection of your potential, it's a reflection of the patterns currently shaping your financial decisions. Seeing them clearly is always where real movement begins.</p>
+        <p style={{fontSize:"14px",color:C.muted,lineHeight:"1.7",marginBottom:"16px",fontStyle:"italic"}}>A portion of your Awareness Score is shown below. Your complete score breakdown and full results have been sent to your email.</p>
         <div style={{backgroundColor:C.dark,borderRadius:"12px",padding:"36px 30px",marginBottom:"30px",textAlign:"left"}}>
           <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"20px",textAlign:"center"}}>Your ETFM Awareness Score</p>
-          <p style={{color:"#6a6a7a",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"12px",textAlign:"center"}}>How your score was calculated</p>
+          <p style={{color:"#6a6a7a",fontSize:"13px",marginBottom:"16px",textAlign:"center",lineHeight:"1.7",fontStyle:"italic"}}>Your Awareness Score is made up of five components: Financial Visibility, Money Patterns, Behavioral Awareness, Stress Response, and System Readiness. Each is scored individually. Your total score reflects where you are right now, not where you are going.</p>
           {breakdown.map((item,i)=>(
             <div key={i} style={{marginBottom:"8px",padding:"10px 14px",backgroundColor:"rgba(255,255,255,0.04)",borderRadius:"6px",border:"1px solid rgba(255,255,255,0.07)",display:"flex",justifyContent:"space-between",alignItems:"center",gap:"12px"}}>
               <div style={{flex:1,minWidth:0}}>
@@ -564,17 +582,19 @@ export default function ETFMAssessment(){
         </div>
 
         <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"28px",marginBottom:"30px",textAlign:"left"}}>
-          <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",color:C.gold,marginBottom:"16px"}}>A Note From Robert</p>
+          <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",color:C.gold,marginBottom:"16px"}}>A Note From Robert, ETFM Founder</p>
           <p style={{fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.8",marginBottom:"16px",fontStyle:"italic"}}>
             "Most people never take the time to look honestly at their financial patterns. You just did. That matters more than you know. Where you are right now is not where you have to stay. Awareness is always where real movement begins."
           </p>
           <div style={{marginTop:"20px",padding:"16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`}}>
             <p style={{margin:"0 0 6px",fontSize:"13px",color:C.muted,fontStyle:"italic"}}>"I left that conversation knowing exactly what to do for the first time."</p>
             <p style={{margin:0,fontSize:"12px",color:C.gold}}>Strategic Reset Client</p>
+            <p style={{margin:"4px 0 0",fontSize:"11px",color:C.muted,fontStyle:"italic"}}>Name protected for privacy.</p>
           </div>
           <div style={{marginTop:"12px",padding:"16px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`}}>
             <p style={{margin:"0 0 6px",fontSize:"13px",color:C.muted,fontStyle:"italic"}}>"Most advisors talk at you. Robert actually looked at my situation."</p>
             <p style={{margin:0,fontSize:"12px",color:C.gold}}>ETFM Client</p>
+            <p style={{margin:"4px 0 0",fontSize:"11px",color:C.muted,fontStyle:"italic"}}>Name protected for privacy.</p>
           </div>
         </div>
 
@@ -610,11 +630,9 @@ export default function ETFMAssessment(){
       <h2 style={{fontSize:"36px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"20px",lineHeight:"1.3"}}>
         Your Snapshot is on its way.
       </h2>
-      <div style={{backgroundColor:C.goldSoft,border:`1px solid rgba(201,151,58,0.35)`,borderRadius:"8px",padding:"16px 20px",marginBottom:"24px",textAlign:"left"}}>
-        <p style={{margin:0,color:C.gold,fontSize:"14px",lineHeight:"1.8"}}>
-          <strong>Check your spam or junk folder</strong> if you don't see your Snapshot email within 2 minutes. Add <strong>exit@etfm.systems</strong> to your contacts to ensure future emails reach your inbox.
-        </p>
-      </div>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"24px"}}>
+        Your Snapshot is on its way. Check your inbox in the next few minutes. If you do not see it, check your spam folder.
+      </p>
       <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"16px"}}>
         You just did something most people never do, you took an honest look at your own financial patterns. That kind of awareness is the foundation of everything that changes next.
       </p>
