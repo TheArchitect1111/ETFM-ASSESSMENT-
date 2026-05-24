@@ -148,7 +148,7 @@ export default async function handler(req, res) {
     const componentScores = answerValues.map((v) => SCORE_MAP_API[v] || 40);
     const scoreTableHtml = `
       <table cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 28px;border-collapse:collapse;background:#1a1a2e;border-radius:10px;overflow:hidden;">
-        <tr><td colspan="2" style="padding:18px 20px 10px;text-align:center;"><p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0;">Your Awareness Score Breakdown</p></td></tr>
+        <tr><td colspan="2" style="padding:18px 20px 10px;text-align:center;"><p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0;">Your Total Score Breakdown</p></td></tr>
         <tr style="background:rgba(201,151,58,0.15);border-bottom:2px solid rgba(201,151,58,0.4);">
           <td style="padding:12px 20px;color:#ffffff;font-size:15px;font-weight:bold;">Total Score</td>
           <td style="padding:12px 20px;color:#c9973a;font-size:24px;font-family:Georgia,serif;font-weight:bold;text-align:right;">${awarenessScore}/100</td>
@@ -165,7 +165,7 @@ export default async function handler(req, res) {
       snapshotHtml = await callClaude(`You are Robert Brickey, a licensed financial strategist and creator of ETFM (Escape The Financial Matrix). You speak with calm authority, strategic, observational, never preachy or salesy.
 
 ${firstName}'s Financial Archetype: ${archetype}
-${firstName}'s Awareness Score: ${awarenessScore}/100
+${firstName}'s Total Score: ${awarenessScore}/100
 
 Assessment answers:
 ${answersText}
@@ -194,7 +194,7 @@ Use: <h3>, <p>, <strong>, <hr style="border:none;border-top:1px solid #e8e3da;ma
 Keep under 250 words total.`, 1024);
     } catch (err) {
       console.error("Claude snapshot error:", err);
-      snapshotHtml = `<p>Hi ${firstName},</p><p>Your ETFM Financial Snapshot has been prepared. Your Awareness Score is <strong>${awarenessScore}/100</strong> and your financial archetype is <strong>${archetype}</strong>. A follow-up from Robert will provide your full analysis.</p>`;
+      snapshotHtml = `<p>Hi ${firstName},</p><p>Your ETFM Financial Snapshot has been prepared. Your Total Score is <strong>${awarenessScore}/100</strong> and your financial archetype is <strong>${archetype}</strong>. A follow-up from Robert will provide your full analysis.</p>`;
     }
 
     const emailHtml = emailWrapper(`
@@ -202,7 +202,7 @@ Keep under 250 words total.`, 1024);
         <td class="email-body" style="padding:40px;color:#1a1a2e;font-size:15px;line-height:1.8;">
           <p style="color:#1a1a2e;font-family:Georgia,serif;font-size:22px;font-weight:normal;margin:0 0 16px;line-height:1.4;">Congratulations, ${firstName}.</p>
           <p style="color:#4a4a4a;font-size:15px;line-height:1.9;margin:0 0 12px;">You have taken the first step most people avoid: slowing down long enough to see your financial patterns clearly.</p>
-          <p style="color:#4a4a4a;font-size:15px;line-height:1.9;margin:0 0 24px;">Your ETFM Awareness Score below is a guided snapshot of how your current habits, structure, stress responses, and financial visibility are working together to shape your financial life today. It is scored across five behavioral components based on your answers. This is not a judgment. It is a starting point. And awareness is where real change begins.</p>
+          <p style="color:#4a4a4a;font-size:15px;line-height:1.9;margin:0 0 24px;">Your ETFM Total Score below is a guided snapshot of how your current habits, structure, stress responses, and financial visibility are working together to shape your financial life today. It is scored across five behavioral components based on your answers. This is not a judgment. It is a starting point. And awareness is where real change begins.</p>
           ${scoreTableHtml}
           ${snapshotHtml}
         </td>
@@ -296,7 +296,7 @@ Keep under 250 words total.`, 1024);
                 <td style="padding:10px 0;font-size:14px;color:#1a1a2e;font-weight:500;">${archetype}</td>
               </tr>
               <tr style="border-bottom:1px solid #e8e3da;">
-                <td style="padding:10px 0;font-size:13px;color:#7a7a8a;">Awareness Score</td>
+                <td style="padding:10px 0;font-size:13px;color:#7a7a8a;">Total Score</td>
                 <td style="padding:10px 0;font-size:24px;color:#c9973a;font-family:Georgia,serif;font-weight:bold;">${awarenessScore}/100</td>
               </tr>
             </table>
