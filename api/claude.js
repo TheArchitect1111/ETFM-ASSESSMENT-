@@ -189,6 +189,7 @@ Follow this EXACT structure:
 7. CLOSING LINE, one powerful forward-momentum sentence.
 
 Tone: calm, strategic, observational, intelligent. Never motivational. Never generic. Always specific.
+FORMATTING RULES: Never use em dashes (—) anywhere. Use commas or colons instead. Never write incomplete sentences or sentence fragments. Every thought must be complete.
 Use: <h3>, <p>, <strong>, <hr style="border:none;border-top:1px solid #e8e3da;margin:28px 0;">
 Keep under 250 words total.`, 1024);
     } catch (err) {
