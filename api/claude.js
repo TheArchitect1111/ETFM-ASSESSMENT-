@@ -150,7 +150,7 @@ export default async function handler(req, res) {
       <table cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 28px;border-collapse:collapse;background:#1a1a2e;border-radius:10px;overflow:hidden;">
         <tr><td colspan="2" style="padding:18px 20px 10px;text-align:center;"><p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0;">Your Awareness Score Breakdown</p></td></tr>
         <tr style="background:rgba(201,151,58,0.15);border-bottom:2px solid rgba(201,151,58,0.4);">
-          <td style="padding:12px 20px;color:#ffffff;font-size:15px;font-weight:bold;">Overall Score</td>
+          <td style="padding:12px 20px;color:#ffffff;font-size:15px;font-weight:bold;">Total Awareness Score</td>
           <td style="padding:12px 20px;color:#c9973a;font-size:24px;font-family:Georgia,serif;font-weight:bold;text-align:right;">${awarenessScore}/100</td>
         </tr>
         ${SCORE_CATEGORIES.map((cat, i) => `
@@ -178,7 +178,7 @@ Follow this EXACT structure:
 
 2. FINANCIAL IDENTITY, display their archetype: "${archetype}" in bold gold. 2-3 sentences explaining exactly what this means for them based on their specific answers. Be precise, reference what they actually said.
 
-3. AWARENESS SCORE, display: <h2 style="color:#c9973a;font-size:42px;font-family:Georgia,serif;margin:20px 0 4px;">${awarenessScore}/100</h2><p style="color:#7a7a8a;font-size:13px;margin:0 0 24px;">Awareness Score</p> Then 2 sentences interpreting what this score means right now.
+3. AWARENESS SCORE, display: <h2 style="color:#c9973a;font-size:42px;font-family:Georgia,serif;margin:20px 0 4px;">${awarenessScore}/100</h2><p style="color:#7a7a8a;font-size:13px;margin:0 0 24px;">Total Awareness Score</p> Then 2 sentences interpreting what this score means right now.
 
 4. KEY PATTERN OBSERVATION, 3 sentences. Name the specific financial cycle their answers reveal. This should feel like an advisor who has seen this pattern before and knows it well. Reference their actual answers.
 
@@ -230,6 +230,7 @@ Keep under 250 words total.`, 1024);
         <td style="padding:32px 40px;background-color:#f7f4ef;border-top:2px solid #e8e3da;text-align:center;">
           <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 8px;">Step 3</p>
           <h3 style="color:#1a1a2e;font-family:Georgia,serif;font-size:20px;margin:0 0 12px;text-align:center;line-height:1.4;">Build the Systems That Create Stability</h3>
+          <p style="color:#7a7a8a;font-size:14px;margin:0 0 20px;line-height:1.7;text-align:left;">The ETFM Reset Experience is a guided implementation system designed to help you reduce financial chaos, organize your financial life, and create more consistency, visibility, and control through practical weekly structure. Inside the Reset Experience you will build the operational foundation that most people never create.</p>
           <table cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 20px;text-align:left;">
             <tr><td style="padding:8px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #e8e3da;"><strong>Financial Reset Workbook</strong><br/><span style="color:#7a7a8a;">A structured workbook to map your current financial reality, clarify your numbers, and begin building your system from the ground up.</span></td></tr>
             <tr><td style="padding:8px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #e8e3da;"><strong>Financial Reality Audit</strong><br/><span style="color:#7a7a8a;">A guided audit to surface every income stream, expense, debt, and pattern so nothing stays hidden or unaccounted for.</span></td></tr>
