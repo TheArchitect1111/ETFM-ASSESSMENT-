@@ -557,7 +557,7 @@ export default function ETFMAssessment(){
     return(
     <div style={{minHeight:"100vh",backgroundColor:C.bg,padding:"40px 20px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
       <div style={{maxWidth:"580px",width:"100%",textAlign:"center"}}>
-        <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'24px',textAlign:'left'}}>Congratulations. You have taken the first step most people avoid: slowing down long enough to see your financial patterns clearly. Your ETFM Awareness Score is a guided snapshot of how your current habits, structure, stress responses, and financial visibility are working together to shape your financial life today. This is not a judgment. It is a starting point. And awareness is where real change begins.</p>
+        <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'24px',textAlign:'left'}}>Congratulations. You have taken the first step most people avoid: slowing down long enough to see your financial patterns clearly. Your ETFM Awareness Score is a guided snapshot of how your current habits, structure, stress responses, and financial visibility are working together to shape your financial life today. This is not a judgment. No judgment. It is a starting point. And awareness is where real change begins.</p>
         <Tag t="Snapshot Complete"/>
         <h2 style={{fontSize:"32px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Your pattern has been identified.</h2>
         <p style={{fontSize:"16px",color:C.muted,marginBottom:"40px",lineHeight:"1.7"}}>What you've uncovered isn't a reflection of your potential, it's a reflection of the patterns currently shaping your financial decisions. Seeing them clearly is always where real movement begins.</p>
@@ -571,12 +571,18 @@ export default function ETFMAssessment(){
             {name:"Financial Structure",desc:"The systems and habits you have in place to manage your finances."},
             {name:"System Readiness",desc:"Your ability and mindset to build and follow a financial plan."},
           ].map((comp,i)=>(
-            <div key={i} style={{marginBottom:"8px",padding:"12px 14px",backgroundColor:"rgba(255,255,255,0.04)",borderRadius:"6px",border:"1px solid rgba(255,255,255,0.07)",display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"12px"}}>
+            <div key={i} style={{marginBottom:"8px",padding:"12px 14px",backgroundColor:"rgba(255,255,255,0.04)",borderRadius:"6px",border:"1px solid rgba(255,255,255,0.07)",display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"12px",opacity:i===0?1:0.5}}>
               <div style={{flex:1}}>
                 <p style={{color:"#e8e3da",fontSize:"13px",fontWeight:"600",margin:"0 0 4px"}}>{comp.name}</p>
                 <p style={{color:"#6a6a7a",fontSize:"12px",margin:0,lineHeight:"1.5"}}>{comp.desc}</p>
               </div>
-              <span style={{color:C.gold,fontSize:"17px",fontWeight:"bold",flexShrink:0}}>{breakdown[i]?.score??"-"}</span>
+              {i===0
+                ? <span style={{color:C.gold,fontSize:"17px",fontWeight:"bold",flexShrink:0}}>{breakdown[0]?.score??"-"}</span>
+                : <div style={{flexShrink:0,textAlign:"right"}}>
+                    <span style={{color:C.gold,fontSize:"14px"}}>🔒</span>
+                    <p style={{color:"#6a6a7a",fontSize:"11px",fontStyle:"italic",margin:"2px 0 0",whiteSpace:"nowrap"}}>Revealed in your email</p>
+                  </div>
+              }
             </div>
           ))}
           <div style={{marginTop:"12px",padding:"12px 14px",backgroundColor:"rgba(201,151,58,0.1)",borderRadius:"6px",border:"1px solid rgba(201,151,58,0.3)",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
