@@ -99,18 +99,18 @@ function emailWrapper(content) {
 
 // ── SCORING ENGINE ────────────────────────────────────────────────────────────
 const SCORE_MAP_API = {
-  "no_idea": 10, "some_inconsistent": 30, "track_mentally": 50, "track_most": 70, "know_exactly": 90,
-  "disappears_bills": 10, "spend_quickly": 20, "try_save": 40, "use_intentionally": 70, "save_invest": 90,
-  "avoid": 10, "emotional_decisions": 20, "work_more": 40, "ask_others": 50, "slow_plan": 85,
-  "debt": 30, "spending": 25, "saving": 35, "income_consistency": 40, "planning_future": 45, "investing": 50, "fairly_organized": 80,
-  "stability": 50, "peace_of_mind": 55, "freedom_from_debt": 60, "time_freedom": 65, "ownership_wealth": 75, "security_family": 70, "dont_know": 20,
+  no_idea:2, some_inconsistent:7, track_mentally:11, track_most:16, know_exactly:20,
+  disappears_bills:2, spend_quickly:4, try_save:9, use_intentionally:16, save_invest:20,
+  avoid:2, emotional_decisions:5, work_more:9, ask_others:12, slow_plan:20,
+  debt:6, spending:6, saving:9, income_consistency:10, planning_future:11, investing:13, fairly_organized:20,
+  stability:13, peace_of_mind:15, freedom_from_debt:16, time_freedom:17, ownership_wealth:20, security_family:19, dont_know:5,
 };
 
-const SCORE_CATEGORIES = ["Awareness", "Money Pattern", "Stress Response", "Financial Structure", "Your Vision"];
+const SCORE_CATEGORIES = ["Awareness", "Money Pattern", "Stress Response", "Financial Structure", "System Readiness"];
 
 function calculateAwarenessScore(answers) {
-  const scores = answers.map((a) => SCORE_MAP_API[a] || 40);
-  return Math.round(scores.reduce((sum, s) => sum + s, 0) / scores.length);
+  const scores = answers.map((a) => SCORE_MAP_API[a] || 10);
+  return Math.min(100, scores.reduce((sum, s) => sum + s, 0));
 }
 
 function assignArchetype(answers, awarenessScore) {
@@ -199,6 +199,9 @@ Keep under 250 words total.`, 1024);
     const emailHtml = emailWrapper(`
       <tr>
         <td class="email-body" style="padding:40px;color:#1a1a2e;font-size:15px;line-height:1.8;">
+          <p style="color:#1a1a2e;font-family:Georgia,serif;font-size:22px;font-weight:normal;margin:0 0 16px;line-height:1.4;">Congratulations, ${firstName}.</p>
+          <p style="color:#4a4a4a;font-size:15px;line-height:1.9;margin:0 0 12px;">You have taken the first step most people avoid: slowing down long enough to see your financial patterns clearly.</p>
+          <p style="color:#4a4a4a;font-size:15px;line-height:1.9;margin:0 0 24px;">Your ETFM Awareness Score below is a guided snapshot of how your current habits, structure, stress responses, and financial visibility are working together to shape your financial life today. It is scored across five behavioral components based on your answers. This is not a judgment. It is a starting point. And awareness is where real change begins.</p>
           ${scoreTableHtml}
           ${snapshotHtml}
         </td>
