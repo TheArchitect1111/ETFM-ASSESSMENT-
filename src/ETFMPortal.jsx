@@ -188,7 +188,7 @@ export default function ETFMPortal() {
             {["Reactive decision-making", "Financial avoidance", "Mental overload", "Scattered obligations", "Emotional spending", "Survival-mode thinking", "Constant financial stress"].map(item => (
               <div key={item} style={styles.shiftItem}>
                 <div style={{ ...styles.shiftDot, background: "#d0ccc4" }} />
-                <span style={{ color: "#4a4a4a", fontSize: 12, fontWeight: 300 }}>{item}</span>
+                <span style={{ color: "#4a4a4a", fontSize: 14, fontWeight: 300 }}>{item}</span>
               </div>
             ))}
           </div>
@@ -198,7 +198,7 @@ export default function ETFMPortal() {
             {["Intentional decision-making", "Operational clarity", "Structured financial systems", "Visible obligations", "Purposeful financial behavior", "Future positioning", "Calm financial awareness"].map(item => (
               <div key={item} style={styles.shiftItem}>
                 <div style={{ ...styles.shiftDot, background: "#C4960F" }} />
-                <span style={{ color: "#4a4a4a", fontSize: 12, fontWeight: 300 }}>{item}</span>
+                <span style={{ color: "#4a4a4a", fontSize: 14, fontWeight: 300 }}>{item}</span>
               </div>
             ))}
           </div>
@@ -313,14 +313,14 @@ export default function ETFMPortal() {
         <div style={styles.progGrid2}>
           <div style={styles.progCard}>
             <div style={styles.progLabel}>CURRENT STREAK</div>
-            <div style={{ fontFamily: "Georgia, serif", fontSize: 18, color: "#C4960F", marginBottom: 8 }}>
+            <div style={{ fontFamily: "Georgia, serif", fontSize: 20, color: "#C4960F", marginBottom: 8 }}>
               {toolsCompleted === 0 ? "Day 1: Reset Begins Today" : `${toolsCompleted} tool${toolsCompleted > 1 ? "s" : ""} completed`}
             </div>
             <p style={styles.progText}>Your streak begins the moment you open your first tool. Return each week to keep it growing.</p>
           </div>
           <div style={styles.progCard}>
             <div style={styles.progLabel}>NEXT MILESTONE</div>
-            <div style={{ fontFamily: "Georgia, serif", fontSize: 15, color: "#C4960F", marginBottom: 8 }}>
+            <div style={{ fontFamily: "Georgia, serif", fontSize: 17, color: "#C4960F", marginBottom: 8 }}>
               {toolsCompleted === 0 ? "Complete Tool 01: Financial Reset Workbook" :
                toolsCompleted === 1 ? "Complete Tool 02: Financial Reality Audit" :
                toolsCompleted === 2 ? "Complete Tool 03: Spending Reflection" :
@@ -446,7 +446,7 @@ export default function ETFMPortal() {
 function SectionLabel({ children }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 8 }}>
-      <span style={{ color: "#C4960F", fontSize: 10, letterSpacing: 4 }}>{children}</span>
+      <span style={{ color: "#C4960F", fontSize: 12, letterSpacing: 4 }}>{children}</span>
       <div style={{ flex: 1, height: 1, background: "#e8e3da" }} />
     </div>
   );
@@ -455,8 +455,8 @@ function SectionLabel({ children }) {
 function InfoBox({ label, children, style }) {
   return (
     <div style={{ background: "#F0EDE8", borderLeft: "2px solid #C4960F", padding: "20px 24px", marginBottom: 16, ...style }}>
-      <div style={{ color: "#C4960F", fontSize: 11, letterSpacing: 3, marginBottom: 10 }}>{label}</div>
-      <p style={{ color: "#4a4a4a", fontSize: 15, lineHeight: 1.9, fontWeight: 300 }}>{children}</p>
+      <div style={{ color: "#C4960F", fontSize: 13, letterSpacing: 3, marginBottom: 10 }}>{label}</div>
+      <p style={{ color: "#4a4a4a", fontSize: 17, lineHeight: 1.9, fontWeight: 300 }}>{children}</p>
     </div>
   );
 }
@@ -465,12 +465,12 @@ function ProgressCard({ label, value, pct, note, text }) {
   return (
     <div style={styles.progCard}>
       <div style={styles.progLabel}>{label}</div>
-      <div style={{ fontFamily: "Georgia, serif", fontSize: 28, color: "#C4960F", marginBottom: 6 }}>{value}</div>
+      <div style={{ fontFamily: "Georgia, serif", fontSize: 30, color: "#C4960F", marginBottom: 6 }}>{value}</div>
       <p style={styles.progText}>{text}</p>
       <div style={{ background: "#e8e3da", height: 1, marginTop: 14 }}>
         <div style={{ background: "#C4960F", height: 1, width: `${pct}%`, transition: "width 0.6s ease" }} />
       </div>
-      <div style={{ color: "#4a4a4a", fontSize: 10, marginTop: 8, fontStyle: "italic", fontFamily: "Georgia, serif" }}>{note}</div>
+      <div style={{ color: "#4a4a4a", fontSize: 12, marginTop: 8, fontStyle: "italic", fontFamily: "Georgia, serif" }}>{note}</div>
     </div>
   );
 }
@@ -482,11 +482,11 @@ function ToolCard({ phase, icon, name, what, why, time, status, completed, onCom
   return (
     <div style={{ ...styles.toolCard, ...(status === "ready" && !completed ? styles.toolCardActive : {}), ...(completed ? styles.toolCardDone : {}), ...(locked ? styles.toolCardLocked : {}), ...(open && !locked && !completed ? { background: "#FAFAF8", border: "1px solid #e8e3da" } : {}) }}>
       <div style={{ fontSize: 24, marginBottom: 10, opacity: locked ? 0.3 : 1 }}>{icon}</div>
-      <div style={{ color: locked ? "#4a4a4a" : "#C4960F", fontSize: 11, letterSpacing: 3, marginBottom: 8 }}>{phase}</div>
-      <div style={{ color: locked ? "#4a4a4a" : completed ? "#C4960F" : "#1a1a2e", fontSize: 15, fontFamily: "Georgia, serif", marginBottom: 8 }}>{name}</div>
-      <p style={{ color: locked ? "#4a4a4a" : open ? "#4a4a4a" : "#4a4a4a", fontSize: 13, lineHeight: 1.6, marginBottom: 4, fontWeight: 300 }}>{what}</p>
-      <p style={{ color: locked ? "#4a4a4a" : open ? "#4a4a4a" : "#4a4a4a", fontSize: 13, lineHeight: 1.5, fontStyle: "italic", marginBottom: 12, fontWeight: 300 }}>{why}</p>
-      <div style={{ color: locked ? "#4a4a4a" : open ? "#1a1a2e" : "#4a4a4a", fontSize: 12, letterSpacing: 1, marginBottom: 12 }}>{time}</div>
+      <div style={{ color: locked ? "#4a4a4a" : "#C4960F", fontSize: 13, letterSpacing: 3, marginBottom: 8 }}>{phase}</div>
+      <div style={{ color: locked ? "#4a4a4a" : completed ? "#C4960F" : "#1a1a2e", fontSize: 17, fontFamily: "Georgia, serif", marginBottom: 8 }}>{name}</div>
+      <p style={{ color: locked ? "#4a4a4a" : open ? "#4a4a4a" : "#4a4a4a", fontSize: 15, lineHeight: 1.6, marginBottom: 4, fontWeight: 300 }}>{what}</p>
+      <p style={{ color: locked ? "#4a4a4a" : open ? "#4a4a4a" : "#4a4a4a", fontSize: 15, lineHeight: 1.5, fontStyle: "italic", marginBottom: 12, fontWeight: 300 }}>{why}</p>
+      <div style={{ color: locked ? "#4a4a4a" : open ? "#1a1a2e" : "#4a4a4a", fontSize: 14, letterSpacing: 1, marginBottom: 12 }}>{time}</div>
 
       {completed ? (
         <div style={styles.completedBadge}>✓ COMPLETED</div>
@@ -598,61 +598,61 @@ const styles = {
   banner: { width: "100%", display: "block", maxHeight: 260, objectFit: "cover", objectPosition: "center 30%" },
   nav: { background: "#ffffff", borderBottom: "1px solid #e8e3da", padding: "18px 40px", display: "flex", alignItems: "center", justifyContent: "space-between" },
   logo: { fontFamily: "Georgia, serif", color: "#C4960F", fontSize: 24, letterSpacing: 6 },
-  logoSub: { color: "#4a4a4a", fontSize: 9, letterSpacing: 4, marginTop: 3 },
-  navName: { color: "#4a4a4a", fontSize: 13 },
-  navStep: { color: "#C4960F", fontSize: 10, letterSpacing: 2, marginTop: 3 },
-  saveToast: { position: "fixed", top: 16, right: 16, background: "#fff8e8", border: "1px solid #C4960F", color: "#C4960F", fontSize: 12, padding: "8px 16px", zIndex: 9999, letterSpacing: 1 },
+  logoSub: { color: "#4a4a4a", fontSize: 11, letterSpacing: 4, marginTop: 3 },
+  navName: { color: "#4a4a4a", fontSize: 15 },
+  navStep: { color: "#C4960F", fontSize: 12, letterSpacing: 2, marginTop: 3 },
+  saveToast: { position: "fixed", top: 16, right: 16, background: "#fff8e8", border: "1px solid #C4960F", color: "#C4960F", fontSize: 14, padding: "8px 16px", zIndex: 9999, letterSpacing: 1 },
   hero: { padding: "60px 40px 52px", borderBottom: "1px solid #e8e3da" },
-  heroLabel: { color: "#C4960F", fontSize: 10, letterSpacing: 5, marginBottom: 20 },
-  heroTitle: { fontFamily: "Georgia, serif", fontSize: 44, color: "#1a1a2e", fontWeight: 400, lineHeight: 1.15, marginBottom: 20 },
+  heroLabel: { color: "#C4960F", fontSize: 12, letterSpacing: 5, marginBottom: 20 },
+  heroTitle: { fontFamily: "Georgia, serif", fontSize: 36, color: "#1a1a2e", fontWeight: 400, lineHeight: 1.15, marginBottom: 20 },
   congratsBox: { background: "#ffffff", borderLeft: "2px solid #C4960F", padding: "22px 28px", marginBottom: 28, maxWidth: 680 },
-  congratsLabel: { color: "#C4960F", fontSize: 9, letterSpacing: 4, marginBottom: 12 },
-  congratsText: { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 15, lineHeight: 2 },
-  heroTransition: { color: "#4a4a4a", fontSize: 15, lineHeight: 1.9, maxWidth: 640, marginBottom: 32, fontWeight: 300 },
+  congratsLabel: { color: "#C4960F", fontSize: 11, letterSpacing: 4, marginBottom: 12 },
+  congratsText: { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 17, lineHeight: 2 },
+  heroTransition: { color: "#4a4a4a", fontSize: 17, lineHeight: 1.9, maxWidth: 640, marginBottom: 32, fontWeight: 300 },
   howBox: { background: "#ffffff", border: "1px solid #e8e3da", borderLeft: "2px solid #C4960F", padding: "22px 28px", maxWidth: 680 },
-  howLabel: { color: "#C4960F", fontSize: 9, letterSpacing: 3, marginBottom: 14 },
+  howLabel: { color: "#C4960F", fontSize: 11, letterSpacing: 3, marginBottom: 14 },
   howStep: { display: "flex", gap: 14, padding: "9px 0", borderBottom: "1px solid #e8e3da", alignItems: "flex-start" },
-  howNum: { color: "#C4960F", fontSize: 11, minWidth: 18, paddingTop: 1 },
-  howText: { color: "#4a4a4a", fontSize: 13, lineHeight: 1.7, fontWeight: 300 },
-  autosaveBar: { background: "#fff8e8", border: "1px solid #e8c87a", padding: "14px 20px", maxWidth: 680, marginTop: 16, color: "#4a4a4a", fontSize: 12, lineHeight: 1.7, fontWeight: 300 },
+  howNum: { color: "#C4960F", fontSize: 13, minWidth: 18, paddingTop: 1 },
+  howText: { color: "#4a4a4a", fontSize: 15, lineHeight: 1.7, fontWeight: 300 },
+  autosaveBar: { background: "#fff8e8", border: "1px solid #e8c87a", padding: "14px 20px", maxWidth: 680, marginTop: 16, color: "#4a4a4a", fontSize: 14, lineHeight: 1.7, fontWeight: 300 },
   section: { padding: "50px 40px 0" },
-  sectionCtx: { color: "#4a4a4a", fontSize: 12, lineHeight: 1.8, marginBottom: 24, fontWeight: 300, maxWidth: 640 },
+  sectionCtx: { color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, marginBottom: 24, fontWeight: 300, maxWidth: 640 },
   archTrack: { display: "flex", alignItems: "center", background: "#ffffff", border: "1px solid #e8e3da", padding: "24px 32px" },
   archDot: { width: 10, height: 10, borderRadius: "50%", background: "#e8e3da", border: "1px solid #d0ccc4", flexShrink: 0 },
   archDotActive: { background: "#C4960F", border: "1px solid #C4960F" },
   archDotNear: { border: "1px solid #4a4a4a" },
   archLine: { flex: 1, height: 1, background: "#e8e3da" },
-  archNum: { color: "#4a4a4a", fontSize: 9, letterSpacing: 2 },
-  archName: { color: "#4a4a4a", fontSize: 10, fontFamily: "Georgia, serif", textAlign: "center" },
-  archStatus: { color: "#4a4a4a", fontSize: 9, letterSpacing: 1 },
-  archBottom: { background: "#F0EDE8", border: "1px solid #e8e3da", borderTop: "none", padding: "14px 32px", color: "#4a4a4a", fontSize: 11, letterSpacing: 1, textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic" },
+  archNum: { color: "#4a4a4a", fontSize: 11, letterSpacing: 2 },
+  archName: { color: "#4a4a4a", fontSize: 12, fontFamily: "Georgia, serif", textAlign: "center" },
+  archStatus: { color: "#4a4a4a", fontSize: 11, letterSpacing: 1 },
+  archBottom: { background: "#F0EDE8", border: "1px solid #e8e3da", borderTop: "none", padding: "14px 32px", color: "#4a4a4a", fontSize: 13, letterSpacing: 1, textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic" },
   missionCard: { background: "#ffffff", border: "1px solid #e8e3da", borderTop: "2px solid #C4960F", padding: 40, position: "relative" },
-  missionBadge: { position: "absolute", top: 20, right: 20, background: "#fff8e8", border: "1px solid #C4960F", color: "#C4960F", fontSize: 9, letterSpacing: 3, padding: "5px 14px" },
+  missionBadge: { position: "absolute", top: 20, right: 20, background: "#fff8e8", border: "1px solid #C4960F", color: "#C4960F", fontSize: 11, letterSpacing: 3, padding: "5px 14px" },
   divider: { height: 1, background: "#e8e3da", marginBottom: 24 },
-  mcPhase: { color: "#C4960F", fontSize: 10, letterSpacing: 3, marginBottom: 8 },
-  mcTitle: { fontFamily: "Georgia, serif", fontSize: 26, color: "#1a1a2e", marginBottom: 24, fontWeight: 400 },
-  stepsLabel: { color: "#C4960F", fontSize: 9, letterSpacing: 3, marginBottom: 12 },
+  mcPhase: { color: "#C4960F", fontSize: 12, letterSpacing: 3, marginBottom: 8 },
+  mcTitle: { fontFamily: "Georgia, serif", fontSize: 28, color: "#1a1a2e", marginBottom: 24, fontWeight: 400 },
+  stepsLabel: { color: "#C4960F", fontSize: 11, letterSpacing: 3, marginBottom: 12 },
   step: { display: "flex", gap: 14, padding: "10px 0", borderBottom: "1px solid #e8e3da" },
-  stepNum: { color: "#C4960F", fontSize: 11, minWidth: 20 },
-  stepText: { color: "#4a4a4a", fontSize: 12, lineHeight: 1.7, fontWeight: 300 },
+  stepNum: { color: "#C4960F", fontSize: 13, minWidth: 20 },
+  stepText: { color: "#4a4a4a", fontSize: 14, lineHeight: 1.7, fontWeight: 300 },
   metaGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, margin: "24px 0" },
   metaItem: { background: "#F0EDE8", padding: "14px 18px" },
-  metaLabel: { color: "#4a4a4a", fontSize: 9, letterSpacing: 2, marginBottom: 5 },
-  metaVal: { color: "#4a4a4a", fontSize: 12, lineHeight: 1.6, fontWeight: 300 },
+  metaLabel: { color: "#4a4a4a", fontSize: 11, letterSpacing: 2, marginBottom: 5 },
+  metaVal: { color: "#4a4a4a", fontSize: 14, lineHeight: 1.6, fontWeight: 300 },
   nextUnlock: { background: "#F0EDE8", borderTop: "1px solid #e8e3da", padding: "14px 20px", marginBottom: 20, display: "flex", alignItems: "center", gap: 12 },
-  nextLabel: { color: "#4a4a4a", fontSize: 9, letterSpacing: 3 },
-  nextVal: { color: "#C4960F", fontSize: 12, fontFamily: "Georgia, serif" },
-  btnPrimary: { background: "#C4960F", color: "#ffffff", border: "none", padding: "13px 28px", fontSize: 11, letterSpacing: 2, cursor: "pointer", fontFamily: "Inter, sans-serif", fontWeight: 500 },
-  btnSecondary: { background: "transparent", color: "#C4960F", border: "1px solid #C4960F", padding: "13px 28px", fontSize: 11, letterSpacing: 2, cursor: "pointer", fontFamily: "Inter, sans-serif" },
-  mcHint: { color: "#4a4a4a", fontSize: 11, marginTop: 12, fontStyle: "italic", fontFamily: "Georgia, serif" },
+  nextLabel: { color: "#4a4a4a", fontSize: 11, letterSpacing: 3 },
+  nextVal: { color: "#C4960F", fontSize: 14, fontFamily: "Georgia, serif" },
+  btnPrimary: { background: "#C4960F", color: "#ffffff", border: "none", padding: "13px 28px", fontSize: 13, letterSpacing: 2, cursor: "pointer", fontFamily: "Inter, sans-serif", fontWeight: 500 },
+  btnSecondary: { background: "transparent", color: "#C4960F", border: "1px solid #C4960F", padding: "13px 28px", fontSize: 13, letterSpacing: 2, cursor: "pointer", fontFamily: "Inter, sans-serif" },
+  mcHint: { color: "#4a4a4a", fontSize: 13, marginTop: 12, fontStyle: "italic", fontFamily: "Georgia, serif" },
   shiftGrid: { display: "grid", gridTemplateColumns: "1fr 1px 1fr", background: "#ffffff", border: "1px solid #e8e3da", marginTop: 2 },
   shiftSide: { padding: 32 },
-  shiftLabel: { fontSize: 9, letterSpacing: 4, marginBottom: 20 },
+  shiftLabel: { fontSize: 11, letterSpacing: 4, marginBottom: 20 },
   shiftItem: { display: "flex", alignItems: "flex-start", gap: 10, padding: "9px 0", borderBottom: "1px solid #e8e3da" },
   shiftDot: { width: 4, height: 4, borderRadius: "50%", marginTop: 6, flexShrink: 0 },
-  shiftBottom: { padding: "20px 32px", borderTop: "1px solid #e8e3da", gridColumn: "1/4", background: "#F0EDE8", textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 13, lineHeight: 1.9 },
+  shiftBottom: { padding: "20px 32px", borderTop: "1px solid #e8e3da", gridColumn: "1/4", background: "#F0EDE8", textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 15, lineHeight: 1.9 },
   toolIntro: { background: "#F0EDE8", border: "1px solid #e8e3da", borderLeft: "2px solid #C4960F", padding: "20px 24px", marginBottom: 14 },
-  toolIntroLabel: { color: "#C4960F", fontSize: 9, letterSpacing: 3, marginBottom: 8 },
+  toolIntroLabel: { color: "#C4960F", fontSize: 11, letterSpacing: 3, marginBottom: 8 },
   toolIntroText: { color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, fontWeight: 300 },
   toolGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 },
   toolCard: { background: "#ffffff", border: "1px solid #e8e3da", padding: 22 },
@@ -660,52 +660,52 @@ const styles = {
   toolCardDone: { borderColor: "#4A8A4A", background: "#f0f8f0" },
   toolCardLocked: { opacity: 0.5 },
   toolContent: { marginTop: 20, borderTop: "1px solid #e8e3da", paddingTop: 20, background: "#FAFAF8" },
-  toolBtn: { background: "#C4960F", color: "#ffffff", border: "none", padding: "10px 20px", fontSize: 10, letterSpacing: 2, cursor: "pointer", fontFamily: "Inter, sans-serif", fontWeight: 500, width: "100%" },
-  completedBadge: { background: "#f0f8f0", border: "1px solid #4A8A4A", color: "#4A8A4A", fontSize: 10, letterSpacing: 2, padding: "6px 12px", display: "inline-block" },
-  lockedBadge: { background: "#F0EDE8", border: "1px solid #d0ccc4", color: "#4a4a4a", fontSize: 10, letterSpacing: 2, padding: "6px 12px", display: "inline-block" },
+  toolBtn: { background: "#C4960F", color: "#ffffff", border: "none", padding: "10px 20px", fontSize: 12, letterSpacing: 2, cursor: "pointer", fontFamily: "Inter, sans-serif", fontWeight: 500, width: "100%" },
+  completedBadge: { background: "#f0f8f0", border: "1px solid #4A8A4A", color: "#4A8A4A", fontSize: 12, letterSpacing: 2, padding: "6px 12px", display: "inline-block" },
+  lockedBadge: { background: "#F0EDE8", border: "1px solid #d0ccc4", color: "#4a4a4a", fontSize: 12, letterSpacing: 2, padding: "6px 12px", display: "inline-block" },
   formIntro: { color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, marginBottom: 20, fontStyle: "italic" },
-  fieldLabel: { display: "block", color: "#1a1a2e", fontSize: 12, letterSpacing: 2, marginBottom: 6 },
-  input: { width: "100%", background: "#ffffff", border: "1px solid #e8e3da", color: "#1a1a2e", fontSize: 15, padding: "10px 14px", fontFamily: "Inter, sans-serif", outline: "none", boxSizing: "border-box" },
-  textarea: { width: "100%", background: "#ffffff", border: "1px solid #e8e3da", color: "#1a1a2e", fontSize: 15, padding: "10px 14px", fontFamily: "Inter, sans-serif", outline: "none", resize: "vertical", boxSizing: "border-box" },
+  fieldLabel: { display: "block", color: "#1a1a2e", fontSize: 14, letterSpacing: 2, marginBottom: 6 },
+  input: { width: "100%", background: "#ffffff", border: "1px solid #e8e3da", color: "#1a1a2e", fontSize: 17, padding: "10px 14px", fontFamily: "Inter, sans-serif", outline: "none", boxSizing: "border-box" },
+  textarea: { width: "100%", background: "#ffffff", border: "1px solid #e8e3da", color: "#1a1a2e", fontSize: 17, padding: "10px 14px", fontFamily: "Inter, sans-serif", outline: "none", resize: "vertical", boxSizing: "border-box" },
   expGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 12 },
   expItem: { background: "#ffffff", border: "1px solid #e8e3da", padding: "16px 20px", display: "flex", gap: 12, alignItems: "flex-start" },
   expDot: { width: 4, height: 4, borderRadius: "50%", background: "#C4960F", marginTop: 6, flexShrink: 0 },
-  expText: { color: "#4a4a4a", fontSize: 12, lineHeight: 1.6, fontWeight: 300 },
-  expBottom: { background: "#F0EDE8", border: "1px solid #e8e3da", padding: "16px 20px", textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 13, lineHeight: 1.8 },
+  expText: { color: "#4a4a4a", fontSize: 14, lineHeight: 1.6, fontWeight: 300 },
+  expBottom: { background: "#F0EDE8", border: "1px solid #e8e3da", padding: "16px 20px", textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 15, lineHeight: 1.8 },
   progGrid3: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, marginBottom: 12 },
   progGrid2: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 },
   progCard: { background: "#ffffff", border: "1px solid #e8e3da", padding: 24 },
-  progLabel: { color: "#4a4a4a", fontSize: 9, letterSpacing: 3, marginBottom: 12 },
-  progText: { color: "#4a4a4a", fontSize: 11, lineHeight: 1.7, fontWeight: 300 },
+  progLabel: { color: "#4a4a4a", fontSize: 11, letterSpacing: 3, marginBottom: 12 },
+  progText: { color: "#4a4a4a", fontSize: 13, lineHeight: 1.7, fontWeight: 300 },
   rmItem: { background: "#ffffff", border: "1px solid #e8e3da", padding: "20px 28px", display: "flex", alignItems: "center", gap: 20 },
   rmItemActive: { borderColor: "#C4960F" },
-  rmNum: { fontFamily: "Georgia, serif", fontSize: 28, color: "#e8e3da", flexShrink: 0 },
-  rmTag: { fontSize: 9, letterSpacing: 3, color: "#4a4a4a", marginBottom: 3 },
+  rmNum: { fontFamily: "Georgia, serif", fontSize: 30, color: "#e8e3da", flexShrink: 0 },
+  rmTag: { fontSize: 11, letterSpacing: 3, color: "#4a4a4a", marginBottom: 3 },
   rmName: { fontFamily: "Georgia, serif", fontSize: 14, color: "#1a1a2e", marginBottom: 2 },
-  rmDesc: { color: "#4a4a4a", fontSize: 11, fontWeight: 300 },
-  rmStatusActive: { background: "#fff8e8", color: "#C4960F", border: "1px solid #C4960F", fontSize: 9, letterSpacing: 2, padding: "4px 12px" },
-  rmStatusLocked: { background: "#F0EDE8", color: "#4a4a4a", border: "1px solid #e8e3da", fontSize: 9, letterSpacing: 2, padding: "4px 12px" },
+  rmDesc: { color: "#4a4a4a", fontSize: 13, fontWeight: 300 },
+  rmStatusActive: { background: "#fff8e8", color: "#C4960F", border: "1px solid #C4960F", fontSize: 11, letterSpacing: 2, padding: "4px 12px" },
+  rmStatusLocked: { background: "#F0EDE8", color: "#4a4a4a", border: "1px solid #e8e3da", fontSize: 11, letterSpacing: 2, padding: "4px 12px" },
   rhythmGrid: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10, marginBottom: 12 },
   rhCard: { background: "#ffffff", border: "1px solid #e8e3da", padding: 20 },
-  rhDay: { color: "#C4960F", fontSize: 10, letterSpacing: 3, marginBottom: 8 },
-  rhText: { color: "#4a4a4a", fontSize: 12, lineHeight: 1.7, fontWeight: 300 },
-  rhBottom: { background: "#F0EDE8", border: "1px solid #e8e3da", borderTop: "none", padding: "14px 20px", textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 13 },
+  rhDay: { color: "#C4960F", fontSize: 12, letterSpacing: 3, marginBottom: 8 },
+  rhText: { color: "#4a4a4a", fontSize: 14, lineHeight: 1.7, fontWeight: 300 },
+  rhBottom: { background: "#F0EDE8", border: "1px solid #e8e3da", borderTop: "none", padding: "14px 20px", textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 15 },
   advisor: { background: "#ffffff", border: "1px solid #e8e3da", padding: 28 },
-  advisorLabel: { color: "#C4960F", fontSize: 9, letterSpacing: 4, marginBottom: 16 },
+  advisorLabel: { color: "#C4960F", fontSize: 11, letterSpacing: 4, marginBottom: 16 },
   advisorGrid: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 },
   aiCard: { background: "#F0EDE8", padding: 16 },
-  aiLabel: { color: "#4a4a4a", fontSize: 9, letterSpacing: 2, marginBottom: 6 },
-  aiText: { color: "#4a4a4a", fontSize: 11, lineHeight: 1.6, fontWeight: 300 },
+  aiLabel: { color: "#4a4a4a", fontSize: 11, letterSpacing: 2, marginBottom: 6 },
+  aiText: { color: "#4a4a4a", fontSize: 13, lineHeight: 1.6, fontWeight: 300 },
   robertSection: { padding: "50px 40px", borderTop: "1px solid #e8e3da", display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 40, alignItems: "start", marginTop: 50 },
   robertImg: { width: "100%", display: "block", objectFit: "cover", height: 420, border: "1px solid #e8e3da" },
   robertImgLabel: { background: "#F0EDE8", border: "1px solid #e8e3da", padding: "10px 16px" },
-  robertImgName: { color: "#C4960F", fontSize: 11, letterSpacing: 2 },
-  robertImgTitle: { color: "#4a4a4a", fontSize: 10, letterSpacing: 1, marginTop: 2 },
-  robertLabel: { color: "#C4960F", fontSize: 9, letterSpacing: 4, marginBottom: 4 },
-  robertContext: { color: "#4a4a4a", fontSize: 11, lineHeight: 1.7, marginBottom: 18, fontWeight: 300, borderBottom: "1px solid #e8e3da", paddingBottom: 14 },
+  robertImgName: { color: "#C4960F", fontSize: 13, letterSpacing: 2 },
+  robertImgTitle: { color: "#4a4a4a", fontSize: 12, letterSpacing: 1, marginTop: 2 },
+  robertLabel: { color: "#C4960F", fontSize: 11, letterSpacing: 4, marginBottom: 4 },
+  robertContext: { color: "#4a4a4a", fontSize: 13, lineHeight: 1.7, marginBottom: 18, fontWeight: 300, borderBottom: "1px solid #e8e3da", paddingBottom: 14 },
   robertText: { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 14, lineHeight: 2.1 },
-  robertSig: { color: "#4a4a4a", fontSize: 11, marginTop: 18, letterSpacing: 1 },
+  robertSig: { color: "#4a4a4a", fontSize: 13, marginTop: 18, letterSpacing: 1 },
   footer: { margin: "56px 40px 0", borderTop: "1px solid #e8e3da", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center" },
   footerQuote: { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 14 },
-  footerLogo: { color: "#4a4a4a", fontFamily: "Georgia, serif", fontSize: 18, letterSpacing: 4 },
+  footerLogo: { color: "#4a4a4a", fontFamily: "Georgia, serif", fontSize: 20, letterSpacing: 4 },
 };
