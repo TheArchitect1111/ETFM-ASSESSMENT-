@@ -137,10 +137,9 @@ export default function ETFMStrategic() {
       {/* HERO */}
       <section style={styles.hero}>
         <img
-          src="https://raw.githubusercontent.com/TheArchitect1111/ETFM-ASSESSMENT-/main/public/etfm-logo.png"
+          src="https://etfm-assessment.vercel.app/etfm-logo.png"
           alt="ETFM"
           style={{ width: 52, display: "block", margin: "0 auto 20px", opacity: 0.9 }}
-          onError={e => { e.target.src = "https://etfm-assessment.vercel.app/etfm-logo.png"; }}
         />
         <div style={styles.heroLabel}>YOUR STRATEGIC RESET PARTNERSHIP</div>
         <h1 style={styles.heroTitle}>Private Client<br />Strategic Dashboard</h1>
