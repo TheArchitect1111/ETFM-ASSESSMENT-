@@ -422,7 +422,7 @@ export default function ETFMStrategic() {
         <SectionLabel>SECTION 4 — PERSONALIZED STRATEGIC OPERATING FRAMEWORK</SectionLabel>
         <GuidedNote>This section will be completed by Robert Brickey after Session 1 and will unlock automatically.</GuidedNote>
         <p style={styles.sectionCtx}>
-          After Session 1, Robert Brickey personally develops a Strategic Operating Framework built entirely around your financial reality, pressure points, goals, and implementation capacity.
+          After Session 1, Robert personally develops a Strategic Operating Framework built entirely around your financial reality, pressure points, goals, and implementation capacity.
         </p>
         <p style={styles.sectionCtx}>
           This is not a generic financial template. It is a personalized operational system that will include your strategic financial priorities, a structural gap analysis, a personalized strategic action plan, decision rules and financial policies, system recommendations, a pressure reduction strategy, 90-day strategic execution priorities, and behavioral and pattern insights.
@@ -539,7 +539,7 @@ export default function ETFMStrategic() {
         <SectionLabel>SECTION 7 — SESSION NOTES AND DELIVERABLES</SectionLabel>
         <GuidedNote>This section will be completed by Robert Brickey after Session 1 and will unlock automatically.</GuidedNote>
         <p style={styles.sectionCtx}>
-          After each session, Robert Brickey personally prepares detailed notes summarizing key insights, identified patterns, strategic priorities, and implementation guidance from your conversation.
+          After each session, Robert personally prepares detailed notes summarizing key insights, identified patterns, strategic priorities, and implementation guidance from your conversation.
         </p>
         <p style={styles.sectionCtx}>
           These notes are designed to help you revisit your plan clearly at any time, stay focused on your highest-priority actions, reference your strategic direction during implementation, and maintain clarity and momentum between sessions.
