@@ -158,7 +158,7 @@ export default function ETFMStrategic() {
       {/* ── SECTION 1: INTAKE FORM ── */}
       <section style={styles.section}>
         <SectionLabel>SECTION 1 — STRATEGIC INTAKE FORM</SectionLabel>
-        <p style={styles.sectionCtx}>38 questions across 7 areas. Complete this fully before your first session. Your answers are saved automatically and reviewed by Robert Brickey prior to Session 1.</p>
+        <p style={styles.sectionCtx}>There are 38 questions across 7 guided sections designed to help identify your current financial structure, pressure points, decision-making patterns, habits, and strategic priorities before Session 1. Click into each section and answer the questions as honestly as possible. These questions are intentionally designed to help uncover where financial stress is being created, where your system may be breaking down, and what changes will create the greatest impact moving forward. Your answers are saved automatically and personally reviewed by Robert Brickey prior to Session 1 so your Strategic Reset Framework can be built around your real financial reality, not generic advice. You do not need perfect answers or exact numbers. The goal is clarity, not perfection.</p>
 
         <div style={styles.progressWrap}>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
@@ -220,7 +220,7 @@ export default function ETFMStrategic() {
       {/* ── SECTION 2: SESSION BOOKING ── */}
       <section style={styles.section}>
         <SectionLabel>SECTION 2 — SESSION BOOKING</SectionLabel>
-        <p style={styles.sectionCtx}>Book both sessions at your convenience. Session 1 can be scheduled immediately after completing your intake form. Session 2 is booked after Session 1 is complete.</p>
+        <p style={styles.sectionCtx}>Book your strategy sessions at a pace that feels intentional and manageable for you. Session 1 becomes available immediately after completing your Strategic Intake Form and is designed to help identify your financial patterns, pressure points, structural gaps, and highest-priority focus areas. Session 2 is scheduled after Session 1 and focuses on reviewing your personalized Strategic Framework, implementation priorities, and next-step execution plan together. These sessions are designed to create clarity, structure, and direction, not overwhelm. Take your time, choose the schedule that works best for you, and arrive ready for an honest strategic conversation about where you are and where you want to go next.</p>
 
         <div style={styles.bookingGrid}>
           <div style={styles.bookingCard}>
