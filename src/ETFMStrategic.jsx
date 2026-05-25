@@ -135,12 +135,12 @@ export default function ETFMStrategic() {
           : "Complete the Strategic Intake Form";
 
   const processSteps = [
-    { label: "Complete the Strategic Intake Form (38 questions)", done: !!intakeComplete },
-    { label: "Book and attend Session 1: Strategic Reality Session", done: !!call1Complete },
-    { label: "Receive your Full Matrix Score and Structural Analysis", done: !!(call1Complete && data.structural_analysis) },
-    { label: "Receive your Personalized Strategic Framework and Decision Rules", done: !!(call1Complete && data.fw_priority) },
-    { label: "Book and attend Session 2: Strategic Implementation Session", done: !!call2Complete },
-    { label: "Begin your 60-Day Priority Email Support period", done: !!data.support_start },
+    { label: "Complete the Strategic Intake Form (38 questions)", desc: "Answer 38 guided questions across 7 sections designed to uncover financial patterns, stress points, structural gaps, habits, and strategic priorities before Session 1.", done: !!intakeComplete },
+    { label: "Book and attend Session 1: Strategic Reality Session", desc: "A private strategy session where Robert reviews your intake, identifies high-leverage pressure points, and begins building your personalized Strategic Framework.", done: !!call1Complete },
+    { label: "Receive your Full Matrix Score and Structural Analysis", desc: "A personalized operational analysis designed to identify the behaviors, stress patterns, structural gaps, and decision-making cycles impacting your financial progress.", done: !!(call1Complete && data.structural_analysis) },
+    { label: "Receive your Personalized Strategic Framework and Decision Rules", desc: "Your custom financial operating system built around your goals, priorities, financial reality, and implementation capacity.", done: !!(call1Complete && data.fw_priority) },
+    { label: "Book and attend Session 2: Strategic Implementation Session", desc: "Clear operating rules for spending, saving, debt, and financial decisions designed to reduce emotional reactions and create long-term consistency.", done: !!call2Complete },
+    { label: "Begin your 60-Day Priority Email Support period", desc: "A phased implementation framework with strategic priorities, execution guidance, accountability, and ongoing support during your reset process.", done: !!data.support_start },
   ];
 
   return (
@@ -180,37 +180,52 @@ export default function ETFMStrategic() {
       {/* RESET STATUS CARD */}
       <section style={styles.section}>
         <SectionLabel>YOUR RESET STATUS</SectionLabel>
+        <p style={styles.sectionCtx}>You are currently in the Discovery Phase of your Strategic Reset Partnership. This phase is designed to help identify your financial patterns, pressure points, structural gaps, and highest-priority focus areas before your first strategy session. As you complete your intake, Robert Brickey personally reviews your responses and begins building the foundation of your personalized Strategic Operating Framework behind the scenes. The goal right now is not perfection. The goal is clarity.</p>
         <div style={styles.statusGrid}>
           {[
-            { label: "CURRENT PHASE",     val: currentPhase },
-            { label: "SESSION STATUS",    val: sessionStatus },
-            { label: "FRAMEWORK STATUS",  val: frameworkStatus },
-            { label: "INTAKE PROGRESS",   val: `${progressPct}%` },
-          ].map(({ label, val }) => (
+            { label: "CURRENT PHASE",    val: currentPhase,        sub: "Identifying patterns, pressure points, and structural gaps before Session 1." },
+            { label: "SESSION STATUS",   val: sessionStatus,       sub: "Session 1 becomes available immediately after your intake is completed." },
+            { label: "FRAMEWORK STATUS", val: frameworkStatus,     sub: "Your Strategic Framework begins taking shape as Robert reviews your intake responses." },
+            { label: "INTAKE PROGRESS",  val: `${progressPct}%`,  sub: "Progress saves automatically as you complete each section." },
+          ].map(({ label, val, sub }) => (
             <div key={label} style={styles.statusTile}>
               <div style={styles.statusTileLabel}>{label}</div>
               <div style={styles.statusTileVal}>{val}</div>
+              <div style={styles.statusTileSub}>{sub}</div>
             </div>
           ))}
         </div>
         <div style={styles.statusNextAction}>
-          <span style={styles.statusNextLabel}>NEXT ACTION</span>
-          <span style={styles.statusNextVal}>{nextAction}</span>
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: intakeComplete ? 0 : 8 }}>
+              <span style={styles.statusNextLabel}>NEXT ACTION</span>
+              <span style={styles.statusNextVal}>{intakeComplete || call1Complete || call2Complete ? nextAction : "Complete your Strategic Intake Form so Robert can begin identifying the financial patterns, stress points, and structural priorities shaping your current financial reality."}</span>
+            </div>
+            {!intakeComplete && !call1Complete && !call2Complete && (
+              <p style={styles.statusNextSub}>The more honest and complete your responses are, the more personalized and strategic your Reset Framework becomes.</p>
+            )}
+          </div>
         </div>
       </section>
 
       {/* STRATEGIC RESET PROCESS */}
       <section style={styles.section}>
         <SectionLabel>YOUR STRATEGIC RESET PROCESS</SectionLabel>
-        <p style={styles.sectionCtx}>Six steps from intake to implementation. Each step builds directly on the one before it.</p>
+        <p style={styles.sectionCtx}>Your Strategic Reset Partnership unfolds through six guided phases designed to move you from financial awareness into structured implementation intentionally and progressively. Each step builds on the previous one so the process feels clear, strategic, and manageable. As you move through each phase, Robert uses your intake, session conversations, and strategic priorities to build a framework designed specifically around your financial reality.</p>
         <div style={styles.processGrid}>
           {processSteps.map((step, i) => (
             <div key={i} style={{ ...styles.processStep, ...(step.done ? styles.processStepDone : {}) }}>
               <span style={{ ...styles.processNum, ...(step.done ? styles.processNumDone : {}) }}>0{i + 1}</span>
-              <span style={styles.processText}>{step.label}</span>
+              <div style={{ flex: 1 }}>
+                <div style={styles.processText}>{step.label}</div>
+                <div style={styles.processDesc}>{step.desc}</div>
+              </div>
               {step.done && <span style={styles.processBadge}>✓ COMPLETE</span>}
             </div>
           ))}
+        </div>
+        <div style={styles.processClosing}>
+          This process is intentionally progressive. You are not expected to solve everything immediately. Each phase is designed to reduce overwhelm, create clarity, and help you build stronger financial systems one step at a time. The goal is not financial perfection. The goal is intentional financial operation.
         </div>
       </section>
 
@@ -601,18 +616,22 @@ const styles = {
   statusGrid:         { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2, marginBottom: 2 },
   statusTile:         { background: "#ffffff", border: "1px solid #e8e3da", padding: "18px 20px" },
   statusTileLabel:    { color: "#4a4a4a", fontSize: 10, letterSpacing: 3, marginBottom: 8 },
-  statusTileVal:      { color: "#1a1a2e", fontSize: 15, fontFamily: "Georgia, serif", fontWeight: 400 },
-  statusNextAction:   { background: "#fff8e8", border: "1px solid #C4960F", padding: "14px 20px", display: "flex", alignItems: "center", gap: 14 },
+  statusTileVal:      { color: "#1a1a2e", fontSize: 15, fontFamily: "Georgia, serif", fontWeight: 400, marginBottom: 6 },
+  statusTileSub:      { color: "#4a4a4a", fontSize: 11, lineHeight: 1.6, fontWeight: 300 },
+  statusNextAction:   { background: "#fff8e8", border: "1px solid #C4960F", padding: "16px 20px" },
   statusNextLabel:    { color: "#C4960F", fontSize: 10, letterSpacing: 3, flexShrink: 0 },
   statusNextVal:      { color: "#1a1a2e", fontSize: 14, fontFamily: "Georgia, serif" },
+  statusNextSub:      { color: "#4a4a4a", fontSize: 13, fontStyle: "italic", lineHeight: 1.7, margin: "6px 0 0", fontFamily: "Georgia, serif" },
   // Process steps
   processGrid:        { display: "flex", flexDirection: "column", gap: 2 },
   processStep:        { background: "#ffffff", border: "1px solid #e8e3da", padding: "16px 22px", display: "flex", alignItems: "center", gap: 16 },
   processStepDone:    { borderColor: "#4A8A4A", background: "#f0f8f0" },
   processNum:         { color: "#C4960F", fontSize: 18, fontFamily: "Georgia, serif", minWidth: 28, flexShrink: 0 },
   processNumDone:     { color: "#4A8A4A" },
-  processText:        { color: "#4a4a4a", fontSize: 14, lineHeight: 1.6, fontWeight: 300 },
-  processBadge:       { marginLeft: "auto", flexShrink: 0, background: "#f0f8f0", border: "1px solid #4A8A4A", color: "#4A8A4A", fontSize: 11, padding: "3px 10px", letterSpacing: 1 },
+  processText:        { color: "#1a1a2e", fontSize: 14, lineHeight: 1.5, fontWeight: 500, marginBottom: 4 },
+  processDesc:        { color: "#4a4a4a", fontSize: 13, lineHeight: 1.7, fontWeight: 300 },
+  processBadge:       { marginLeft: "auto", flexShrink: 0, alignSelf: "flex-start", background: "#f0f8f0", border: "1px solid #4A8A4A", color: "#4A8A4A", fontSize: 11, padding: "3px 10px", letterSpacing: 1 },
+  processClosing:     { background: "#F0EDE8", border: "1px solid #e8e3da", borderLeft: "2px solid #C4960F", padding: "20px 24px", marginTop: 10, color: "#4a4a4a", fontSize: 14, lineHeight: 1.9, fontWeight: 300 },
   // RobertNote
   robertNote:         { borderLeft: "3px solid #C4960F", background: "#fff8e8", padding: "16px 22px", marginBottom: 20 },
   robertNoteLabel:    { color: "#C4960F", fontSize: 10, letterSpacing: 3, marginBottom: 8 },
