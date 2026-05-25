@@ -133,7 +133,7 @@ export default function ETFMPortal() {
             Week 1 is not about fixing anything. It is entirely about seeing clearly. You will work through four guided exercises that help you identify where your financial stress is coming from, what obligations you are carrying, and what patterns have been keeping you stuck. None of this requires perfect finances. It simply requires honesty.
           </InfoBox>
 
-          <InfoBox label="WHY THIS MATTERS" style={{ background: "#0F0F0F", borderLeft: "none", padding: "20px 24px", marginBottom: 24 }}>
+          <InfoBox label="WHY THIS MATTERS" style={{ marginBottom: 24 }}>
             You cannot build structure around a problem you have not clearly identified. Most people jump straight to budgeting without first understanding their actual situation. That is why those efforts rarely stick. This week changes that. By the end of Week 1, you will have a clear, honest picture of your financial reality.
           </InfoBox>
 
@@ -452,11 +452,11 @@ function SectionLabel({ children }) {
   );
 }
 
-function InfoBox({ label, children }) {
+function InfoBox({ label, children, style }) {
   return (
-    <div style={{ background: "#0F0F0F", borderLeft: "2px solid #C4960F", padding: "20px 24px", marginBottom: 16 }}>
-      <div style={{ color: "#C4960F", fontSize: 9, letterSpacing: 3, marginBottom: 10 }}>{label}</div>
-      <p style={{ color: "#777", fontSize: 13, lineHeight: 1.9, fontWeight: 300 }}>{children}</p>
+    <div style={{ background: "#F0EDE8", borderLeft: "2px solid #C4960F", padding: "20px 24px", marginBottom: 16, ...style }}>
+      <div style={{ color: "#C4960F", fontSize: 11, letterSpacing: 3, marginBottom: 10 }}>{label}</div>
+      <p style={{ color: "#4a4a4a", fontSize: 15, lineHeight: 1.9, fontWeight: 300 }}>{children}</p>
     </div>
   );
 }
@@ -651,15 +651,15 @@ const styles = {
   shiftItem: { display: "flex", alignItems: "flex-start", gap: 10, padding: "9px 0", borderBottom: "1px solid #141414" },
   shiftDot: { width: 4, height: 4, borderRadius: "50%", marginTop: 6, flexShrink: 0 },
   shiftBottom: { padding: "20px 32px", borderTop: "1px solid #1A1A1A", gridColumn: "1/4", background: "#0F0F0F", textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic", color: "#555", fontSize: 13, lineHeight: 1.9 },
-  toolIntro: { background: "#111", border: "1px solid #1A1A1A", borderLeft: "2px solid #C4960F", padding: "20px 24px", marginBottom: 14 },
+  toolIntro: { background: "#F0EDE8", border: "1px solid #e8e3da", borderLeft: "2px solid #C4960F", padding: "20px 24px", marginBottom: 14 },
   toolIntroLabel: { color: "#C4960F", fontSize: 9, letterSpacing: 3, marginBottom: 8 },
-  toolIntroText: { color: "#555", fontSize: 12, lineHeight: 1.8, fontWeight: 300 },
+  toolIntroText: { color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, fontWeight: 300 },
   toolGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 },
   toolCard: { background: "#111", border: "1px solid #1A1A1A", padding: 22 },
   toolCardActive: { borderColor: "#C4960F" },
   toolCardDone: { borderColor: "#2A3A1A", background: "#0F110D" },
   toolCardLocked: { opacity: 0.5 },
-  toolContent: { marginTop: 20, borderTop: "1px solid #e8e3da", paddingTop: 20 },
+  toolContent: { marginTop: 20, borderTop: "1px solid #e8e3da", paddingTop: 20, background: "#FAFAF8" },
   toolBtn: { background: "#C4960F", color: "#0D0D0D", border: "none", padding: "10px 20px", fontSize: 10, letterSpacing: 2, cursor: "pointer", fontFamily: "Inter, sans-serif", fontWeight: 500, width: "100%" },
   completedBadge: { background: "#1A3A1A", border: "1px solid #2A5A2A", color: "#4A8A4A", fontSize: 10, letterSpacing: 2, padding: "6px 12px", display: "inline-block" },
   lockedBadge: { background: "#0F0F0F", border: "1px solid #141414", color: "#222", fontSize: 10, letterSpacing: 2, padding: "6px 12px", display: "inline-block" },
