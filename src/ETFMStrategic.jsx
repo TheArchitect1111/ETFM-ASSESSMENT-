@@ -180,7 +180,7 @@ export default function ETFMStrategic() {
       {/* RESET STATUS CARD */}
       <section style={styles.section}>
         <SectionLabel>YOUR RESET STATUS</SectionLabel>
-        <p style={styles.sectionCtx}>You are currently in the Discovery Phase of your Strategic Reset Partnership. This phase is designed to help identify your financial patterns, pressure points, structural gaps, and highest-priority focus areas before your first strategy session. As you complete your intake, Robert Brickey personally reviews your responses and begins building the foundation of your personalized Strategic Operating Framework behind the scenes. The goal right now is not perfection. The goal is clarity.</p>
+        <p style={styles.sectionCtx}>You are currently in the Discovery Phase of your Strategic Reset Partnership. This phase is designed to help identify your financial patterns, pressure points, structural gaps, and highest-priority focus areas before your first strategy session. As you complete your intake, Robert personally reviews your responses and begins building the foundation of your personalized Strategic Operating Framework behind the scenes. The goal right now is not perfection. The goal is clarity.</p>
         <div style={styles.statusGrid}>
           {[
             { label: "CURRENT PHASE",    val: currentPhase,       sub: "Identifying patterns, pressure points, and structural gaps before Session 1." },
@@ -231,9 +231,9 @@ export default function ETFMStrategic() {
 
       {/* ── SECTION 1: INTAKE FORM ── */}
       <section style={styles.section}>
-        <SectionLabel>SECTION 1 — STRATEGIC INTAKE FORM</SectionLabel>
+        <SectionLabel>SECTION 1 · STRATEGIC INTAKE FORM</SectionLabel>
         <GuidedNote>Start here. Complete all 7 intake sections before your first session.</GuidedNote>
-        <p style={styles.sectionCtx}>There are 38 questions across 7 guided sections designed to help identify your current financial structure, pressure points, decision-making patterns, habits, and strategic priorities before Session 1. Click into each section and answer the questions as honestly as possible. These questions are intentionally designed to help uncover where financial stress is being created, where your system may be breaking down, and what changes will create the greatest impact moving forward. Your answers are saved automatically and personally reviewed by Robert Brickey prior to Session 1 so your Strategic Reset Framework can be built around your real financial reality, not generic advice. You do not need perfect answers or exact numbers. The goal is clarity, not perfection.</p>
+        <p style={styles.sectionCtx}>There are 38 questions across 7 guided sections designed to help identify your current financial structure, pressure points, decision-making patterns, habits, and strategic priorities before Session 1. Click into each section and answer the questions as honestly as possible. These questions are intentionally designed to help uncover where financial stress is being created, where your system may be breaking down, and what changes will create the greatest impact moving forward. Your answers are saved automatically and personally reviewed by Robert prior to Session 1 so your Strategic Reset Framework can be built around your real financial reality, not generic advice. You do not need perfect answers or exact numbers. The goal is clarity, not perfection.</p>
 
         <RobertNote>
           The intake questions are not just administrative. They are the foundation of everything we build together. The more honest your answers, the more precise and useful your Strategic Framework will be. There are no wrong answers here.
@@ -292,7 +292,7 @@ export default function ETFMStrategic() {
           </button>
         )}
         {intakeComplete && (
-          <div style={styles.submittedBadge}>✓ INTAKE FORM SUBMITTED — Robert Brickey will review your responses before Session 1</div>
+          <div style={styles.submittedBadge}>✓ INTAKE FORM SUBMITTED — Robert will review your responses before Session 1</div>
         )}
 
         {/* SESSION 1 STATUS — shown only after intake is submitted */}
@@ -315,7 +315,7 @@ export default function ETFMStrategic() {
 
       {/* ── SECTION 2: SESSION BOOKING ── */}
       <section style={styles.section}>
-        <SectionLabel>SECTION 2 — SESSION BOOKING</SectionLabel>
+        <SectionLabel>SECTION 2 · SESSION BOOKING</SectionLabel>
         <GuidedNote>Book both sessions after completing your intake. Session 1 first, Session 2 after your framework is delivered.</GuidedNote>
         <p style={styles.sectionCtx}>Book your strategy sessions at a pace that feels intentional and manageable for you. Session 1 becomes available immediately after completing your Strategic Intake Form and is designed to help identify your financial patterns, pressure points, structural gaps, and highest-priority focus areas. Session 2 is scheduled after Session 1 and focuses on reviewing your personalized Strategic Framework, implementation priorities, and next-step execution plan together. These sessions are designed to create clarity, structure, and direction, not overwhelm. Take your time, choose the schedule that works best for you, and arrive ready for an honest strategic conversation about where you are and where you want to go next.</p>
 
@@ -328,7 +328,7 @@ export default function ETFMStrategic() {
             <div style={styles.bookingBadge}>SESSION 1 OF 2</div>
             <div style={styles.bookingIcon}>📅</div>
             <h3 style={styles.bookingTitle}>Strategic Reality Session</h3>
-            <p style={styles.bookingDesc}>Your first 30-minute private session with Robert Brickey. This session reviews your intake responses, identifies your highest-leverage pressure points, and builds the foundation of your personalized strategic framework.</p>
+            <p style={styles.bookingDesc}>Your first 30-minute private strategy session. This session reviews your intake responses, identifies your highest-leverage pressure points, and builds the foundation of your personalized strategic framework.</p>
             <div style={styles.bookingMeta}>
               {[["DURATION", "30 minutes"], ["FORMAT", "Private video call"], ["REQUIREMENT", "Intake form completed"]].map(([l, v]) => (
                 <div key={l} style={styles.bookingMetaRow}><span style={styles.bookingMetaLabel}>{l}</span><span style={styles.bookingMetaVal}>{v}</span></div>
@@ -381,7 +381,7 @@ export default function ETFMStrategic() {
           Your Full Matrix Score and Structural Analysis is designed to help clarify where your system is breaking down, what is creating the most pressure, what behaviors are repeating, and what changes will create the greatest impact moving forward.
         </p>
         <p style={styles.sectionCtx}>
-          The goal is not judgment. The goal is awareness, clarity, and intentional financial operation. Robert Brickey personally develops this analysis after reviewing your intake responses and your first strategy session together.
+          The goal is not judgment. The goal is awareness, clarity, and intentional financial operation. Robert personally develops this analysis after reviewing your intake responses and your first strategy session together.
         </p>
         <RobertNote>
           Your Matrix Score is not a grade. It is a map. It shows where your financial system has gaps and where the highest-leverage changes are. The score itself is less important than the pattern it reveals.
@@ -419,8 +419,8 @@ export default function ETFMStrategic() {
 
       {/* ── SECTION 4: STRATEGIC FRAMEWORK ── */}
       <section style={styles.section}>
-        <SectionLabel>SECTION 4 — PERSONALIZED STRATEGIC OPERATING FRAMEWORK</SectionLabel>
-        <GuidedNote>This section will be completed by Robert Brickey after Session 1 and will unlock automatically.</GuidedNote>
+        <SectionLabel>SECTION 4 · PERSONALIZED STRATEGIC OPERATING FRAMEWORK</SectionLabel>
+        <GuidedNote>This section will be ready after your Strategy Session and will unlock automatically.</GuidedNote>
         <p style={styles.sectionCtx}>
           After Session 1, Robert personally develops a Strategic Operating Framework built entirely around your financial reality, pressure points, goals, and implementation capacity.
         </p>
@@ -453,8 +453,8 @@ export default function ETFMStrategic() {
 
       {/* ── SECTION 5: DECISION RULES ── */}
       <section style={styles.section}>
-        <SectionLabel>SECTION 5 — DECISION RULES AND FINANCIAL POLICY SYSTEM</SectionLabel>
-        <GuidedNote>This section will be completed by Robert Brickey after Session 1 and will unlock automatically.</GuidedNote>
+        <SectionLabel>SECTION 5 · DECISION RULES AND FINANCIAL POLICY SYSTEM</SectionLabel>
+        <GuidedNote>This section will be ready after your Strategy Session and will unlock automatically.</GuidedNote>
         <p style={styles.sectionCtx}>
           This is not a budget. This is a personalized financial operating system designed to help you make clearer, more intentional decisions under pressure.
         </p>
@@ -536,8 +536,8 @@ export default function ETFMStrategic() {
 
       {/* ── SECTION 7: SESSION NOTES ── */}
       <section style={styles.section}>
-        <SectionLabel>SECTION 7 — SESSION NOTES AND DELIVERABLES</SectionLabel>
-        <GuidedNote>This section will be completed by Robert Brickey after Session 1 and will unlock automatically.</GuidedNote>
+        <SectionLabel>SECTION 7 · SESSION NOTES AND DELIVERABLES</SectionLabel>
+        <GuidedNote>This section will be ready after your Strategy Session and will unlock automatically.</GuidedNote>
         <p style={styles.sectionCtx}>
           After each session, Robert personally prepares detailed notes summarizing key insights, identified patterns, strategic priorities, and implementation guidance from your conversation.
         </p>
@@ -625,7 +625,7 @@ export default function ETFMStrategic() {
           <p style={{ margin: "0 0 12px" }}>It is about building systems strong enough to create clarity, consistency, and intentional direction long after the reset is complete.</p>
           <p style={{ margin: "0 0 12px" }}>You do not need to solve everything immediately. You simply need to stay honest, intentional, and committed to building stronger structure one decision at a time.</p>
           <p style={{ margin: "0 0 16px" }}>Most people remain financially reactive because they never stop long enough to build systems intentionally. You are doing that now. And that matters.</p>
-          <p style={{ margin: 0, color: "#C4960F" }}>— Robert Brickey, ETFM</p>
+          <p style={{ margin: 0, color: "#C4960F" }}>— Robert, ETFM</p>
         </div>
         <span style={styles.footerLogo}>ETFM</span>
       </footer>
@@ -656,7 +656,7 @@ function GuidedNote({ children }) {
 function RobertNote({ children }) {
   return (
     <div style={styles.robertNote}>
-      <div style={styles.robertNoteLabel}>A NOTE FROM ROBERT BRICKEY</div>
+      <div style={styles.robertNoteLabel}>A NOTE FROM ROBERT</div>
       <p style={styles.robertNoteText}>{children}</p>
     </div>
   );
@@ -713,7 +713,7 @@ function PersonalizedField({ label, id, data, update, unlocked, rows = 4, hideLa
   return (
     <div style={styles.pendingCard}>
       {!hideLabel && <div style={styles.pendingCardLabel}>{label}</div>}
-      <p style={styles.pendingCardText}>{pendingText || "This field will be completed by Robert Brickey after Session 1. It will contain personalized content built specifically around your intake responses and strategy session."}</p>
+      <p style={styles.pendingCardText}>{pendingText || "This field will be ready after your Strategy Session."}</p>
     </div>
   );
 }
@@ -725,7 +725,7 @@ function LockedSection({ unlocked, children }) {
       <div style={styles.lockedBanner}>
         <div style={styles.lockedBannerTitle}>🔒 PERSONALIZED MATERIAL IN DEVELOPMENT</div>
         <p style={styles.lockedBannerText}>
-          This section becomes available after Session 1 because Robert Brickey personally builds these materials around your intake responses, financial structure, goals, stress patterns, strategy session, and implementation priorities. This process is intentionally personalized — not generated from a generic template. Once Session 1 is marked complete, this section will unlock automatically.
+          This section unlocks after your Strategy Session. The content here is built specifically for you — not from a template — and will be ready once your session is complete.
         </p>
       </div>
       <div style={{ opacity: 0.6, pointerEvents: "none", userSelect: "none" }}>{children}</div>
