@@ -136,10 +136,12 @@ export default function ETFMStrategic() {
 
       {/* HERO */}
       <section style={styles.hero}>
-        <div style={{textAlign:"center", marginBottom:"20px"}}>
-          <p style={{fontFamily:"Georgia, serif", color:"#C4960F", fontSize:"28px", letterSpacing:"6px", margin:"0"}}>ETFM</p>
-          <p style={{color:"#5A5A6A", fontSize:"10px", letterSpacing:"4px", margin:"4px 0 0"}}>ESCAPE THE FINANCIAL MATRIX</p>
-        </div>
+        <img
+          src="https://raw.githubusercontent.com/TheArchitect1111/ETFM-ASSESSMENT-/main/public/54fc28f1-22d8-4392-9c01-3d3f5a5c420b.png"
+          alt="ETFM"
+          style={{width:"64px", height:"64px", objectFit:"contain", display:"block", margin:"0 auto 16px"}}
+          onError={e => e.target.style.display="none"}
+        />
         <div style={styles.heroLabel}>YOUR STRATEGIC RESET PARTNERSHIP</div>
         <h1 style={styles.heroTitle}>Private Client<br />Strategic Dashboard</h1>
         <div style={styles.congratsBox}>
