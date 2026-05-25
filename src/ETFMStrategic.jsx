@@ -139,7 +139,7 @@ export default function ETFMStrategic() {
         <img
           src="/etfm-logo.png"
           alt="ETFM"
-          style={{width:"120px", display:"block", margin:"0 auto 16px", objectFit:"contain"}}
+          style={{width:"360px", display:"block", margin:"0 auto 16px", objectFit:"contain"}}
           onError={e => e.target.style.display="none"}
         />
         <div style={styles.heroLabel}>YOUR STRATEGIC RESET PARTNERSHIP</div>
