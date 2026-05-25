@@ -136,9 +136,12 @@ export default function ETFMStrategic() {
 
       {/* HERO */}
       <section style={styles.hero}>
-        <div style={{textAlign:"center", marginBottom:"20px"}}>
-          <p style={{fontFamily:"Georgia, serif", color:"#C4960F", fontSize:"24px", letterSpacing:"8px", margin:"0", fontWeight:"normal"}}>ETFM</p>
-        </div>
+        <img
+          src="/etfm-logo.png"
+          alt="ETFM"
+          style={{width:"120px", display:"block", margin:"0 auto 16px", objectFit:"contain"}}
+          onError={e => e.target.style.display="none"}
+        />
         <div style={styles.heroLabel}>YOUR STRATEGIC RESET PARTNERSHIP</div>
         <h1 style={styles.heroTitle}>Private Client<br />Strategic Dashboard</h1>
         <div style={styles.congratsBox}>
