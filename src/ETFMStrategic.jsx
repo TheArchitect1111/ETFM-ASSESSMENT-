@@ -369,8 +369,8 @@ export default function ETFMStrategic() {
 
       {/* ── SECTION 3: MATRIX SCORE ── */}
       <section style={styles.section}>
-        <SectionLabel>SECTION 3 — FULL MATRIX SCORE AND STRUCTURAL ANALYSIS</SectionLabel>
-        <GuidedNote>This section will be completed by Robert Brickey after Session 1 and will unlock automatically.</GuidedNote>
+        <SectionLabel>SECTION 3 · FULL MATRIX SCORE AND STRUCTURAL ANALYSIS</SectionLabel>
+        <GuidedNote>This section will be completed after your Strategy Session and will unlock automatically.</GuidedNote>
         <p style={styles.sectionCtx}>
           This personalized operational analysis is designed to identify the financial behaviors, stress patterns, structural gaps, and decision-making cycles currently shaping your financial reality.
         </p>
@@ -444,7 +444,7 @@ export default function ETFMStrategic() {
               { id: "fw_build",     label: "WEALTH BUILDING PATHWAY" },
             ].map(f => (
               <div key={f.id} style={styles.frameworkCard}>
-                <PersonalizedField label={f.label} id={f.id} data={data} update={update} unlocked={call1Complete} rows={4} />
+                <PersonalizedField label={f.label} id={f.id} data={data} update={update} unlocked={call1Complete} rows={4} pendingText="This field will be personalized based on your intake responses and strategy session. It will appear here once your plan is complete." />
               </div>
             ))}
           </div>
@@ -475,15 +475,15 @@ export default function ETFMStrategic() {
         </WhyMatters>
         <LockedSection unlocked={call1Complete}>
           {[
-            { id: "rule_spending",  label: "SPENDING RULE" },
-            { id: "rule_saving",    label: "SAVING RULE" },
-            { id: "rule_debt",      label: "DEBT RULE" },
-            { id: "rule_income",    label: "INCOME RULE" },
-            { id: "rule_emergency", label: "EMERGENCY FUND RULE" },
+            { id: "rule_spending",  label: "SPENDING RULE",      pendingText: "You will define this rule during your strategy session. It will be recorded here as part of your personal financial framework." },
+            { id: "rule_saving",    label: "SAVING RULE",         pendingText: "You will define this rule during your strategy session. It will be recorded here as part of your personal financial framework." },
+            { id: "rule_debt",      label: "DEBT RULE",           pendingText: "You will define this rule during your strategy session. It will be recorded here as part of your personal financial framework." },
+            { id: "rule_income",    label: "INCOME RULE",         pendingText: "You will define this rule during your strategy session. It will be recorded here as part of your personal financial framework." },
+            { id: "rule_emergency", label: "EMERGENCY FUND RULE", pendingText: "You will define this rule during your strategy session. It will be recorded here as part of your personal financial framework." },
             { id: "rule_invest",    label: "INVESTMENT RULE" },
           ].map(r => (
             <div key={r.id} style={styles.ruleCard}>
-              <PersonalizedField label={r.label} id={r.id} data={data} update={update} unlocked={call1Complete} rows={2} />
+              <PersonalizedField label={r.label} id={r.id} data={data} update={update} unlocked={call1Complete} rows={2} pendingText={r.pendingText} />
             </div>
           ))}
           <div style={{ marginTop: 8 }}>
@@ -494,8 +494,8 @@ export default function ETFMStrategic() {
 
       {/* ── SECTION 6: 90-DAY ROADMAP ── */}
       <section style={styles.section}>
-        <SectionLabel>SECTION 6 — CUSTOM 90-DAY ROADMAP</SectionLabel>
-        <GuidedNote>This section will be completed by Robert Brickey after Session 1 and will unlock automatically.</GuidedNote>
+        <SectionLabel>SECTION 6 · CUSTOM 90-DAY ROADMAP</SectionLabel>
+        <GuidedNote>This section will be completed after your Strategy Session and will unlock automatically.</GuidedNote>
         <p style={styles.sectionCtx}>
           Your 90-Day Strategic Reset Roadmap is a phased implementation plan designed to reduce overwhelm by focusing on the highest-impact changes first. Each phase builds intentionally on the previous one.
         </p>
@@ -525,11 +525,11 @@ export default function ETFMStrategic() {
                 <div style={styles.roadmapPhaseLabel}>{phase.label}</div>
                 <div style={styles.roadmapPhaseSub}>{phase.sub}</div>
               </div>
-              <PersonalizedField label={phase.label} id={phase.id} data={data} update={update} unlocked={call1Complete} rows={5} hideLabel />
+              <PersonalizedField label={phase.label} id={phase.id} data={data} update={update} unlocked={call1Complete} rows={5} hideLabel pendingText="This phase will be outlined based on your goals and session findings. Your specific action steps will appear here after your strategy session." />
             </div>
           ))}
           <div style={styles.roadmapOutcome}>
-            <PersonalizedField label="90-DAY TARGET OUTCOME" id="road_outcome" data={data} update={update} unlocked={call1Complete} rows={3} />
+            <PersonalizedField label="90-DAY TARGET OUTCOME" id="road_outcome" data={data} update={update} unlocked={call1Complete} rows={3} pendingText="Your 90-day target will be defined collaboratively and recorded here after your strategy session." />
           </div>
         </LockedSection>
       </section>
@@ -576,8 +576,8 @@ export default function ETFMStrategic() {
 
       {/* ── SECTION 8: 60-DAY SUPPORT ── */}
       <section style={{ ...styles.section, paddingBottom: 80 }}>
-        <SectionLabel>SECTION 8 — 60-DAY PRIORITY EMAIL SUPPORT</SectionLabel>
-        <GuidedNote>This section will be completed by Robert Brickey after Session 1 and will unlock automatically.</GuidedNote>
+        <SectionLabel>SECTION 8 · 60-DAY PRIORITY EMAIL SUPPORT</SectionLabel>
+        <GuidedNote>This section will be completed after your Strategy Session and will unlock automatically.</GuidedNote>
         <p style={styles.sectionCtx}>
           Your 60-Day Priority Support begins immediately after your Strategic Framework is delivered. This is not unlimited open access. It is structured implementation support designed to help you maintain momentum, reduce confusion, and continue building consistency while your new financial systems are being put into practice.
         </p>
@@ -671,7 +671,7 @@ function WhyMatters({ children }) {
   );
 }
 
-function PersonalizedField({ label, id, data, update, unlocked, rows = 4, hideLabel = false, singleLine = false, displayAs }) {
+function PersonalizedField({ label, id, data, update, unlocked, rows = 4, hideLabel = false, singleLine = false, displayAs, pendingText }) {
   const value = data[id] || "";
   if (!hideLabel && !singleLine) {
     // full label + field
@@ -713,7 +713,7 @@ function PersonalizedField({ label, id, data, update, unlocked, rows = 4, hideLa
   return (
     <div style={styles.pendingCard}>
       {!hideLabel && <div style={styles.pendingCardLabel}>{label}</div>}
-      <p style={styles.pendingCardText}>This field will be completed by Robert Brickey after Session 1. It will contain personalized content built specifically around your intake responses and strategy session.</p>
+      <p style={styles.pendingCardText}>{pendingText || "This field will be completed by Robert Brickey after Session 1. It will contain personalized content built specifically around your intake responses and strategy session."}</p>
     </div>
   );
 }
