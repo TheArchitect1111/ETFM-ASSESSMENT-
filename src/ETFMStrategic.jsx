@@ -292,10 +292,10 @@ export default function ETFMStrategic() {
           </button>
         )}
         {intakeComplete && (
-          <div style={styles.submittedBadge}>✓ INTAKE FORM SUBMITTED — Robert will review your responses before Session 1</div>
+          <div style={styles.submittedBadge}>✓ INTAKE FORM SUBMITTED. Robert will review your responses before Session 1</div>
         )}
 
-        {/* SESSION 1 STATUS — shown only after intake is submitted */}
+        {/* SESSION 1 STATUS: shown only after intake is submitted */}
         {intakeComplete && (
           <div style={styles.session1StatusBlock}>
             <div style={styles.session1StatusLabel}>SESSION 1 STATUS</div>
@@ -303,10 +303,10 @@ export default function ETFMStrategic() {
               Once your Strategic Intake Form is complete and Session 1 has been finished, mark your session complete below to unlock your personalized Matrix Analysis, Strategic Framework, Decision Rules, 90-Day Roadmap, and Session Notes.
             </p>
             <p style={styles.session1StatusSub}>
-              Your personalized strategic materials begin unlocking after Session 1 because Robert uses your intake responses and strategy conversation to build them specifically around your situation — not from a generic template.
+              Your personalized strategic materials begin unlocking after Session 1 because Robert uses your intake responses and strategy conversation to build them specifically around your situation, not from a generic template.
             </p>
             {call1Complete
-              ? <div style={styles.submittedBadge}>✓ SESSION 1 COMPLETE — Your personalized materials are now unlocked</div>
+              ? <div style={styles.submittedBadge}>✓ SESSION 1 COMPLETE. Your personalized materials are now unlocked.</div>
               : <button style={{ ...styles.btnSecondary, marginTop: 16 }} onClick={() => update("call1_complete", true)}>MARK SESSION 1 COMPLETE</button>
             }
           </div>
@@ -389,7 +389,7 @@ export default function ETFMStrategic() {
         <WhyMatters>
           Understanding your scores across all five dimensions reveals which specific area is creating the most financial drag. Most clients discover their lowest score is not where they expected it to be.
         </WhyMatters>
-        <LockedSection unlocked={call1Complete} message="Your full behavioral and financial matrix score will appear here — a detailed breakdown of how your money patterns, stress responses, and financial structure interact. This gives you a clear picture of where you stand and why.">
+        <LockedSection unlocked={call1Complete} message="Your full behavioral and financial matrix score will appear here. You will see a detailed breakdown of how your money patterns, stress responses, and financial structure connect. This gives you a clear picture of where your system is breaking down and what needs to change first.">
           <div style={styles.matrixGrid}>
             {[
               { key: "sc_awareness",  name: "Awareness",          desc: "How clearly you see where your money goes and what drives your decisions." },
@@ -433,15 +433,15 @@ export default function ETFMStrategic() {
         <RobertNote>
           Your Strategic Operating Framework is not a generic plan. It was built around your specific answers, your situation, and your goals. Every element here was chosen because it addresses a gap in your current financial system.
         </RobertNote>
-        <LockedSection unlocked={call1Complete} message="Your personal operating framework will live here — a custom set of financial principles and priorities built around how you think, earn, spend, and make decisions. This is your financial system, not a generic template.">
+        <LockedSection unlocked={call1Complete} message="Your personal operating framework will appear here. This is a custom financial system built around how you think, earn, spend, and make decisions. It is not a generic template. It is built specifically around your intake responses and strategy session findings.">
           <div style={styles.frameworkGrid}>
             {[
-              { id: "fw_priority",  label: "PRIMARY STRATEGIC PRIORITY",   pendingText: "The single most important financial move for you right now — based on your income, obligations, stress patterns, and goals. Everything else is sequenced around this." },
-              { id: "fw_structure", label: "STRUCTURAL FOUNDATION",         pendingText: "The core structure your finances will be built on — accounts, flow, and allocation set up in a way that matches how you actually live and earn." },
-              { id: "fw_behavior",  label: "BEHAVIORAL PROTOCOL",           pendingText: "A set of specific behavioral guidelines based on your identified money patterns — designed to reduce friction, prevent backsliding, and build consistency." },
-              { id: "fw_income",    label: "INCOME AND STABILITY STRATEGY", pendingText: "A plan for protecting, growing, or stabilizing your income based on your current situation and what your numbers reveal about your earning patterns." },
-              { id: "fw_debt",      label: "DEBT AND OBLIGATION FRAMEWORK", pendingText: "A clear strategy for how to handle your existing debt and financial obligations — prioritized, sequenced, and realistic based on your cash flow." },
-              { id: "fw_build",     label: "WEALTH BUILDING PATHWAY",       pendingText: "The long-term path forward — where wealth building fits into your plan, when it starts, and what form it takes based on your timeline and goals." },
+              { id: "fw_priority",  label: "PRIMARY STRATEGIC PRIORITY",   pendingText: "The single most important financial move for you right now. Based on your income, obligations, stress patterns, and goals. Everything else in your plan is sequenced around this." },
+              { id: "fw_structure", label: "STRUCTURAL FOUNDATION",         pendingText: "The core structure your finances will be built on. This includes accounts, cash flow, and allocation set up in a way that matches how you actually live and earn." },
+              { id: "fw_behavior",  label: "BEHAVIORAL PROTOCOL",           pendingText: "A set of specific behavioral guidelines based on your identified money patterns. Designed to reduce friction, prevent backsliding, and build consistency over time." },
+              { id: "fw_income",    label: "INCOME AND STABILITY STRATEGY", pendingText: "A plan for protecting, growing, or stabilizing your income. Based on your current situation and what your numbers reveal about your earning patterns and financial pressure points." },
+              { id: "fw_debt",      label: "DEBT AND OBLIGATION FRAMEWORK", pendingText: "A clear strategy for handling your existing debt and financial obligations. Prioritized, sequenced, and realistic based on your actual cash flow." },
+              { id: "fw_build",     label: "WEALTH BUILDING PATHWAY",       pendingText: "The long-term path forward. This covers where wealth building fits into your plan, when it starts, and what form it takes based on your timeline and goals." },
             ].map(f => (
               <div key={f.id} style={styles.frameworkCard}>
                 <PersonalizedField label={f.label} id={f.id} data={data} update={update} unlocked={call1Complete} rows={4} pendingText={f.pendingText} />
@@ -465,7 +465,7 @@ export default function ETFMStrategic() {
           Robert builds these rules after Session 1 based on your intake responses, behavioral patterns, and strategic conversation. They will include spending decision rules, savings policies, debt management rules, a financial pressure response framework, and a weekly financial operating rhythm.
         </p>
         <p style={styles.sectionCtx}>
-          Most financial mistakes happen during moments of stress, urgency, and emotional pressure — not because of lack of intelligence. This system is designed to reduce those moments.
+          Most financial mistakes happen during moments of stress, urgency, and emotional pressure, not because of lack of intelligence. This system is designed to reduce those moments.
         </p>
         <RobertNote>
           Decision rules are the most practical element of your reset. When you are under financial pressure, you will not have the mental bandwidth to make thoughtful decisions. These rules make the decision in advance so you do not have to.
@@ -473,13 +473,13 @@ export default function ETFMStrategic() {
         <WhyMatters>
           Without decision rules, financial choices get made emotionally, reactively, or under pressure. A written financial policy removes the variable of mood and circumstance from your most important decisions.
         </WhyMatters>
-        <LockedSection unlocked={call1Complete} message="Your personal spending, saving, debt, and income rules will be defined here after your Strategy Session. These become the financial boundaries you operate within going forward.">
+        <LockedSection unlocked={call1Complete} message="Your personal spending, saving, debt, and income rules will appear here. These are the financial boundaries you will operate within going forward. They are designed to reduce emotional decisions and replace reactive habits with consistent structure.">
           {[
-            { id: "rule_spending",  label: "SPENDING RULE",      pendingText: "Your personal cap or guideline for discretionary spending — defined during your session based on your income, obligations, and behavioral patterns." },
-            { id: "rule_saving",    label: "SAVING RULE",         pendingText: "The saving rate or method that works for your situation — not a generic percentage, but a rule built around your actual cash flow." },
-            { id: "rule_debt",      label: "DEBT RULE",           pendingText: "How you will handle debt repayment — which debts, in what order, at what pace — based on your full financial picture." },
-            { id: "rule_income",    label: "INCOME RULE",         pendingText: "How you treat and allocate income when it arrives — including irregular or variable income — so money has a job before it disappears." },
-            { id: "rule_emergency", label: "EMERGENCY FUND RULE", pendingText: "Your target emergency fund amount and the plan to build or maintain it based on your expenses, risk tolerance, and income stability." },
+            { id: "rule_spending",  label: "SPENDING RULE",      pendingText: "Your personal guideline for discretionary spending. Defined during your session based on your income, obligations, and behavioral patterns. Not a generic percentage." },
+            { id: "rule_saving",    label: "SAVING RULE",         pendingText: "The saving rate or method that works for your situation. Built around your actual cash flow, not a one-size-fits-all recommendation." },
+            { id: "rule_debt",      label: "DEBT RULE",           pendingText: "How you will handle debt repayment. Which debts, in what order, at what pace. Based on your full financial picture." },
+            { id: "rule_income",    label: "INCOME RULE",         pendingText: "How you treat and allocate income when it arrives, including irregular or variable income. So every dollar has a job before it disappears." },
+            { id: "rule_emergency", label: "EMERGENCY FUND RULE", pendingText: "Your target emergency fund amount and the plan to build or maintain it. Based on your expenses, income stability, and risk tolerance." },
             { id: "rule_invest",    label: "INVESTMENT RULE" },
           ].map(r => (
             <div key={r.id} style={styles.ruleCard}>
@@ -506,7 +506,7 @@ export default function ETFMStrategic() {
           The roadmap moves through three phases: Month 1 Stabilization to reduce financial chaos and create visibility, Month 2 Control to build consistency and reduce reactive decision-making, and Month 3 Positioning to transition into intentional financial positioning.
         </p>
         <p style={styles.sectionCtx}>
-          The goal is not perfection. The goal is to replace financial reaction with financial structure — one system, one decision, and one week at a time.
+          The goal is not perfection. The goal is to replace financial reaction with financial structure: one system, one decision, and one week at a time.
         </p>
         <RobertNote>
           The 90-day structure is intentional. Most financial change fails not because people lack motivation but because they try to change everything at once. This roadmap sequences your changes so each one builds on the previous.
@@ -514,11 +514,11 @@ export default function ETFMStrategic() {
         <WhyMatters>
           A 90-day roadmap creates sequenced momentum. Each phase builds the foundation for the next. Without a roadmap, implementation becomes reactive and inconsistent.
         </WhyMatters>
-        <LockedSection unlocked={call1Complete} message="Your 90-day action plan will appear here — broken into three phases with specific steps, priorities, and targets based on your goals and current financial position.">
+        <LockedSection unlocked={call1Complete} message="Your 90-day action plan will appear here. It is broken into three phases with specific steps, priorities, and targets based on your goals and current financial position. Each phase builds on the last.">
           {[
-            { id: "road_30", label: "DAYS 1–30: FOUNDATION",   sub: "Stabilization and structure installation", pendingText: "The first 30 days focus on stabilization — stopping financial leaks, installing structure, and building the habits that everything else depends on." },
-            { id: "road_60", label: "DAYS 31–60: MOMENTUM",    sub: "Consistency and behavioral reinforcement",  pendingText: "The middle phase focuses on consistency — reinforcing new behaviors, adjusting what isn't working, and building confidence in your system." },
-            { id: "road_90", label: "DAYS 61–90: POSITIONING", sub: "Advancement and future alignment",          pendingText: "The final phase focuses on advancement — moving from stability to growth and setting up the next chapter of your financial life." },
+            { id: "road_30", label: "DAYS 1–30: FOUNDATION",   sub: "Stabilization and structure installation", pendingText: "The first 30 days focus on stabilization. Stopping financial leaks, installing structure, and building the habits everything else depends on." },
+            { id: "road_60", label: "DAYS 31–60: MOMENTUM",    sub: "Consistency and behavioral reinforcement",  pendingText: "The middle phase focuses on consistency. Reinforcing new behaviors, adjusting what is not working, and building confidence in your system." },
+            { id: "road_90", label: "DAYS 61–90: POSITIONING", sub: "Advancement and future alignment",          pendingText: "The final phase focuses on advancement. Moving from stability to growth and setting up the next chapter of your financial life." },
           ].map(phase => (
             <div key={phase.id} style={styles.roadmapPhase}>
               <div style={styles.roadmapPhaseHeader}>
@@ -529,7 +529,7 @@ export default function ETFMStrategic() {
             </div>
           ))}
           <div style={styles.roadmapOutcome}>
-            <PersonalizedField label="90-DAY TARGET OUTCOME" id="road_outcome" data={data} update={update} unlocked={call1Complete} rows={3} pendingText="The specific, measurable result you and Robert have agreed to work toward by the end of 90 days. This is your north star for the entire plan." />
+            <PersonalizedField label="90-DAY TARGET OUTCOME" id="road_outcome" data={data} update={update} unlocked={call1Complete} rows={3} pendingText="The specific, measurable result you and Robert have agreed to work toward by the end of 90 days. This is the north star for your entire plan." />
           </div>
         </LockedSection>
       </section>
@@ -582,7 +582,7 @@ export default function ETFMStrategic() {
           Your 60-Day Priority Support begins immediately after your Strategic Framework is delivered. This is not unlimited open access. It is structured implementation support designed to help you maintain momentum, reduce confusion, and continue building consistency while your new financial systems are being put into practice.
         </p>
         <p style={styles.sectionCtx}>
-          Most financial plans fail during implementation — not because the plan was wrong, but because stress, pressure, and old patterns return. This support window exists to interrupt that cycle before it gains momentum.
+          Most financial plans fail during implementation, not because the plan was wrong, but because stress, pressure, and old patterns return. This support window exists to interrupt that cycle before it gains momentum.
         </p>
         <p style={styles.sectionCtx}>
           During your 60-day support period you have direct priority email access for questions and clarification about your framework, guidance while applying your decision rules and policies, support evaluating important financial decisions, accountability and momentum during implementation, and strategic direction when pressure or uncertainty arises.
@@ -596,7 +596,7 @@ export default function ETFMStrategic() {
         <WhyMatters>
           Strategic questions answered quickly save months of uncertainty. Use this access for decisions that feel unclear, situations that feel financially pressured, and moments where you need a second perspective.
         </WhyMatters>
-        <LockedSection unlocked={call1Complete} message="After your Strategy Session, you will have direct email access for questions, adjustments, and accountability check-ins for 60 days. Details and instructions will appear here once your session is complete.">
+        <LockedSection unlocked={call1Complete} message="After your Strategy Session, you will have direct email access for questions, adjustments, and accountability check-ins for 60 days. Instructions and contact details will appear here once your session is complete.">
           <div style={styles.supportBox}>
             <div style={styles.supportHeader}>
               <div style={styles.supportTitle}>PRIORITY EMAIL SUPPORT</div>
@@ -625,7 +625,7 @@ export default function ETFMStrategic() {
           <p style={{ margin: "0 0 12px" }}>It is about building systems strong enough to create clarity, consistency, and intentional direction long after the reset is complete.</p>
           <p style={{ margin: "0 0 12px" }}>You do not need to solve everything immediately. You simply need to stay honest, intentional, and committed to building stronger structure one decision at a time.</p>
           <p style={{ margin: "0 0 16px" }}>Most people remain financially reactive because they never stop long enough to build systems intentionally. You are doing that now. And that matters.</p>
-          <p style={{ margin: 0, color: "#C4960F" }}>— Robert, ETFM</p>
+          <p style={{ margin: 0, color: "#C4960F" }}>Robert, ETFM</p>
         </div>
         <span style={styles.footerLogo}>ETFM</span>
       </footer>
@@ -709,7 +709,7 @@ function PersonalizedField({ label, id, data, update, unlocked, rows = 4, hideLa
       </div>
     );
   }
-  // Locked — show pending card
+  // Locked: show pending card
   return (
     <div style={styles.pendingCard}>
       {!hideLabel && <div style={styles.pendingCardLabel}>{label}</div>}
@@ -725,7 +725,7 @@ function LockedSection({ unlocked, children, message }) {
       <div style={styles.lockedBanner}>
         <div style={styles.lockedBannerTitle}>🔒 PERSONALIZED MATERIAL IN DEVELOPMENT</div>
         <p style={styles.lockedBannerText}>
-          {message || "This section unlocks after your Strategy Session. The content here is built specifically for you — not from a template — and will be ready once your session is complete."}
+          {message || "This section unlocks after your Strategy Session. Everything here is built specifically around your intake responses, goals, and financial patterns. It will be ready once your session is complete."}
         </p>
       </div>
       <div style={{ opacity: 0.6, pointerEvents: "none", userSelect: "none" }}>{children}</div>
