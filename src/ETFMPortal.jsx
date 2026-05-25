@@ -77,7 +77,7 @@ export default function ETFMPortal() {
         </div>
 
         <p style={styles.heroTransition}>
-          <strong style={{ color: "#AAA", fontWeight: 400 }}>You are no longer operating in survival mode.</strong> You are building structure. This environment was designed to help you move from reaction to clarity, from stress to strategy, and from scattered financial decisions to intentional execution. Everything you need is here. Start at the top and read every section before clicking anything.
+          <strong style={{ color: "#4a4a4a", fontWeight: 400 }}>You are no longer operating in survival mode.</strong> You are building structure. This environment was designed to help you move from reaction to clarity, from stress to strategy, and from scattered financial decisions to intentional execution. Everything you need is here. Start at the top and read every section before clicking anything.
         </p>
 
         <div style={styles.howBox}>
@@ -91,7 +91,7 @@ export default function ETFMPortal() {
           ].map(([num, bold, rest]) => (
             <div key={num} style={styles.howStep}>
               <span style={styles.howNum}>{num}</span>
-              <span style={styles.howText}><strong style={{ color: "#AAA", fontWeight: 400 }}>{bold}</strong> {rest}</span>
+              <span style={styles.howText}><strong style={{ color: "#4a4a4a", fontWeight: 400 }}>{bold}</strong> {rest}</span>
             </div>
           ))}
         </div>
@@ -111,7 +111,7 @@ export default function ETFMPortal() {
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
                 <div style={{ ...styles.archDot, ...(i === 0 ? styles.archDotActive : i === 1 ? styles.archDotNear : {}) }} />
                 <span style={{ ...styles.archNum, ...(i === 0 ? { color: "#C4960F" } : {}) }}>0{i + 1}</span>
-                <span style={{ ...styles.archName, ...(i === 0 ? { color: "#FAF8F4" } : i === 1 ? { color: "#444" } : {}) }}>{phase}</span>
+                <span style={{ ...styles.archName, ...(i === 0 ? { color: "#1a1a2e" } : i === 1 ? { color: "#4a4a4a" } : {}) }}>{phase}</span>
                 <span style={{ ...styles.archStatus, ...(i === 0 ? { color: "#C4960F" } : {}) }}>{i === 0 ? "YOU ARE HERE" : "LOCKED"}</span>
               </div>
               {i < 4 && <div style={styles.archLine} />}
@@ -184,21 +184,21 @@ export default function ETFMPortal() {
         {/* IDENTITY SHIFT */}
         <div style={styles.shiftGrid}>
           <div style={styles.shiftSide}>
-            <div style={{ ...styles.shiftLabel, color: "#2A2A2A" }}>WHERE YOU ARE COMING FROM</div>
+            <div style={{ ...styles.shiftLabel, color: "#4a4a4a" }}>WHERE YOU ARE COMING FROM</div>
             {["Reactive decision-making", "Financial avoidance", "Mental overload", "Scattered obligations", "Emotional spending", "Survival-mode thinking", "Constant financial stress"].map(item => (
               <div key={item} style={styles.shiftItem}>
-                <div style={{ ...styles.shiftDot, background: "#222" }} />
-                <span style={{ color: "#2A2A2A", fontSize: 12, fontWeight: 300 }}>{item}</span>
+                <div style={{ ...styles.shiftDot, background: "#d0ccc4" }} />
+                <span style={{ color: "#4a4a4a", fontSize: 12, fontWeight: 300 }}>{item}</span>
               </div>
             ))}
           </div>
-          <div style={{ width: 1, background: "#1A1A1A" }} />
+          <div style={{ width: 1, background: "#e8e3da" }} />
           <div style={styles.shiftSide}>
             <div style={{ ...styles.shiftLabel, color: "#C4960F" }}>WHERE YOU ARE GOING</div>
             {["Intentional decision-making", "Operational clarity", "Structured financial systems", "Visible obligations", "Purposeful financial behavior", "Future positioning", "Calm financial awareness"].map(item => (
               <div key={item} style={styles.shiftItem}>
                 <div style={{ ...styles.shiftDot, background: "#C4960F" }} />
-                <span style={{ color: "#888", fontSize: 12, fontWeight: 300 }}>{item}</span>
+                <span style={{ color: "#4a4a4a", fontSize: 12, fontWeight: 300 }}>{item}</span>
               </div>
             ))}
           </div>
@@ -348,7 +348,7 @@ export default function ETFMPortal() {
               <div style={{ ...styles.rmNum, ...(active ? { color: "#C4960F" } : {}) }}>{num}</div>
               <div>
                 <div style={{ ...styles.rmTag, ...(active ? { color: "#C4960F" } : {}) }}>{tag}</div>
-                <div style={{ ...styles.rmName, ...(active ? { color: "#FAF8F4" } : {}) }}>{name}</div>
+                <div style={{ ...styles.rmName, ...(active ? { color: "#1a1a2e" } : {}) }}>{name}</div>
                 <div style={{ ...styles.rmDesc, ...(active ? { color: "#555" } : {}) }}>{desc}</div>
               </div>
               <div style={{ marginLeft: "auto", flexShrink: 0 }}>
@@ -447,7 +447,7 @@ function SectionLabel({ children }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 8 }}>
       <span style={{ color: "#C4960F", fontSize: 10, letterSpacing: 4 }}>{children}</span>
-      <div style={{ flex: 1, height: 1, background: "#1A1A1A" }} />
+      <div style={{ flex: 1, height: 1, background: "#e8e3da" }} />
     </div>
   );
 }
@@ -467,10 +467,10 @@ function ProgressCard({ label, value, pct, note, text }) {
       <div style={styles.progLabel}>{label}</div>
       <div style={{ fontFamily: "Georgia, serif", fontSize: 28, color: "#C4960F", marginBottom: 6 }}>{value}</div>
       <p style={styles.progText}>{text}</p>
-      <div style={{ background: "#1A1A1A", height: 1, marginTop: 14 }}>
+      <div style={{ background: "#e8e3da", height: 1, marginTop: 14 }}>
         <div style={{ background: "#C4960F", height: 1, width: `${pct}%`, transition: "width 0.6s ease" }} />
       </div>
-      <div style={{ color: "#333", fontSize: 10, marginTop: 8, fontStyle: "italic", fontFamily: "Georgia, serif" }}>{note}</div>
+      <div style={{ color: "#4a4a4a", fontSize: 10, marginTop: 8, fontStyle: "italic", fontFamily: "Georgia, serif" }}>{note}</div>
     </div>
   );
 }
@@ -482,11 +482,11 @@ function ToolCard({ phase, icon, name, what, why, time, status, completed, onCom
   return (
     <div style={{ ...styles.toolCard, ...(status === "ready" && !completed ? styles.toolCardActive : {}), ...(completed ? styles.toolCardDone : {}), ...(locked ? styles.toolCardLocked : {}), ...(open && !locked && !completed ? { background: "#FAFAF8", border: "1px solid #e8e3da" } : {}) }}>
       <div style={{ fontSize: 24, marginBottom: 10, opacity: locked ? 0.3 : 1 }}>{icon}</div>
-      <div style={{ color: locked ? "#2A2A2A" : "#C4960F", fontSize: 11, letterSpacing: 3, marginBottom: 8 }}>{phase}</div>
-      <div style={{ color: locked ? "#2A2A2A" : completed ? "#C4960F" : open ? "#1a1a2e" : "#DDD", fontSize: 15, fontFamily: "Georgia, serif", marginBottom: 8 }}>{name}</div>
-      <p style={{ color: locked ? "#1E1E1E" : open ? "#4a4a4a" : "#555", fontSize: 13, lineHeight: 1.6, marginBottom: 4, fontWeight: 300 }}>{what}</p>
-      <p style={{ color: locked ? "#141414" : open ? "#4a4a4a" : "#3A3A3A", fontSize: 13, lineHeight: 1.5, fontStyle: "italic", marginBottom: 12, fontWeight: 300 }}>{why}</p>
-      <div style={{ color: locked ? "#1A1A1A" : open ? "#1a1a2e" : "#333", fontSize: 12, letterSpacing: 1, marginBottom: 12 }}>{time}</div>
+      <div style={{ color: locked ? "#4a4a4a" : "#C4960F", fontSize: 11, letterSpacing: 3, marginBottom: 8 }}>{phase}</div>
+      <div style={{ color: locked ? "#4a4a4a" : completed ? "#C4960F" : "#1a1a2e", fontSize: 15, fontFamily: "Georgia, serif", marginBottom: 8 }}>{name}</div>
+      <p style={{ color: locked ? "#4a4a4a" : open ? "#4a4a4a" : "#4a4a4a", fontSize: 13, lineHeight: 1.6, marginBottom: 4, fontWeight: 300 }}>{what}</p>
+      <p style={{ color: locked ? "#4a4a4a" : open ? "#4a4a4a" : "#4a4a4a", fontSize: 13, lineHeight: 1.5, fontStyle: "italic", marginBottom: 12, fontWeight: 300 }}>{why}</p>
+      <div style={{ color: locked ? "#4a4a4a" : open ? "#1a1a2e" : "#4a4a4a", fontSize: 12, letterSpacing: 1, marginBottom: 12 }}>{time}</div>
 
       {completed ? (
         <div style={styles.completedBadge}>✓ COMPLETED</div>
@@ -594,118 +594,118 @@ function WeeklyReviewForm({ data, update }) {
 /* ── STYLES ── */
 
 const styles = {
-  page: { fontFamily: "'Inter', sans-serif", background: "#0D0D0D", color: "#E8E4DC", minHeight: "100vh", paddingBottom: 80 },
+  page: { fontFamily: "'Inter', sans-serif", background: "#FAFAF8", color: "#1a1a2e", minHeight: "100vh", paddingBottom: 80 },
   banner: { width: "100%", display: "block", maxHeight: 260, objectFit: "cover", objectPosition: "center 30%" },
-  nav: { background: "#090909", borderBottom: "1px solid #2A2414", padding: "18px 40px", display: "flex", alignItems: "center", justifyContent: "space-between" },
+  nav: { background: "#ffffff", borderBottom: "1px solid #e8e3da", padding: "18px 40px", display: "flex", alignItems: "center", justifyContent: "space-between" },
   logo: { fontFamily: "Georgia, serif", color: "#C4960F", fontSize: 24, letterSpacing: 6 },
-  logoSub: { color: "#3A3A3A", fontSize: 9, letterSpacing: 4, marginTop: 3 },
-  navName: { color: "#888", fontSize: 13 },
+  logoSub: { color: "#4a4a4a", fontSize: 9, letterSpacing: 4, marginTop: 3 },
+  navName: { color: "#4a4a4a", fontSize: 13 },
   navStep: { color: "#C4960F", fontSize: 10, letterSpacing: 2, marginTop: 3 },
-  saveToast: { position: "fixed", top: 16, right: 16, background: "#1A1505", border: "1px solid #C4960F", color: "#C4960F", fontSize: 12, padding: "8px 16px", zIndex: 9999, letterSpacing: 1 },
-  hero: { padding: "60px 40px 52px", borderBottom: "1px solid #1A1A1A" },
+  saveToast: { position: "fixed", top: 16, right: 16, background: "#fff8e8", border: "1px solid #C4960F", color: "#C4960F", fontSize: 12, padding: "8px 16px", zIndex: 9999, letterSpacing: 1 },
+  hero: { padding: "60px 40px 52px", borderBottom: "1px solid #e8e3da" },
   heroLabel: { color: "#C4960F", fontSize: 10, letterSpacing: 5, marginBottom: 20 },
-  heroTitle: { fontFamily: "Georgia, serif", fontSize: 44, color: "#FAF8F4", fontWeight: 400, lineHeight: 1.15, marginBottom: 20 },
-  congratsBox: { background: "#111", borderLeft: "2px solid #C4960F", padding: "22px 28px", marginBottom: 28, maxWidth: 680 },
+  heroTitle: { fontFamily: "Georgia, serif", fontSize: 44, color: "#1a1a2e", fontWeight: 400, lineHeight: 1.15, marginBottom: 20 },
+  congratsBox: { background: "#ffffff", borderLeft: "2px solid #C4960F", padding: "22px 28px", marginBottom: 28, maxWidth: 680 },
   congratsLabel: { color: "#C4960F", fontSize: 9, letterSpacing: 4, marginBottom: 12 },
-  congratsText: { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#888", fontSize: 15, lineHeight: 2 },
-  heroTransition: { color: "#666", fontSize: 15, lineHeight: 1.9, maxWidth: 640, marginBottom: 32, fontWeight: 300 },
-  howBox: { background: "#111", border: "1px solid #1A1A1A", borderLeft: "2px solid #C4960F", padding: "22px 28px", maxWidth: 680 },
+  congratsText: { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 15, lineHeight: 2 },
+  heroTransition: { color: "#4a4a4a", fontSize: 15, lineHeight: 1.9, maxWidth: 640, marginBottom: 32, fontWeight: 300 },
+  howBox: { background: "#ffffff", border: "1px solid #e8e3da", borderLeft: "2px solid #C4960F", padding: "22px 28px", maxWidth: 680 },
   howLabel: { color: "#C4960F", fontSize: 9, letterSpacing: 3, marginBottom: 14 },
-  howStep: { display: "flex", gap: 14, padding: "9px 0", borderBottom: "1px solid #141414", alignItems: "flex-start" },
+  howStep: { display: "flex", gap: 14, padding: "9px 0", borderBottom: "1px solid #e8e3da", alignItems: "flex-start" },
   howNum: { color: "#C4960F", fontSize: 11, minWidth: 18, paddingTop: 1 },
-  howText: { color: "#777", fontSize: 13, lineHeight: 1.7, fontWeight: 300 },
-  autosaveBar: { background: "#1A1505", border: "1px solid #2A2414", padding: "14px 20px", maxWidth: 680, marginTop: 16, color: "#888", fontSize: 12, lineHeight: 1.7, fontWeight: 300 },
+  howText: { color: "#4a4a4a", fontSize: 13, lineHeight: 1.7, fontWeight: 300 },
+  autosaveBar: { background: "#fff8e8", border: "1px solid #e8c87a", padding: "14px 20px", maxWidth: 680, marginTop: 16, color: "#4a4a4a", fontSize: 12, lineHeight: 1.7, fontWeight: 300 },
   section: { padding: "50px 40px 0" },
-  sectionCtx: { color: "#444", fontSize: 12, lineHeight: 1.8, marginBottom: 24, fontWeight: 300, maxWidth: 640 },
-  archTrack: { display: "flex", alignItems: "center", background: "#111", border: "1px solid #1A1A1A", padding: "24px 32px" },
-  archDot: { width: 10, height: 10, borderRadius: "50%", background: "#1A1A1A", border: "1px solid #222", flexShrink: 0 },
+  sectionCtx: { color: "#4a4a4a", fontSize: 12, lineHeight: 1.8, marginBottom: 24, fontWeight: 300, maxWidth: 640 },
+  archTrack: { display: "flex", alignItems: "center", background: "#ffffff", border: "1px solid #e8e3da", padding: "24px 32px" },
+  archDot: { width: 10, height: 10, borderRadius: "50%", background: "#e8e3da", border: "1px solid #d0ccc4", flexShrink: 0 },
   archDotActive: { background: "#C4960F", border: "1px solid #C4960F" },
-  archDotNear: { border: "1px solid #333" },
-  archLine: { flex: 1, height: 1, background: "#1A1A1A" },
-  archNum: { color: "#333", fontSize: 9, letterSpacing: 2 },
-  archName: { color: "#2A2A2A", fontSize: 10, fontFamily: "Georgia, serif", textAlign: "center" },
-  archStatus: { color: "#333", fontSize: 9, letterSpacing: 1 },
-  archBottom: { background: "#111", border: "1px solid #1A1A1A", borderTop: "none", padding: "14px 32px", color: "#2A2A2A", fontSize: 11, letterSpacing: 1, textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic" },
-  missionCard: { background: "#111", border: "1px solid #2A2414", borderTop: "2px solid #C4960F", padding: 40, position: "relative" },
-  missionBadge: { position: "absolute", top: 20, right: 20, background: "#1A1505", border: "1px solid #C4960F", color: "#C4960F", fontSize: 9, letterSpacing: 3, padding: "5px 14px" },
-  divider: { height: 1, background: "#1A1A1A", marginBottom: 24 },
+  archDotNear: { border: "1px solid #4a4a4a" },
+  archLine: { flex: 1, height: 1, background: "#e8e3da" },
+  archNum: { color: "#4a4a4a", fontSize: 9, letterSpacing: 2 },
+  archName: { color: "#4a4a4a", fontSize: 10, fontFamily: "Georgia, serif", textAlign: "center" },
+  archStatus: { color: "#4a4a4a", fontSize: 9, letterSpacing: 1 },
+  archBottom: { background: "#F0EDE8", border: "1px solid #e8e3da", borderTop: "none", padding: "14px 32px", color: "#4a4a4a", fontSize: 11, letterSpacing: 1, textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic" },
+  missionCard: { background: "#ffffff", border: "1px solid #e8e3da", borderTop: "2px solid #C4960F", padding: 40, position: "relative" },
+  missionBadge: { position: "absolute", top: 20, right: 20, background: "#fff8e8", border: "1px solid #C4960F", color: "#C4960F", fontSize: 9, letterSpacing: 3, padding: "5px 14px" },
+  divider: { height: 1, background: "#e8e3da", marginBottom: 24 },
   mcPhase: { color: "#C4960F", fontSize: 10, letterSpacing: 3, marginBottom: 8 },
-  mcTitle: { fontFamily: "Georgia, serif", fontSize: 26, color: "#FAF8F4", marginBottom: 24, fontWeight: 400 },
+  mcTitle: { fontFamily: "Georgia, serif", fontSize: 26, color: "#1a1a2e", marginBottom: 24, fontWeight: 400 },
   stepsLabel: { color: "#C4960F", fontSize: 9, letterSpacing: 3, marginBottom: 12 },
-  step: { display: "flex", gap: 14, padding: "10px 0", borderBottom: "1px solid #141414" },
+  step: { display: "flex", gap: 14, padding: "10px 0", borderBottom: "1px solid #e8e3da" },
   stepNum: { color: "#C4960F", fontSize: 11, minWidth: 20 },
-  stepText: { color: "#777", fontSize: 12, lineHeight: 1.7, fontWeight: 300 },
+  stepText: { color: "#4a4a4a", fontSize: 12, lineHeight: 1.7, fontWeight: 300 },
   metaGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, margin: "24px 0" },
-  metaItem: { background: "#0F0F0F", padding: "14px 18px" },
-  metaLabel: { color: "#333", fontSize: 9, letterSpacing: 2, marginBottom: 5 },
-  metaVal: { color: "#666", fontSize: 12, lineHeight: 1.6, fontWeight: 300 },
-  nextUnlock: { background: "#0F0F0F", borderTop: "1px solid #1A1A1A", padding: "14px 20px", marginBottom: 20, display: "flex", alignItems: "center", gap: 12 },
-  nextLabel: { color: "#333", fontSize: 9, letterSpacing: 3 },
+  metaItem: { background: "#F0EDE8", padding: "14px 18px" },
+  metaLabel: { color: "#4a4a4a", fontSize: 9, letterSpacing: 2, marginBottom: 5 },
+  metaVal: { color: "#4a4a4a", fontSize: 12, lineHeight: 1.6, fontWeight: 300 },
+  nextUnlock: { background: "#F0EDE8", borderTop: "1px solid #e8e3da", padding: "14px 20px", marginBottom: 20, display: "flex", alignItems: "center", gap: 12 },
+  nextLabel: { color: "#4a4a4a", fontSize: 9, letterSpacing: 3 },
   nextVal: { color: "#C4960F", fontSize: 12, fontFamily: "Georgia, serif" },
-  btnPrimary: { background: "#C4960F", color: "#0D0D0D", border: "none", padding: "13px 28px", fontSize: 11, letterSpacing: 2, cursor: "pointer", fontFamily: "Inter, sans-serif", fontWeight: 500 },
-  btnSecondary: { background: "transparent", color: "#C4960F", border: "1px solid #2A2414", padding: "13px 28px", fontSize: 11, letterSpacing: 2, cursor: "pointer", fontFamily: "Inter, sans-serif" },
-  mcHint: { color: "#333", fontSize: 11, marginTop: 12, fontStyle: "italic", fontFamily: "Georgia, serif" },
-  shiftGrid: { display: "grid", gridTemplateColumns: "1fr 1px 1fr", background: "#111", border: "1px solid #1A1A1A", marginTop: 2 },
+  btnPrimary: { background: "#C4960F", color: "#ffffff", border: "none", padding: "13px 28px", fontSize: 11, letterSpacing: 2, cursor: "pointer", fontFamily: "Inter, sans-serif", fontWeight: 500 },
+  btnSecondary: { background: "transparent", color: "#C4960F", border: "1px solid #C4960F", padding: "13px 28px", fontSize: 11, letterSpacing: 2, cursor: "pointer", fontFamily: "Inter, sans-serif" },
+  mcHint: { color: "#4a4a4a", fontSize: 11, marginTop: 12, fontStyle: "italic", fontFamily: "Georgia, serif" },
+  shiftGrid: { display: "grid", gridTemplateColumns: "1fr 1px 1fr", background: "#ffffff", border: "1px solid #e8e3da", marginTop: 2 },
   shiftSide: { padding: 32 },
   shiftLabel: { fontSize: 9, letterSpacing: 4, marginBottom: 20 },
-  shiftItem: { display: "flex", alignItems: "flex-start", gap: 10, padding: "9px 0", borderBottom: "1px solid #141414" },
+  shiftItem: { display: "flex", alignItems: "flex-start", gap: 10, padding: "9px 0", borderBottom: "1px solid #e8e3da" },
   shiftDot: { width: 4, height: 4, borderRadius: "50%", marginTop: 6, flexShrink: 0 },
-  shiftBottom: { padding: "20px 32px", borderTop: "1px solid #1A1A1A", gridColumn: "1/4", background: "#0F0F0F", textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic", color: "#555", fontSize: 13, lineHeight: 1.9 },
+  shiftBottom: { padding: "20px 32px", borderTop: "1px solid #e8e3da", gridColumn: "1/4", background: "#F0EDE8", textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 13, lineHeight: 1.9 },
   toolIntro: { background: "#F0EDE8", border: "1px solid #e8e3da", borderLeft: "2px solid #C4960F", padding: "20px 24px", marginBottom: 14 },
   toolIntroLabel: { color: "#C4960F", fontSize: 9, letterSpacing: 3, marginBottom: 8 },
   toolIntroText: { color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, fontWeight: 300 },
   toolGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 },
-  toolCard: { background: "#111", border: "1px solid #1A1A1A", padding: 22 },
+  toolCard: { background: "#ffffff", border: "1px solid #e8e3da", padding: 22 },
   toolCardActive: { borderColor: "#C4960F" },
-  toolCardDone: { borderColor: "#2A3A1A", background: "#0F110D" },
+  toolCardDone: { borderColor: "#4A8A4A", background: "#f0f8f0" },
   toolCardLocked: { opacity: 0.5 },
   toolContent: { marginTop: 20, borderTop: "1px solid #e8e3da", paddingTop: 20, background: "#FAFAF8" },
-  toolBtn: { background: "#C4960F", color: "#0D0D0D", border: "none", padding: "10px 20px", fontSize: 10, letterSpacing: 2, cursor: "pointer", fontFamily: "Inter, sans-serif", fontWeight: 500, width: "100%" },
-  completedBadge: { background: "#1A3A1A", border: "1px solid #2A5A2A", color: "#4A8A4A", fontSize: 10, letterSpacing: 2, padding: "6px 12px", display: "inline-block" },
-  lockedBadge: { background: "#0F0F0F", border: "1px solid #141414", color: "#222", fontSize: 10, letterSpacing: 2, padding: "6px 12px", display: "inline-block" },
+  toolBtn: { background: "#C4960F", color: "#ffffff", border: "none", padding: "10px 20px", fontSize: 10, letterSpacing: 2, cursor: "pointer", fontFamily: "Inter, sans-serif", fontWeight: 500, width: "100%" },
+  completedBadge: { background: "#f0f8f0", border: "1px solid #4A8A4A", color: "#4A8A4A", fontSize: 10, letterSpacing: 2, padding: "6px 12px", display: "inline-block" },
+  lockedBadge: { background: "#F0EDE8", border: "1px solid #d0ccc4", color: "#4a4a4a", fontSize: 10, letterSpacing: 2, padding: "6px 12px", display: "inline-block" },
   formIntro: { color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, marginBottom: 20, fontStyle: "italic" },
   fieldLabel: { display: "block", color: "#1a1a2e", fontSize: 12, letterSpacing: 2, marginBottom: 6 },
   input: { width: "100%", background: "#ffffff", border: "1px solid #e8e3da", color: "#1a1a2e", fontSize: 15, padding: "10px 14px", fontFamily: "Inter, sans-serif", outline: "none", boxSizing: "border-box" },
   textarea: { width: "100%", background: "#ffffff", border: "1px solid #e8e3da", color: "#1a1a2e", fontSize: 15, padding: "10px 14px", fontFamily: "Inter, sans-serif", outline: "none", resize: "vertical", boxSizing: "border-box" },
   expGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 12 },
-  expItem: { background: "#111", border: "1px solid #1A1A1A", padding: "16px 20px", display: "flex", gap: 12, alignItems: "flex-start" },
+  expItem: { background: "#ffffff", border: "1px solid #e8e3da", padding: "16px 20px", display: "flex", gap: 12, alignItems: "flex-start" },
   expDot: { width: 4, height: 4, borderRadius: "50%", background: "#C4960F", marginTop: 6, flexShrink: 0 },
-  expText: { color: "#555", fontSize: 12, lineHeight: 1.6, fontWeight: 300 },
-  expBottom: { background: "#0F0F0F", border: "1px solid #1A1A1A", padding: "16px 20px", textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic", color: "#444", fontSize: 13, lineHeight: 1.8 },
+  expText: { color: "#4a4a4a", fontSize: 12, lineHeight: 1.6, fontWeight: 300 },
+  expBottom: { background: "#F0EDE8", border: "1px solid #e8e3da", padding: "16px 20px", textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 13, lineHeight: 1.8 },
   progGrid3: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, marginBottom: 12 },
   progGrid2: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 },
-  progCard: { background: "#111", border: "1px solid #1A1A1A", padding: 24 },
-  progLabel: { color: "#333", fontSize: 9, letterSpacing: 3, marginBottom: 12 },
-  progText: { color: "#3A3A3A", fontSize: 11, lineHeight: 1.7, fontWeight: 300 },
-  rmItem: { background: "#111", border: "1px solid #1A1A1A", padding: "20px 28px", display: "flex", alignItems: "center", gap: 20 },
+  progCard: { background: "#ffffff", border: "1px solid #e8e3da", padding: 24 },
+  progLabel: { color: "#4a4a4a", fontSize: 9, letterSpacing: 3, marginBottom: 12 },
+  progText: { color: "#4a4a4a", fontSize: 11, lineHeight: 1.7, fontWeight: 300 },
+  rmItem: { background: "#ffffff", border: "1px solid #e8e3da", padding: "20px 28px", display: "flex", alignItems: "center", gap: 20 },
   rmItemActive: { borderColor: "#C4960F" },
-  rmNum: { fontFamily: "Georgia, serif", fontSize: 28, color: "#1A1A1A", flexShrink: 0 },
-  rmTag: { fontSize: 9, letterSpacing: 3, color: "#222", marginBottom: 3 },
-  rmName: { fontFamily: "Georgia, serif", fontSize: 14, color: "#222", marginBottom: 2 },
-  rmDesc: { color: "#1E1E1E", fontSize: 11, fontWeight: 300 },
-  rmStatusActive: { background: "#1A1505", color: "#C4960F", border: "1px solid #2A2414", fontSize: 9, letterSpacing: 2, padding: "4px 12px" },
-  rmStatusLocked: { background: "#0D0D0D", color: "#1A1A1A", border: "1px solid #141414", fontSize: 9, letterSpacing: 2, padding: "4px 12px" },
+  rmNum: { fontFamily: "Georgia, serif", fontSize: 28, color: "#e8e3da", flexShrink: 0 },
+  rmTag: { fontSize: 9, letterSpacing: 3, color: "#4a4a4a", marginBottom: 3 },
+  rmName: { fontFamily: "Georgia, serif", fontSize: 14, color: "#1a1a2e", marginBottom: 2 },
+  rmDesc: { color: "#4a4a4a", fontSize: 11, fontWeight: 300 },
+  rmStatusActive: { background: "#fff8e8", color: "#C4960F", border: "1px solid #C4960F", fontSize: 9, letterSpacing: 2, padding: "4px 12px" },
+  rmStatusLocked: { background: "#F0EDE8", color: "#4a4a4a", border: "1px solid #e8e3da", fontSize: 9, letterSpacing: 2, padding: "4px 12px" },
   rhythmGrid: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10, marginBottom: 12 },
-  rhCard: { background: "#111", border: "1px solid #1A1A1A", padding: 20 },
+  rhCard: { background: "#ffffff", border: "1px solid #e8e3da", padding: 20 },
   rhDay: { color: "#C4960F", fontSize: 10, letterSpacing: 3, marginBottom: 8 },
-  rhText: { color: "#555", fontSize: 12, lineHeight: 1.7, fontWeight: 300 },
-  rhBottom: { background: "#111", border: "1px solid #1A1A1A", borderTop: "none", padding: "14px 20px", textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic", color: "#3A3A3A", fontSize: 13 },
-  advisor: { background: "#111", border: "1px solid #1A1A1A", padding: 28 },
+  rhText: { color: "#4a4a4a", fontSize: 12, lineHeight: 1.7, fontWeight: 300 },
+  rhBottom: { background: "#F0EDE8", border: "1px solid #e8e3da", borderTop: "none", padding: "14px 20px", textAlign: "center", fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 13 },
+  advisor: { background: "#ffffff", border: "1px solid #e8e3da", padding: 28 },
   advisorLabel: { color: "#C4960F", fontSize: 9, letterSpacing: 4, marginBottom: 16 },
   advisorGrid: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 },
-  aiCard: { background: "#0F0F0F", padding: 16 },
-  aiLabel: { color: "#333", fontSize: 9, letterSpacing: 2, marginBottom: 6 },
-  aiText: { color: "#444", fontSize: 11, lineHeight: 1.6, fontWeight: 300 },
-  robertSection: { padding: "50px 40px", borderTop: "1px solid #1A1A1A", display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 40, alignItems: "start", marginTop: 50 },
-  robertImg: { width: "100%", display: "block", objectFit: "cover", height: 420, border: "1px solid #1A1A1A" },
-  robertImgLabel: { background: "#090909", border: "1px solid #2A2414", padding: "10px 16px" },
+  aiCard: { background: "#F0EDE8", padding: 16 },
+  aiLabel: { color: "#4a4a4a", fontSize: 9, letterSpacing: 2, marginBottom: 6 },
+  aiText: { color: "#4a4a4a", fontSize: 11, lineHeight: 1.6, fontWeight: 300 },
+  robertSection: { padding: "50px 40px", borderTop: "1px solid #e8e3da", display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 40, alignItems: "start", marginTop: 50 },
+  robertImg: { width: "100%", display: "block", objectFit: "cover", height: 420, border: "1px solid #e8e3da" },
+  robertImgLabel: { background: "#F0EDE8", border: "1px solid #e8e3da", padding: "10px 16px" },
   robertImgName: { color: "#C4960F", fontSize: 11, letterSpacing: 2 },
-  robertImgTitle: { color: "#3A3A3A", fontSize: 10, letterSpacing: 1, marginTop: 2 },
+  robertImgTitle: { color: "#4a4a4a", fontSize: 10, letterSpacing: 1, marginTop: 2 },
   robertLabel: { color: "#C4960F", fontSize: 9, letterSpacing: 4, marginBottom: 4 },
-  robertContext: { color: "#3A3A3A", fontSize: 11, lineHeight: 1.7, marginBottom: 18, fontWeight: 300, borderBottom: "1px solid #141414", paddingBottom: 14 },
-  robertText: { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#777", fontSize: 14, lineHeight: 2.1 },
-  robertSig: { color: "#2A2A2A", fontSize: 11, marginTop: 18, letterSpacing: 1 },
-  footer: { margin: "56px 40px 0", borderTop: "1px solid #1A1A1A", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center" },
-  footerQuote: { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#222", fontSize: 14 },
-  footerLogo: { color: "#1A1A1A", fontFamily: "Georgia, serif", fontSize: 18, letterSpacing: 4 },
+  robertContext: { color: "#4a4a4a", fontSize: 11, lineHeight: 1.7, marginBottom: 18, fontWeight: 300, borderBottom: "1px solid #e8e3da", paddingBottom: 14 },
+  robertText: { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 14, lineHeight: 2.1 },
+  robertSig: { color: "#4a4a4a", fontSize: 11, marginTop: 18, letterSpacing: 1 },
+  footer: { margin: "56px 40px 0", borderTop: "1px solid #e8e3da", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center" },
+  footerQuote: { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 14 },
+  footerLogo: { color: "#4a4a4a", fontFamily: "Georgia, serif", fontSize: 18, letterSpacing: 4 },
 };
