@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const STORAGE_KEY = "etfm_strategic_data";
 
-const CALENDLY_PRE = "https://calendly.com/exit-etfm/etfm-strategic-reset-session";
+const CALENDLY_PRE  = "https://calendly.com/exit-etfm/etfm-strategic-reset-session";
 const CALENDLY_POST = "https://calendly.com/exit-etfm/etfm-strategic-reset-session";
 
 const loadData = () => {
@@ -116,13 +116,13 @@ export default function ETFMStrategic() {
   };
 
   const answeredCount = ALL_IDS.filter(id => (data[id] || "").trim()).length;
-  const progressPct = Math.round((answeredCount / TOTAL_Q) * 100);
+  const progressPct   = Math.round((answeredCount / TOTAL_Q) * 100);
   const intakeComplete = data.intake_submitted;
-  const call1Complete = data.call1_complete;
-  const call2Complete = data.call2_complete;
+  const call1Complete  = data.call1_complete;
+  const call2Complete  = data.call2_complete;
 
-  const currentPhase = call2Complete ? "Phase 3: Framework" : call1Complete ? "Phase 2: Sessions" : "Phase 1: Intake";
-  const sessionStatus = call2Complete ? "Both sessions complete" : call1Complete ? "Session 1 complete" : "Not yet started";
+  const currentPhase   = call2Complete ? "Phase 3: Framework" : call1Complete ? "Phase 2: Sessions" : "Phase 1: Intake";
+  const sessionStatus  = call2Complete ? "Both sessions complete" : call1Complete ? "Session 1 complete" : "Not yet started";
   const frameworkStatus = call1Complete ? "Unlocked" : "Locked";
   const nextAction = call2Complete
     ? "Review your Strategic Framework and 90-Day Roadmap"
@@ -132,7 +132,7 @@ export default function ETFMStrategic() {
         ? "Book and complete Session 1"
         : progressPct === 100
           ? "Submit your Intake Form"
-          : "Complete the Strategic Intake Form";
+          : "Complete your Strategic Intake Form so Robert can begin identifying the financial patterns, stress points, and structural priorities shaping your current financial reality.";
 
   const processSteps = [
     { label: "Complete the Strategic Intake Form (38 questions)", desc: "Answer 38 guided questions across 7 sections designed to uncover financial patterns, stress points, structural gaps, habits, and strategic priorities before Session 1.", done: !!intakeComplete },
@@ -183,10 +183,10 @@ export default function ETFMStrategic() {
         <p style={styles.sectionCtx}>You are currently in the Discovery Phase of your Strategic Reset Partnership. This phase is designed to help identify your financial patterns, pressure points, structural gaps, and highest-priority focus areas before your first strategy session. As you complete your intake, Robert Brickey personally reviews your responses and begins building the foundation of your personalized Strategic Operating Framework behind the scenes. The goal right now is not perfection. The goal is clarity.</p>
         <div style={styles.statusGrid}>
           {[
-            { label: "CURRENT PHASE",    val: currentPhase,        sub: "Identifying patterns, pressure points, and structural gaps before Session 1." },
-            { label: "SESSION STATUS",   val: sessionStatus,       sub: "Session 1 becomes available immediately after your intake is completed." },
-            { label: "FRAMEWORK STATUS", val: frameworkStatus,     sub: "Your Strategic Framework begins taking shape as Robert reviews your intake responses." },
-            { label: "INTAKE PROGRESS",  val: `${progressPct}%`,  sub: "Progress saves automatically as you complete each section." },
+            { label: "CURRENT PHASE",    val: currentPhase,       sub: "Identifying patterns, pressure points, and structural gaps before Session 1." },
+            { label: "SESSION STATUS",   val: sessionStatus,      sub: "Session 1 becomes available immediately after your intake is completed." },
+            { label: "FRAMEWORK STATUS", val: frameworkStatus,    sub: "Your Strategic Framework begins taking shape as Robert reviews your intake responses." },
+            { label: "INTAKE PROGRESS",  val: `${progressPct}%`, sub: "Progress saves automatically as you complete each section." },
           ].map(({ label, val, sub }) => (
             <div key={label} style={styles.statusTile}>
               <div style={styles.statusTileLabel}>{label}</div>
@@ -197,9 +197,9 @@ export default function ETFMStrategic() {
         </div>
         <div style={styles.statusNextAction}>
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: intakeComplete ? 0 : 8 }}>
+            <div style={{ display: "flex", alignItems: "baseline", gap: 14, marginBottom: (!intakeComplete && !call1Complete && !call2Complete) ? 8 : 0 }}>
               <span style={styles.statusNextLabel}>NEXT ACTION</span>
-              <span style={styles.statusNextVal}>{intakeComplete || call1Complete || call2Complete ? nextAction : "Complete your Strategic Intake Form so Robert can begin identifying the financial patterns, stress points, and structural priorities shaping your current financial reality."}</span>
+              <span style={styles.statusNextVal}>{nextAction}</span>
             </div>
             {!intakeComplete && !call1Complete && !call2Complete && (
               <p style={styles.statusNextSub}>The more honest and complete your responses are, the more personalized and strategic your Reset Framework becomes.</p>
@@ -232,6 +232,7 @@ export default function ETFMStrategic() {
       {/* ── SECTION 1: INTAKE FORM ── */}
       <section style={styles.section}>
         <SectionLabel>SECTION 1 — STRATEGIC INTAKE FORM</SectionLabel>
+        <GuidedNote>Start here. Complete all 7 intake sections before your first session.</GuidedNote>
         <p style={styles.sectionCtx}>There are 38 questions across 7 guided sections designed to help identify your current financial structure, pressure points, decision-making patterns, habits, and strategic priorities before Session 1. Click into each section and answer the questions as honestly as possible. These questions are intentionally designed to help uncover where financial stress is being created, where your system may be breaking down, and what changes will create the greatest impact moving forward. Your answers are saved automatically and personally reviewed by Robert Brickey prior to Session 1 so your Strategic Reset Framework can be built around your real financial reality, not generic advice. You do not need perfect answers or exact numbers. The goal is clarity, not perfection.</p>
 
         <RobertNote>
@@ -293,11 +294,29 @@ export default function ETFMStrategic() {
         {intakeComplete && (
           <div style={styles.submittedBadge}>✓ INTAKE FORM SUBMITTED — Robert Brickey will review your responses before Session 1</div>
         )}
+
+        {/* SESSION 1 STATUS — shown only after intake is submitted */}
+        {intakeComplete && (
+          <div style={styles.session1StatusBlock}>
+            <div style={styles.session1StatusLabel}>SESSION 1 STATUS</div>
+            <p style={styles.session1StatusText}>
+              Once your Strategic Intake Form is complete and Session 1 has been finished, mark your session complete below to unlock your personalized Matrix Analysis, Strategic Framework, Decision Rules, 90-Day Roadmap, and Session Notes.
+            </p>
+            <p style={styles.session1StatusSub}>
+              Your personalized strategic materials begin unlocking after Session 1 because Robert uses your intake responses and strategy conversation to build them specifically around your situation — not from a generic template.
+            </p>
+            {call1Complete
+              ? <div style={styles.submittedBadge}>✓ SESSION 1 COMPLETE — Your personalized materials are now unlocked</div>
+              : <button style={{ ...styles.btnSecondary, marginTop: 16 }} onClick={() => update("call1_complete", true)}>MARK SESSION 1 COMPLETE</button>
+            }
+          </div>
+        )}
       </section>
 
       {/* ── SECTION 2: SESSION BOOKING ── */}
       <section style={styles.section}>
         <SectionLabel>SECTION 2 — SESSION BOOKING</SectionLabel>
+        <GuidedNote>Book both sessions after completing your intake. Session 1 first, Session 2 after your framework is delivered.</GuidedNote>
         <p style={styles.sectionCtx}>Book your strategy sessions at a pace that feels intentional and manageable for you. Session 1 becomes available immediately after completing your Strategic Intake Form and is designed to help identify your financial patterns, pressure points, structural gaps, and highest-priority focus areas. Session 2 is scheduled after Session 1 and focuses on reviewing your personalized Strategic Framework, implementation priorities, and next-step execution plan together. These sessions are designed to create clarity, structure, and direction, not overwhelm. Take your time, choose the schedule that works best for you, and arrive ready for an honest strategic conversation about where you are and where you want to go next.</p>
 
         <RobertNote>
@@ -340,24 +359,30 @@ export default function ETFMStrategic() {
           </div>
         </div>
 
-        <div style={styles.sessionNote}>
-          After completing Session 1, mark it complete below to unlock your full Matrix Score, Strategic Framework, Decision Rules, 90-Day Roadmap, and Session Notes.
-        </div>
-        <div style={{ display: "flex", gap: 12, marginTop: 14 }}>
-          {!call1Complete && (
-            <button style={styles.btnSecondary} onClick={() => update("call1_complete", true)}>MARK SESSION 1 COMPLETE</button>
-          )}
-          {call1Complete && !call2Complete && (
+        {call1Complete && !call2Complete && (
+          <div style={{ marginTop: 14 }}>
             <button style={styles.btnSecondary} onClick={() => update("call2_complete", true)}>MARK SESSION 2 COMPLETE</button>
-          )}
-          {call2Complete && <div style={styles.submittedBadge}>✓ BOTH SESSIONS COMPLETE</div>}
-        </div>
+          </div>
+        )}
+        {call2Complete && <div style={{ ...styles.submittedBadge, marginTop: 14 }}>✓ BOTH SESSIONS COMPLETE</div>}
       </section>
 
       {/* ── SECTION 3: MATRIX SCORE ── */}
       <section style={styles.section}>
         <SectionLabel>SECTION 3 — FULL MATRIX SCORE AND STRUCTURAL ANALYSIS</SectionLabel>
-        <p style={styles.sectionCtx}>Your complete five-component financial matrix analysis and structural breakdown, delivered after Session 1.</p>
+        <GuidedNote>This section will be completed by Robert Brickey after Session 1 and will unlock automatically.</GuidedNote>
+        <p style={styles.sectionCtx}>
+          This personalized operational analysis is designed to identify the financial behaviors, stress patterns, structural gaps, and decision-making cycles currently shaping your financial reality.
+        </p>
+        <p style={styles.sectionCtx}>
+          Most people know they feel financial pressure. Very few understand the systems, habits, and recurring patterns creating that pressure repeatedly.
+        </p>
+        <p style={styles.sectionCtx}>
+          Your Full Matrix Score and Structural Analysis is designed to help clarify where your system is breaking down, what is creating the most pressure, what behaviors are repeating, and what changes will create the greatest impact moving forward.
+        </p>
+        <p style={styles.sectionCtx}>
+          The goal is not judgment. The goal is awareness, clarity, and intentional financial operation. Robert Brickey personally develops this analysis after reviewing your intake responses and your first strategy session together.
+        </p>
         <RobertNote>
           Your Matrix Score is not a grade. It is a map. It shows where your financial system has gaps and where the highest-leverage changes are. The score itself is less important than the pattern it reveals.
         </RobertNote>
@@ -371,43 +396,55 @@ export default function ETFMStrategic() {
               { key: "sc_pattern",    name: "Money Pattern",      desc: "How consistently you handle income, expenses, and unexpected funds." },
               { key: "sc_stress",     name: "Stress Response",    desc: "How you respond when financial pressure builds or problems arise." },
               { key: "sc_structure",  name: "Financial Structure", desc: "The systems and habits you have in place to manage your finances." },
-              { key: "sc_readiness", name: "System Readiness",   desc: "Your ability and mindset to build and follow a financial plan." },
+              { key: "sc_readiness",  name: "System Readiness",   desc: "Your ability and mindset to build and follow a financial plan." },
             ].map(comp => (
               <div key={comp.key} style={styles.matrixCard}>
                 <div style={styles.matrixName}>{comp.name}</div>
                 <div style={styles.matrixDesc}>{comp.desc}</div>
-                <div style={styles.matrixScore}>{data[comp.key] || "—"}<span style={{ fontSize: 13, color: "#4a4a4a" }}> / 100</span></div>
-                <input value={data[comp.key] || ""} onChange={e => update(comp.key, e.target.value)} placeholder="Enter score" style={{ ...styles.input, marginTop: 10, fontSize: 13 }} />
+                <PersonalizedField
+                  label={comp.name}
+                  id={comp.key}
+                  data={data}
+                  update={update}
+                  unlocked={call1Complete}
+                  singleLine
+                  displayAs="score"
+                />
               </div>
             ))}
           </div>
-          <div style={{ marginTop: 24 }}>
-            <label style={styles.fieldLabel}>STRUCTURAL ANALYSIS</label>
-            <textarea value={data.structural_analysis || ""} onChange={e => update("structural_analysis", e.target.value)} placeholder="Robert Brickey's structural analysis delivered after Session 1..." rows={6} style={styles.textarea} />
-          </div>
+          <PersonalizedField label="STRUCTURAL ANALYSIS" id="structural_analysis" data={data} update={update} unlocked={call1Complete} rows={6} />
         </LockedSection>
       </section>
 
       {/* ── SECTION 4: STRATEGIC FRAMEWORK ── */}
       <section style={styles.section}>
         <SectionLabel>SECTION 4 — PERSONALIZED STRATEGIC OPERATING FRAMEWORK</SectionLabel>
-        <p style={styles.sectionCtx}>Your custom financial operating system built around your specific situation, goals, and pressure points. Delivered after Session 1.</p>
+        <GuidedNote>This section will be completed by Robert Brickey after Session 1 and will unlock automatically.</GuidedNote>
+        <p style={styles.sectionCtx}>
+          After Session 1, Robert Brickey personally develops a Strategic Operating Framework built entirely around your financial reality, pressure points, goals, and implementation capacity.
+        </p>
+        <p style={styles.sectionCtx}>
+          This is not a generic financial template. It is a personalized operational system that will include your strategic financial priorities, a structural gap analysis, a personalized strategic action plan, decision rules and financial policies, system recommendations, a pressure reduction strategy, 90-day strategic execution priorities, and behavioral and pattern insights.
+        </p>
+        <p style={styles.sectionCtx}>
+          Most people do not need more financial information. They need a clearer operational framework for how to move forward intentionally. That is what this section delivers.
+        </p>
         <RobertNote>
           Your Strategic Operating Framework is not a generic plan. It was built around your specific answers, your situation, and your goals. Every element here was chosen because it addresses a gap in your current financial system.
         </RobertNote>
         <LockedSection unlocked={call1Complete}>
           <div style={styles.frameworkGrid}>
             {[
-              { id: "fw_priority",  label: "PRIMARY STRATEGIC PRIORITY",   placeholder: "Your highest-leverage focus area based on your intake and Session 1..." },
-              { id: "fw_structure", label: "STRUCTURAL FOUNDATION",         placeholder: "The core financial systems and behaviors to install first..." },
-              { id: "fw_behavior",  label: "BEHAVIORAL PROTOCOL",           placeholder: "Specific behavioral changes and decision-making protocols for your situation..." },
-              { id: "fw_income",    label: "INCOME AND STABILITY STRATEGY", placeholder: "Recommendations specific to your income structure and consistency..." },
-              { id: "fw_debt",      label: "DEBT AND OBLIGATION FRAMEWORK", placeholder: "Prioritization and sequencing for your specific debt obligations..." },
-              { id: "fw_build",     label: "WEALTH BUILDING PATHWAY",       placeholder: "The longer-term positioning and wealth-building strategy aligned with your goals..." },
+              { id: "fw_priority",  label: "PRIMARY STRATEGIC PRIORITY" },
+              { id: "fw_structure", label: "STRUCTURAL FOUNDATION" },
+              { id: "fw_behavior",  label: "BEHAVIORAL PROTOCOL" },
+              { id: "fw_income",    label: "INCOME AND STABILITY STRATEGY" },
+              { id: "fw_debt",      label: "DEBT AND OBLIGATION FRAMEWORK" },
+              { id: "fw_build",     label: "WEALTH BUILDING PATHWAY" },
             ].map(f => (
               <div key={f.id} style={styles.frameworkCard}>
-                <div style={styles.frameworkLabel}>{f.label}</div>
-                <textarea value={data[f.id] || ""} onChange={e => update(f.id, e.target.value)} placeholder={f.placeholder} rows={4} style={styles.textarea} />
+                <PersonalizedField label={f.label} id={f.id} data={data} update={update} unlocked={call1Complete} rows={4} />
               </div>
             ))}
           </div>
@@ -417,7 +454,19 @@ export default function ETFMStrategic() {
       {/* ── SECTION 5: DECISION RULES ── */}
       <section style={styles.section}>
         <SectionLabel>SECTION 5 — DECISION RULES AND FINANCIAL POLICY SYSTEM</SectionLabel>
-        <p style={styles.sectionCtx}>Your personal financial policy: a set of clear rules that govern financial decisions so you never have to make them under pressure again.</p>
+        <GuidedNote>This section will be completed by Robert Brickey after Session 1 and will unlock automatically.</GuidedNote>
+        <p style={styles.sectionCtx}>
+          This is not a budget. This is a personalized financial operating system designed to help you make clearer, more intentional decisions under pressure.
+        </p>
+        <p style={styles.sectionCtx}>
+          Instead of constantly asking what you should do right now, you will operate from a clear set of rules designed around your specific situation, stress patterns, and financial priorities.
+        </p>
+        <p style={styles.sectionCtx}>
+          Robert builds these rules after Session 1 based on your intake responses, behavioral patterns, and strategic conversation. They will include spending decision rules, savings policies, debt management rules, a financial pressure response framework, and a weekly financial operating rhythm.
+        </p>
+        <p style={styles.sectionCtx}>
+          Most financial mistakes happen during moments of stress, urgency, and emotional pressure — not because of lack of intelligence. This system is designed to reduce those moments.
+        </p>
         <RobertNote>
           Decision rules are the most practical element of your reset. When you are under financial pressure, you will not have the mental bandwidth to make thoughtful decisions. These rules make the decision in advance so you do not have to.
         </RobertNote>
@@ -425,9 +474,6 @@ export default function ETFMStrategic() {
           Without decision rules, financial choices get made emotionally, reactively, or under pressure. A written financial policy removes the variable of mood and circumstance from your most important decisions.
         </WhyMatters>
         <LockedSection unlocked={call1Complete}>
-          <div style={styles.rulesIntro}>
-            <p style={styles.rulesIntroText}>Decision rules remove the emotional variable from financial decisions. These rules are built specifically around your behavioral patterns, pressure points, and goals identified during intake and Session 1.</p>
-          </div>
           {[
             { id: "rule_spending",  label: "SPENDING RULE" },
             { id: "rule_saving",    label: "SAVING RULE" },
@@ -437,13 +483,11 @@ export default function ETFMStrategic() {
             { id: "rule_invest",    label: "INVESTMENT RULE" },
           ].map(r => (
             <div key={r.id} style={styles.ruleCard}>
-              <div style={styles.ruleLabel}>{r.label}</div>
-              <textarea value={data[r.id] || ""} onChange={e => update(r.id, e.target.value)} placeholder={`Your personal ${r.label.toLowerCase()} delivered after Session 1...`} rows={2} style={styles.textarea} />
+              <PersonalizedField label={r.label} id={r.id} data={data} update={update} unlocked={call1Complete} rows={2} />
             </div>
           ))}
-          <div style={{ marginTop: 16 }}>
-            <label style={styles.fieldLabel}>ADDITIONAL FINANCIAL POLICIES</label>
-            <textarea value={data.rule_additional || ""} onChange={e => update("rule_additional", e.target.value)} placeholder="Any additional policies specific to your situation..." rows={4} style={styles.textarea} />
+          <div style={{ marginTop: 8 }}>
+            <PersonalizedField label="ADDITIONAL FINANCIAL POLICIES" id="rule_additional" data={data} update={update} unlocked={call1Complete} rows={4} />
           </div>
         </LockedSection>
       </section>
@@ -451,7 +495,19 @@ export default function ETFMStrategic() {
       {/* ── SECTION 6: 90-DAY ROADMAP ── */}
       <section style={styles.section}>
         <SectionLabel>SECTION 6 — CUSTOM 90-DAY ROADMAP</SectionLabel>
-        <p style={styles.sectionCtx}>Your personalized 90-day execution plan with phase-by-phase milestones, specific actions, and measurable outcomes.</p>
+        <GuidedNote>This section will be completed by Robert Brickey after Session 1 and will unlock automatically.</GuidedNote>
+        <p style={styles.sectionCtx}>
+          Your 90-Day Strategic Reset Roadmap is a phased implementation plan designed to reduce overwhelm by focusing on the highest-impact changes first. Each phase builds intentionally on the previous one.
+        </p>
+        <p style={styles.sectionCtx}>
+          This is not a generic timeline. It will be built specifically around your situation, priorities, and implementation capacity after Session 1.
+        </p>
+        <p style={styles.sectionCtx}>
+          The roadmap moves through three phases: Month 1 Stabilization to reduce financial chaos and create visibility, Month 2 Control to build consistency and reduce reactive decision-making, and Month 3 Positioning to transition into intentional financial positioning.
+        </p>
+        <p style={styles.sectionCtx}>
+          The goal is not perfection. The goal is to replace financial reaction with financial structure — one system, one decision, and one week at a time.
+        </p>
         <RobertNote>
           The 90-day structure is intentional. Most financial change fails not because people lack motivation but because they try to change everything at once. This roadmap sequences your changes so each one builds on the previous.
         </RobertNote>
@@ -460,21 +516,20 @@ export default function ETFMStrategic() {
         </WhyMatters>
         <LockedSection unlocked={call1Complete}>
           {[
-            { id: "road_30", label: "DAYS 1–30: FOUNDATION",   sub: "Stabilization and structure installation", placeholder: "Specific actions, systems, and milestones for the first 30 days..." },
-            { id: "road_60", label: "DAYS 31–60: MOMENTUM",    sub: "Consistency and behavioral reinforcement",  placeholder: "Specific actions, systems, and milestones for days 31 through 60..." },
-            { id: "road_90", label: "DAYS 61–90: POSITIONING", sub: "Advancement and future alignment",          placeholder: "Specific actions, systems, and milestones for days 61 through 90..." },
+            { id: "road_30", label: "DAYS 1–30: FOUNDATION",   sub: "Stabilization and structure installation" },
+            { id: "road_60", label: "DAYS 31–60: MOMENTUM",    sub: "Consistency and behavioral reinforcement" },
+            { id: "road_90", label: "DAYS 61–90: POSITIONING", sub: "Advancement and future alignment" },
           ].map(phase => (
             <div key={phase.id} style={styles.roadmapPhase}>
               <div style={styles.roadmapPhaseHeader}>
                 <div style={styles.roadmapPhaseLabel}>{phase.label}</div>
                 <div style={styles.roadmapPhaseSub}>{phase.sub}</div>
               </div>
-              <textarea value={data[phase.id] || ""} onChange={e => update(phase.id, e.target.value)} placeholder={phase.placeholder} rows={5} style={styles.textarea} />
+              <PersonalizedField label={phase.label} id={phase.id} data={data} update={update} unlocked={call1Complete} rows={5} hideLabel />
             </div>
           ))}
           <div style={styles.roadmapOutcome}>
-            <label style={{ ...styles.fieldLabel, marginBottom: 10 }}>90-DAY TARGET OUTCOME</label>
-            <textarea value={data.road_outcome || ""} onChange={e => update("road_outcome", e.target.value)} placeholder="The specific financial outcome you will reach by the end of 90 days..." rows={3} style={styles.textarea} />
+            <PersonalizedField label="90-DAY TARGET OUTCOME" id="road_outcome" data={data} update={update} unlocked={call1Complete} rows={3} />
           </div>
         </LockedSection>
       </section>
@@ -482,22 +537,31 @@ export default function ETFMStrategic() {
       {/* ── SECTION 7: SESSION NOTES ── */}
       <section style={styles.section}>
         <SectionLabel>SECTION 7 — SESSION NOTES AND DELIVERABLES</SectionLabel>
-        <p style={styles.sectionCtx}>Detailed notes from both sessions, delivered by Robert Brickey after each call for your ongoing reference and implementation.</p>
+        <GuidedNote>This section will be completed by Robert Brickey after Session 1 and will unlock automatically.</GuidedNote>
+        <p style={styles.sectionCtx}>
+          After each session, Robert Brickey personally prepares detailed notes summarizing key insights, identified patterns, strategic priorities, and implementation guidance from your conversation.
+        </p>
+        <p style={styles.sectionCtx}>
+          These notes are designed to help you revisit your plan clearly at any time, stay focused on your highest-priority actions, reference your strategic direction during implementation, and maintain clarity and momentum between sessions.
+        </p>
+        <p style={styles.sectionCtx}>
+          Session 1 notes will be posted here after your first call. Session 2 notes will be posted after your implementation review session.
+        </p>
         <LockedSection unlocked={call1Complete}>
           <div style={styles.notesGrid}>
             <div style={styles.notesCard}>
               <div style={styles.notesCardLabel}>SESSION 1 NOTES</div>
-              <div style={styles.notesDate}>{data.session1_date || "Date pending"}</div>
-              <textarea value={data.session1_notes || ""} onChange={e => update("session1_notes", e.target.value)} placeholder="Session 1 notes delivered by Robert Brickey after your first call..." rows={8} style={styles.textarea} />
+              {data.session1_date && <div style={styles.notesDate}>{data.session1_date}</div>}
+              <PersonalizedField label="SESSION 1 NOTES" id="session1_notes" data={data} update={update} unlocked={call1Complete} rows={8} hideLabel />
               <div style={{ marginTop: 14 }}>
                 <label style={styles.fieldLabel}>SESSION 1 DATE</label>
                 <input value={data.session1_date || ""} onChange={e => update("session1_date", e.target.value)} placeholder="MM/DD/YYYY" style={styles.input} />
               </div>
             </div>
-            <div style={{ ...styles.notesCard, ...(call2Complete ? {} : { opacity: 0.55 }) }}>
+            <div style={{ ...styles.notesCard, ...(call2Complete ? {} : { opacity: 0.6 }) }}>
               <div style={styles.notesCardLabel}>SESSION 2 NOTES</div>
-              <div style={styles.notesDate}>{data.session2_date || "Date pending"}</div>
-              <textarea value={data.session2_notes || ""} onChange={e => update("session2_notes", e.target.value)} placeholder="Session 2 notes delivered by Robert Brickey after your second call..." rows={8} style={styles.textarea} />
+              {data.session2_date && <div style={styles.notesDate}>{data.session2_date}</div>}
+              <PersonalizedField label="SESSION 2 NOTES" id="session2_notes" data={data} update={update} unlocked={!!call2Complete} rows={8} hideLabel />
               <div style={{ marginTop: 14 }}>
                 <label style={styles.fieldLabel}>SESSION 2 DATE</label>
                 <input value={data.session2_date || ""} onChange={e => update("session2_date", e.target.value)} placeholder="MM/DD/YYYY" style={styles.input} />
@@ -505,8 +569,7 @@ export default function ETFMStrategic() {
             </div>
           </div>
           <div style={{ marginTop: 16 }}>
-            <label style={styles.fieldLabel}>KEY DELIVERABLES AND ACTION COMMITMENTS</label>
-            <textarea value={data.deliverables || ""} onChange={e => update("deliverables", e.target.value)} placeholder="Specific commitments, action items, and deliverables agreed upon during your sessions..." rows={4} style={styles.textarea} />
+            <PersonalizedField label="KEY DELIVERABLES AND ACTION COMMITMENTS" id="deliverables" data={data} update={update} unlocked={call1Complete} rows={4} />
           </div>
         </LockedSection>
       </section>
@@ -514,7 +577,19 @@ export default function ETFMStrategic() {
       {/* ── SECTION 8: 60-DAY SUPPORT ── */}
       <section style={{ ...styles.section, paddingBottom: 80 }}>
         <SectionLabel>SECTION 8 — 60-DAY PRIORITY EMAIL SUPPORT</SectionLabel>
-        <p style={styles.sectionCtx}>Direct email access to Robert Brickey for 60 days following your final session. Use this section to track your support interactions and document guidance received.</p>
+        <GuidedNote>This section will be completed by Robert Brickey after Session 1 and will unlock automatically.</GuidedNote>
+        <p style={styles.sectionCtx}>
+          Your 60-Day Priority Support begins immediately after your Strategic Framework is delivered. This is not unlimited open access. It is structured implementation support designed to help you maintain momentum, reduce confusion, and continue building consistency while your new financial systems are being put into practice.
+        </p>
+        <p style={styles.sectionCtx}>
+          Most financial plans fail during implementation — not because the plan was wrong, but because stress, pressure, and old patterns return. This support window exists to interrupt that cycle before it gains momentum.
+        </p>
+        <p style={styles.sectionCtx}>
+          During your 60-day support period you have direct priority email access for questions and clarification about your framework, guidance while applying your decision rules and policies, support evaluating important financial decisions, accountability and momentum during implementation, and strategic direction when pressure or uncertainty arises.
+        </p>
+        <p style={styles.sectionCtx}>
+          The goal is not dependency. The goal is helping you build enough structure that your systems continue operating long after the support period ends.
+        </p>
         <RobertNote>
           Use this support period intentionally. Bring your implementation questions, your pressure points, your decisions. The 60-day period is most effective when it is used as active strategic guidance rather than passive reassurance.
         </RobertNote>
@@ -538,15 +613,20 @@ export default function ETFMStrategic() {
                 <input value={data.support_end || ""} onChange={e => update("support_end", e.target.value)} placeholder="MM/DD/YYYY" style={styles.input} />
               </div>
             </div>
-            <label style={styles.fieldLabel}>SUPPORT LOG</label>
-            <textarea value={data.support_log || ""} onChange={e => update("support_log", e.target.value)} placeholder="Log your support interactions, key questions asked, and guidance received during your 60-day support period..." rows={10} style={styles.textarea} />
+            <PersonalizedField label="SUPPORT LOG" id="support_log" data={data} update={update} unlocked={call1Complete} rows={10} />
           </div>
         </LockedSection>
       </section>
 
       {/* FOOTER */}
       <footer style={styles.footer}>
-        <span style={styles.footerQuote}>This process is not about becoming perfect financially. It is about building systems strong enough to create clarity, consistency, and intentional direction long after the reset is complete.</span>
+        <div style={styles.footerQuote}>
+          <p style={{ margin: "0 0 12px" }}>This process is not about becoming perfect financially.</p>
+          <p style={{ margin: "0 0 12px" }}>It is about building systems strong enough to create clarity, consistency, and intentional direction long after the reset is complete.</p>
+          <p style={{ margin: "0 0 12px" }}>You do not need to solve everything immediately. You simply need to stay honest, intentional, and committed to building stronger structure one decision at a time.</p>
+          <p style={{ margin: "0 0 16px" }}>Most people remain financially reactive because they never stop long enough to build systems intentionally. You are doing that now. And that matters.</p>
+          <p style={{ margin: 0, color: "#C4960F" }}>— Robert Brickey, ETFM</p>
+        </div>
         <span style={styles.footerLogo}>ETFM</span>
       </footer>
     </div>
@@ -560,6 +640,15 @@ function SectionLabel({ children }) {
     <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 8 }}>
       <span style={{ color: "#C4960F", fontSize: 11, letterSpacing: 4 }}>{children}</span>
       <div style={{ flex: 1, height: 1, background: "#e8e3da" }} />
+    </div>
+  );
+}
+
+function GuidedNote({ children }) {
+  return (
+    <div style={styles.guidedNote}>
+      <span style={styles.guidedNoteIcon}>→</span>
+      <span style={styles.guidedNoteText}>{children}</span>
     </div>
   );
 }
@@ -582,13 +671,62 @@ function WhyMatters({ children }) {
   );
 }
 
+function PersonalizedField({ label, id, data, update, unlocked, rows = 4, hideLabel = false, singleLine = false, displayAs }) {
+  const value = data[id] || "";
+  if (!hideLabel && !singleLine) {
+    // full label + field
+  }
+  if (unlocked && value) {
+    if (displayAs === "score") {
+      return (
+        <div>
+          <div style={{ fontFamily: "Georgia, serif", fontSize: 28, color: "#1a1a2e", marginBottom: 6 }}>{value}<span style={{ fontSize: 13, color: "#4a4a4a" }}> / 100</span></div>
+          <input value={value} onChange={e => update(id, e.target.value)} style={{ ...styles.input, fontSize: 13 }} />
+        </div>
+      );
+    }
+    return (
+      <div>
+        {!hideLabel && <label style={styles.fieldLabel}>{label}</label>}
+        {singleLine
+          ? <input value={value} onChange={e => update(id, e.target.value)} style={styles.input} />
+          : <textarea value={value} onChange={e => update(id, e.target.value)} rows={rows} style={styles.textarea} />
+        }
+      </div>
+    );
+  }
+  if (unlocked && !value) {
+    if (displayAs === "score") {
+      return <input value="" onChange={e => update(id, e.target.value)} placeholder="Enter score" style={{ ...styles.input, marginTop: 6, fontSize: 13 }} />;
+    }
+    return (
+      <div>
+        {!hideLabel && <label style={styles.fieldLabel}>{label}</label>}
+        {singleLine
+          ? <input value="" onChange={e => update(id, e.target.value)} style={styles.input} />
+          : <textarea value="" onChange={e => update(id, e.target.value)} rows={rows} style={styles.textarea} />
+        }
+      </div>
+    );
+  }
+  // Locked — show pending card
+  return (
+    <div style={styles.pendingCard}>
+      {!hideLabel && <div style={styles.pendingCardLabel}>{label}</div>}
+      <p style={styles.pendingCardText}>This field will be completed by Robert Brickey after Session 1. It will contain personalized content built specifically around your intake responses and strategy session.</p>
+    </div>
+  );
+}
+
 function LockedSection({ unlocked, children }) {
   if (unlocked) return <div>{children}</div>;
   return (
     <div>
       <div style={styles.lockedBanner}>
-        <span style={{ fontSize: 15, flexShrink: 0 }}>🔒</span>
-        <span style={styles.lockedBannerText}>This section unlocks after Session 1 is marked complete in Section 2 above.</span>
+        <div style={styles.lockedBannerTitle}>🔒 PERSONALIZED MATERIAL IN DEVELOPMENT</div>
+        <p style={styles.lockedBannerText}>
+          This section becomes available after Session 1 because Robert Brickey personally builds these materials around your intake responses, financial structure, goals, stress patterns, strategy session, and implementation priorities. This process is intentionally personalized — not generated from a generic template. Once Session 1 is marked complete, this section will unlock automatically.
+        </p>
       </div>
       <div style={{ opacity: 0.6, pointerEvents: "none", userSelect: "none" }}>{children}</div>
     </div>
@@ -611,7 +749,11 @@ const styles = {
   congratsLabel:  { color: "#C4960F", fontSize: 11, letterSpacing: 4, marginBottom: 12 },
   congratsText:   { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 17, lineHeight: 2, margin: 0 },
   section:        { padding: "50px 40px 0" },
-  sectionCtx:     { color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, marginBottom: 24, fontWeight: 300, maxWidth: 700 },
+  sectionCtx:     { color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, marginBottom: 16, fontWeight: 300, maxWidth: 700 },
+  // Guided note
+  guidedNote:     { display: "flex", alignItems: "baseline", gap: 10, background: "#F0EDE8", border: "1px solid #e8e3da", padding: "10px 16px", marginBottom: 20 },
+  guidedNoteIcon: { color: "#C4960F", fontSize: 13, flexShrink: 0 },
+  guidedNoteText: { color: "#4a4a4a", fontSize: 13, lineHeight: 1.6, fontStyle: "italic" },
   // Status card
   statusGrid:         { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2, marginBottom: 2 },
   statusTile:         { background: "#ffffff", border: "1px solid #e8e3da", padding: "18px 20px" },
@@ -624,14 +766,19 @@ const styles = {
   statusNextSub:      { color: "#4a4a4a", fontSize: 13, fontStyle: "italic", lineHeight: 1.7, margin: "6px 0 0", fontFamily: "Georgia, serif" },
   // Process steps
   processGrid:        { display: "flex", flexDirection: "column", gap: 2 },
-  processStep:        { background: "#ffffff", border: "1px solid #e8e3da", padding: "16px 22px", display: "flex", alignItems: "center", gap: 16 },
+  processStep:        { background: "#ffffff", border: "1px solid #e8e3da", padding: "16px 22px", display: "flex", alignItems: "flex-start", gap: 16 },
   processStepDone:    { borderColor: "#4A8A4A", background: "#f0f8f0" },
-  processNum:         { color: "#C4960F", fontSize: 18, fontFamily: "Georgia, serif", minWidth: 28, flexShrink: 0 },
+  processNum:         { color: "#C4960F", fontSize: 18, fontFamily: "Georgia, serif", minWidth: 28, flexShrink: 0, paddingTop: 2 },
   processNumDone:     { color: "#4A8A4A" },
   processText:        { color: "#1a1a2e", fontSize: 14, lineHeight: 1.5, fontWeight: 500, marginBottom: 4 },
   processDesc:        { color: "#4a4a4a", fontSize: 13, lineHeight: 1.7, fontWeight: 300 },
-  processBadge:       { marginLeft: "auto", flexShrink: 0, alignSelf: "flex-start", background: "#f0f8f0", border: "1px solid #4A8A4A", color: "#4A8A4A", fontSize: 11, padding: "3px 10px", letterSpacing: 1 },
+  processBadge:       { marginLeft: "auto", flexShrink: 0, background: "#f0f8f0", border: "1px solid #4A8A4A", color: "#4A8A4A", fontSize: 11, padding: "3px 10px", letterSpacing: 1, whiteSpace: "nowrap" },
   processClosing:     { background: "#F0EDE8", border: "1px solid #e8e3da", borderLeft: "2px solid #C4960F", padding: "20px 24px", marginTop: 10, color: "#4a4a4a", fontSize: 14, lineHeight: 1.9, fontWeight: 300 },
+  // Session 1 status block (in Section 1)
+  session1StatusBlock:  { background: "#ffffff", border: "1px solid #e8e3da", borderTop: "2px solid #C4960F", padding: "28px 32px", marginTop: 20 },
+  session1StatusLabel:  { color: "#C4960F", fontSize: 10, letterSpacing: 4, marginBottom: 14 },
+  session1StatusText:   { color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, fontWeight: 300, marginBottom: 12 },
+  session1StatusSub:    { color: "#4a4a4a", fontSize: 13, lineHeight: 1.8, fontStyle: "italic", fontFamily: "Georgia, serif", marginBottom: 0 },
   // RobertNote
   robertNote:         { borderLeft: "3px solid #C4960F", background: "#fff8e8", padding: "16px 22px", marginBottom: 20 },
   robertNoteLabel:    { color: "#C4960F", fontSize: 10, letterSpacing: 3, marginBottom: 8 },
@@ -641,8 +788,13 @@ const styles = {
   whyLabel:           { color: "#C4960F", fontSize: 10, letterSpacing: 3, marginBottom: 6 },
   whyText:            { color: "#4a4a4a", fontSize: 13, lineHeight: 1.7, fontWeight: 300, margin: 0 },
   // Locked banner
-  lockedBanner:       { background: "#F0EDE8", border: "1px solid #e8e3da", padding: "13px 18px", display: "flex", alignItems: "center", gap: 12, marginBottom: 12 },
-  lockedBannerText:   { color: "#4a4a4a", fontSize: 13 },
+  lockedBanner:       { background: "#fff8e8", border: "1px solid #C4960F", padding: "20px 24px", marginBottom: 16 },
+  lockedBannerTitle:  { color: "#C4960F", fontSize: 12, letterSpacing: 2, marginBottom: 10 },
+  lockedBannerText:   { color: "#4a4a4a", fontSize: 13, lineHeight: 1.8, fontWeight: 300, margin: 0 },
+  // Pending card (personalized field locked state)
+  pendingCard:        { background: "#F0EDE8", border: "1px solid #e8e3da", padding: "16px 18px", marginBottom: 4 },
+  pendingCardLabel:   { color: "#C4960F", fontSize: 10, letterSpacing: 3, marginBottom: 8 },
+  pendingCardText:    { color: "#4a4a4a", fontSize: 13, lineHeight: 1.7, fontWeight: 300, fontStyle: "italic", margin: 0 },
   // Progress
   progressWrap:   { background: "#ffffff", border: "1px solid #e8e3da", padding: "20px 24px", marginBottom: 12 },
   progressLabel:  { color: "#C4960F", fontSize: 11, letterSpacing: 3 },
@@ -680,23 +832,17 @@ const styles = {
   bookingMetaRow: { display: "flex", justifyContent: "space-between", alignItems: "center" },
   bookingMetaLabel: { color: "#4a4a4a", fontSize: 11, letterSpacing: 2 },
   bookingMetaVal: { color: "#1a1a2e", fontSize: 13, fontWeight: 500 },
-  sessionNote:    { background: "#F0EDE8", border: "1px solid #e8e3da", borderLeft: "2px solid #C4960F", padding: "16px 20px", color: "#4a4a4a", fontSize: 14, lineHeight: 1.8 },
   sessionDoneBadge: { background: "#f0f8f0", border: "1px solid #4A8A4A", color: "#4A8A4A", fontSize: 12, padding: "13px 20px", textAlign: "center" },
   // Matrix
   matrixGrid:     { display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 12, marginBottom: 24 },
   matrixCard:     { background: "#F0EDE8", border: "1px solid #e8e3da", padding: 16 },
   matrixName:     { color: "#C4960F", fontSize: 13, letterSpacing: 1, marginBottom: 4 },
   matrixDesc:     { color: "#4a4a4a", fontSize: 12, lineHeight: 1.6, fontWeight: 300, marginBottom: 8 },
-  matrixScore:    { fontFamily: "Georgia, serif", fontSize: 28, color: "#1a1a2e" },
   // Framework
   frameworkGrid:  { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 },
   frameworkCard:  { background: "#ffffff", border: "1px solid #e8e3da", padding: 20 },
-  frameworkLabel: { color: "#C4960F", fontSize: 11, letterSpacing: 2, marginBottom: 10 },
   // Decision rules
-  rulesIntro:     { background: "#F0EDE8", border: "1px solid #e8e3da", borderLeft: "2px solid #C4960F", padding: "20px 24px", marginBottom: 16 },
-  rulesIntroText: { color: "#4a4a4a", fontSize: 15, lineHeight: 1.9, fontWeight: 300, margin: 0 },
   ruleCard:       { background: "#ffffff", border: "1px solid #e8e3da", padding: 18, marginBottom: 8 },
-  ruleLabel:      { color: "#C4960F", fontSize: 11, letterSpacing: 2, marginBottom: 8 },
   // Roadmap
   roadmapPhase:       { background: "#ffffff", border: "1px solid #e8e3da", padding: 24, marginBottom: 10 },
   roadmapPhaseHeader: { display: "flex", alignItems: "baseline", gap: 16, marginBottom: 12 },
@@ -715,7 +861,7 @@ const styles = {
   supportPeriod:  { color: "#4a4a4a", fontSize: 13, fontFamily: "Georgia, serif", fontStyle: "italic" },
   supportDesc:    { color: "#4a4a4a", fontSize: 15, lineHeight: 1.9, fontWeight: 300, marginBottom: 20 },
   // Footer
-  footer:         { margin: "56px 40px 0", borderTop: "1px solid #e8e3da", paddingTop: 24, paddingBottom: 40, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 40 },
-  footerQuote:    { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, maxWidth: 640 },
+  footer:         { margin: "56px 40px 0", borderTop: "1px solid #e8e3da", paddingTop: 32, paddingBottom: 60, display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 40 },
+  footerQuote:    { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 14, lineHeight: 1.9, maxWidth: 600 },
   footerLogo:     { color: "#4a4a4a", fontFamily: "Georgia, serif", fontSize: 20, letterSpacing: 4, flexShrink: 0 },
 };
