@@ -118,6 +118,28 @@ export default function ETFMStrategic() {
   const call1Complete = data.call1_complete;
   const call2Complete = data.call2_complete;
 
+  const currentPhase = call2Complete ? "Phase 3: Framework" : call1Complete ? "Phase 2: Sessions" : "Phase 1: Intake";
+  const sessionStatus = call2Complete ? "Both sessions complete" : call1Complete ? "Session 1 complete" : "Not yet started";
+  const frameworkStatus = call1Complete ? "Unlocked" : "Locked";
+  const nextAction = call2Complete
+    ? "Review your Strategic Framework and 90-Day Roadmap"
+    : call1Complete
+      ? "Book and complete Session 2"
+      : intakeComplete
+        ? "Book and complete Session 1"
+        : progressPct === 100
+          ? "Submit your Intake Form"
+          : "Complete the Strategic Intake Form";
+
+  const processSteps = [
+    { label: "Complete the Strategic Intake Form (38 questions)", done: !!intakeComplete },
+    { label: "Book and attend Session 1: Strategic Reality Session", done: !!call1Complete },
+    { label: "Receive your Full Matrix Score and Structural Analysis", done: !!(call1Complete && data.structural_analysis) },
+    { label: "Receive your Personalized Strategic Framework and Decision Rules", done: !!(call1Complete && data.fw_priority) },
+    { label: "Book and attend Session 2: Strategic Implementation Session", done: !!call2Complete },
+    { label: "Begin your 60-Day Priority Email Support period", done: !!data.support_start },
+  ];
+
   return (
     <div style={styles.page}>
       {/* NAV */}
@@ -139,8 +161,8 @@ export default function ETFMStrategic() {
         <img
           src="/etfm-logo.png"
           alt="ETFM"
-          style={{width:"360px", display:"block", margin:"0 auto 16px", objectFit:"contain"}}
-          onError={e => e.target.style.display="none"}
+          style={{ width: "360px", display: "block", margin: "0 auto 16px", objectFit: "contain" }}
+          onError={e => e.target.style.display = "none"}
         />
         <div style={styles.heroLabel}>YOUR STRATEGIC RESET PARTNERSHIP</div>
         <h1 style={styles.heroTitle}>Private Client<br />Strategic Dashboard</h1>
@@ -150,15 +172,53 @@ export default function ETFMStrategic() {
             You have made a serious decision. The Strategic Reset Partnership is not a course, a program, or a framework. It is a private, one-on-one strategic engagement built entirely around your specific financial situation, behaviors, and goals. Everything in this dashboard was designed for you.
           </p>
         </div>
-        <p style={styles.heroTransition}>
-          Begin with the Strategic Intake Form below. Complete all 38 questions before your first session. Your responses inform every section of this dashboard and allow your strategist to arrive at Session 1 fully prepared for your specific situation.
-        </p>
+      </section>
+
+      {/* RESET STATUS CARD */}
+      <section style={styles.section}>
+        <SectionLabel>YOUR RESET STATUS</SectionLabel>
+        <div style={styles.statusGrid}>
+          {[
+            { label: "CURRENT PHASE",     val: currentPhase },
+            { label: "SESSION STATUS",    val: sessionStatus },
+            { label: "FRAMEWORK STATUS",  val: frameworkStatus },
+            { label: "INTAKE PROGRESS",   val: `${progressPct}%` },
+          ].map(({ label, val }) => (
+            <div key={label} style={styles.statusTile}>
+              <div style={styles.statusTileLabel}>{label}</div>
+              <div style={styles.statusTileVal}>{val}</div>
+            </div>
+          ))}
+        </div>
+        <div style={styles.statusNextAction}>
+          <span style={styles.statusNextLabel}>NEXT ACTION</span>
+          <span style={styles.statusNextVal}>{nextAction}</span>
+        </div>
+      </section>
+
+      {/* STRATEGIC RESET PROCESS */}
+      <section style={styles.section}>
+        <SectionLabel>YOUR STRATEGIC RESET PROCESS</SectionLabel>
+        <p style={styles.sectionCtx}>Six steps from intake to implementation. Each step builds directly on the one before it.</p>
+        <div style={styles.processGrid}>
+          {processSteps.map((step, i) => (
+            <div key={i} style={{ ...styles.processStep, ...(step.done ? styles.processStepDone : {}) }}>
+              <span style={{ ...styles.processNum, ...(step.done ? styles.processNumDone : {}) }}>0{i + 1}</span>
+              <span style={styles.processText}>{step.label}</span>
+              {step.done && <span style={styles.processBadge}>✓ COMPLETE</span>}
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* ── SECTION 1: INTAKE FORM ── */}
       <section style={styles.section}>
         <SectionLabel>SECTION 1 — STRATEGIC INTAKE FORM</SectionLabel>
         <p style={styles.sectionCtx}>There are 38 questions across 7 guided sections designed to help identify your current financial structure, pressure points, decision-making patterns, habits, and strategic priorities before Session 1. Click into each section and answer the questions as honestly as possible. These questions are intentionally designed to help uncover where financial stress is being created, where your system may be breaking down, and what changes will create the greatest impact moving forward. Your answers are saved automatically and personally reviewed by Robert Brickey prior to Session 1 so your Strategic Reset Framework can be built around your real financial reality, not generic advice. You do not need perfect answers or exact numbers. The goal is clarity, not perfection.</p>
+
+        <RobertNote>
+          The intake questions are not just administrative. They are the foundation of everything we build together. The more honest your answers, the more precise and useful your Strategic Framework will be. There are no wrong answers here.
+        </RobertNote>
 
         <div style={styles.progressWrap}>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
@@ -222,6 +282,10 @@ export default function ETFMStrategic() {
         <SectionLabel>SECTION 2 — SESSION BOOKING</SectionLabel>
         <p style={styles.sectionCtx}>Book your strategy sessions at a pace that feels intentional and manageable for you. Session 1 becomes available immediately after completing your Strategic Intake Form and is designed to help identify your financial patterns, pressure points, structural gaps, and highest-priority focus areas. Session 2 is scheduled after Session 1 and focuses on reviewing your personalized Strategic Framework, implementation priorities, and next-step execution plan together. These sessions are designed to create clarity, structure, and direction, not overwhelm. Take your time, choose the schedule that works best for you, and arrive ready for an honest strategic conversation about where you are and where you want to go next.</p>
 
+        <RobertNote>
+          Both sessions are private strategy calls. Come prepared to have an honest conversation about your financial situation. I will have reviewed your intake form before we meet, so we will not spend time on background. We will get straight to strategy.
+        </RobertNote>
+
         <div style={styles.bookingGrid}>
           <div style={styles.bookingCard}>
             <div style={styles.bookingBadge}>SESSION 1 OF 2</div>
@@ -276,14 +340,20 @@ export default function ETFMStrategic() {
       <section style={styles.section}>
         <SectionLabel>SECTION 3 — FULL MATRIX SCORE AND STRUCTURAL ANALYSIS</SectionLabel>
         <p style={styles.sectionCtx}>Your complete five-component financial matrix analysis and structural breakdown, delivered after Session 1.</p>
+        <RobertNote>
+          Your Matrix Score is not a grade. It is a map. It shows where your financial system has gaps and where the highest-leverage changes are. The score itself is less important than the pattern it reveals.
+        </RobertNote>
+        <WhyMatters>
+          Understanding your scores across all five dimensions reveals which specific area is creating the most financial drag. Most clients discover their lowest score is not where they expected it to be.
+        </WhyMatters>
         <LockedSection unlocked={call1Complete}>
           <div style={styles.matrixGrid}>
             {[
-              { key: "sc_awareness",   name: "Awareness",          desc: "How clearly you see where your money goes and what drives your decisions." },
-              { key: "sc_pattern",     name: "Money Pattern",      desc: "How consistently you handle income, expenses, and unexpected funds." },
-              { key: "sc_stress",      name: "Stress Response",    desc: "How you respond when financial pressure builds or problems arise." },
-              { key: "sc_structure",   name: "Financial Structure", desc: "The systems and habits you have in place to manage your finances." },
-              { key: "sc_readiness",   name: "System Readiness",   desc: "Your ability and mindset to build and follow a financial plan." },
+              { key: "sc_awareness",  name: "Awareness",          desc: "How clearly you see where your money goes and what drives your decisions." },
+              { key: "sc_pattern",    name: "Money Pattern",      desc: "How consistently you handle income, expenses, and unexpected funds." },
+              { key: "sc_stress",     name: "Stress Response",    desc: "How you respond when financial pressure builds or problems arise." },
+              { key: "sc_structure",  name: "Financial Structure", desc: "The systems and habits you have in place to manage your finances." },
+              { key: "sc_readiness", name: "System Readiness",   desc: "Your ability and mindset to build and follow a financial plan." },
             ].map(comp => (
               <div key={comp.key} style={styles.matrixCard}>
                 <div style={styles.matrixName}>{comp.name}</div>
@@ -304,6 +374,9 @@ export default function ETFMStrategic() {
       <section style={styles.section}>
         <SectionLabel>SECTION 4 — PERSONALIZED STRATEGIC OPERATING FRAMEWORK</SectionLabel>
         <p style={styles.sectionCtx}>Your custom financial operating system built around your specific situation, goals, and pressure points. Delivered after Session 1.</p>
+        <RobertNote>
+          Your Strategic Operating Framework is not a generic plan. It was built around your specific answers, your situation, and your goals. Every element here was chosen because it addresses a gap in your current financial system.
+        </RobertNote>
         <LockedSection unlocked={call1Complete}>
           <div style={styles.frameworkGrid}>
             {[
@@ -327,17 +400,23 @@ export default function ETFMStrategic() {
       <section style={styles.section}>
         <SectionLabel>SECTION 5 — DECISION RULES AND FINANCIAL POLICY SYSTEM</SectionLabel>
         <p style={styles.sectionCtx}>Your personal financial policy: a set of clear rules that govern financial decisions so you never have to make them under pressure again.</p>
+        <RobertNote>
+          Decision rules are the most practical element of your reset. When you are under financial pressure, you will not have the mental bandwidth to make thoughtful decisions. These rules make the decision in advance so you do not have to.
+        </RobertNote>
+        <WhyMatters>
+          Without decision rules, financial choices get made emotionally, reactively, or under pressure. A written financial policy removes the variable of mood and circumstance from your most important decisions.
+        </WhyMatters>
         <LockedSection unlocked={call1Complete}>
           <div style={styles.rulesIntro}>
             <p style={styles.rulesIntroText}>Decision rules remove the emotional variable from financial decisions. These rules are built specifically around your behavioral patterns, pressure points, and goals identified during intake and Session 1.</p>
           </div>
           {[
-            { id: "rule_spending",   label: "SPENDING RULE" },
-            { id: "rule_saving",     label: "SAVING RULE" },
-            { id: "rule_debt",       label: "DEBT RULE" },
-            { id: "rule_income",     label: "INCOME RULE" },
-            { id: "rule_emergency",  label: "EMERGENCY FUND RULE" },
-            { id: "rule_invest",     label: "INVESTMENT RULE" },
+            { id: "rule_spending",  label: "SPENDING RULE" },
+            { id: "rule_saving",    label: "SAVING RULE" },
+            { id: "rule_debt",      label: "DEBT RULE" },
+            { id: "rule_income",    label: "INCOME RULE" },
+            { id: "rule_emergency", label: "EMERGENCY FUND RULE" },
+            { id: "rule_invest",    label: "INVESTMENT RULE" },
           ].map(r => (
             <div key={r.id} style={styles.ruleCard}>
               <div style={styles.ruleLabel}>{r.label}</div>
@@ -355,11 +434,17 @@ export default function ETFMStrategic() {
       <section style={styles.section}>
         <SectionLabel>SECTION 6 — CUSTOM 90-DAY ROADMAP</SectionLabel>
         <p style={styles.sectionCtx}>Your personalized 90-day execution plan with phase-by-phase milestones, specific actions, and measurable outcomes.</p>
+        <RobertNote>
+          The 90-day structure is intentional. Most financial change fails not because people lack motivation but because they try to change everything at once. This roadmap sequences your changes so each one builds on the previous.
+        </RobertNote>
+        <WhyMatters>
+          A 90-day roadmap creates sequenced momentum. Each phase builds the foundation for the next. Without a roadmap, implementation becomes reactive and inconsistent.
+        </WhyMatters>
         <LockedSection unlocked={call1Complete}>
           {[
             { id: "road_30", label: "DAYS 1–30: FOUNDATION",   sub: "Stabilization and structure installation", placeholder: "Specific actions, systems, and milestones for the first 30 days..." },
             { id: "road_60", label: "DAYS 31–60: MOMENTUM",    sub: "Consistency and behavioral reinforcement",  placeholder: "Specific actions, systems, and milestones for days 31 through 60..." },
-            { id: "road_90", label: "DAYS 61–90: POSITIONING", sub: "Advancement and future alignment",           placeholder: "Specific actions, systems, and milestones for days 61 through 90..." },
+            { id: "road_90", label: "DAYS 61–90: POSITIONING", sub: "Advancement and future alignment",          placeholder: "Specific actions, systems, and milestones for days 61 through 90..." },
           ].map(phase => (
             <div key={phase.id} style={styles.roadmapPhase}>
               <div style={styles.roadmapPhaseHeader}>
@@ -412,6 +497,12 @@ export default function ETFMStrategic() {
       <section style={{ ...styles.section, paddingBottom: 80 }}>
         <SectionLabel>SECTION 8 — 60-DAY PRIORITY EMAIL SUPPORT</SectionLabel>
         <p style={styles.sectionCtx}>Direct email access to Robert Brickey for 60 days following your final session. Use this section to track your support interactions and document guidance received.</p>
+        <RobertNote>
+          Use this support period intentionally. Bring your implementation questions, your pressure points, your decisions. The 60-day period is most effective when it is used as active strategic guidance rather than passive reassurance.
+        </RobertNote>
+        <WhyMatters>
+          Strategic questions answered quickly save months of uncertainty. Use this access for decisions that feel unclear, situations that feel financially pressured, and moments where you need a second perspective.
+        </WhyMatters>
         <LockedSection unlocked={call1Complete}>
           <div style={styles.supportBox}>
             <div style={styles.supportHeader}>
@@ -437,7 +528,7 @@ export default function ETFMStrategic() {
 
       {/* FOOTER */}
       <footer style={styles.footer}>
-        <span style={styles.footerQuote}>Structure is permanent. The reset is complete.</span>
+        <span style={styles.footerQuote}>This process is not about becoming perfect financially. It is about building systems strong enough to create clarity, consistency, and intentional direction long after the reset is complete.</span>
         <span style={styles.footerLogo}>ETFM</span>
       </footer>
     </div>
@@ -455,16 +546,33 @@ function SectionLabel({ children }) {
   );
 }
 
+function RobertNote({ children }) {
+  return (
+    <div style={styles.robertNote}>
+      <div style={styles.robertNoteLabel}>A NOTE FROM ROBERT BRICKEY</div>
+      <p style={styles.robertNoteText}>{children}</p>
+    </div>
+  );
+}
+
+function WhyMatters({ children }) {
+  return (
+    <div style={styles.whyBox}>
+      <div style={styles.whyLabel}>WHY THIS MATTERS</div>
+      <p style={styles.whyText}>{children}</p>
+    </div>
+  );
+}
+
 function LockedSection({ unlocked, children }) {
   if (unlocked) return <div>{children}</div>;
   return (
-    <div style={{ position: "relative" }}>
-      <div style={styles.lockedOverlay}>
-        <div style={{ fontSize: 28, marginBottom: 8 }}>🔒</div>
-        <div style={{ color: "#C4960F", fontSize: 13, letterSpacing: 3, marginBottom: 8 }}>UNLOCKS AFTER SESSION 1</div>
-        <p style={{ color: "#4a4a4a", fontSize: 13, textAlign: "center", maxWidth: 320, lineHeight: 1.7, margin: 0 }}>Mark Session 1 as complete in Section 2 above to unlock this section.</p>
+    <div>
+      <div style={styles.lockedBanner}>
+        <span style={{ fontSize: 15, flexShrink: 0 }}>🔒</span>
+        <span style={styles.lockedBannerText}>This section unlocks after Session 1 is marked complete in Section 2 above.</span>
       </div>
-      <div style={{ opacity: 0.12, pointerEvents: "none", userSelect: "none" }}>{children}</div>
+      <div style={{ opacity: 0.6, pointerEvents: "none", userSelect: "none" }}>{children}</div>
     </div>
   );
 }
@@ -481,12 +589,38 @@ const styles = {
   hero:           { padding: "60px 40px 52px", borderBottom: "1px solid #e8e3da" },
   heroLabel:      { color: "#C4960F", fontSize: 12, letterSpacing: 5, marginBottom: 20 },
   heroTitle:      { fontFamily: "Georgia, serif", fontSize: 36, color: "#1a1a2e", fontWeight: 400, lineHeight: 1.15, marginBottom: 20 },
-  congratsBox:    { background: "#ffffff", borderLeft: "2px solid #C4960F", padding: "22px 28px", marginBottom: 28, maxWidth: 680 },
+  congratsBox:    { background: "#ffffff", borderLeft: "2px solid #C4960F", padding: "22px 28px", marginBottom: 0, maxWidth: 680 },
   congratsLabel:  { color: "#C4960F", fontSize: 11, letterSpacing: 4, marginBottom: 12 },
   congratsText:   { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 17, lineHeight: 2, margin: 0 },
-  heroTransition: { color: "#4a4a4a", fontSize: 17, lineHeight: 1.9, maxWidth: 640, fontWeight: 300, margin: 0 },
   section:        { padding: "50px 40px 0" },
-  sectionCtx:     { color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, marginBottom: 24, fontWeight: 300, maxWidth: 640 },
+  sectionCtx:     { color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, marginBottom: 24, fontWeight: 300, maxWidth: 700 },
+  // Status card
+  statusGrid:         { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2, marginBottom: 2 },
+  statusTile:         { background: "#ffffff", border: "1px solid #e8e3da", padding: "18px 20px" },
+  statusTileLabel:    { color: "#4a4a4a", fontSize: 10, letterSpacing: 3, marginBottom: 8 },
+  statusTileVal:      { color: "#1a1a2e", fontSize: 15, fontFamily: "Georgia, serif", fontWeight: 400 },
+  statusNextAction:   { background: "#fff8e8", border: "1px solid #C4960F", padding: "14px 20px", display: "flex", alignItems: "center", gap: 14 },
+  statusNextLabel:    { color: "#C4960F", fontSize: 10, letterSpacing: 3, flexShrink: 0 },
+  statusNextVal:      { color: "#1a1a2e", fontSize: 14, fontFamily: "Georgia, serif" },
+  // Process steps
+  processGrid:        { display: "flex", flexDirection: "column", gap: 2 },
+  processStep:        { background: "#ffffff", border: "1px solid #e8e3da", padding: "16px 22px", display: "flex", alignItems: "center", gap: 16 },
+  processStepDone:    { borderColor: "#4A8A4A", background: "#f0f8f0" },
+  processNum:         { color: "#C4960F", fontSize: 18, fontFamily: "Georgia, serif", minWidth: 28, flexShrink: 0 },
+  processNumDone:     { color: "#4A8A4A" },
+  processText:        { color: "#4a4a4a", fontSize: 14, lineHeight: 1.6, fontWeight: 300 },
+  processBadge:       { marginLeft: "auto", flexShrink: 0, background: "#f0f8f0", border: "1px solid #4A8A4A", color: "#4A8A4A", fontSize: 11, padding: "3px 10px", letterSpacing: 1 },
+  // RobertNote
+  robertNote:         { borderLeft: "3px solid #C4960F", background: "#fff8e8", padding: "16px 22px", marginBottom: 20 },
+  robertNoteLabel:    { color: "#C4960F", fontSize: 10, letterSpacing: 3, marginBottom: 8 },
+  robertNoteText:     { color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, fontStyle: "italic", fontFamily: "Georgia, serif", margin: 0 },
+  // WhyMatters
+  whyBox:             { background: "#F0EDE8", border: "1px solid #e8e3da", padding: "14px 18px", marginBottom: 16 },
+  whyLabel:           { color: "#C4960F", fontSize: 10, letterSpacing: 3, marginBottom: 6 },
+  whyText:            { color: "#4a4a4a", fontSize: 13, lineHeight: 1.7, fontWeight: 300, margin: 0 },
+  // Locked banner
+  lockedBanner:       { background: "#F0EDE8", border: "1px solid #e8e3da", padding: "13px 18px", display: "flex", alignItems: "center", gap: 12, marginBottom: 12 },
+  lockedBannerText:   { color: "#4a4a4a", fontSize: 13 },
   // Progress
   progressWrap:   { background: "#ffffff", border: "1px solid #e8e3da", padding: "20px 24px", marginBottom: 12 },
   progressLabel:  { color: "#C4960F", fontSize: 11, letterSpacing: 3 },
@@ -495,14 +629,14 @@ const styles = {
   progressFill:   { background: "#C4960F", height: 4, borderRadius: 2, transition: "width 0.4s ease" },
   // Intake accordion
   intakeSec:      { background: "#ffffff", border: "1px solid #e8e3da", marginBottom: 4 },
-  intakeSecOpen:  { borderColor: "#C4960F" },
+  intakeSecOpen:  { borderColor: "#C4960F", background: "#FDFCFA" },
   intakeHeader:   { width: "100%", background: "none", border: "none", padding: "18px 22px", display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer", fontFamily: "Inter, sans-serif" },
   intakeNum:      { color: "#C4960F", fontSize: 20, fontFamily: "Georgia, serif", minWidth: 32 },
   intakeSecLabel: { color: "#1a1a2e", fontSize: 13, letterSpacing: 2, textAlign: "left" },
   intakeProgress: { color: "#4a4a4a", fontSize: 12, marginTop: 3, textAlign: "left" },
   checkBadge:     { background: "#f0f8f0", border: "1px solid #4A8A4A", color: "#4A8A4A", fontSize: 12, padding: "2px 8px" },
   chevron:        { color: "#4a4a4a", fontSize: 12 },
-  intakeBody:     { padding: "4px 22px 22px", borderTop: "1px solid #e8e3da" },
+  intakeBody:     { padding: "4px 22px 22px", borderTop: "1px solid #e8e3da", background: "#FDFCFA" },
   intakeDesc:     { color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, fontStyle: "italic", marginTop: 16, marginBottom: 20, fontWeight: 300 },
   // Fields
   fieldLabel:     { display: "block", color: "#1a1a2e", fontSize: 12, letterSpacing: 2, marginBottom: 6 },
@@ -522,12 +656,10 @@ const styles = {
   bookingDesc:    { color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, fontWeight: 300, marginBottom: 20 },
   bookingMeta:    { background: "#F0EDE8", padding: "14px 18px", marginBottom: 20, display: "flex", flexDirection: "column", gap: 8 },
   bookingMetaRow: { display: "flex", justifyContent: "space-between", alignItems: "center" },
-  bookingMetaLabel:{ color: "#4a4a4a", fontSize: 11, letterSpacing: 2 },
+  bookingMetaLabel: { color: "#4a4a4a", fontSize: 11, letterSpacing: 2 },
   bookingMetaVal: { color: "#1a1a2e", fontSize: 13, fontWeight: 500 },
   sessionNote:    { background: "#F0EDE8", border: "1px solid #e8e3da", borderLeft: "2px solid #C4960F", padding: "16px 20px", color: "#4a4a4a", fontSize: 14, lineHeight: 1.8 },
-  sessionDoneBadge:{ background: "#f0f8f0", border: "1px solid #4A8A4A", color: "#4A8A4A", fontSize: 12, padding: "13px 20px", textAlign: "center" },
-  // Locked overlay
-  lockedOverlay:  { position: "absolute", inset: 0, background: "rgba(250,250,248,0.93)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", zIndex: 10, gap: 4, padding: "40px 20px" },
+  sessionDoneBadge: { background: "#f0f8f0", border: "1px solid #4A8A4A", color: "#4A8A4A", fontSize: 12, padding: "13px 20px", textAlign: "center" },
   // Matrix
   matrixGrid:     { display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 12, marginBottom: 24 },
   matrixCard:     { background: "#F0EDE8", border: "1px solid #e8e3da", padding: 16 },
@@ -561,7 +693,7 @@ const styles = {
   supportPeriod:  { color: "#4a4a4a", fontSize: 13, fontFamily: "Georgia, serif", fontStyle: "italic" },
   supportDesc:    { color: "#4a4a4a", fontSize: 15, lineHeight: 1.9, fontWeight: 300, marginBottom: 20 },
   // Footer
-  footer:         { margin: "56px 40px 0", borderTop: "1px solid #e8e3da", paddingTop: 24, paddingBottom: 40, display: "flex", justifyContent: "space-between", alignItems: "center" },
-  footerQuote:    { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 15 },
-  footerLogo:     { color: "#4a4a4a", fontFamily: "Georgia, serif", fontSize: 20, letterSpacing: 4 },
+  footer:         { margin: "56px 40px 0", borderTop: "1px solid #e8e3da", paddingTop: 24, paddingBottom: 40, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 40 },
+  footerQuote:    { fontFamily: "Georgia, serif", fontStyle: "italic", color: "#4a4a4a", fontSize: 14, lineHeight: 1.8, maxWidth: 640 },
+  footerLogo:     { color: "#4a4a4a", fontFamily: "Georgia, serif", fontSize: 20, letterSpacing: 4, flexShrink: 0 },
 };
