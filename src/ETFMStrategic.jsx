@@ -2,6 +2,9 @@ import { useState } from "react";
 
 const STORAGE_KEY = "etfm_strategic_data";
 
+const CALENDLY_PRE = "https://calendly.com/exit-etfm/etfm-strategic-reset-session";
+const CALENDLY_POST = "https://calendly.com/exit-etfm/etfm-strategic-reset-session";
+
 const loadData = () => {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -299,7 +302,7 @@ export default function ETFMStrategic() {
             </div>
             {call1Complete
               ? <div style={styles.sessionDoneBadge}>✓ SESSION 1 COMPLETE</div>
-              : <a href="https://calendly.com/robertbrickey/strategic-session-1" target="_blank" rel="noopener noreferrer" style={{ ...styles.btnPrimary, display: "block", textAlign: "center", textDecoration: "none" }}>BOOK SESSION 1</a>
+              : <a href={CALENDLY_PRE} target="_blank" rel="noopener noreferrer" style={{ ...styles.btnPrimary, display: "block", textAlign: "center", textDecoration: "none" }}>BOOK SESSION 1</a>
             }
           </div>
 
@@ -316,7 +319,7 @@ export default function ETFMStrategic() {
             {call2Complete
               ? <div style={styles.sessionDoneBadge}>✓ SESSION 2 COMPLETE</div>
               : call1Complete
-                ? <a href="https://calendly.com/robertbrickey/strategic-session-2" target="_blank" rel="noopener noreferrer" style={{ ...styles.btnPrimary, display: "block", textAlign: "center", textDecoration: "none" }}>BOOK SESSION 2</a>
+                ? <a href={CALENDLY_POST} target="_blank" rel="noopener noreferrer" style={{ ...styles.btnPrimary, display: "block", textAlign: "center", textDecoration: "none" }}>BOOK SESSION 2</a>
                 : <div style={styles.lockedBtn}>UNLOCKS AFTER SESSION 1</div>
             }
           </div>
