@@ -136,11 +136,10 @@ export default function ETFMStrategic() {
 
       {/* HERO */}
       <section style={styles.hero}>
-        <img
-          src="https://etfm-assessment.vercel.app/etfm-logo.png"
-          alt="ETFM"
-          style={{ width: 52, display: "block", margin: "0 auto 20px", opacity: 0.9 }}
-        />
+        <div style={{textAlign:"center", marginBottom:"20px"}}>
+          <p style={{fontFamily:"Georgia, serif", color:"#C4960F", fontSize:"28px", letterSpacing:"6px", margin:"0"}}>ETFM</p>
+          <p style={{color:"#8A8A9A", fontSize:"10px", letterSpacing:"4px", margin:"4px 0 0"}}>ESCAPE THE FINANCIAL MATRIX</p>
+        </div>
         <div style={styles.heroLabel}>YOUR STRATEGIC RESET PARTNERSHIP</div>
         <h1 style={styles.heroTitle}>Private Client<br />Strategic Dashboard</h1>
         <div style={styles.congratsBox}>
