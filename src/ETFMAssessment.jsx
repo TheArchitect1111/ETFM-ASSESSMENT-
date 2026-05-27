@@ -17,7 +17,7 @@ const SCORE_MAP = {
 };
 
 function calcScore(answers){
-  const scores=answers.map(a=>SCORE_MAP[a]||10);
+  const scores=answers.map(a=>SCORE_MAP[a]||0);
   return Math.min(100,scores.reduce((s,n)=>s+n,0));
 }
 
@@ -552,7 +552,7 @@ export default function ETFMAssessment(){
     const SCORE_CATEGORIES=["Awareness","Money Pattern","Stress Response","Financial Structure","System Readiness"];
     const breakdown=freeAns.map((val,i)=>{
       const opt=FQ[i].options.find(o=>o.value===val);
-      return{category:SCORE_CATEGORIES[i],answer:opt?opt.label:val,score:SCORE_MAP[val]||40};
+      return{category:SCORE_CATEGORIES[i],answer:opt?opt.label:val,score:SCORE_MAP[val]||0};
     });
     return(
     <div style={{minHeight:"100vh",backgroundColor:C.bg,padding:"40px 20px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
@@ -561,7 +561,14 @@ export default function ETFMAssessment(){
         <Tag t="Snapshot Complete"/>
         <h2 style={{fontSize:"32px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Your pattern has been identified.</h2>
         <p style={{fontSize:"16px",color:C.muted,marginBottom:"40px",lineHeight:"1.7"}}>What you've uncovered isn't a reflection of your potential, it's a reflection of the patterns currently shaping your financial decisions. Seeing them clearly is always where real movement begins.</p>
-        <p style={{color:'#4A4A4A',fontSize:'14px',lineHeight:'1.9',marginBottom:'16px'}}>Your Awareness Score is built from multiple behavioral and structural indicators across your responses, including visibility, consistency, organization, and financial decision-making patterns. What you see here is only a partial snapshot. Your complete score breakdown, Financial Archetype, and personalized strategic insights will be delivered to your inbox.</p>
+        <p style={{color:'#4A4A4A',fontSize:'14px',lineHeight:'1.9',marginBottom:'24px'}}>Your Awareness Score is built from multiple behavioral and structural indicators across your responses, including visibility, consistency, organization, and financial decision-making patterns. What you see here is only a partial snapshot. Your complete score breakdown, Financial Archetype, and personalized strategic insights will be delivered to your inbox.</p>
+        <div style={{backgroundColor:C.white,border:`2px solid ${C.gold}`,borderRadius:"12px",padding:"28px 24px",marginBottom:"24px",textAlign:"center"}}>
+          <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"3px",marginBottom:"12px",fontWeight:"bold"}}>Congratulations</p>
+          <p style={{color:C.text,fontSize:"18px",fontFamily:"Georgia, serif",marginBottom:"20px",lineHeight:"1.5"}}>You've completed your ETFM Awareness Snapshot.</p>
+          <p style={{color:C.dark,fontSize:"52px",fontWeight:"bold",fontFamily:"Georgia, serif",margin:"0 0 4px",lineHeight:"1"}}>{score}</p>
+          <p style={{color:C.muted,fontSize:"16px",margin:"0 0 16px"}}>out of 100</p>
+          <p style={{color:C.muted,fontSize:"14px",margin:0,lineHeight:"1.6"}}>Your score reflects your current level of financial awareness across five behavioral components. The higher your score, the more visibility, structure, and intentionality you already have in place.</p>
+        </div>
         <div style={{backgroundColor:C.dark,borderRadius:"12px",padding:"36px 30px",marginBottom:"30px",textAlign:"left"}}>
           <p style={{color:"#e8e3da",fontSize:"15px",fontWeight:"600",marginBottom:"24px",textAlign:"center",lineHeight:"1.5"}}>Your score is built across five behavioral components.</p>
           {[
@@ -577,7 +584,7 @@ export default function ETFMAssessment(){
                 <p style={{color:"#6a6a7a",fontSize:"12px",margin:0,lineHeight:"1.5"}}>{comp.desc}</p>
               </div>
               {i===0
-                ? <span style={{color:C.gold,fontSize:"17px",fontWeight:"bold",flexShrink:0}}>{breakdown[0]?.score??"-"}</span>
+                ? <span style={{color:C.gold,fontSize:"17px",fontWeight:"bold",flexShrink:0}}>{breakdown[0]?.score??"-"} / 20</span>
                 : <div style={{flexShrink:0,textAlign:"right"}}>
                     <span style={{color:C.gold,fontSize:"14px"}}>🔒</span>
                     <p style={{color:"#6a6a7a",fontSize:"11px",fontStyle:"italic",margin:"2px 0 0",whiteSpace:"nowrap"}}>Revealed in your email</p>
@@ -936,7 +943,26 @@ export default function ETFMAssessment(){
     <Wrap>
       <Tag t="ETFM Financial Reset, Step 3"/>
       <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>You understand the pattern. Now it is time to build the systems that create stability.</h2>
-      <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'20px'}}>You understand the pattern. Now it is time to build the systems that create stability. The ETFM Reset Experience is a guided implementation system designed to help you reduce financial chaos, organize your financial life, and create more consistency, visibility, and control through practical weekly structure. Inside the Reset Experience you will build: Financial Reset Workbook, Financial Reality Audit, Bill Organization System, Financial Calendar and Visibility System, Spending Pattern Analysis, Weekly System Review Framework, Guided Five-Phase Reset Journey, and Strategic Guidance from Robert Brickey. This is not another budgeting course. This is a practical financial operating system designed to help you move from reaction to structure, one step, one system, and one week at a time.</p>
+      <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'16px'}}>You understand the pattern. Now it is time to build the systems that create stability. The ETFM Reset Experience is a guided implementation system designed to help you reduce financial chaos, organize your financial life, and create more consistency, visibility, and control through practical weekly structure.</p>
+      <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"10px",padding:"24px 28px",marginBottom:"20px",textAlign:"left"}}>
+        <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px",fontWeight:"bold"}}>Inside the Reset Experience, you will build:</p>
+        {[
+          "Financial Reset Workbook",
+          "Financial Reality Audit",
+          "Bill Organization System",
+          "Financial Calendar and Visibility System",
+          "Spending Pattern Analysis",
+          "Weekly System Review Framework",
+          "Guided Five-Phase Reset Journey",
+          "Strategic Guidance from Robert Brickey",
+        ].map((tool,i)=>(
+          <div key={i} style={{display:"flex",alignItems:"flex-start",gap:"10px",padding:"8px 0",borderBottom:i<7?`1px solid ${C.border}`:"none"}}>
+            <span style={{width:"5px",height:"5px",borderRadius:"50%",background:C.gold,flexShrink:0,marginTop:"7px"}}/>
+            <p style={{margin:0,fontSize:"14px",color:C.text,fontWeight:"500",lineHeight:"1.5"}}>{tool}</p>
+          </div>
+        ))}
+      </div>
+      <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'20px'}}>This is not another budgeting course. This is a practical financial operating system designed to help you move from reaction to structure, one step, one system, and one week at a time.</p>
 
       <div style={{backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"20px 24px",marginBottom:"20px",textAlign:"left"}}>
         <p style={{color:C.dark,fontSize:"12px",fontWeight:"bold",marginBottom:"10px",textTransform:"uppercase",letterSpacing:"1px"}}>Before You Continue</p>
