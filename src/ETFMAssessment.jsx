@@ -768,32 +768,8 @@ export default function ETFMAssessment(){
   // BLUEPRINT OFFER
   if(screen==="blueprint_offer") return(
     <Wrap>
-      <Tag t="ETFM Strategic Blueprint"/>
-      <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Now that you can see the pattern, it's time to understand it fully.</h2>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"16px"}}>Most people spend years reacting financially without ever identifying the underlying patterns driving their decisions. They try harder, restart plans, and still find themselves in the same place.</p>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"32px"}}>The ETFM Blueprint is an 18-question diagnostic designed to surface the habits, blind spots, behavioral patterns, and system gaps shaping your financial life. Not to give you generic advice. To help you finally understand why the same cycles keep repeating, and what to do differently.</p>
-
-      <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"20px"}}>
-        <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"20px"}}>What Changes After Your Blueprint</p>
-        {[
-          {title:"You understand your financial archetype and operating pattern",body:"Not a label. A clear picture of how your financial decisions are actually being made and why certain cycles keep repeating."},
-          {title:"You see where your system is breaking",body:"A personalized breakdown of where your financial structure is strong, where it is fragile, and where the hidden gaps are creating the most pressure."},
-          {title:"You have a real framework to work from",body:"The ETFM Financial Operating System gives you a structure to organize your financial life around clarity, priorities, and intentional decisions rather than reaction."},
-          {title:"You have a 30-day starting point",body:"A guided 30-Day Strategic Reset Protocol so you can begin applying what you've learned immediately and start building momentum."},
-          {title:"You know what to focus on first",body:"Immediate priority action steps so the path forward is clear, not overwhelming."},
-        ].map((item,i)=>(
-          <div key={i} style={{padding:"12px 0",borderBottom:"1px solid rgba(255,255,255,0.08)"}}>
-            <p style={{margin:"0 0 4px",color:C.white,fontSize:"14px",fontWeight:"bold"}}>{item.title}</p>
-            <p style={{margin:"0 0 0 0",color:"#a0a0b0",fontSize:"13px",lineHeight:"1.6"}}>{item.body}</p>
-          </div>
-        ))}
-        <div style={{marginTop:"20px",padding:"16px",backgroundColor:"rgba(201,151,58,0.08)",borderRadius:"6px",border:"1px solid rgba(201,151,58,0.2)"}}>
-          <p style={{color:"#c8c8d8",fontSize:"14px",margin:0,lineHeight:"1.8",fontStyle:"italic"}}>Structured financial clarity and organization services can often cost thousands of dollars or require large investment minimums. The Blueprint is designed to give you diagnostic clarity and a structured starting framework at a fraction of that investment.</p>
-        </div>
-        <CreditNote dark={true}/>
-      </div>
-
-      <p style={{fontSize:"14px",color:C.muted,marginBottom:"20px",lineHeight:"1.7"}}>After payment, you'll answer 18 diagnostic questions. Robert's team generates your personalized Blueprint and delivers it to your inbox, typically within minutes.</p>
+      <h2 style={{fontSize:"38px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.2",fontWeight:"normal"}}>Go Deeper</h2>
+      <p style={{fontSize:"17px",color:C.muted,lineHeight:"1.8",marginBottom:"40px"}}>Your Snapshot revealed the pattern. The Blueprint shows you the system driving it.</p>
       {!email&&(
         <div style={{marginBottom:"20px",textAlign:"left"}}>
           <label style={{display:"block",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"8px",color:C.muted}}>Confirm your email</label>
@@ -805,7 +781,7 @@ export default function ETFMAssessment(){
         <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}>The ETFM Strategic Blueprint is designed for educational and awareness purposes only. The content, scores, and recommendations generated are not individualized financial guidance and do not constitute a professional strategic guidance relationship. For guidance specific to your financial situation, please consult a licensed financial professional.</p>
         <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:0}}>All sales are final. Due to the personalized and immediately delivered nature of the Blueprint, refunds are not available once your diagnostic has been processed. By completing payment you acknowledge you have read and agree to these terms.</p>
       </div>
-      <BtnPrimary onClick={payBlueprint} disabled={loading}>{loading?"One moment, setting up your Blueprint...":"Unlock Your Blueprint: $47"}</BtnPrimary>
+      <BtnPrimary onClick={payBlueprint} disabled={loading}>{loading?"One moment, setting up your Blueprint...":"Unlock Your Strategic Blueprint — $47"}</BtnPrimary>
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
     </Wrap>
@@ -874,58 +850,8 @@ export default function ETFMAssessment(){
   // SESSION OFFER
   if(screen==="session_offer") return(
     <Wrap>
-      <Tag t="ETFM Financial Reset"/>
-      <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>You've been figuring this out alone long enough.</h2>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"16px",textAlign:"center"}}>Most people have never had someone actually sit down with their real numbers, not to judge, not to sell them something, but to look honestly at where they are, understand what's creating the pressure, and build a plan that fits their actual life.</p>
-      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"24px"}}>Structured financial clarity and organization can easily cost several thousand dollars, and often requires large investment minimums just to get started. The ETFM Financial Reset is designed to deliver the same personalized strategic clarity at a fraction of that.</p>
-
-      <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"28px",marginBottom:"24px",textAlign:"left"}}>
-        <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",color:C.gold,marginBottom:"16px"}}>A Personal Note From Robert</p>
-        <p style={{fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.8",marginBottom:"20px",fontStyle:"italic"}}>
-          "You've already done the hard part. You stopped, looked honestly at your situation, and decided to take it seriously. That's not nothing. Most people never get there. What I want for you is simple: a plan that is real, clear, and built around your actual life. Not a template. Not generic guidance. Something you can actually follow. That's what this session is built to give you."
-        </p>
-        <div style={{marginBottom:"20px"}}>
-          <DotCred label="Financial Strategist" sub="12 years of client strategic guidance"/>
-          <DotCred label="Creator of ETFM" sub="A financial operating system built for real life"/>
-        </div>
-        <div style={{padding:"20px",backgroundColor:C.bg,borderRadius:"8px",border:`1px solid ${C.border}`,borderLeft:`3px solid ${C.gold}`}}>
-          <p style={{margin:"0 0 8px",fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",fontStyle:"italic",lineHeight:"1.7"}}>"The moment you take charge of your financial life, everything else becomes possible. You don't need to be perfect. You just need a clear direction and the right structure to move in it."</p>
-          <p style={{margin:0,fontSize:"12px",color:C.gold,textTransform:"uppercase",letterSpacing:"1px"}}>Robert Brickey, Financial Strategist</p>
-        </div>
-      </div>
-
-      <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"20px"}}>
-        <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px"}}>{blueprintClient?"What You Get: $425 (Blueprint client rate)":"What You Get: $499"}</p>
-        {[
-          {title:"Your financial situation is fully reviewed before the first call",body:"You complete a short intake form in advance. Robert reviews your actual numbers, obligations, and goals before you speak so nothing is wasted and nothing is generic."},
-          {title:"Two private 30-minute strategy sessions with Robert Brickey, Creator of ETFM",body:"A pre-session call to build your plan and a post-session call to review it together, answer questions, and confirm your direction. No group calls. No assistants."},
-          {title:"A personalized strategic action plan built around your current reality, priorities, pressure points, and long-term goals",body:"Not a template. A plan built specifically around your income, obligations, goals, and lifestyle. Something you can actually follow."},
-          {title:"Clear financial structure recommendations",body:"Guidance on how to organize your accounts, allocate your income, and build a system that reduces decision fatigue and makes consistent progress possible."},
-          {title:"Strategic next-step planning so you leave with clarity",body:"You end each session knowing exactly what to focus on next and in what order. No more guessing. No more starting over. A clear path forward."},
-          {title:"Detailed session notes delivered to you after both calls for review and reference",body:"Comprehensive written notes sent directly to you after each session so you can revisit the plan, stay on track, and keep moving."},
-          {title:"60 Days of Priority Email Support",body:"Ongoing clarification, guidance, and accountability during implementation. Questions come up after the calls, and support is available to make sure momentum continues."},
-        ].map((item,i)=>(
-          <div key={i} style={{padding:"12px 0",borderBottom:`1px solid ${C.border}`}}>
-            <p style={{margin:"0 0 4px",color:C.text,fontSize:"14px",fontWeight:"bold"}}>{item.title}</p>
-            <p style={{margin:"0",color:C.muted,fontSize:"13px",lineHeight:"1.6"}}>{item.body}</p>
-          </div>
-        ))}
-        <CreditNote dark={false}/>
-      </div>
-
-      <div style={{backgroundColor:C.bg,borderRadius:"8px",padding:"20px 24px",marginBottom:"24px",textAlign:"center",border:`1px solid ${C.border}`}}>
-        <p style={{color:C.dark,fontSize:"14px",fontWeight:"bold",marginBottom:"12px"}}>How it works</p>
-        {[
-          "Book your pre-session call and choose a time that works for you",
-          "Complete your secure payment to confirm your spot",
-          "You will receive a short intake form within 24 hours. Complete it so Robert arrives fully prepared",
-          "Your first 30-minute call with Robert. He has already reviewed your situation",
-          "Receive your personalized plan, financial score, and 90-day roadmap",
-          "Your second 30-minute call. Review your plan together and confirm your next move",
-        ].map((step,i)=>(
-          <div key={i} style={{padding:"8px 0",color:C.muted,fontSize:"14px",lineHeight:"1.6",borderBottom:i<5?`1px solid ${C.border}`:"none"}}>{i+1}.&nbsp;&nbsp;{step}</div>
-        ))}
-      </div>
+      <h2 style={{fontSize:"38px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.2",fontWeight:"normal"}}>Private Strategic Partnership</h2>
+      <p style={{fontSize:"17px",color:C.muted,lineHeight:"1.8",marginBottom:"40px"}}>Work directly with Robert to analyze your financial reality, close the structural gaps, and build a system that runs on intention, not pressure.</p>
 
       {!email&&(
         <div style={{marginBottom:"20px",textAlign:"left"}}>
@@ -941,7 +867,7 @@ export default function ETFMAssessment(){
       </div>
       <a href={`${CALENDLY}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(firstName)}`} target="_blank" rel="noopener noreferrer"
         style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
-        Book Your Pre-Session Call
+        Book Your Strategic Reset Session — $499
       </a>
       <p style={{fontSize:"13px",color:C.muted,textAlign:"center",marginBottom:"24px"}}>A real plan, built around your real life. Starting now.</p>
       <Hr/>
@@ -1039,28 +965,8 @@ export default function ETFMAssessment(){
   // RESET OFFER
   if(screen==="reset_offer") return(
     <Wrap>
-      <Tag t="ETFM Financial Reset, Step 3"/>
-      <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>You understand the pattern. Now it is time to build the systems that create stability.</h2>
-      <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'16px'}}>You understand the pattern. Now it is time to build the systems that create stability. The ETFM Reset Experience is a guided implementation system designed to help you reduce financial chaos, organize your financial life, and create more consistency, visibility, and control through practical weekly structure.</p>
-      <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"10px",padding:"24px 28px",marginBottom:"20px",textAlign:"left"}}>
-        <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"16px",fontWeight:"bold"}}>Inside the Reset Experience, you will build:</p>
-        {[
-          "Financial Reset Workbook",
-          "Financial Reality Audit",
-          "Bill Organization System",
-          "Financial Calendar and Visibility System",
-          "Spending Pattern Analysis",
-          "Weekly System Review Framework",
-          "Guided Five-Phase Reset Journey",
-          "Strategic Guidance from Robert Brickey",
-        ].map((tool,i)=>(
-          <div key={i} style={{display:"flex",alignItems:"flex-start",gap:"10px",padding:"8px 0",borderBottom:i<7?`1px solid ${C.border}`:"none"}}>
-            <span style={{width:"5px",height:"5px",borderRadius:"50%",background:C.gold,flexShrink:0,marginTop:"7px"}}/>
-            <p style={{margin:0,fontSize:"14px",color:C.text,fontWeight:"500",lineHeight:"1.5"}}>{tool}</p>
-          </div>
-        ))}
-      </div>
-      <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'20px'}}>This is not another budgeting course. This is a practical financial operating system designed to help you move from reaction to structure, one step, one system, and one week at a time.</p>
+      <h2 style={{fontSize:"38px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.2",fontWeight:"normal"}}>Build the Structure</h2>
+      <p style={{fontSize:"17px",color:C.muted,lineHeight:"1.8",marginBottom:"40px"}}>The ETFM Reset Experience is a guided implementation system to reduce financial chaos and create real stability.</p>
 
       <div style={{backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"20px 24px",marginBottom:"20px",textAlign:"left"}}>
         <p style={{color:C.dark,fontSize:"12px",fontWeight:"bold",marginBottom:"10px",textTransform:"uppercase",letterSpacing:"1px"}}>Before You Continue</p>
@@ -1069,7 +975,7 @@ export default function ETFMAssessment(){
       </div>
       <a href="https://buy.stripe.com/fZueVee9agLY7d7esu8Vi0f"
         style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
-        Begin Your Reset: $99
+        Begin Your Reset Experience — $99
       </a>
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
