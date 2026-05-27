@@ -24,7 +24,7 @@ function calcScore(answers){
 const FQ=[
   {id:"awareness",
    bot:"How clearly do you see where your money actually goes each month?",
-   subtext:"Awareness is the starting point. No judgment here, just honesty.",
+   subtext:"Financial visibility is the first indicator of system health. What you can see, you can change. What stays hidden keeps repeating.",
    options:[
      {label:"Honestly? I have no real idea",value:"no_idea"},
      {label:"I know some of it, but not consistently",value:"some_inconsistent"},
@@ -319,7 +319,7 @@ const Spinner=()=>(
       marginBottom:"16px"
     }}/>
     <style>{`@keyframes etfm-spin{to{transform:rotate(360deg)}}`}</style>
-    <p style={{color:C.muted,fontSize:"14px",margin:0}}>Building your Snapshot. Just a moment...</p>
+    <p style={{color:C.muted,fontSize:"14px",margin:0}}>Processing your pattern analysis. Just a moment...</p>
   </div>
 );
 
@@ -401,7 +401,7 @@ export default function ETFMAssessment(){
     const a=[...freeAns,val];
     setFreeAns(a);
     if(freeIdx<FQ.length-1){setFreeIdx(freeIdx+1);}
-    else{setScore(calcScore(a));setScreen("transition");}
+    else{setScore(calcScore(a));setScreen("email_gate");}
   };
 
   const submitFree=async(e)=>{
@@ -414,9 +414,9 @@ export default function ETFMAssessment(){
         fetch("/api/claude",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({type:"subscribe",firstName,email,answers:freeAns.map((v,i)=>({question:FQ[i].bot,answer:v}))})}),
         timeout,
       ]);
-      setScreen("snapshot_confirmed");
+      setScreen("transition");
     }catch(e){
-      setScreen("snapshot_confirmed");
+      setScreen("transition");
     }finally{setLoading(false);}
   };
 
@@ -479,7 +479,8 @@ export default function ETFMAssessment(){
       <Tag t="Escape The Financial Matrix"/>
       <h1 style={{fontSize:"42px",fontFamily:"Georgia, serif",marginBottom:"20px",color:C.text,lineHeight:"1.2"}}>Most people don't have a money problem. They have a pattern problem.</h1>
       <p style={{fontSize:"17px",color:C.muted,marginBottom:"16px",lineHeight:"1.8"}}>The same cycles repeat. The same pressure returns. The same intentions don't stick, not because of effort or character, but because nobody has ever helped you see the underlying pattern driving your financial decisions.</p>
-      <p style={{fontSize:"17px",color:C.muted,marginBottom:"40px",lineHeight:"1.8"}}>The ETFM Snapshot is a 5-question financial awareness assessment. It identifies your Financial Archetype, calculates your personal Awareness Score, and delivers a targeted strategic insight straight to your inbox. It takes about two minutes. It is completely free.</p>
+      <p style={{fontSize:"17px",color:C.muted,marginBottom:"16px",lineHeight:"1.8"}}>Most people don't have an effort problem. They have a structure problem. The same cycles repeat not because of willpower or intelligence, but because the underlying financial operating system has never been diagnosed or rebuilt.</p>
+      <p style={{fontSize:"17px",color:C.muted,marginBottom:"40px",lineHeight:"1.8"}}>The ETFM Snapshot is a 5-question behavioral pattern diagnostic built on the ETFM Financial Operating System. It surfaces hidden patterns, identifies system leaks, and calculates your personal Awareness Score across five behavioral and structural components. Your results, Financial Archetype, and personalized strategic insight are delivered directly to your inbox. It takes about two minutes. It is completely free.</p>
 
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"32px",marginBottom:"36px",textAlign:"left"}}>
         <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"3px",color:C.gold,marginBottom:"20px",textAlign:"center"}}>Who Built This</p>
@@ -504,11 +505,28 @@ export default function ETFMAssessment(){
   // SNAPSHOT INTRO
   if(screen==="snapshot_intro") return(
     <Wrap max="600px">
-      <Tag t="Escape The Financial Matrix"/>
-      <h1 style={{fontSize:"34px",fontFamily:"Georgia, serif",marginBottom:"16px",color:C.text,lineHeight:"1.3"}}>Your Financial Clarity Snapshot</h1>
-      <p style={{fontSize:"16px",color:C.text,marginBottom:"20px",lineHeight:"1.7",fontWeight:"500"}}>Before we begin, here is what this is and why it matters.</p>
-      <p style={{fontSize:"16px",color:C.muted,marginBottom:"40px",lineHeight:"1.8"}}>This is a 5-question snapshot designed to identify your current financial patterns and awareness level. It takes about 2 minutes. There are no right or wrong answers. At the end you will receive your Financial Archetype, a portion of your Awareness Score, and a personalized insight. Your full score and complete breakdown will arrive in your email shortly after.</p>
-      <button onClick={()=>setScreen("chat")} style={{backgroundColor:C.gold,color:C.dark,border:"none",padding:"16px 44px",fontSize:"16px",fontWeight:"bold",borderRadius:"8px",cursor:"pointer"}}>Begin My Snapshot</button>
+      <Tag t="ETFM Behavioral Pattern Diagnostic"/>
+      <h1 style={{fontSize:"34px",fontFamily:"Georgia, serif",marginBottom:"16px",color:C.text,lineHeight:"1.3"}}>Before we surface your pattern, here is what this diagnostic does.</h1>
+      <p style={{fontSize:"16px",color:C.muted,marginBottom:"24px",lineHeight:"1.8"}}>This is not a quiz. It is a 5-question behavioral pattern analysis designed to identify the structural and behavioral factors currently shaping your financial decisions. Each question surfaces a specific layer of your financial operating system.</p>
+      <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"24px",marginBottom:"32px",textAlign:"left"}}>
+        {[
+          {label:"Awareness",desc:"Your current level of financial visibility"},
+          {label:"Money Pattern",desc:"How you handle income, expenses, and unexpected funds"},
+          {label:"Stress Response",desc:"How you respond when financial pressure builds"},
+          {label:"Financial Structure",desc:"The systems and habits you currently have in place"},
+          {label:"System Readiness",desc:"Your ability and mindset to build and follow a plan"},
+        ].map((item,i)=>(
+          <div key={i} style={{display:"flex",alignItems:"flex-start",gap:"12px",padding:"8px 0",borderBottom:i<4?"1px solid rgba(255,255,255,0.06)":"none"}}>
+            <span style={{color:C.gold,fontSize:"11px",fontWeight:"bold",minWidth:"20px",paddingTop:"2px"}}>{i+1}.</span>
+            <div>
+              <p style={{color:"#e8e3da",fontSize:"13px",fontWeight:"600",margin:"0 0 2px"}}>{item.label}</p>
+              <p style={{color:"#6a6a7a",fontSize:"12px",margin:0}}>{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p style={{fontSize:"14px",color:C.muted,marginBottom:"32px",lineHeight:"1.7"}}>Answer based on what is actually true, not what you wish were true. The diagnostic is only useful if it reflects where things actually stand today.</p>
+      <button onClick={()=>setScreen("chat")} style={{backgroundColor:C.gold,color:C.dark,border:"none",padding:"16px 44px",fontSize:"16px",fontWeight:"bold",borderRadius:"8px",cursor:"pointer"}}>Begin the Diagnostic</button>
     </Wrap>
   );
 
@@ -521,7 +539,7 @@ export default function ETFMAssessment(){
         <div style={{maxWidth:"680px",margin:"0 auto"}}>
           {freeIdx===0&&(
             <div style={{marginBottom:"24px",padding:"20px 24px",backgroundColor:C.white,borderRadius:"10px",border:`1px solid ${C.border}`,borderLeft:`3px solid ${C.gold}`}}>
-              <p style={{color:C.text,fontSize:"15px",lineHeight:"1.9",margin:0}}>These 5 questions are designed to identify your current financial patterns and awareness level. Answer honestly. There are no right or wrong answers. At the end you will see a partial Awareness Score broken down by component, and your full score, Financial Archetype, and personalized insight will be delivered directly to your inbox, completely free.</p>
+              <p style={{color:C.text,fontSize:"15px",lineHeight:"1.9",margin:0}}>Five questions. Each one designed to surface a specific layer of your financial operating system. Answer based on what is actually true right now, not what you intend or what sounds best. The pattern this reveals only has value if it reflects your current reality.</p>
             </div>
           )}
           <div style={{marginBottom:"8px",display:"flex",justifyContent:"space-between"}}>
@@ -547,6 +565,49 @@ export default function ETFMAssessment(){
     );
   }
 
+  // EMAIL GATE (after questions, before results)
+  if(screen==="email_gate") return(
+    <div style={{minHeight:"100vh",backgroundColor:C.bg,padding:"40px 20px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
+      <div style={{maxWidth:"560px",width:"100%",textAlign:"center"}}>
+        <Tag t="Pattern Analysis Complete"/>
+        <h2 style={{fontSize:"32px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Your behavioral pattern has been identified.</h2>
+        <p style={{fontSize:"16px",color:C.muted,marginBottom:"32px",lineHeight:"1.8"}}>What we found reveals how your financial decisions have been structured, where hidden system leaks exist, and what behavioral blind spots have been shaping your financial life without your awareness. Your Awareness Score is ready.</p>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"12px",marginBottom:"32px"}}>
+          {[
+            {label:"Awareness Score",value:"Ready",locked:false},
+            {label:"Financial Archetype",value:"Locked",locked:true},
+            {label:"Primary Pattern",value:"Locked",locked:true},
+          ].map((item,i)=>(
+            <div key={i} style={{backgroundColor:C.dark,borderRadius:"8px",padding:"16px 10px",textAlign:"center"}}>
+              <p style={{color:"#6a6a7a",fontSize:"10px",textTransform:"uppercase",letterSpacing:"1px",margin:"0 0 8px",lineHeight:"1.4"}}>{item.label}</p>
+              <p style={{color:item.locked?"#3a3a5a":C.gold,fontSize:"18px",fontWeight:"bold",margin:0}}>{item.locked?"🔒":"✓"}</p>
+            </div>
+          ))}
+        </div>
+        <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"32px"}}>
+          <h3 style={{fontSize:"17px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"8px"}}>Unlock your Awareness Score and full breakdown.</h3>
+          <p style={{fontSize:"14px",color:C.muted,marginBottom:"24px",lineHeight:"1.6"}}>Enter your details below. Your Financial Archetype, Awareness Score, and personalized strategic insight will be delivered to your inbox. Your results will appear on the next screen.</p>
+          {loading ? <Spinner/> : (
+            <form onSubmit={submitFree}>
+              <div style={{marginBottom:"16px",textAlign:"left"}}>
+                <label style={{display:"block",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"8px",color:C.muted}}>First Name</label>
+                <input type="text" value={firstName} onChange={e=>setFirstName(e.target.value)} placeholder="Your first name" style={{width:"100%",padding:"12px",backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"6px",fontSize:"15px",boxSizing:"border-box"}}/>
+              </div>
+              <div style={{marginBottom:"20px",textAlign:"left"}}>
+                <label style={{display:"block",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"8px",color:C.muted}}>Email Address</label>
+                <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="your@email.com" style={{width:"100%",padding:"12px",backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"6px",fontSize:"15px",boxSizing:"border-box"}}/>
+              </div>
+              <button type="submit" style={{width:"100%",padding:"14px",backgroundColor:C.gold,color:C.dark,border:"none",borderRadius:"6px",fontSize:"16px",fontWeight:"bold",cursor:"pointer"}}>
+                Unlock My Awareness Score
+              </button>
+            </form>
+          )}
+          <p style={{fontSize:"11px",color:C.muted,marginTop:"16px",textAlign:"center"}}>Your information is never sold or shared.</p>
+        </div>
+      </div>
+    </div>
+  );
+
   // TRANSITION
   if(screen==="transition"){
     const SCORE_CATEGORIES=["Awareness","Money Pattern","Stress Response","Financial Structure","System Readiness"];
@@ -557,20 +618,19 @@ export default function ETFMAssessment(){
     return(
     <div style={{minHeight:"100vh",backgroundColor:C.bg,padding:"40px 20px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
       <div style={{maxWidth:"580px",width:"100%",textAlign:"center"}}>
-        <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'24px',textAlign:'left'}}>Congratulations. You have taken the first step most people avoid: slowing down long enough to see your financial patterns clearly. Your ETFM Awareness Score is a guided snapshot of how your current habits, structure, stress responses, and financial visibility are working together to shape your financial life today. This is not a judgment. No judgment. It is a starting point. And awareness is where real change begins.</p>
-        <Tag t="Snapshot Complete"/>
-        <h2 style={{fontSize:"32px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Your pattern has been identified.</h2>
-        <p style={{fontSize:"16px",color:C.muted,marginBottom:"40px",lineHeight:"1.7"}}>What you've uncovered isn't a reflection of your potential, it's a reflection of the patterns currently shaping your financial decisions. Seeing them clearly is always where real movement begins.</p>
-        <p style={{color:'#4A4A4A',fontSize:'14px',lineHeight:'1.9',marginBottom:'24px'}}>Your Awareness Score is built from multiple behavioral and structural indicators across your responses, including visibility, consistency, organization, and financial decision-making patterns. What you see here is only a partial snapshot. Your complete score breakdown, Financial Archetype, and personalized strategic insights will be delivered to your inbox.</p>
+        <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'24px',textAlign:'left'}}>What this diagnostic uncovered is not a reflection of your effort. It is a map of how your financial operating system is currently running: which behavioral patterns are active, where structural gaps are creating friction, and where hidden system leaks are driving the cycles you keep experiencing. Most people don't have an effort problem. They have a structure problem. Now you can see it.</p>
+        <Tag t="Behavioral Pattern Analysis Complete"/>
+        <h2 style={{fontSize:"32px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Your financial operating system has been mapped.</h2>
+        <p style={{fontSize:"16px",color:C.muted,marginBottom:"24px",lineHeight:"1.7"}}>What you're looking at isn't a grade. It's a behavioral and structural diagnostic. The patterns it identified have been running quietly in the background, shaping every financial decision you've made. This is what they look like when they're named.</p>
+        <p style={{color:'#4A4A4A',fontSize:'14px',lineHeight:'1.9',marginBottom:'24px'}}>Your Awareness Score is calculated from five behavioral and structural components rooted in the ETFM Financial Operating System: financial visibility, money patterns, stress response architecture, structural organization, and system readiness. Component 1 is revealed below. Your full breakdown, Financial Archetype, and personalized strategic insights are in your inbox.</p>
         <div style={{backgroundColor:C.white,border:`2px solid ${C.gold}`,borderRadius:"12px",padding:"28px 24px",marginBottom:"24px",textAlign:"center"}}>
-          <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"3px",marginBottom:"12px",fontWeight:"bold"}}>Congratulations</p>
-          <p style={{color:C.text,fontSize:"18px",fontFamily:"Georgia, serif",marginBottom:"20px",lineHeight:"1.5"}}>You've completed your ETFM Awareness Snapshot.</p>
+          <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"3px",marginBottom:"16px",fontWeight:"bold"}}>Your Awareness Score</p>
           <p style={{color:C.dark,fontSize:"52px",fontWeight:"bold",fontFamily:"Georgia, serif",margin:"0 0 4px",lineHeight:"1"}}>{score}</p>
           <p style={{color:C.muted,fontSize:"16px",margin:"0 0 16px"}}>out of 100</p>
-          <p style={{color:C.muted,fontSize:"14px",margin:0,lineHeight:"1.6"}}>Your score reflects your current level of financial awareness across five behavioral components. The higher your score, the more visibility, structure, and intentionality you already have in place.</p>
+          <p style={{color:C.muted,fontSize:"14px",margin:0,lineHeight:"1.6"}}>This is not a grade. It is a diagnostic reading of how your current financial operating system is structured: where it is holding, and where it is leaking. Lower scores surface where the system needs to be rebuilt. Higher scores reveal where structure is already working.</p>
         </div>
         <div style={{backgroundColor:C.dark,borderRadius:"12px",padding:"36px 30px",marginBottom:"30px",textAlign:"left"}}>
-          <p style={{color:"#e8e3da",fontSize:"15px",fontWeight:"600",marginBottom:"24px",textAlign:"center",lineHeight:"1.5"}}>Your score is built across five behavioral components.</p>
+          <p style={{color:"#e8e3da",fontSize:"15px",fontWeight:"600",marginBottom:"24px",textAlign:"center",lineHeight:"1.5"}}>Five components. Five behavioral and structural indicators of your financial operating system.</p>
           {[
             {name:"Awareness",desc:"How clearly you see where your money goes and what drives your decisions."},
             {name:"Money Pattern",desc:"How you consistently handle income, expenses, and unexpected funds."},
@@ -611,25 +671,16 @@ export default function ETFMAssessment(){
           </div>
         </div>
 
-        <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"36px 30px"}}>
-          <h3 style={{fontSize:"18px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"8px"}}>Send me my Snapshot and Awareness Score</h3>
-          <p style={{fontSize:"14px",color:C.muted,marginBottom:"24px"}}>Enter your details and we'll send your Financial Archetype, Awareness Score, and personalized insight right away.</p>
-          {loading ? <Spinner/> : (
-            <form onSubmit={submitFree}>
-              <div style={{marginBottom:"16px",textAlign:"left"}}>
-                <label style={{display:"block",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"8px",color:C.muted}}>First Name</label>
-                <input type="text" value={firstName} onChange={e=>setFirstName(e.target.value)} placeholder="Your first name" style={{width:"100%",padding:"12px",backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"6px",fontSize:"15px",boxSizing:"border-box"}}/>
-              </div>
-              <div style={{marginBottom:"20px",textAlign:"left"}}>
-                <label style={{display:"block",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"8px",color:C.muted}}>Email Address</label>
-                <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="your@email.com" style={{width:"100%",padding:"12px",backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"6px",fontSize:"15px",boxSizing:"border-box"}}/>
-              </div>
-              <button type="submit" style={{width:"100%",padding:"14px",backgroundColor:C.gold,color:C.dark,border:"none",borderRadius:"6px",fontSize:"16px",fontWeight:"bold",cursor:"pointer"}}>
-                Send My Snapshot
-              </button>
-            </form>
-          )}
-          <p style={{fontSize:"11px",color:C.muted,marginTop:"16px",textAlign:"center"}}>Your information is never sold or shared.</p>
+        <div style={{backgroundColor:C.bg,borderRadius:"8px",padding:"18px 22px",marginBottom:"24px",border:`1px solid ${C.border}`,borderLeft:`3px solid ${C.gold}`}}>
+          <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>Your Financial Archetype, full Awareness Score breakdown, and personalized strategic insight are being sent to your inbox now. Check your spam folder if you don't see it within a few minutes.</p>
+        </div>
+        <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"28px",textAlign:"center"}}>
+          <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"12px"}}>Ready to go deeper?</p>
+          <h3 style={{color:C.white,fontSize:"20px",fontFamily:"Georgia, serif",marginBottom:"12px",lineHeight:"1.4"}}>Your Snapshot surfaces the pattern. The Blueprint maps the entire system.</h3>
+          <p style={{color:"#a0a0b0",fontSize:"14px",marginBottom:"24px",lineHeight:"1.7"}}>18 diagnostic questions. A full behavioral and structural analysis of the hidden blind spots, system gaps, and decision patterns shaping your financial life, mapped and explained.</p>
+          <button onClick={()=>setScreen("blueprint_offer")} style={{display:"block",width:"100%",padding:"14px",backgroundColor:C.gold,color:C.dark,border:"none",borderRadius:"6px",fontSize:"15px",fontWeight:"bold",cursor:"pointer"}}>
+            Explore the Strategic Blueprint: $47
+          </button>
         </div>
       </div>
     </div>
