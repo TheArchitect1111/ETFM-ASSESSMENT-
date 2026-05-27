@@ -9,6 +9,12 @@ const C = {
 };
 
 const STAGES = ["VISIBILITY","PRESSURE","CONTROL","DIRECTION","AWARENESS"];
+const Q_TRANSITIONS = [
+  "Awareness changes behavior.",
+  "Pressure reveals structure.",
+  "Patterns repeat until they are seen.",
+  "Naming your destination is the first real act of financial strategy.",
+];
 
 const SCORE_MAP = {
   no_idea:2,some_inconsistent:7,track_mentally:11,track_most:16,know_exactly:20,
@@ -38,6 +44,7 @@ const FQ=[
   {id:"extra_money",
    bot:"When unexpected money comes in, what usually happens to it?",
    subtext:"How you treat extra money reveals your real financial pattern, not your intentions.",
+   highlight:"Your response under pressure shapes your financial life more than your income ever will.",
    options:[
      {label:"It gets absorbed into bills and everyday expenses",value:"disappears_bills"},
      {label:"I spend it, sometimes without thinking",value:"spend_quickly"},
@@ -47,7 +54,7 @@ const FQ=[
    ]},
   {id:"stress_response",
    bot:"When financial pressure builds, how do you usually respond?",
-   highlight:"Your response under pressure shapes your financial life more than your income ever will.",
+   highlight:"Pressure reveals structure.",
    options:[
      {label:"I avoid thinking about it as long as I can",value:"avoid"},
      {label:"I react, emotionally or impulsively",value:"emotional_decisions"},
@@ -58,6 +65,7 @@ const FQ=[
   {id:"structural_weakness",
    bot:"Which part of your financial life currently feels the most out of control?",
    subtext:"Where your system is breaking is where we begin building.",
+   highlight:"Naming your destination changes your behavior.",
    options:[
      {label:"Debt",value:"debt"},
      {label:"Spending",value:"spending"},
@@ -69,7 +77,7 @@ const FQ=[
    ]},
   {id:"future_vision",
    bot:"What are you ultimately trying to build, financially?",
-   highlight:"Naming your destination is the first real act of financial strategy.",
+   highlight:"Awareness is always where real movement begins.",
    options:[
      {label:"Stability I can count on",value:"stability"},
      {label:"Peace of mind",value:"peace_of_mind"},
@@ -403,8 +411,13 @@ export default function ETFMAssessment(){
   const selectFree=(val)=>{
     const a=[...freeAns,val];
     setFreeAns(a);
-    if(freeIdx<FQ.length-1){setFreeIdx(freeIdx+1);}
+    if(freeIdx<FQ.length-1){setScreen("q_transition");}
     else{setScore(calcScore(a));setScreen("email_gate");}
+  };
+
+  const advanceFromTransition=()=>{
+    setFreeIdx(freeIdx+1);
+    setScreen("chat");
   };
 
   const submitFree=async(e)=>{
@@ -475,17 +488,19 @@ export default function ETFMAssessment(){
 
   // ── INTRO ──────────────────────────────────────────────────────────────────
   if(screen==="intro") return(
-    <Wrap max="600px">
-      <div style={{width:"110px",height:"110px",borderRadius:"50%",backgroundColor:C.dark,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 30px",boxShadow:"0 4px 24px rgba(0,0,0,0.18)"}}>
-        <img src={LOGO_URL} alt="ETFM" style={{width:"86px",height:"86px",objectFit:"contain"}} onError={e=>e.target.style.display="none"}/>
+    <Wrap max="560px">
+      <div style={{marginBottom:"0"}}>
+        <div style={{width:"64px",height:"64px",borderRadius:"50%",backgroundColor:C.dark,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 52px",opacity:0.88}}>
+          <img src={LOGO_URL} alt="ETFM" style={{width:"48px",height:"48px",objectFit:"contain"}} onError={e=>e.target.style.display="none"}/>
+        </div>
+        <h1 style={{fontSize:"40px",fontFamily:"Georgia, serif",color:C.text,lineHeight:"1.25",marginBottom:"14px",fontWeight:"normal"}}>Most people don't have a money problem.</h1>
+        <h2 style={{fontSize:"30px",fontFamily:"Georgia, serif",color:"rgba(26,26,46,0.5)",lineHeight:"1.25",marginBottom:"48px",fontWeight:"normal"}}>They have a pattern problem.</h2>
+        <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.9",marginBottom:"52px",maxWidth:"440px",margin:"0 auto 52px"}}>The same cycles repeat. The same pressure returns. Not because of effort or intelligence, but because the underlying financial system has never been clearly seen or rebuilt. The ETFM Snapshot is a 5-question behavioral diagnostic designed to identify hidden patterns, system leaks, and the financial behaviors shaping your life beneath the surface. It takes about two minutes.</p>
+        <button onClick={()=>setScreen("snapshot_intro")} style={{backgroundColor:C.gold,color:C.dark,border:"none",padding:"16px 48px",fontSize:"14px",fontWeight:"bold",borderRadius:"8px",cursor:"pointer",letterSpacing:"1.5px",textTransform:"uppercase"}}>Start Your Snapshot</button>
+        <p style={{fontSize:"12px",color:"rgba(122,122,138,0.65)",marginTop:"18px",letterSpacing:"0.3px"}}>Five questions. One clearer view of the system you're operating inside.</p>
       </div>
-      <Tag t="Escape The Financial Matrix"/>
-      <h1 style={{fontSize:"42px",fontFamily:"Georgia, serif",marginBottom:"20px",color:C.text,lineHeight:"1.2"}}>Most people don't have a money problem. They have a pattern problem.</h1>
-      <p style={{fontSize:"17px",color:C.muted,marginBottom:"16px",lineHeight:"1.8"}}>The same cycles repeat. The same pressure returns. The same intentions don't stick, not because of effort or character, but because nobody has ever helped you see the underlying pattern driving your financial decisions.</p>
-      <p style={{fontSize:"17px",color:C.muted,marginBottom:"16px",lineHeight:"1.8"}}>Most people don't have an effort problem. They have a structure problem. The same cycles repeat not because of willpower or intelligence, but because the underlying financial operating system has never been diagnosed or rebuilt.</p>
-      <p style={{fontSize:"17px",color:C.muted,marginBottom:"40px",lineHeight:"1.8"}}>The ETFM Snapshot is a 5-question behavioral pattern diagnostic built on the ETFM Financial Operating System. It surfaces hidden patterns, identifies system leaks, and calculates your personal Awareness Score across five behavioral and structural components. Your results, Financial Archetype, and personalized strategic insight are delivered directly to your inbox. It takes about two minutes. It is completely free.</p>
 
-      <div style={{maxWidth:"460px",margin:"0 auto 48px",textAlign:"left"}}>
+      <div style={{maxWidth:"460px",margin:"72px auto 0",textAlign:"left"}}>
         <p style={{fontSize:"10px",textTransform:"uppercase",letterSpacing:"4px",color:C.gold,marginBottom:"36px",textAlign:"center",opacity:0.7}}>Who Built This</p>
         <p style={{fontSize:"16px",color:"#4a4a5a",fontFamily:"Georgia, serif",lineHeight:"2.1",marginBottom:"22px"}}>
           I created ETFM after years of watching hardworking people do everything they thought they were supposed to do, yet still feel stuck, stressed, and uncertain about money. Over time, I realized the problem was rarely effort or intelligence. It was structure.
@@ -498,9 +513,6 @@ export default function ETFMAssessment(){
         </p>
         <p style={{fontSize:"12px",color:C.muted,textAlign:"right",letterSpacing:"0.8px"}}>Robert Brickey, Creator of ETFM</p>
       </div>
-
-      <button onClick={()=>setScreen("snapshot_intro")} style={{backgroundColor:C.gold,color:C.dark,border:"none",padding:"16px 44px",fontSize:"16px",fontWeight:"bold",borderRadius:"8px",cursor:"pointer"}}>Start Your Snapshot</button>
-      <p style={{fontSize:"12px",color:C.muted,marginTop:"16px"}}>Five questions. Two minutes. Free, no strings attached.</p>
     </Wrap>
   );
 
@@ -559,6 +571,7 @@ export default function ETFMAssessment(){
           <div style={{marginBottom:"40px",padding:"0"}}>
             {q.subtext&&<p style={{color:"rgba(122,122,138,0.85)",fontSize:"13px",margin:"0 0 14px",lineHeight:"1.7"}}>{q.subtext}</p>}
             {q.highlight&&<p style={{color:"rgba(26,26,46,0.5)",fontSize:"14px",fontStyle:"italic",letterSpacing:"0.5px",lineHeight:"1.9",margin:"0 0 24px",paddingLeft:"14px",borderLeft:"1.5px solid rgba(201,151,58,0.35)"}}>{q.highlight}</p>}
+            <p style={{fontSize:"10px",textTransform:"uppercase",letterSpacing:"3px",color:C.gold,marginBottom:"12px",opacity:0.8}}>{STAGES[freeIdx]}</p>
             <h2 style={{fontSize:"28px",fontFamily:"Georgia, serif",color:C.text,margin:0,lineHeight:"1.35",fontWeight:"normal"}}>{q.bot}</h2>
           </div>
           {q.options.map((opt,i)=>(
@@ -568,6 +581,19 @@ export default function ETFMAssessment(){
               {opt.label}
             </button>
           ))}
+        </div>
+      </div>
+    );
+  }
+
+  // QUESTION TRANSITION
+  if(screen==="q_transition"){
+    const line=Q_TRANSITIONS[freeIdx]||"";
+    return(
+      <div style={{minHeight:"100vh",background:"linear-gradient(150deg,#f5f0e8 0%,#f7f4ef 45%,#f2ece2 100%)",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",padding:"40px 20px"}}>
+        <div style={{maxWidth:"480px",width:"100%",textAlign:"center"}}>
+          <p style={{fontSize:"26px",fontFamily:"Georgia, serif",color:C.text,lineHeight:"1.6",marginBottom:"56px",fontWeight:"normal"}}>{line}</p>
+          <button onClick={advanceFromTransition} style={{backgroundColor:"transparent",border:"none",color:C.gold,fontSize:"12px",textTransform:"uppercase",letterSpacing:"2.5px",cursor:"pointer",padding:"8px 0"}}>Continue →</button>
         </div>
       </div>
     );
@@ -593,7 +619,7 @@ export default function ETFMAssessment(){
           ))}
         </div>
         <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"32px"}}>
-          <h3 style={{fontSize:"19px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"12px",lineHeight:"1.45",fontWeight:"normal"}}>Your Awareness Score has been calculated. Your behavioral breakdown is ready.</h3>
+          <h3 style={{fontSize:"19px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"12px",lineHeight:"1.45",fontWeight:"normal"}}>Your Awareness Score has been calculated. Your deeper behavioral breakdown is ready.</h3>
           <p style={{fontSize:"14px",color:C.muted,marginBottom:"24px",lineHeight:"1.7"}}>Enter your name and email to unlock your results and receive your Financial Archetype, full Score breakdown, and personalized strategic insight.</p>
           {loading ? <Spinner/> : (
             <form onSubmit={submitFree}>
@@ -683,12 +709,23 @@ export default function ETFMAssessment(){
         <div style={{backgroundColor:C.bg,borderRadius:"8px",padding:"18px 22px",marginBottom:"24px",border:`1px solid ${C.border}`,borderLeft:`3px solid ${C.gold}`}}>
           <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>Your Financial Archetype, full Awareness Score breakdown, and personalized strategic insight are being sent to your inbox now. Check your spam folder if you don't see it within a few minutes.</p>
         </div>
-        <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"28px",textAlign:"center"}}>
-          <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"12px"}}>Ready to go deeper?</p>
-          <h3 style={{color:C.white,fontSize:"20px",fontFamily:"Georgia, serif",marginBottom:"12px",lineHeight:"1.4"}}>Your Snapshot surfaces the pattern. The Blueprint maps the entire system.</h3>
-          <p style={{color:"#a0a0b0",fontSize:"14px",marginBottom:"24px",lineHeight:"1.7"}}>18 diagnostic questions. A full behavioral and structural analysis of the hidden blind spots, system gaps, and decision patterns shaping your financial life, mapped and explained.</p>
-          <button onClick={()=>setScreen("blueprint_offer")} style={{display:"block",width:"100%",padding:"14px",backgroundColor:C.gold,color:C.dark,border:"none",borderRadius:"6px",fontSize:"15px",fontWeight:"bold",cursor:"pointer"}}>
-            Explore the Strategic Blueprint: $47
+        <div style={{marginBottom:"8px"}}>
+          <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"3px",color:C.gold,marginBottom:"20px",textAlign:"center",opacity:0.7}}>What Comes Next</p>
+          {[
+            {tier:"SNAPSHOT",desc:"See the pattern.",active:true,note:"Complete"},
+            {tier:"BLUEPRINT",desc:"Understand the system.",active:false,note:"$47"},
+            {tier:"RESET",desc:"Rebuild the structure.",active:false,note:"$99"},
+          ].map((item,i)=>(
+            <div key={i} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"16px 20px",marginBottom:"8px",backgroundColor:item.active?"rgba(201,151,58,0.07)":"rgba(26,26,46,0.03)",borderRadius:"8px",border:item.active?"1px solid rgba(201,151,58,0.2)":"1px solid rgba(232,227,218,0.5)"}}>
+              <div style={{display:"flex",alignItems:"center",gap:"18px"}}>
+                <span style={{fontSize:"10px",textTransform:"uppercase",letterSpacing:"2px",color:item.active?C.gold:"rgba(122,122,138,0.45)",fontWeight:"600",minWidth:"80px"}}>{item.tier}</span>
+                <span style={{fontSize:"14px",fontFamily:"Georgia, serif",color:item.active?C.text:"rgba(26,26,46,0.35)"}}>{item.desc}</span>
+              </div>
+              <span style={{fontSize:"12px",color:item.active?"rgba(201,151,58,0.8)":C.muted,fontStyle:item.active?"normal":"italic"}}>{item.note}</span>
+            </div>
+          ))}
+          <button onClick={()=>setScreen("blueprint_offer")} style={{display:"block",width:"100%",padding:"14px",marginTop:"16px",backgroundColor:C.gold,color:C.dark,border:"none",borderRadius:"6px",fontSize:"15px",fontWeight:"bold",cursor:"pointer"}}>
+            Go Deeper: Unlock the Blueprint
           </button>
         </div>
       </div>
