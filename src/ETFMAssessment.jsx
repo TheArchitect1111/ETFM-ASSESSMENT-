@@ -8,6 +8,8 @@ const C = {
   text: "#1a1a2e", muted: "#7a7a8a", border: "#e8e3da", white: "#ffffff",
 };
 
+const STAGES = ["VISIBILITY","PRESSURE","CONTROL","DIRECTION","AWARENESS"];
+
 const SCORE_MAP = {
   no_idea:2,some_inconsistent:7,track_mentally:11,track_most:16,know_exactly:20,
   disappears_bills:2,spend_quickly:4,try_save:9,use_intentionally:16,save_invest:20,
@@ -24,7 +26,8 @@ function calcScore(answers){
 const FQ=[
   {id:"awareness",
    bot:"How clearly do you see where your money actually goes each month?",
-   subtext:"Financial visibility is the first indicator of system health. What you can see, you can change. What stays hidden keeps repeating.",
+   subtext:"Financial visibility is the first indicator of system health. What you can see, you can change.",
+   highlight:"What stays hidden keeps repeating.",
    options:[
      {label:"Honestly? I have no real idea",value:"no_idea"},
      {label:"I know some of it, but not consistently",value:"some_inconsistent"},
@@ -44,7 +47,7 @@ const FQ=[
    ]},
   {id:"stress_response",
    bot:"When financial pressure builds, how do you usually respond?",
-   subtext:"Your response under pressure shapes your financial life more than your income ever will.",
+   highlight:"Your response under pressure shapes your financial life more than your income ever will.",
    options:[
      {label:"I avoid thinking about it as long as I can",value:"avoid"},
      {label:"I react, emotionally or impulsively",value:"emotional_decisions"},
@@ -66,7 +69,7 @@ const FQ=[
    ]},
   {id:"future_vision",
    bot:"What are you ultimately trying to build, financially?",
-   subtext:"Naming your destination is the first real act of financial strategy.",
+   highlight:"Naming your destination is the first real act of financial strategy.",
    options:[
      {label:"Stability I can count on",value:"stability"},
      {label:"Peace of mind",value:"peace_of_mind"},
@@ -298,7 +301,7 @@ const BQ=[
    ]},
 ];
 
-const OPT={display:"block",width:"100%",padding:"16px",marginBottom:"12px",backgroundColor:"#ffffff",color:"#1a1a2e",border:"1px solid #e8e3da",borderRadius:"8px",cursor:"pointer",fontSize:"15px",textAlign:"left",transition:"all 0.2s ease"};
+const OPT={display:"block",width:"100%",padding:"13px 18px",marginBottom:"9px",backgroundColor:"rgba(255,255,255,0.8)",color:"#1a1a2e",border:"1px solid rgba(232,227,218,0.7)",borderRadius:"10px",cursor:"pointer",fontSize:"15px",textAlign:"left",transition:"all 0.22s ease",boxShadow:"0 1px 4px rgba(0,0,0,0.04)"};
 
 const CreditNote=({dark=false})=>(
   <div style={{marginTop:"20px",padding:"16px",backgroundColor:dark?"rgba(201,151,58,0.12)":C.goldSoft,borderRadius:"6px",border:"1px solid rgba(201,151,58,0.3)"}}>
@@ -456,7 +459,7 @@ export default function ETFMAssessment(){
   };
 
   const Wrap=({children,max="560px"})=>(
-    <div style={{minHeight:"100vh",backgroundColor:C.bg,display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",padding:"40px 20px"}}>
+    <div style={{minHeight:"100vh",background:"linear-gradient(150deg,#f5f0e8 0%,#f7f4ef 45%,#f2ece2 100%)",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",padding:"40px 20px"}}>
       <div style={{maxWidth:max,width:"100%",textAlign:"center"}}>{children}</div>
     </div>
   );
@@ -482,19 +485,18 @@ export default function ETFMAssessment(){
       <p style={{fontSize:"17px",color:C.muted,marginBottom:"16px",lineHeight:"1.8"}}>Most people don't have an effort problem. They have a structure problem. The same cycles repeat not because of willpower or intelligence, but because the underlying financial operating system has never been diagnosed or rebuilt.</p>
       <p style={{fontSize:"17px",color:C.muted,marginBottom:"40px",lineHeight:"1.8"}}>The ETFM Snapshot is a 5-question behavioral pattern diagnostic built on the ETFM Financial Operating System. It surfaces hidden patterns, identifies system leaks, and calculates your personal Awareness Score across five behavioral and structural components. Your results, Financial Archetype, and personalized strategic insight are delivered directly to your inbox. It takes about two minutes. It is completely free.</p>
 
-      <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"32px",marginBottom:"36px",textAlign:"left"}}>
-        <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"3px",color:C.gold,marginBottom:"20px",textAlign:"center"}}>Who Built This</p>
-        <p style={{fontSize:"16px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.8",marginBottom:"20px",fontStyle:"italic"}}>
-          "I've spent 12 years watching people do everything right and still feel lost when it comes to money. They work hard. They try to save. They search for answers at midnight. But nobody ever sat down with them, looked at their actual situation, and helped them build something real. That's why I created this."
+      <div style={{maxWidth:"460px",margin:"0 auto 48px",textAlign:"left"}}>
+        <p style={{fontSize:"10px",textTransform:"uppercase",letterSpacing:"4px",color:C.gold,marginBottom:"36px",textAlign:"center",opacity:0.7}}>Who Built This</p>
+        <p style={{fontSize:"16px",color:"#4a4a5a",fontFamily:"Georgia, serif",lineHeight:"2.1",marginBottom:"22px"}}>
+          I created ETFM after years of watching hardworking people do everything they thought they were supposed to do, yet still feel stuck, stressed, and uncertain about money. Over time, I realized the problem was rarely effort or intelligence. It was structure.
         </p>
-        <p style={{fontSize:"14px",color:C.muted,marginBottom:"24px",fontWeight:"bold",textAlign:"right"}}>Robert Brickey, Creator of ETFM</p>
-        <div style={{borderTop:`0.5px solid ${C.border}`,paddingTop:"20px"}}>
-          <DotCred label="Duke University Graduate" sub="Former Basketball Team Captain"/>
-          <DotCred label="Financial Strategist" sub="12 years of client strategic guidance"/>
-          <DotCred label="Radio Host" sub="WIDU 1600 AM, Fayetteville NC"/>
-          <DotCred label="Speaker & Educator" sub="Financial literacy across the Carolinas"/>
-          <DotCred label="Creator of ETFM" sub="A financial operating system built for real life"/>
-        </div>
+        <p style={{fontSize:"16px",color:"#4a4a5a",fontFamily:"Georgia, serif",lineHeight:"2.1",marginBottom:"22px"}}>
+          Some of my earliest lessons about systems came while playing at Duke under Coach K, where I learned that talent means very little without accountability, discipline, and a clear operating system. Years later, working directly with individuals and families, I kept seeing that same truth play out financially.
+        </p>
+        <p style={{fontSize:"16px",color:"#4a4a5a",fontFamily:"Georgia, serif",lineHeight:"2.1",marginBottom:"36px"}}>
+          ETFM was built to help people see the patterns, fix the leaks, and finally build something that lasts.
+        </p>
+        <p style={{fontSize:"12px",color:C.muted,textAlign:"right",letterSpacing:"0.8px"}}>Robert Brickey, Creator of ETFM</p>
       </div>
 
       <button onClick={()=>setScreen("snapshot_intro")} style={{backgroundColor:C.gold,color:C.dark,border:"none",padding:"16px 44px",fontSize:"16px",fontWeight:"bold",borderRadius:"8px",cursor:"pointer"}}>Start Your Snapshot</button>
@@ -516,11 +518,11 @@ export default function ETFMAssessment(){
           {label:"Financial Structure",desc:"The systems and habits you currently have in place"},
           {label:"System Readiness",desc:"Your ability and mindset to build and follow a plan"},
         ].map((item,i)=>(
-          <div key={i} style={{display:"flex",alignItems:"flex-start",gap:"12px",padding:"8px 0",borderBottom:i<4?"1px solid rgba(255,255,255,0.06)":"none"}}>
-            <span style={{color:C.gold,fontSize:"11px",fontWeight:"bold",minWidth:"20px",paddingTop:"2px"}}>{i+1}.</span>
+          <div key={i} style={{display:"flex",alignItems:"flex-start",gap:"16px",padding:"18px 0",borderBottom:i<4?"1px solid rgba(255,255,255,0.04)":"none"}}>
+            <span style={{color:C.gold,fontSize:"11px",fontWeight:"normal",minWidth:"24px",paddingTop:"4px",opacity:0.7}}>{i+1}</span>
             <div>
-              <p style={{color:"#e8e3da",fontSize:"13px",fontWeight:"600",margin:"0 0 2px"}}>{item.label}</p>
-              <p style={{color:"#6a6a7a",fontSize:"12px",margin:0}}>{item.desc}</p>
+              <p style={{color:"#e8e3da",fontSize:"15px",fontWeight:"400",margin:"0 0 5px",letterSpacing:"0.2px"}}>{item.label}</p>
+              <p style={{color:"#6a6a7a",fontSize:"13px",margin:0,lineHeight:"1.6"}}>{item.desc}</p>
             </div>
           </div>
         ))}
@@ -533,30 +535,36 @@ export default function ETFMAssessment(){
   // FREE CHAT
   if(screen==="chat"){
     const q=FQ[freeIdx];
-    const prog=((freeIdx+1)/FQ.length)*100;
     return(
-      <div style={{minHeight:"100vh",backgroundColor:C.bg,padding:"40px 20px"}}>
-        <div style={{maxWidth:"680px",margin:"0 auto"}}>
+      <div style={{minHeight:"100vh",background:"linear-gradient(150deg,#f5f0e8 0%,#f7f4ef 45%,#f2ece2 100%)",padding:"48px 20px"}}>
+        <div style={{maxWidth:"580px",margin:"0 auto"}}>
           {freeIdx===0&&(
-            <div style={{marginBottom:"24px",padding:"20px 24px",backgroundColor:C.white,borderRadius:"10px",border:`1px solid ${C.border}`,borderLeft:`3px solid ${C.gold}`}}>
-              <p style={{color:C.text,fontSize:"15px",lineHeight:"1.9",margin:0}}>Five questions. Each one designed to surface a specific layer of your financial operating system. Answer based on what is actually true right now, not what you intend or what sounds best. The pattern this reveals only has value if it reflects your current reality.</p>
+            <div style={{marginBottom:"36px"}}>
+              <p style={{color:"rgba(26,26,46,0.5)",fontSize:"14px",lineHeight:"1.9",margin:0,fontStyle:"italic",letterSpacing:"0.2px",textAlign:"center"}}>Five questions. Each one surfaces a specific layer of your financial operating system. Answer based on what is actually true right now.</p>
             </div>
           )}
-          <div style={{marginBottom:"8px",display:"flex",justifyContent:"space-between"}}>
-            <p style={{fontSize:"11px",color:C.muted,textTransform:"uppercase",letterSpacing:"1px",margin:0}}>ETFM Snapshot</p>
-            <p style={{fontSize:"11px",color:C.muted,margin:0}}>{freeIdx+1} of {FQ.length}</p>
+          <div style={{marginBottom:"48px"}}>
+            <div style={{display:"flex",alignItems:"flex-end",justifyContent:"center",gap:"0"}}>
+              {STAGES.map((stage,si)=>(
+                <div key={si} style={{display:"flex",alignItems:"flex-end"}}>
+                  <div style={{textAlign:"center",padding:"0 10px"}}>
+                    <p style={{fontSize:"9px",textTransform:"uppercase",letterSpacing:"1.8px",margin:"0 0 7px",color:si===freeIdx?C.gold:si<freeIdx?"rgba(201,151,58,0.45)":"rgba(122,122,138,0.5)",fontWeight:si===freeIdx?"600":"400",transition:"all 0.3s ease"}}>{stage}</p>
+                    <div style={{width:si===freeIdx?"8px":"5px",height:si===freeIdx?"8px":"5px",borderRadius:"50%",margin:"0 auto",backgroundColor:si===freeIdx?C.gold:si<freeIdx?"rgba(201,151,58,0.35)":"rgba(232,227,218,0.7)",transition:"all 0.3s ease",boxShadow:si===freeIdx?"0 0 8px rgba(201,151,58,0.4)":"none"}}/>
+                  </div>
+                  {si<4&&<div style={{width:"28px",height:"1px",backgroundColor:si<freeIdx?"rgba(201,151,58,0.25)":"rgba(232,227,218,0.6)",marginBottom:"4px"}}/>}
+                </div>
+              ))}
+            </div>
           </div>
-          <div style={{marginBottom:"36px",backgroundColor:C.border,height:"3px",borderRadius:"2px",overflow:"hidden"}}>
-            <div style={{backgroundColor:C.gold,height:"100%",width:`${prog}%`,transition:"width 0.4s ease"}}/>
-          </div>
-          <div style={{marginBottom:"32px",padding:"24px",backgroundColor:C.white,borderRadius:"10px",border:`1px solid ${C.border}`}}>
-            <p style={{color:C.muted,fontSize:"13px",margin:"0 0 10px"}}>{q.subtext}</p>
-            <h2 style={{fontSize:"22px",fontFamily:"Georgia, serif",color:C.text,margin:0,lineHeight:"1.4"}}>{q.bot}</h2>
+          <div style={{marginBottom:"40px",padding:"0"}}>
+            {q.subtext&&<p style={{color:"rgba(122,122,138,0.85)",fontSize:"13px",margin:"0 0 14px",lineHeight:"1.7"}}>{q.subtext}</p>}
+            {q.highlight&&<p style={{color:"rgba(26,26,46,0.5)",fontSize:"14px",fontStyle:"italic",letterSpacing:"0.5px",lineHeight:"1.9",margin:"0 0 24px",paddingLeft:"14px",borderLeft:"1.5px solid rgba(201,151,58,0.35)"}}>{q.highlight}</p>}
+            <h2 style={{fontSize:"28px",fontFamily:"Georgia, serif",color:C.text,margin:0,lineHeight:"1.35",fontWeight:"normal"}}>{q.bot}</h2>
           </div>
           {q.options.map((opt,i)=>(
             <button key={i} onClick={()=>selectFree(opt.value)} style={OPT}
-              onMouseEnter={e=>{e.currentTarget.style.backgroundColor=C.goldSoft;e.currentTarget.style.borderColor=C.gold;}}
-              onMouseLeave={e=>{e.currentTarget.style.backgroundColor=C.white;e.currentTarget.style.borderColor=C.border;}}>
+              onMouseEnter={e=>{e.currentTarget.style.backgroundColor="rgba(201,151,58,0.07)";e.currentTarget.style.borderColor=C.gold;e.currentTarget.style.transform="translateY(-1px)";e.currentTarget.style.boxShadow="0 4px 14px rgba(201,151,58,0.12)";}}
+              onMouseLeave={e=>{e.currentTarget.style.backgroundColor="rgba(255,255,255,0.8)";e.currentTarget.style.borderColor="rgba(232,227,218,0.7)";e.currentTarget.style.transform="translateY(0)";e.currentTarget.style.boxShadow="0 1px 4px rgba(0,0,0,0.04)";}}>
               {opt.label}
             </button>
           ))}
@@ -585,8 +593,8 @@ export default function ETFMAssessment(){
           ))}
         </div>
         <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"12px",padding:"32px"}}>
-          <h3 style={{fontSize:"17px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"8px"}}>Unlock your Awareness Score and full breakdown.</h3>
-          <p style={{fontSize:"14px",color:C.muted,marginBottom:"24px",lineHeight:"1.6"}}>Enter your details below. Your Financial Archetype, Awareness Score, and personalized strategic insight will be delivered to your inbox. Your results will appear on the next screen.</p>
+          <h3 style={{fontSize:"19px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"12px",lineHeight:"1.45",fontWeight:"normal"}}>Your Awareness Score has been calculated. Your behavioral breakdown is ready.</h3>
+          <p style={{fontSize:"14px",color:C.muted,marginBottom:"24px",lineHeight:"1.7"}}>Enter your name and email to unlock your results and receive your Financial Archetype, full Score breakdown, and personalized strategic insight.</p>
           {loading ? <Spinner/> : (
             <form onSubmit={submitFree}>
               <div style={{marginBottom:"16px",textAlign:"left"}}>
@@ -638,16 +646,17 @@ export default function ETFMAssessment(){
             {name:"Financial Structure",desc:"The systems and habits you have in place to manage your finances."},
             {name:"System Readiness",desc:"Your ability and mindset to build and follow a financial plan."},
           ].map((comp,i)=>(
-            <div key={i} style={{marginBottom:"8px",padding:"12px 14px",backgroundColor:"rgba(255,255,255,0.04)",borderRadius:"6px",border:"1px solid rgba(255,255,255,0.07)",display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"12px",opacity:i===0?1:0.5}}>
+            <div key={i} style={{marginBottom:"10px",padding:"14px 16px",backgroundColor:i===0?"rgba(255,255,255,0.06)":"rgba(5,5,15,0.25)",borderRadius:"8px",border:i===0?"1px solid rgba(201,151,58,0.2)":"1px solid rgba(255,255,255,0.03)",display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"12px",position:"relative",overflow:"hidden"}}>
+              {i>0&&<div style={{position:"absolute",inset:0,background:"linear-gradient(90deg,transparent 50%,rgba(5,5,15,0.4))",pointerEvents:"none"}}/>}
               <div style={{flex:1}}>
-                <p style={{color:"#e8e3da",fontSize:"13px",fontWeight:"600",margin:"0 0 4px"}}>{comp.name}</p>
-                <p style={{color:"#6a6a7a",fontSize:"12px",margin:0,lineHeight:"1.5"}}>{comp.desc}</p>
+                <p style={{color:i===0?"#e8e3da":"rgba(232,227,218,0.3)",fontSize:"13px",fontWeight:"600",margin:"0 0 4px"}}>{comp.name}</p>
+                <p style={{color:"#6a6a7a",fontSize:"12px",margin:0,lineHeight:"1.5",filter:i>0?"blur(3px)":"none",userSelect:i>0?"none":"auto"}}>{comp.desc}</p>
               </div>
               {i===0
                 ? <span style={{color:C.gold,fontSize:"17px",fontWeight:"bold",flexShrink:0}}>{breakdown[0]?.score??"-"} / 20</span>
-                : <div style={{flexShrink:0,textAlign:"right"}}>
-                    <span style={{color:C.gold,fontSize:"14px"}}>🔒</span>
-                    <p style={{color:"#6a6a7a",fontSize:"11px",fontStyle:"italic",margin:"2px 0 0",whiteSpace:"nowrap"}}>Revealed in your email</p>
+                : <div style={{flexShrink:0,textAlign:"right",position:"relative",zIndex:1}}>
+                    <span style={{color:"rgba(201,151,58,0.55)",fontSize:"14px"}}>🔒</span>
+                    <p style={{color:"#3a3a4a",fontSize:"10px",fontStyle:"italic",margin:"3px 0 0",whiteSpace:"nowrap",letterSpacing:"0.3px"}}>In your email</p>
                   </div>
               }
             </div>
@@ -785,8 +794,9 @@ export default function ETFMAssessment(){
           </div>
           {q.options.map((opt,i)=>(
             <button key={i} onClick={()=>selectBp(opt.value)} style={OPT}
-              onMouseEnter={e=>{e.currentTarget.style.backgroundColor=C.goldSoft;e.currentTarget.style.borderColor=C.gold;}}
-              onMouseLeave={e=>{e.currentTarget.style.backgroundColor=C.white;e.currentTarget.style.borderColor=C.border;}}>
+              onMouseEnter={e=>{e.currentTarget.style.backgroundColor="rgba(201,151,58,0.07)";e.currentTarget.style.borderColor=C.gold;e.currentTarget.style.transform="translateY(-1px)";e.currentTarget.style.boxShadow="0 4px 14px rgba(201,151,58,0.12)";}}
+              onMouseLeave={e=>{e.currentTarget.style.backgroundColor="rgba(255,255,255,0.8)";e.currentTarget.style.borderColor="rgba(232,227,218,0.7)";e.currentTarget.style.transform="translateY(0)";e.currentTarget.style.boxShadow="0 1px 4px rgba(0,0,0,0.04)";}}>
+
               {opt.label}
             </button>
           ))}
