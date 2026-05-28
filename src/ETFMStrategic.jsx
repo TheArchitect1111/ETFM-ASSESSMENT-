@@ -243,15 +243,14 @@ export default function ETFMStrategic() {
 function TabDashboard({ sessionStatus, progressPct, frameworkStatus, supportDaysRemaining, nextAction, nextTabAction, setActiveTab, processSteps, intakeComplete, call1Complete }) {
   return (
     <div>
-      <div style={{ paddingTop:8, paddingBottom:40, textAlign:"center" }}>
-        <p style={{ fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:"1.2rem", color:"#c9a84c", fontVariant:"small-caps", letterSpacing:"0.3em", margin:"0 0 10px", fontWeight:600 }}>E T F M</p>
-        <p style={{ fontFamily:"'DM Sans', sans-serif", fontSize:"0.7rem", letterSpacing:"0.2em", color:C.muted, margin:0 }}>Escape the Financial Matrix</p>
+      <div style={{ paddingTop:48, paddingBottom:32, textAlign:"center" }}>
+        <p style={{ fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:"1.8rem", color:"#c9a84c", fontVariant:"small-caps", letterSpacing:"0.3em", margin:"0 0 12px", fontWeight:600 }}>E T F M</p>
+        <p style={{ fontFamily:"'DM Sans', sans-serif", fontSize:"0.85rem", letterSpacing:"0.2em", color:C.muted, margin:0 }}>Escape the Financial Matrix</p>
       </div>
 
       <div style={{ marginBottom:48 }}>
         <h1 style={S.h1}>WELCOME TO YOUR STRATEGIC RESET</h1>
-        <p style={S.sub}>This is not coaching. This is strategic architecture designed to help you rebuild your financial operating system with intention and structure.</p>
-        <p style={{ color:C.muted, fontSize:16, lineHeight:1.9, margin:"24px auto 0", maxWidth:680, fontFamily:"'Cormorant Garamond', Georgia, serif", fontWeight:300 }}>Personal finances have become increasingly complex — not because people lack effort or intelligence, but because most people were never shown how to organize the system beneath the pressure. This strategic partnership was built to change that. Over the next 90 days, you will gain complete visibility into your financial system, close the structural gaps, and build a framework designed around your specific situation.</p>
+        <p style={{ color:C.muted, fontSize:16, lineHeight:1.9, margin:"16px auto 0", maxWidth:680, fontFamily:"'Cormorant Garamond', Georgia, serif", fontWeight:300 }}>This is not coaching. This is strategic architecture designed to help you rebuild your financial operating system with intention and structure. Personal finances have become increasingly complex, not because people lack effort or intelligence, but because most people were never shown how to organize the system beneath the pressure. This strategic partnership was built to change that. Over the next 90 days, you will gain complete visibility into your financial system, close the structural gaps, and build a framework designed around your specific situation.</p>
       </div>
 
       {/* METRIC TILES */}
@@ -300,7 +299,7 @@ function TabDashboard({ sessionStatus, progressPct, frameworkStatus, supportDays
           <p style={{ color:C.navy, fontSize:16, fontFamily:"'Cormorant Garamond', Georgia, serif", lineHeight:1.9, marginBottom:28, fontWeight:400 }}>
             Every session is built around your specific financial reality. The goal is not generic advice. It is a personalized strategic framework designed around your situation, your patterns, and your goals.
           </p>
-          <p style={{ color:C.muted, fontSize:14, fontFamily:"'Cormorant Garamond', Georgia, serif", fontStyle:"italic", margin:0 }}>Robert Brickey — Financial Strategist, ETFM</p>
+          <p style={{ color:C.muted, fontSize:14, fontFamily:"'Cormorant Garamond', Georgia, serif", fontStyle:"italic", margin:0 }}>Robert Brickey, Financial Strategist, ETFM</p>
         </div>
       </div>
     </div>
@@ -318,7 +317,7 @@ function TabIntake({ data, update, answeredCount, progressPct, intakeComplete, c
         <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Your responses here shape every element of your personalized strategic framework. Answer based on your current reality, not where you want to be.</p>
       </div>
       <h2 style={{ ...S.h2, marginTop:0, marginBottom:8 }}>Strategic Intake Form</h2>
-      <p style={{ color:C.muted, fontSize:14, marginBottom:36, fontFamily:"'DM Sans', sans-serif", fontWeight:300 }}>38 questions across 7 sections. Answer as honestly as you can — accuracy matters more than perfection.</p>
+      <p style={{ color:C.muted, fontSize:14, marginBottom:36, fontFamily:"'DM Sans', sans-serif", fontWeight:300 }}>38 questions across 7 sections. Answer as honestly as you can. Accuracy matters more than perfection.</p>
 
       {/* Progress bar */}
       <div style={{ ...S.card, marginBottom:28 }}>
@@ -451,7 +450,7 @@ function TabFramework({ data, update, call1Complete }) {
         {[
           { id:"rule_spending",  label:"SPENDING RULE",      pendingText:"Your personal discretionary spending guideline." },
           { id:"rule_saving",    label:"SAVING RULE",         pendingText:"The saving rate or method that works for your situation." },
-          { id:"rule_debt",      label:"DEBT RULE",           pendingText:"How you will handle debt repayment — which debts, in what order." },
+          { id:"rule_debt",      label:"DEBT RULE",           pendingText:"How you will handle debt repayment, which debts, in what order." },
           { id:"rule_income",    label:"INCOME RULE",         pendingText:"How you treat and allocate income when it arrives." },
           { id:"rule_emergency", label:"EMERGENCY FUND RULE", pendingText:"Your target emergency fund amount and the plan to build it." },
           { id:"rule_invest",    label:"INVESTMENT RULE",     pendingText:"" },
