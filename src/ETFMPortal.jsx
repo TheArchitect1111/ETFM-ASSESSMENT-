@@ -129,6 +129,9 @@ export default function ETFMPortal() {
 function TabDashboard({ tc, overallPct, firstName, nextMilestone, setActiveTab }) {
   return (
     <div>
+      <div style={{ paddingTop:8, textAlign:"center" }}>
+        <img src="/etfm-logo.png" alt="ETFM" style={{ maxWidth:220, width:"100%", borderRadius:12, boxShadow:"0 4px 16px rgba(0,0,0,0.13)", display:"inline-block", marginBottom:32 }} />
+      </div>
       <div style={{ marginBottom:48 }}>
         <h1 style={S.h1}>WELCOME TO YOUR RESET</h1>
         <p style={S.sub}>Most people spend years reacting financially without ever seeing the full system clearly. This space was built to help you slow down, organize the noise, and begin rebuilding with intention.</p>

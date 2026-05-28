@@ -516,9 +516,8 @@ export default function ETFMAssessment(){
   if(screen==="intro") return(
     <Wrap max="560px">
       <div style={{marginBottom:"0"}}>
-        <div style={{paddingTop:"8px",paddingBottom:"44px",textAlign:"center"}}>
-          <p style={{fontFamily:"'Cormorant Garamond',Georgia,serif",fontSize:"28px",color:"#c9a84c",fontVariant:"small-caps",letterSpacing:"0.3em",margin:"0 0 10px",fontWeight:"600"}}>E T F M</p>
-          <p style={{fontSize:"10px",textTransform:"uppercase",letterSpacing:"0.22em",color:"rgba(201,168,76,0.65)",margin:0}}>Escape the Financial Matrix</p>
+        <div style={{paddingTop:"8px",textAlign:"center"}}>
+          <img src="/etfm-logo.png" alt="ETFM" style={{maxWidth:280,width:"100%",borderRadius:12,boxShadow:"0 4px 16px rgba(0,0,0,0.13)",display:"inline-block",marginBottom:32}} />
         </div>
         <div style={{width:"64px",height:"64px",borderRadius:"50%",backgroundColor:C.dark,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 52px",opacity:0.88}}>
           <img src={LOGO_URL} alt="ETFM" style={{width:"48px",height:"48px",objectFit:"contain"}} onError={e=>e.target.style.display="none"}/>
