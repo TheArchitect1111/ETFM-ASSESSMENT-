@@ -771,22 +771,11 @@ export default function ETFMAssessment(){
   // BLUEPRINT OFFER
   if(screen==="blueprint_offer") return(
     <Wrap>
-      <h2 style={{fontSize:"38px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.2",fontWeight:"normal"}}>Go Deeper</h2>
-      <p style={{fontSize:"17px",color:C.muted,lineHeight:"1.8",marginBottom:"40px"}}>Your Snapshot revealed the pattern. The Blueprint shows you the system driving it.</p>
-      {!email&&(
-        <div style={{marginBottom:"20px",textAlign:"left"}}>
-          <label style={{display:"block",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"8px",color:C.muted}}>Confirm your email</label>
-          <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="your@email.com" style={{width:"100%",padding:"12px",backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"6px",fontSize:"15px",boxSizing:"border-box"}}/>
-        </div>
-      )}
-      <div style={{backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"20px 24px",marginBottom:"20px",textAlign:"left"}}>
-        <p style={{color:C.dark,fontSize:"12px",fontWeight:"bold",marginBottom:"10px",textTransform:"uppercase",letterSpacing:"1px"}}>Before You Continue</p>
-        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}>The ETFM Strategic Blueprint is designed for educational and awareness purposes only. The content, scores, and recommendations generated are not individualized financial guidance and do not constitute a professional strategic guidance relationship. For guidance specific to your financial situation, please consult a licensed financial professional.</p>
-        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:0}}>All sales are final. Due to the personalized and immediately delivered nature of the Blueprint, refunds are not available once your diagnostic has been processed. By completing payment you acknowledge you have read and agree to these terms.</p>
+      <div style={{textAlign:'center', padding:'2rem'}}>
+        <h2>Go Deeper</h2>
+        <p>Your Snapshot revealed the pattern. The Blueprint shows you the system driving it.</p>
+        <a href="https://buy.stripe.com/fZueVee9agLY7d7esu8Vi0f" style={{display:'inline-block', padding:'1rem 2rem', background:'#1a2744', color:'#c9a84c', textDecoration:'none'}}>Unlock Your Strategic Blueprint — $47</a>
       </div>
-      <BtnPrimary onClick={payBlueprint} disabled={loading}>{loading?"One moment, setting up your Blueprint...":"Unlock Your Strategic Blueprint — $47"}</BtnPrimary>
-      <Hr/>
-      <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
     </Wrap>
   );
 
@@ -853,30 +842,11 @@ export default function ETFMAssessment(){
   // SESSION OFFER
   if(screen==="session_offer") return(
     <Wrap>
-      <h2 style={{fontSize:"38px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.2",fontWeight:"normal"}}>Private Strategic Partnership</h2>
-      <p style={{fontSize:"17px",color:C.muted,lineHeight:"1.8",marginBottom:"40px"}}>Work directly with Robert to analyze your financial reality, close the structural gaps, and build a system that runs on intention, not pressure.</p>
-
-      {!email&&(
-        <div style={{marginBottom:"20px",textAlign:"left"}}>
-          <label style={{display:"block",fontSize:"11px",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"8px",color:C.muted}}>Your email</label>
-          <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="your@email.com" style={{width:"100%",padding:"12px",backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"6px",fontSize:"15px",boxSizing:"border-box"}}/>
-        </div>
-      )}
-      <div style={{backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"20px 24px",marginBottom:"20px",textAlign:"left"}}>
-        <p style={{color:C.dark,fontSize:"12px",fontWeight:"bold",marginBottom:"10px",textTransform:"uppercase",letterSpacing:"1px"}}>Before You Book</p>
-        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}>The ETFM Financial Reset is designed for educational and organizational awareness purposes only. The content, plans, and recommendations provided during your sessions are not individualized financial guidance and do not constitute a formal strategic guidance relationship. For guidance specific to your situation, please consult a licensed financial professional.</p>
-        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}><strong style={{color:C.text}}>Cancellation and Rescheduling:</strong> Sessions may be rescheduled up to 48 hours before your scheduled call at no charge. Cancellations made less than 48 hours before your call are non-refundable. No-shows are non-refundable. If Robert needs to reschedule, you will be offered a full rescheduling option or a complete refund.</p>
-        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:0}}><strong style={{color:C.text}}>Refund Policy:</strong> Due to the personalized, preparation-intensive nature of this program, refunds are not available once your intake form has been reviewed and your first session has been completed. Refund requests submitted before intake review will be considered on a case-by-case basis. By completing payment you acknowledge you have read and agree to these terms.</p>
+      <div style={{textAlign:'center', padding:'2rem'}}>
+        <h2>Private Strategic Partnership</h2>
+        <p>Work directly with Robert to analyze your financial reality, close the structural gaps, and build a system that runs on intention, not pressure.</p>
+        <a href="https://buy.stripe.com/7sY14o7KMbrE693ckm8Vi0c" style={{display:'inline-block', padding:'1rem 2rem', background:'#1a2744', color:'#c9a84c', textDecoration:'none'}}>Book Your Strategic Reset Session — $499</a>
       </div>
-      <a href={`${CALENDLY}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(firstName)}`} target="_blank" rel="noopener noreferrer"
-        style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
-        {blueprintClient ? "Book Your Strategic Reset Session - $425 Blueprint Client Rate" : "Book Your Strategic Reset Session - $499"}
-      </a>
-      <p style={{fontSize:"13px",color:C.muted,textAlign:"center",marginBottom:"24px"}}>
-        {blueprintClient ? "Your $47 Blueprint purchase has been credited, reducing your Strategic Reset rate to $425." : "Blueprint clients receive a credited Strategic Reset rate of $425."}
-      </p>
-      <Hr/>
-      <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
     </Wrap>
   );
 
@@ -970,20 +940,11 @@ export default function ETFMAssessment(){
   // RESET OFFER
   if(screen==="reset_offer") return(
     <Wrap>
-      <h2 style={{fontSize:"38px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.2",fontWeight:"normal"}}>Build the Structure</h2>
-      <p style={{fontSize:"17px",color:C.muted,lineHeight:"1.8",marginBottom:"40px"}}>The ETFM Reset Experience is a guided implementation system to reduce financial chaos and create real stability.</p>
-
-      <div style={{backgroundColor:C.bg,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"20px 24px",marginBottom:"20px",textAlign:"left"}}>
-        <p style={{color:C.dark,fontSize:"12px",fontWeight:"bold",marginBottom:"10px",textTransform:"uppercase",letterSpacing:"1px"}}>Before You Continue</p>
-        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}>The ETFM Financial Reset systems are designed for educational and organizational awareness purposes only. The content, frameworks, and recommendations provided are not individualized financial guidance and do not constitute a professional strategic guidance relationship. For guidance specific to your financial situation, please consult a licensed financial professional.</p>
-        <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:0}}>All sales are final. Due to the personalized and immediately delivered nature of this program, refunds are not available once your access has been provided. By completing payment you acknowledge you have read and agree to these terms.</p>
+      <div style={{textAlign:'center', padding:'2rem'}}>
+        <h2>Build the Structure</h2>
+        <p>The ETFM Reset Experience is a guided implementation system to reduce financial chaos and create real stability.</p>
+        <a href="https://buy.stripe.com/dRm8wQ6GI0N06938468Vi0e" style={{display:'inline-block', padding:'1rem 2rem', background:'#1a2744', color:'#c9a84c', textDecoration:'none'}}>Begin Your Reset Experience — $99</a>
       </div>
-      <a href={STRIPE_RESET}
-        style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
-        Begin Your Reset Experience — $99
-      </a>
-      <Hr/>
-      <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
     </Wrap>
   );
 
