@@ -392,7 +392,7 @@ function TabAdvisory() {
 
       <div style={{ display:"flex", alignItems:"center", gap:24, marginBottom:48 }}>
         <img
-          src="https://raw.githubusercontent.com/TheArchitect1111/ETFM-ASSESSMENT-/main/public/robert-brickey.png"
+          src="/robert-brickey.jpg"
           alt="Robert Brickey"
           style={{ width:80, height:80, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", border:`3px solid ${C.gold}`, flexShrink:0 }}
           onError={e => { e.target.style.display = "none"; }}
