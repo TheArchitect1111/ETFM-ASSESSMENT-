@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 const LOGO_URL = "https://raw.githubusercontent.com/TheArchitect1111/ETFM-ASSESSMENT-/main/file_00000000e10471f5bb36fabf63d29869.png";
 const CALENDLY = "https://calendly.com/exit-etfm/etfm-strategic-reset-session";
+const STRIPE_RESET = "https://buy.stripe.com/dRm8wQ6GI0N06938468Vi0e";
 
 const C = {
   bg: "#f7f4ef", dark: "#1a1a2e", gold: "#c9973a", goldSoft: "#c9973a18",
@@ -355,6 +356,7 @@ export default function ETFMAssessment(){
   const hasBlueprint=p.get("hasBlueprint")==="true";
 
   const initScreen=()=>{
+    if(window.location.pathname==="/blueprint-success") return "blueprint_complete";
     if(hasSid&&p.get("cancelled")==="true") return "blueprint_cancelled";
     if(hasSid) return "loading";
     if(sessionPaid) return "session_confirmed";
@@ -867,9 +869,11 @@ export default function ETFMAssessment(){
       </div>
       <a href={`${CALENDLY}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(firstName)}`} target="_blank" rel="noopener noreferrer"
         style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
-        Book Your Strategic Reset Session — $499
+        {blueprintClient ? "Book Your Strategic Reset Session - $425 Blueprint Client Rate" : "Book Your Strategic Reset Session - $499"}
       </a>
-      <p style={{fontSize:"13px",color:C.muted,textAlign:"center",marginBottom:"24px"}}>A real plan, built around your real life. Starting now.</p>
+      <p style={{fontSize:"13px",color:C.muted,textAlign:"center",marginBottom:"24px"}}>
+        {blueprintClient ? "Your $47 Blueprint purchase has been credited, reducing your Strategic Reset rate to $425." : "Blueprint clients receive a credited Strategic Reset rate of $425."}
+      </p>
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
     </Wrap>
@@ -911,7 +915,7 @@ export default function ETFMAssessment(){
     <Wrap max="500px">
       <h2 style={{fontSize:"28px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px"}}>This session hasn't been activated yet.</h2>
       <p style={{fontSize:"16px",color:C.muted,marginBottom:"32px",lineHeight:"1.7"}}>Complete your payment to unlock your Strategic Blueprint and begin the diagnostic.</p>
-      <a href="https://buy.stripe.com/bJe7sM5CE9jwbtnace8Vi0d" style={{display:"inline-block",backgroundColor:C.gold,color:C.dark,textDecoration:"none",padding:"14px 36px",borderRadius:"6px",fontWeight:"bold",fontSize:"16px"}}>Unlock Your Blueprint: $47</a>
+      <button onClick={()=>setScreen("blueprint_offer")} style={{display:"inline-block",backgroundColor:C.gold,color:C.dark,textDecoration:"none",padding:"14px 36px",border:"none",borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer"}}>Unlock Your Blueprint: $47</button>
     </Wrap>
   );
 
@@ -920,7 +924,7 @@ export default function ETFMAssessment(){
     <Wrap max="500px">
       <h2 style={{fontSize:"28px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px"}}>Completely fine.</h2>
       <p style={{fontSize:"16px",color:C.muted,marginBottom:"32px",lineHeight:"1.7"}}>Your Snapshot is still in your inbox. Whenever you're ready to go deeper, to understand the patterns behind the patterns, the Blueprint will be right here waiting.</p>
-      <a href="https://buy.stripe.com/bJe7sM5CE9jwbtnace8Vi0d" style={{display:"inline-block",backgroundColor:C.gold,color:C.dark,textDecoration:"none",padding:"14px 36px",borderRadius:"6px",fontWeight:"bold",fontSize:"16px"}}>Unlock Your Blueprint: $47</a>
+      <button onClick={()=>setScreen("blueprint_offer")} style={{display:"inline-block",backgroundColor:C.gold,color:C.dark,textDecoration:"none",padding:"14px 36px",border:"none",borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer"}}>Unlock Your Blueprint: $47</button>
     </Wrap>
   );
 
@@ -973,7 +977,7 @@ export default function ETFMAssessment(){
         <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:"0 0 10px"}}>The ETFM Financial Reset systems are designed for educational and organizational awareness purposes only. The content, frameworks, and recommendations provided are not individualized financial guidance and do not constitute a professional strategic guidance relationship. For guidance specific to your financial situation, please consult a licensed financial professional.</p>
         <p style={{color:C.muted,fontSize:"13px",lineHeight:"1.8",margin:0}}>All sales are final. Due to the personalized and immediately delivered nature of this program, refunds are not available once your access has been provided. By completing payment you acknowledge you have read and agree to these terms.</p>
       </div>
-      <a href="https://buy.stripe.com/fZueVee9agLY7d7esu8Vi0f"
+      <a href={STRIPE_RESET}
         style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
         Begin Your Reset Experience — $99
       </a>
