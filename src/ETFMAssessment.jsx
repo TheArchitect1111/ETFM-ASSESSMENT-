@@ -854,7 +854,22 @@ export default function ETFMAssessment(){
 
         <h1 style={{fontSize:"40px",fontFamily:"Georgia, serif",color:C.text,lineHeight:"1.2",marginBottom:"28px",fontWeight:"normal"}}>Your Strategic Blueprint has been prepared.</h1>
 
-        <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.9",marginBottom:"72px"}}>You have just moved through a deeper layer of the ETFM system. What was surfaced here is not a report. It is a map of the patterns that have been shaping your financial life.</p>
+        <div style={{textAlign:"left",marginBottom:"72px"}}>
+          <p style={{fontSize:"17px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"32px"}}>What's arriving in your inbox:</p>
+          {[
+            "Your personalized Financial Blueprint",
+            "Your complete Awareness Score breakdown",
+            "Your Financial Archetype and pattern analysis",
+            "Your Strategic Roadmap",
+            "Your 30-Day Reset Protocol",
+          ].map((item,i)=>(
+            <div key={i} style={{display:"flex",alignItems:"flex-start",marginBottom:"18px"}}>
+              <span style={{color:C.gold,fontSize:"18px",lineHeight:"1",marginRight:"14px",marginTop:"1px",flexShrink:0}}>•</span>
+              <p style={{fontSize:"15px",color:C.muted,lineHeight:"1.7",margin:0}}>{item}</p>
+            </div>
+          ))}
+          <p style={{fontSize:"13px",color:"rgba(122,122,138,0.6)",fontStyle:"italic",marginTop:"28px",marginBottom:0,lineHeight:"1.7"}}>Typically arrives within a few minutes. Check your spam folder if you don't see it right away.</p>
+        </div>
 
         <p style={{fontSize:"19px",fontFamily:"Georgia, serif",color:C.text,fontStyle:"italic",opacity:0.4,lineHeight:"1.7",marginBottom:"80px"}}>The moment a pattern becomes visible, it can begin to change.</p>
 
