@@ -128,7 +128,7 @@ function TabDashboard({ tc, overallPct, firstName, nextMilestone, setActiveTab }
   return (
     <div>
       <div style={{ marginBottom:48 }}>
-        <h1 style={S.h1}>{firstName ? `Welcome back, ${firstName}.` : "Welcome back."}</h1>
+        <h1 style={S.h1}>{firstName ? `Welcome, ${firstName}.` : "Welcome."}</h1>
         <p style={S.sub}>Your reset is in progress.</p>
       </div>
 
@@ -137,6 +137,21 @@ function TabDashboard({ tc, overallPct, firstName, nextMilestone, setActiveTab }
         <MetricTile label="Current Phase"    value="Phase 1" sub="Awareness" />
         <MetricTile label="Tools Complete"   value={`${tc} of 4`} />
         <MetricTile label="Status"           value={tc === 0 ? "Day 1" : tc === 4 ? "Phase 1 Done" : "Active"} />
+      </div>
+
+      <div style={{ marginTop:32, marginBottom:32 }}>
+        <div style={{ ...S.eyebrow, marginBottom:20 }}>HOW THIS WORKS</div>
+        {[
+          "Start with the Dashboard. Your next action is always shown here.",
+          "Navigate using the tabs above. Each tab shows one part of your system.",
+          "Work through Tools in order. Complete each one before moving to the next.",
+          "Return every week. Progress builds through consistency, not speed.",
+        ].map((step, i) => (
+          <div key={i} style={{ display:"flex", gap:20, padding:"12px 0", borderBottom: i < 3 ? `1px solid ${C.border}` : "none", alignItems:"flex-start" }}>
+            <span style={{ color:C.gold, fontSize:11, letterSpacing:2, fontFamily:"'DM Sans', sans-serif", flexShrink:0, paddingTop:2, minWidth:28 }}>0{i+1}</span>
+            <span style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.6 }}>{step}</span>
+          </div>
+        ))}
       </div>
 
       <div style={S.nextActionCard} className="ep-nac">
@@ -160,8 +175,11 @@ function TabDashboard({ tc, overallPct, firstName, nextMilestone, setActiveTab }
 function TabPhase1({ setActiveTab }) {
   return (
     <div>
-      <div style={S.eyebrow}>CURRENT PHASE</div>
-      <h1 style={{ ...S.h1, marginTop:12, marginBottom:20 }}>Phase 1: Awareness</h1>
+      <div style={{ marginBottom:32 }}>
+        <div style={{ ...S.eyebrow, marginBottom:10 }}>PHASE 1: AWARENESS</div>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>This is where your reset begins. Before building anything, you need a clear, honest picture of where things currently stand.</p>
+      </div>
+      <h1 style={{ ...S.h1, marginTop:0, marginBottom:20 }}>Phase 1: Awareness</h1>
       <p style={{ color:C.muted, fontSize:16, lineHeight:1.8, maxWidth:560, marginBottom:52, fontFamily:"'DM Sans', sans-serif", fontWeight:300 }}>
         Before you can build structure, you need an honest picture of what is actually happening. This phase is entirely about seeing clearly.
       </p>
@@ -191,8 +209,11 @@ function TabPhase1({ setActiveTab }) {
 function TabTools({ data, update, t2Locked, t3Locked, t4Locked }) {
   return (
     <div>
-      <div style={S.eyebrow}>PHASE 1 TOOLS</div>
-      <h2 style={{ ...S.h2, marginTop:12, marginBottom:8 }}>Your Tools This Week</h2>
+      <div style={{ marginBottom:32 }}>
+        <div style={{ ...S.eyebrow, marginBottom:10 }}>YOUR TOOLS</div>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>These are the structured exercises that drive your reset. Complete them in order. Each one builds directly into the next.</p>
+      </div>
+      <h2 style={{ ...S.h2, marginTop:0, marginBottom:8 }}>Your Tools This Week</h2>
       <p style={{ color:C.muted, fontSize:14, marginBottom:40, fontFamily:"'DM Sans', sans-serif", fontWeight:300 }}>Complete each tool in order. Each one unlocks the next.</p>
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:16 }} className="ep-g2">
         <ToolCard
@@ -241,8 +262,11 @@ function TabProgress({ tc, overallPct, structurePct, data }) {
   ];
   return (
     <div>
-      <div style={S.eyebrow}>YOUR PROGRESS</div>
-      <h2 style={{ ...S.h2, marginTop:12, marginBottom:52 }}>Reset Progress Overview</h2>
+      <div style={{ marginBottom:32 }}>
+        <div style={{ ...S.eyebrow, marginBottom:10 }}>YOUR PROGRESS</div>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Track how far you have come. Progress here reflects real structural change, not just activity.</p>
+      </div>
+      <h2 style={{ ...S.h2, marginTop:0, marginBottom:52 }}>Reset Progress Overview</h2>
 
       <div style={{ display:"flex", gap:60, justifyContent:"center", marginBottom:64 }} className="ep-rings">
         <RingProgress pct={overallPct}     value={`${overallPct}%`}     label="Overall Reset"  />
@@ -286,8 +310,11 @@ function TabRoadmap() {
   ];
   return (
     <div>
-      <div style={S.eyebrow}>YOUR JOURNEY</div>
-      <h2 style={{ ...S.h2, marginTop:12, marginBottom:48 }}>Five-Phase Reset Roadmap</h2>
+      <div style={{ marginBottom:32 }}>
+        <div style={{ ...S.eyebrow, marginBottom:10 }}>YOUR JOURNEY</div>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Five phases from chaos to momentum. Understanding where you are going makes every step more intentional.</p>
+      </div>
+      <h2 style={{ ...S.h2, marginTop:0, marginBottom:48 }}>Five-Phase Reset Roadmap</h2>
       <div style={{ display:"flex", flexDirection:"column" }}>
         {phases.map((phase, i) => (
           <div key={phase.num} style={{ display:"flex", gap:20, alignItems:"stretch" }}>
@@ -341,6 +368,11 @@ function TabRoadmap() {
 function TabAdvisory() {
   return (
     <div>
+      <div style={{ marginBottom:36 }}>
+        <div style={{ ...S.eyebrow, marginBottom:10 }}>STRATEGIC GUIDANCE</div>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Direct observations and priority actions from Robert based on where you are in your reset.</p>
+      </div>
+
       <div style={{ display:"flex", alignItems:"center", gap:24, marginBottom:48 }}>
         <img
           src="https://raw.githubusercontent.com/TheArchitect1111/ETFM-ASSESSMENT-/main/public/robert-brickey.png"
