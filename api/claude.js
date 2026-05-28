@@ -222,53 +222,13 @@ Keep under 250 words total.`, 1024);
           <h2 style="color:#ffffff;font-family:Georgia,serif;font-size:22px;margin:0 0 16px;line-height:1.4;">Unlock Your Strategic Financial Blueprint</h2>
           <p style="color:#a0a0b8;font-size:14px;margin:0 0 20px;line-height:1.7;">Awareness is the first step. Structure is what changes the outcome. Your Snapshot revealed the pattern. The Strategic Financial Blueprint shows you the deeper systems, behaviors, and financial gaps driving it, and what to do next.</p>
           <table cellpadding="0" cellspacing="0" style="margin:0 auto 28px;text-align:left;">
-            <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">✓ &nbsp;18-question strategic diagnostic</td></tr>
-            <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">✓ &nbsp;Personalized escape roadmap</td></tr>
-            <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">✓ &nbsp;5-Step ETFM Framework PDF</td></tr>
-            <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">✓ &nbsp;Robert's personal video message</td></tr>
-            <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">✓ &nbsp;30-Day Strategic Reset Protocol</td></tr>
+            <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">- &nbsp;18-question strategic diagnostic</td></tr>
+            <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">- &nbsp;Personalized Financial Archetype analysis</td></tr>
+            <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">- &nbsp;ETFM Behavioral Operating Framework</td></tr>
+            <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">- &nbsp;30-Day Strategic Reset Protocol</td></tr>
+            <tr><td class="checklist-td" style="padding:5px 0;color:#c8c8d8;font-size:14px;line-height:1.6;">- &nbsp;$47 credited toward the next ETFM steps</td></tr>
           </table>
           <a href="https://etfm-assessment.vercel.app/?email=${encodeURIComponent(email)}&firstName=${encodeURIComponent(firstName)}&showBlueprint=true" class="cta-btn" style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 36px;border-radius:6px;font-weight:bold;font-size:16px;">Get the Strategic Blueprint: $47</a>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding:32px 40px;background-color:#f7f4ef;border-top:2px solid #e8e3da;text-align:center;">
-          <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 8px;">Step 3</p>
-          <h3 style="color:#1a1a2e;font-family:Georgia,serif;font-size:20px;margin:0 0 12px;text-align:center;line-height:1.4;">Build the Systems That Create Stability</h3>
-          <p style="color:#7a7a8a;font-size:14px;margin:0 0 20px;line-height:1.7;text-align:center;">The ETFM Reset Experience is a guided implementation system designed to help you reduce financial chaos, organize your financial life, and create more consistency, visibility, and control through practical weekly structure. Inside the Reset Experience you will build the operational foundation that most people never create.</p>
-          <table cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 20px;text-align:left;">
-            <tr><td style="padding:8px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #e8e3da;"><strong>Financial Reset Workbook</strong><br/><span style="color:#7a7a8a;">A structured workbook to map your current financial reality, clarify your numbers, and begin building your system from the ground up.</span></td></tr>
-            <tr><td style="padding:8px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #e8e3da;"><strong>Financial Reality Audit</strong><br/><span style="color:#7a7a8a;">A guided audit to surface every income stream, expense, debt, and pattern so nothing stays hidden or unaccounted for.</span></td></tr>
-            <tr><td style="padding:8px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #e8e3da;"><strong>Bill Organization System</strong><br/><span style="color:#7a7a8a;">A clear system to organize, schedule, and manage every recurring bill and obligation without stress or missed payments.</span></td></tr>
-            <tr><td style="padding:8px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #e8e3da;"><strong>Financial Calendar and Visibility System</strong><br/><span style="color:#7a7a8a;">A visual calendar framework that puts every financial deadline, payment, and priority in one place so you always know what is coming.</span></td></tr>
-            <tr><td style="padding:8px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #e8e3da;"><strong>Spending Pattern Analysis</strong><br/><span style="color:#7a7a8a;">A deep-dive tool to identify where money is leaking, what habits are costing you, and where to redirect with intention.</span></td></tr>
-            <tr><td style="padding:8px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #e8e3da;"><strong>Weekly System Review Framework</strong><br/><span style="color:#7a7a8a;">A simple weekly review process to keep your finances on track, adjust in real time, and build the habit of consistent oversight.</span></td></tr>
-            <tr><td style="padding:8px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #e8e3da;"><strong>Guided Five-Phase Reset Journey</strong><br/><span style="color:#7a7a8a;">A structured five-phase process that walks you step by step from financial chaos to clarity, structure, and momentum.</span></td></tr>
-            <tr><td style="padding:8px 0;color:#1a1a2e;font-size:13px;line-height:1.6;"><strong>Strategic Guidance from Robert Brickey</strong><br/><span style="color:#7a7a8a;">Direct strategic input from Robert, a licensed financial advisor and creator of ETFM, built into the reset experience.</span></td></tr>
-          </table>
-          <div style="text-align:center;">
-            <a href="https://etfm-assessment.vercel.app/?showReset=true" class="cta-btn" style="display:inline-block;background-color:#1a1a2e;color:#c9973a;border:2px solid #1a1a2e;text-decoration:none;padding:14px 32px;border-radius:6px;font-size:16px;font-weight:bold;">Begin Your Reset Experience: $99</a>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="offer-light" style="padding:32px 40px;background-color:#ffffff;border-top:2px solid #c9973a;text-align:center;">
-          <p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 8px;text-align:center;">Step 4</p>
-          <h3 style="color:#1a1a2e;font-family:Georgia,serif;font-size:20px;margin:0 0 12px;text-align:center;line-height:1.4;">Strategic Reset Partnership</h3>
-          <p style="color:#7a7a8a;font-size:14px;margin:0 0 20px;line-height:1.7;">Your Blueprint identified the pattern. Now it's time to build the structure. Work directly with Robert Brickey to analyze your current financial reality, close the structural gaps, and build a system that runs on intention, not pressure.</p>
-          <table cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 20px;">
-            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #f0ece4;">✓ &nbsp;<strong>Pre-Session Financial Intake & Discovery Review</strong>, detailed review of your snapshot, goals, income flow, and current structure before the session begins</td></tr>
-            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #f0ece4;">✓ &nbsp;<strong>Two Private 30-Minute Strategy Sessions</strong> with Robert Brickey, Creator of ETFM, a pre-session call to build your plan and a post-session call to review it together</td></tr>
-            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #f0ece4;">✓ &nbsp;<strong>Personalized Financial Plan & Strategic Framework</strong>, built around your current reality, priorities, pressure points, and long-term goals</td></tr>
-            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #f0ece4;">✓ &nbsp;<strong>Full Matrix Score & Structural Analysis</strong>, identify the financial behaviors, structural gaps, and decision-making patterns impacting your progress</td></tr>
-            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #f0ece4;">✓ &nbsp;<strong>Decision Rules & Financial Policy System</strong>, develop clear rules for spending, saving, debt, and investing so pressure stops controlling your choices</td></tr>
-            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #f0ece4;">✓ &nbsp;<strong>Custom 90-Day Strategic Reset Roadmap</strong>, a practical implementation plan with prioritized action steps and strategic focus areas</td></tr>
-            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;border-bottom:1px solid #f0ece4;">✓ &nbsp;<strong>Detailed session notes delivered after both calls for review and reference</strong></td></tr>
-            <tr><td class="checklist-td" style="padding:6px 0;color:#1a1a2e;font-size:13px;line-height:1.6;">✓ &nbsp;<strong>60 Days of Priority Email Support</strong>, ongoing clarification, guidance, and accountability during implementation</td></tr>
-          </table>
-          <p style="color:#7a7a8a;font-size:12px;font-style:italic;margin:0 0 20px;text-align:center;">This is not coaching. This is private strategic partnership.</p>
-          <div style="text-align:center;">
-<a href="https://etfm-assessment.vercel.app/?email=${encodeURIComponent(email)}&firstName=${encodeURIComponent(firstName)}&showSession=true" class="cta-btn" style="display:inline-block;background-color:#ffffff;color:#c9973a;border:2px solid #c9973a;text-decoration:none;padding:14px 32px;border-radius:6px;font-size:16px;font-weight:bold;">Book Your Strategic Reset Session: $499 →</a>
         </td>
       </tr>
     `);
@@ -418,18 +378,18 @@ Keep under 900 words.`, 1500);
           <h2 style="color:#ffffff;font-family:Georgia,serif;font-size:20px;margin:0 0 12px;">Strategic Reset Partnership</h2>
           <p style="color:#a0a0b8;font-size:14px;margin:0 0 8px;line-height:1.7;">Your Blueprint identified the pattern. Now it's time to build the structure with Robert directly.</p>
           <table cellpadding="0" cellspacing="0" style="margin:0 auto 20px;text-align:left;">
-            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Pre-session financial intake & discovery review</td></tr>
-            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Two 30-minute calls with Robert Brickey</td></tr>
-            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Personalized financial roadmap & strategic framework</td></tr>
-            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Decision rules & financial policy system</td></tr>
-            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Custom 90-day strategic reset roadmap</td></tr>
-            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;Detailed session notes delivered after both calls for review and reference</td></tr>
-            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">✓ &nbsp;60 days of priority email support</td></tr>
+            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">- &nbsp;Pre-session financial intake & discovery review</td></tr>
+            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">- &nbsp;Two 30-minute calls with Robert Brickey</td></tr>
+            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">- &nbsp;Personalized financial roadmap & strategic framework</td></tr>
+            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">- &nbsp;Decision rules & financial policy system</td></tr>
+            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">- &nbsp;Custom 90-day strategic reset roadmap</td></tr>
+            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">- &nbsp;Detailed session notes delivered after both calls for review and reference</td></tr>
+            <tr><td class="checklist-td" style="padding:4px 0;color:#c8c8d8;font-size:13px;line-height:1.6;">- &nbsp;60 days of priority email support</td></tr>
           </table>
           <p style="color:#a0a0b8;font-size:13px;font-style:italic;margin:0 0 20px;">Your 5-Step ETFM Framework guide is also ready to view:</p>
-          <a href="${FRAMEWORK_URL}" class="cta-btn" style="display:inline-block;background-color:rgba(201,151,58,0.15);color:#c9973a;border:1px solid #c9973a;text-decoration:none;padding:10px 24px;border-radius:6px;font-size:14px;margin-bottom:20px;">View Your Framework Guide →</a>
+          <a href="${FRAMEWORK_URL}" class="cta-btn" style="display:inline-block;background-color:rgba(201,151,58,0.15);color:#c9973a;border:1px solid #c9973a;text-decoration:none;padding:10px 24px;border-radius:6px;font-size:14px;margin-bottom:20px;">View Your Framework Guide -></a>
           <br/>
-<a href="https://etfm-assessment.vercel.app/?email=${encodeURIComponent(email)}&firstName=${encodeURIComponent(firstName)}&showSession=true&hasBlueprint=true" class="cta-btn" style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 36px;border-radius:6px;font-weight:bold;font-size:16px;">Book Your Strategic Reset Session: $425 Blueprint Client Rate →</a>
+<a href="https://etfm-assessment.vercel.app/?email=${encodeURIComponent(email)}&firstName=${encodeURIComponent(firstName)}&showSession=true&hasBlueprint=true" class="cta-btn" style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 36px;border-radius:6px;font-weight:bold;font-size:16px;">Book on Calendly: $425 Blueprint Client Rate -></a>
         </td>
       </tr>
     `);

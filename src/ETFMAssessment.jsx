@@ -784,11 +784,32 @@ export default function ETFMAssessment(){
 
   // BLUEPRINT OFFER
   if(screen==="blueprint_offer") return(
-    <Wrap>
-      <div style={{textAlign:'center', padding:'2rem'}}>
-        <h2>Go Deeper</h2>
-        <p>Your Snapshot revealed the pattern. The Blueprint shows you the system driving it.</p>
-        <button onClick={payBlueprint} disabled={loading} style={{display:'inline-block', padding:'1rem 2rem', background:'#1a2744', color:'#c9a84c', border:'none', cursor:'pointer'}}>{loading ? "One moment, setting up your Blueprint..." : "Unlock Your Strategic Blueprint - $47"}</button>
+    <Wrap max="560px">
+      <div style={{textAlign:"center"}}>
+        <Tag t="Step 2 - Structural Visibility"/>
+        <h2 style={{fontSize:"36px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"18px",lineHeight:"1.2"}}>
+          See the system behind the stress.
+        </h2>
+        <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"24px"}}>
+          Your Snapshot revealed the pattern. The Strategic Blueprint goes deeper, showing the behavioral cycles, structural gaps, and decision-making loops that are shaping your financial life.
+        </p>
+        <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"22px",textAlign:"left",marginBottom:"28px"}}>
+          {[
+            "18-question Strategic Visibility Diagnostic",
+            "Personalized Financial Archetype analysis",
+            "ETFM Behavioral Operating Framework",
+            "30-Day Strategic Reset Protocol",
+            "$47 credited toward the Reset and Strategic Partnership",
+          ].map((item,i)=>(
+            <p key={i} style={{margin:"0 0 12px",color:C.text,fontSize:"14px",lineHeight:"1.6"}}>{i+1}. {item}</p>
+          ))}
+        </div>
+        <button onClick={payBlueprint} disabled={loading} style={{display:"inline-block",padding:"16px 32px",background:C.gold,color:C.dark,border:"none",borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:loading?"not-allowed":"pointer",width:"100%",maxWidth:"420px"}}>
+          {loading ? "One moment, setting up your Blueprint..." : "Unlock Your Strategic Blueprint - $47"}
+        </button>
+        <p style={{fontSize:"12px",color:C.muted,lineHeight:"1.7",marginTop:"18px"}}>
+          After payment, you will complete the diagnostic and receive your personalized Blueprint by email.
+        </p>
       </div>
     </Wrap>
   );
@@ -803,9 +824,9 @@ export default function ETFMAssessment(){
       <div style={{maxWidth:"400px",margin:"0 auto 64px",textAlign:"left"}}>
         <p style={{fontSize:"10px",textTransform:"uppercase",letterSpacing:"3px",color:C.gold,marginBottom:"28px",opacity:0.7}}>What Happens Next</p>
         {[
-          "01 — You complete 18 visibility questions.",
-          "02 — Your Financial Archetype is identified.",
-          "03 — Your personalized Blueprint is delivered to your inbox.",
+          "01 - You complete 18 visibility questions.",
+          "02 - Your Financial Archetype is identified.",
+          "03 - Your personalized Blueprint is delivered to your inbox.",
         ].map((line,i)=>(
           <p key={i} style={{fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.5",marginBottom:"20px",margin:"0 0 20px"}}>{line}</p>
         ))}
@@ -823,7 +844,7 @@ export default function ETFMAssessment(){
         <div style={{maxWidth:"680px",margin:"0 auto"}}>
           <div style={{marginBottom:"8px",display:"flex",justifyContent:"space-between"}}>
             <p style={{fontSize:"11px",color:C.gold,textTransform:"uppercase",letterSpacing:"1px",margin:0}}>Strategic Blueprint: {q.section}</p>
-            <p style={{fontSize:"11px",color:C.muted,margin:0}}>Financial Visibility Review • {bpIdx+1} of {BQ.length}</p>
+            <p style={{fontSize:"11px",color:C.muted,margin:0}}>Financial Visibility Review - {bpIdx+1} of {BQ.length}</p>
           </div>
           <div style={{marginBottom:"36px",backgroundColor:C.border,height:"3px",borderRadius:"2px",overflow:"hidden"}}>
             <div style={{backgroundColor:C.gold,height:"100%",width:`${prog}%`,transition:"width 0.4s ease"}}/>
@@ -864,7 +885,7 @@ export default function ETFMAssessment(){
             "Your 30-Day Reset Protocol",
           ].map((item,i)=>(
             <div key={i} style={{display:"flex",alignItems:"flex-start",marginBottom:"18px"}}>
-              <span style={{color:C.gold,fontSize:"18px",lineHeight:"1",marginRight:"14px",marginTop:"1px",flexShrink:0}}>•</span>
+              <span style={{color:C.gold,fontSize:"18px",lineHeight:"1",marginRight:"14px",marginTop:"1px",flexShrink:0}}>-</span>
               <p style={{fontSize:"15px",color:C.muted,lineHeight:"1.7",margin:0}}>{item}</p>
             </div>
           ))}
@@ -876,10 +897,10 @@ export default function ETFMAssessment(){
         <div style={{textAlign:"left",marginBottom:"72px"}}>
           <p style={{fontSize:"10px",textTransform:"uppercase",letterSpacing:"3px",color:C.gold,marginBottom:"28px",opacity:0.7}}>What Happens Next</p>
           {[
-            "01 — Your Strategic Blueprint arrives by email.",
-            "02 — Review your Awareness Score and behavioral patterns.",
-            "03 — Begin your 30-Day Reset Protocol.",
-            "04 — Decide whether to continue into the ETFM Reset Experience.",
+            "01 - Your Strategic Blueprint arrives by email.",
+            "02 - Review your Awareness Score and behavioral patterns.",
+            "03 - Begin your 30-Day Reset Protocol.",
+            "04 - Decide whether to continue into the ETFM Reset Experience.",
           ].map((line,i)=>(
             <p key={i} style={{fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.6",margin:"0 0 20px"}}>{line}</p>
           ))}
@@ -900,12 +921,32 @@ export default function ETFMAssessment(){
 
   // SESSION OFFER
   if(screen==="session_offer") return(
-    <Wrap>
-      <div style={{textAlign:'center', padding:'2rem'}}>
-        <h2>Private Strategic Partnership</h2>
-        <p>Work directly with Robert to analyze your financial reality, close the structural gaps, and build a system that runs on intention, not pressure.</p>
-        <a href={`${CALENDLY}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(firstName)}`} target="_blank" rel="noopener noreferrer" style={{display:'inline-block', padding:'1rem 2rem', background:'#1a2744', color:'#c9a84c', textDecoration:'none'}}>{blueprintClient ? "Book Your Strategic Reset Session - $425 Blueprint Client Rate" : "Book Your Strategic Reset Session - $499"}</a>
-        <p style={{fontSize:'13px', color:C.muted}}>{blueprintClient ? "Your $47 Blueprint purchase has been credited, reducing your Strategic Reset rate to $425." : "Blueprint clients receive a credited Strategic Reset rate of $425."}</p>
+    <Wrap max="560px">
+      <div style={{textAlign:"center"}}>
+        <Tag t="Step 4 - Strategic Optimization"/>
+        <h2 style={{fontSize:"36px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"18px",lineHeight:"1.2"}}>
+          Work directly with Robert.
+        </h2>
+        <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"24px"}}>
+          The Strategic Reset Partnership begins with Calendly. Choose your time first, then follow the confirmation steps to complete your intake and payment.
+        </p>
+        <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"22px",textAlign:"left",marginBottom:"28px"}}>
+          {[
+            "38-question Strategic Discovery Intake reviewed before your first call",
+            "Two private 30-minute strategy sessions",
+            "Full Matrix Score and Structural Analysis",
+            "Custom 90-Day Strategic Reset Roadmap",
+            "60 days of priority email support",
+          ].map((item,i)=>(
+            <p key={i} style={{margin:"0 0 12px",color:C.text,fontSize:"14px",lineHeight:"1.6"}}>{i+1}. {item}</p>
+          ))}
+        </div>
+        <a href={`${CALENDLY}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(firstName)}`} target="_blank" rel="noopener noreferrer" style={{display:"inline-block",padding:"16px 32px",background:C.dark,color:C.gold,textDecoration:"none",borderRadius:"6px",fontWeight:"bold",fontSize:"16px",width:"100%",maxWidth:"440px",boxSizing:"border-box"}}>
+          {blueprintClient ? "Book on Calendly - $425 Blueprint Client Rate" : "Book on Calendly - $499 Strategic Partnership"}
+        </a>
+        <p style={{fontSize:"13px",color:C.muted,lineHeight:"1.7",marginTop:"18px"}}>
+          {blueprintClient ? "Your $47 Blueprint purchase is credited, reducing your Strategic Reset rate to $425." : "Blueprint clients receive a credited Strategic Reset rate of $425."}
+        </p>
       </div>
     </Wrap>
   );
@@ -995,13 +1036,33 @@ export default function ETFMAssessment(){
 
   // RESET OFFER
   if(screen==="reset_offer") return(
-    <Wrap>
-      <div style={{textAlign:'center', padding:'2rem'}}>
-        <h2>Build the Structure</h2>
-        <p>The ETFM Reset Experience is a guided implementation system to reduce financial chaos and create real stability.</p>
-        <button onClick={payReset} disabled={loading} style={{display:'inline-block', padding:'1rem 2rem', background:'#1a2744', color:'#c9a84c', border:'none', cursor:'pointer'}}>
+    <Wrap max="560px">
+      <div style={{textAlign:"center"}}>
+        <Tag t="Step 3 - Operational Stabilization"/>
+        <h2 style={{fontSize:"36px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"18px",lineHeight:"1.2"}}>
+          Build the structure.
+        </h2>
+        <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.8",marginBottom:"24px"}}>
+          The ETFM Reset Experience is a guided implementation system that helps you organize your financial life, reduce pressure, and create a weekly operating rhythm you can actually sustain.
+        </p>
+        <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"22px",textAlign:"left",marginBottom:"28px"}}>
+          {[
+            "Financial Reset Workbook and Reality Audit",
+            "Bill Organization System",
+            "Financial Calendar and Visibility System",
+            "Spending Pattern Analysis",
+            "Weekly System Review Framework",
+            "Private portal access delivered by email after payment",
+          ].map((item,i)=>(
+            <p key={i} style={{margin:"0 0 12px",color:C.text,fontSize:"14px",lineHeight:"1.6"}}>{i+1}. {item}</p>
+          ))}
+        </div>
+        <button onClick={payReset} disabled={loading} style={{display:"inline-block",padding:"16px 32px",background:C.dark,color:C.gold,border:"none",borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:loading?"not-allowed":"pointer",width:"100%",maxWidth:"420px"}}>
           {loading ? "One moment, setting up your Reset..." : "Begin Your Reset Experience - $99"}
         </button>
+        <p style={{fontSize:"12px",color:C.muted,lineHeight:"1.7",marginTop:"18px"}}>
+          After payment, check your email for your private portal access link.
+        </p>
       </div>
     </Wrap>
   );
