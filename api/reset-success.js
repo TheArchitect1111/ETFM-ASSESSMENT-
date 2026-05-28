@@ -5,9 +5,7 @@ const BASE_URL = "https://etfm-assessment.vercel.app";
 const RESET_PORTAL_URL = `${BASE_URL}/portal`;
 const RESET_WELCOME_SUBJECT = "Your ETFM Reset Experience is ready";
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const MAKE_RESET_WEBHOOK_URL =
-  process.env.MAKE_RESET_WEBHOOK_URL ||
-  "https://hook.us2.make.com/55f1ykdw76g5ecyelm5hqvcewr71lqs1";
+const MAKE_RESET_WEBHOOK_URL = process.env.MAKE_RESET_WEBHOOK_URL;
 
 async function sendEmail(to, subject, html) {
   if (!RESEND_API_KEY || !to) return { skipped: true };
