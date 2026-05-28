@@ -24,7 +24,7 @@ export default async function handler(req, res) {
       }],
       mode: "payment",
       ...(email ? { customer_email: email } : {}),
-      success_url: `${BASE_URL}/portal?resetPaid=true`,
+      success_url: `${BASE_URL}/api/reset-success?checkout_session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${BASE_URL}/?showReset=true`,
       metadata: {
         product: "reset_99",

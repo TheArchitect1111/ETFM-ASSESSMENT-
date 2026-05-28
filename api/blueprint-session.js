@@ -170,7 +170,7 @@ export default async function handler(req, res) {
     if (updateError) return res.status(500).json({ error: "Failed to save answers" });
 
     // Fire-and-forget — do not await, Vercel will not block on this
-    fetch(`https://etfm-assessment.vercel.app/api/claude`, {
+    const reportRes = await fetch(`https://etfm-assessment.vercel.app/api/claude`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -180,9 +180,15 @@ export default async function handler(req, res) {
         freeAnswers: session.free_answers,
         blueprintAnswers,
       }),
-    }).catch((err) => console.error("Blueprint report trigger error:", err));
+    });
 
-    return res.status(200).json({ success: true });
+    if (!reportRes.ok) {
+      const errorText = await reportRes.text().catch(() => "");
+      console.error("Blueprint report trigger failed:", reportRes.status, errorText);
+      return res.status(502).json({ error: "Blueprint answers saved, but report email failed to trigger" });
+    }
+
+    return res.status(200).json({ success: true, reportTriggered: true });
   }
 
   return res.status(400).json({ error: "Invalid action" });
