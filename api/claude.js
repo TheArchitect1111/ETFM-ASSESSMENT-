@@ -27,7 +27,53 @@ async function callClaude(prompt, maxTokens = 2048) {
     }),
   });
   const data = await res.json();
-  return data?.content?.[0]?.text || "";
+  if (!res.ok) throw new Error(`Claude error: ${JSON.stringify(data)}`);
+  const text = data?.content?.[0]?.text || "";
+  if (!text.trim()) throw new Error("Claude returned an empty response");
+  return text;
+}
+
+function answerText(answers = [], index, fallback = "Not provided") {
+  return answers[index]?.answer || answers[index] || fallback;
+}
+
+function blueprintFallbackReport(firstName = "there", freeAnswers = [], blueprintAnswers = []) {
+  const visibility = answerText(blueprintAnswers, 0);
+  const pressure = answerText(blueprintAnswers, 3);
+  const structure = answerText(blueprintAnswers, 5);
+  const trajectory = answerText(blueprintAnswers, 16);
+
+  return `
+    <h3 style="color:#1a1a2e;font-family:Georgia,serif;">Executive Pattern Read</h3>
+    <p>${firstName}, your Blueprint points to a financial system that needs clearer visibility, stronger operating structure, and more consistent review. This is not a discipline issue. It is a structure issue.</p>
+    <hr style="border:none;border-top:1px solid #e8e3da;margin:32px 0;">
+    <h3 style="color:#1a1a2e;font-family:Georgia,serif;">What Your Answers Revealed</h3>
+    <p><strong style="color:#c9973a;">Visibility:</strong> ${visibility}</p>
+    <p><strong style="color:#c9973a;">Pressure Point:</strong> ${pressure}</p>
+    <p><strong style="color:#c9973a;">Current Structure:</strong> ${structure}</p>
+    <p><strong style="color:#c9973a;">Future Concern:</strong> ${trajectory}</p>
+    <hr style="border:none;border-top:1px solid #e8e3da;margin:32px 0;">
+    <h3 style="color:#1a1a2e;font-family:Georgia,serif;">Your First Three Moves</h3>
+    <ol>
+      <li>Create one complete list of bills, debts, due dates, balances, and recurring obligations.</li>
+      <li>Set one weekly 30-minute financial review so decisions stop happening only under pressure.</li>
+      <li>Choose one priority for the next 30 days: stabilize cash flow, organize bills, reduce debt pressure, or rebuild savings.</li>
+    </ol>
+    <hr style="border:none;border-top:1px solid #e8e3da;margin:32px 0;">
+    <h3 style="color:#1a1a2e;font-family:Georgia,serif;">30-Day Strategic Reset Protocol</h3>
+    <p><strong style="color:#c9973a;">Week 1: Visibility.</strong> Gather every account, bill, balance, and due date into one view.</p>
+    <p><strong style="color:#c9973a;">Week 2: Stabilization.</strong> Identify the obligations creating the most pressure and build a payment rhythm around them.</p>
+    <p><strong style="color:#c9973a;">Week 3: Structure.</strong> Create simple rules for spending, saving, debt, and weekly review.</p>
+    <p><strong style="color:#c9973a;">Week 4: Momentum.</strong> Review what changed, remove one source of financial friction, and choose the next operating priority.</p>
+    <hr style="border:none;border-top:1px solid #e8e3da;margin:32px 0;">
+    <h3 style="color:#1a1a2e;font-family:Georgia,serif;">Strategic Recommendation</h3>
+    <p>Your next move is to stop trying to solve everything at once and build one reliable operating structure. Visibility first. Structure second. Momentum third.</p>
+  `;
+}
+
+function isUsableReport(html = "") {
+  const text = html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+  return text.length > 500 && /Strategic|Blueprint|30-Day|Week 1|Financial/i.test(text);
 }
 
 async function sendEmail(to, subject, html) {
@@ -356,7 +402,12 @@ Section dividers: <hr style="border:none;border-top:1px solid #e8e3da;margin:32p
 Keep under 900 words.`, 1500);
     } catch (err) {
       console.error("Blueprint Claude error:", err);
-      reportHtml = `<p>Hi ${firstName}, your Strategic Financial Blueprint is being finalized. Robert will follow up directly with your complete report.</p>`;
+      reportHtml = blueprintFallbackReport(firstName, freeAnswers, blueprintAnswers);
+    }
+
+    if (!isUsableReport(reportHtml)) {
+      console.error("Blueprint report was too short or malformed; using fallback report.");
+      reportHtml = blueprintFallbackReport(firstName, freeAnswers, blueprintAnswers);
     }
 
     const emailHtml = emailWrapper(`
