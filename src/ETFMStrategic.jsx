@@ -168,13 +168,13 @@ export default function ETFMStrategic() {
   const intakeComplete  = data.intake_submitted;
   const call1Complete   = data.call1_complete;
   const call2Complete   = data.call2_complete;
-  const frameworkStatus = call1Complete ? "Unlocked" : "Locked";
-  const sessionStatus   = call2Complete ? "Both complete" : call1Complete ? "Session 1 done" : "Not started";
+  const frameworkStatus = call1Complete ? "Unlocked" : "Unlocks After Session 1";
+  const sessionStatus   = call2Complete ? "Both complete" : call1Complete ? "Session 1 done" : "Ready to Begin";
 
   const supportDaysRemaining = (() => {
-    if (!data.support_start) return "Not started";
+    if (!data.support_start) return "60 Days Upon Session 1";
     const start = new Date(data.support_start);
-    if (isNaN(start)) return "Not started";
+    if (isNaN(start)) return "60 Days Upon Session 1";
     const end = new Date(start.getTime() + 60 * 24 * 60 * 60 * 1000);
     const diff = Math.ceil((end - new Date()) / (1000 * 60 * 60 * 24));
     return diff > 0 ? `${diff} days` : "Complete";
@@ -243,9 +243,15 @@ export default function ETFMStrategic() {
 function TabDashboard({ sessionStatus, progressPct, frameworkStatus, supportDaysRemaining, nextAction, nextTabAction, setActiveTab, processSteps, intakeComplete, call1Complete }) {
   return (
     <div>
+      <div style={{ paddingTop:8, paddingBottom:40, textAlign:"center" }}>
+        <p style={{ fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:"1.2rem", color:"#c9a84c", fontVariant:"small-caps", letterSpacing:"0.3em", margin:"0 0 10px", fontWeight:600 }}>E T F M</p>
+        <p style={{ fontFamily:"'DM Sans', sans-serif", fontSize:"0.7rem", letterSpacing:"0.2em", color:C.muted, margin:0 }}>Escape the Financial Matrix</p>
+      </div>
+
       <div style={{ marginBottom:48 }}>
         <h1 style={S.h1}>WELCOME TO YOUR STRATEGIC RESET</h1>
         <p style={S.sub}>This is not coaching. This is strategic architecture designed to help you rebuild your financial operating system with intention and structure.</p>
+        <p style={{ color:C.muted, fontSize:16, lineHeight:1.9, margin:"24px auto 0", maxWidth:680, fontFamily:"'Cormorant Garamond', Georgia, serif", fontWeight:300 }}>Personal finances have become increasingly complex — not because people lack effort or intelligence, but because most people were never shown how to organize the system beneath the pressure. This strategic partnership was built to change that. Over the next 90 days, you will gain complete visibility into your financial system, close the structural gaps, and build a framework designed around your specific situation.</p>
       </div>
 
       {/* METRIC TILES */}
@@ -290,7 +296,7 @@ function TabDashboard({ sessionStatus, progressPct, frameworkStatus, supportDays
           onError={e => { e.target.style.display = "none"; }}
         />
         <div>
-          <div style={{ ...S.eyebrow, marginBottom:20 }}>YOUR STRATEGIC PARTNER</div>
+          <div style={{ color:C.gold, fontSize:"0.8rem", fontFamily:"'Cormorant Garamond', Georgia, serif", fontVariant:"small-caps", letterSpacing:"0.18em", marginBottom:20 }}>Your Strategic Partner</div>
           <p style={{ color:C.navy, fontSize:16, fontFamily:"'Cormorant Garamond', Georgia, serif", lineHeight:1.9, marginBottom:28, fontWeight:400 }}>
             Every session is built around your specific financial reality. The goal is not generic advice. It is a personalized strategic framework designed around your situation, your patterns, and your goals.
           </p>
@@ -309,7 +315,7 @@ function TabIntake({ data, update, answeredCount, progressPct, intakeComplete, c
     <div>
       <div style={{ marginBottom:32 }}>
         <div style={{ ...S.eyebrow, marginBottom:10 }}>STRATEGIC INTAKE</div>
-        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Your intake responses shape every element of your personalized strategic framework.</p>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Your responses here shape every element of your personalized strategic framework. Answer based on your current reality, not where you want to be.</p>
       </div>
       <h2 style={{ ...S.h2, marginTop:0, marginBottom:8 }}>Strategic Intake Form</h2>
       <p style={{ color:C.muted, fontSize:14, marginBottom:36, fontFamily:"'DM Sans', sans-serif", fontWeight:300 }}>38 questions across 7 sections. Answer as honestly as you can — accuracy matters more than perfection.</p>
@@ -393,7 +399,7 @@ function TabFramework({ data, update, call1Complete }) {
     <div>
       <div style={{ marginBottom:32 }}>
         <div style={{ ...S.eyebrow, marginBottom:10 }}>YOUR STRATEGIC FRAMEWORK</div>
-        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Your personalized financial framework is built during your strategy session and delivered here.</p>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Your personalized financial framework is built during your strategy session and delivered here. Everything in this section is specific to your situation.</p>
       </div>
       <h2 style={{ ...S.h2, marginTop:0, marginBottom:48 }}>Personalized Strategic Framework</h2>
 
@@ -469,7 +475,7 @@ function TabSessions({ data, update, call1Complete, call2Complete }) {
     <div>
       <div style={{ marginBottom:32 }}>
         <div style={{ ...S.eyebrow, marginBottom:10 }}>YOUR SESSIONS</div>
-        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Two private strategy sessions with Robert. Your pre-session call builds the plan. Your post-session call reviews it.</p>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Two private strategy sessions with Robert. Your pre-session call builds the plan. Your post-session call reviews it together.</p>
       </div>
       <h2 style={{ ...S.h2, marginTop:0, marginBottom:40 }}>Session Booking</h2>
 
@@ -558,7 +564,7 @@ function TabRoadmap({ data, update, call1Complete }) {
     <div>
       <div style={{ marginBottom:32 }}>
         <div style={{ ...S.eyebrow, marginBottom:10 }}>YOUR 90-DAY ROADMAP</div>
-        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>A practical implementation plan built around your specific situation and strategic priorities.</p>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>A practical 90-day implementation plan built around your specific situation and strategic priorities. Unlocks after Session 1.</p>
       </div>
       <h2 style={{ ...S.h2, marginTop:0, marginBottom:40 }}>Custom 90-Day Roadmap</h2>
 
@@ -591,7 +597,7 @@ function TabAdvisory({ data, update, call1Complete }) {
     <div>
       <div style={{ marginBottom:36 }}>
         <div style={{ ...S.eyebrow, marginBottom:10 }}>STRATEGIC ADVISORY</div>
-        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Direct strategic guidance and support from Robert throughout your reset.</p>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Direct strategic observations and priority actions from Robert based on where you are in your reset process.</p>
       </div>
 
       {/* Wide banner image */}
@@ -729,7 +735,7 @@ const S = {
   navBtn:        { background:"none", border:"none", cursor:"pointer", padding:"0 14px", height:60, fontFamily:"'DM Sans', sans-serif", fontSize:13, letterSpacing:0.3, transition:"all 0.15s ease", outline:"none" },
   avatar:        { width:34, height:34, borderRadius:"50%", background:C.navy, display:"flex", alignItems:"center", justifyContent:"center", color:C.gold, fontSize:14, fontFamily:"'Cormorant Garamond', serif", flexShrink:0 },
   content:       { padding:"52px 48px", maxWidth:1100, margin:"0 auto" },
-  h1:            { fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:52, fontWeight:300, color:C.text, margin:0, lineHeight:1.1 },
+  h1:            { fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:"2.5rem", fontWeight:300, color:C.text, margin:0, lineHeight:1.1 },
   h2:            { fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:40, fontWeight:300, color:C.text, margin:0, lineHeight:1.15 },
   sub:           { color:C.muted, fontSize:17, margin:"10px 0 0", fontFamily:"'DM Sans', sans-serif", fontWeight:300 },
   eyebrow:       { color:C.gold, fontSize:11, letterSpacing:4, fontFamily:"'DM Sans', sans-serif" },
