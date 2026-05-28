@@ -958,7 +958,7 @@ export default function ETFMAssessment(){
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"18px 22px",marginBottom:"24px",textAlign:"left"}}>
         <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>Your dashboard access will be delivered to your email within <strong style={{color:C.text}}>24 hours</strong>. Check your inbox, and your spam folder if you don't see it.</p>
       </div>
-      <a href="https://different-cow.super.site"
+      <a href="/portal"
         style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
         Begin Your Reset Experience
       </a>
