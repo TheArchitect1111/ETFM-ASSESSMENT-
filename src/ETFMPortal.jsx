@@ -58,6 +58,8 @@ export default function ETFMPortal() {
           .ep-nav { padding:0 16px!important; }
           .ep-cnt { padding:32px 20px!important; }
           .ep-nac { flex-direction:column!important; align-items:flex-start!important; gap:16px!important; }
+          .ep-rob { grid-template-columns:1fr!important; gap:24px!important; }
+          .ep-orient { padding:28px 24px!important; }
         }
       `;
       document.head.appendChild(el);
@@ -132,28 +134,41 @@ function TabDashboard({ tc, overallPct, firstName, nextMilestone, setActiveTab }
         <p style={S.sub}>Most people spend years reacting financially without ever seeing the full system clearly. This space was built to help you slow down, organize the noise, and begin rebuilding with intention.</p>
       </div>
 
-      <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:16, marginBottom:20 }} className="ep-g4">
+      {/* METRIC TILES */}
+      <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:16, marginBottom:52 }} className="ep-g4">
         <MetricTile label="Overall Progress" value={`${overallPct}%`} />
         <MetricTile label="Current Phase"    value="Phase 1" sub="Awareness" />
         <MetricTile label="Tools Complete"   value={`${tc} of 4`} />
         <MetricTile label="Status"           value={tc === 0 ? "Day 1" : tc === 4 ? "Phase 1 Done" : "Active"} />
       </div>
 
-      <div style={{ marginTop:32, marginBottom:32 }}>
-        <div style={{ ...S.eyebrow, marginBottom:20 }}>THIS WEEK'S FOCUS</div>
-        {[
-          "Awareness comes before change. Start by seeing your current reality clearly.",
-          "Move through each phase intentionally. Every tool builds on the one before it.",
-          "Progress here is not about speed. It is about consistency and structure.",
-          "Small actions repeated consistently create long-term stability and momentum.",
-        ].map((step, i) => (
-          <div key={i} style={{ display:"flex", gap:20, padding:"12px 0", borderBottom: i < 3 ? `1px solid ${C.border}` : "none", alignItems:"flex-start" }}>
-            <span style={{ color:C.gold, fontSize:11, letterSpacing:2, fontFamily:"'DM Sans', sans-serif", flexShrink:0, paddingTop:2, minWidth:28 }}>0{i+1}</span>
-            <span style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.6 }}>{step}</span>
-          </div>
-        ))}
+      {/* ORIENTATION BLOCK */}
+      <div className="ep-orient" style={{ background:C.surface, borderLeft:`3px solid ${C.gold}`, borderRadius:12, padding:"36px 40px", maxWidth:680, margin:"0 auto 64px", boxShadow:"0 4px 28px rgba(0,0,0,0.06)" }}>
+        <p style={{ color:C.text, fontSize:16, fontFamily:"'Cormorant Garamond', Georgia, serif", lineHeight:1.9, margin:0, fontWeight:400, opacity:0.87 }}>
+          For years, you may have felt like you were working hard financially while still carrying stress, uncertainty, or a constant feeling of reaction. That experience is more common than most people realize. This reset was built to create space between pressure and decision-making so you can begin operating with greater awareness, clarity, and control. You do not need to solve everything this week. You simply need to begin seeing the system clearly enough to change your relationship with it over time.
+        </p>
       </div>
 
+      {/* HOW TO MOVE THROUGH THIS RESET */}
+      <div style={{ marginBottom:52 }}>
+        <div style={{ ...S.eyebrow, marginBottom:24 }}>HOW TO MOVE THROUGH THIS RESET</div>
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:16 }} className="ep-g2">
+          {[
+            { num:"01", title:"Awareness before optimization.", desc:"See clearly before trying to fix everything." },
+            { num:"02", title:"Progress over perfection.", desc:"Consistency matters more than intensity." },
+            { num:"03", title:"Structure reduces pressure.", desc:"Systems create stability and clarity." },
+            { num:"04", title:"Small actions create momentum.", desc:"Long-term change is built gradually." },
+          ].map(({ num, title, desc }) => (
+            <div key={num} style={{ background:C.surface, border:`1px solid ${C.border}`, borderRadius:12, padding:"28px 24px", boxShadow:C.shadow }}>
+              <div style={{ fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:44, color:C.gold, lineHeight:1, marginBottom:14, fontWeight:300 }}>{num}</div>
+              <div style={{ fontFamily:"'DM Sans', sans-serif", fontSize:15, color:C.text, fontWeight:500, marginBottom:6, lineHeight:1.4 }}>{title}</div>
+              <div style={{ color:C.muted, fontSize:13, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.6 }}>{desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* NEXT ACTION CARD */}
       <div style={S.nextActionCard} className="ep-nac">
         <div>
           <div style={{ color:C.gold, fontSize:10, letterSpacing:4, marginBottom:10, fontFamily:"'DM Sans', sans-serif" }}>NEXT ACTION</div>
@@ -161,12 +176,29 @@ function TabDashboard({ tc, overallPct, firstName, nextMilestone, setActiveTab }
         </div>
         <button onClick={() => setActiveTab("tools")} style={S.btnGold}>BEGIN NOW</button>
       </div>
+      <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, marginTop:20, marginBottom:0, fontStyle:"italic" }}>Your reset is not about perfection. It is about building a system that finally supports your life instead of constantly reacting to it.</p>
 
-      <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, marginTop:24, marginBottom:0, fontStyle:"italic" }}>Your reset is not about perfection. It is about building a system that finally supports your life instead of constantly reacting to it.</p>
-
-      <div style={{ marginTop:52 }}>
-        <div style={{ ...S.eyebrow, marginBottom:24 }}>YOUR JOURNEY</div>
+      {/* YOUR JOURNEY */}
+      <div style={{ marginTop:68 }}>
+        <div style={{ ...S.eyebrow, marginBottom:36 }}>YOUR JOURNEY</div>
         <PhasePath activeIndex={0} />
+      </div>
+
+      {/* ROBERT BRICKEY GUIDANCE */}
+      <div className="ep-rob" style={{ marginTop:68, background:C.surface, border:`1px solid ${C.border}`, borderTop:`2px solid ${C.gold}`, borderRadius:12, padding:"40px", boxShadow:C.shadow, display:"grid", gridTemplateColumns:"1fr 1fr", gap:48, alignItems:"center" }}>
+        <img
+          src="/robert-brickey.jpg"
+          alt="Robert Brickey"
+          style={{ width:"100%", borderRadius:12, objectFit:"cover", objectPosition:"center top", maxHeight:340, boxShadow:"0 4px 20px rgba(0,0,0,0.09)", display:"block" }}
+          onError={e => { e.target.style.display = "none"; }}
+        />
+        <div>
+          <div style={{ ...S.eyebrow, marginBottom:20 }}>GUIDANCE THROUGH THE RESET</div>
+          <p style={{ color:C.navy, fontSize:16, fontFamily:"'Cormorant Garamond', Georgia, serif", lineHeight:1.9, marginBottom:28, fontWeight:400 }}>
+            This process was built around one belief: most financial stress is the result of operating without a clear system. When you finally see the full picture — without judgment — and begin building structure around it, something shifts. Not just in the numbers, but in how you experience money day to day. That is what this reset is designed to create.
+          </p>
+          <p style={{ color:C.muted, fontSize:14, fontFamily:"'Cormorant Garamond', Georgia, serif", fontStyle:"italic", margin:0 }}>Robert Brickey — Creator, ETFM</p>
+        </div>
       </div>
     </div>
   );
@@ -390,14 +422,15 @@ function TabAdvisory() {
         <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>These observations are designed to help you stay grounded, intentional, and focused as your reset progresses.</p>
       </div>
 
-      <div style={{ display:"flex", alignItems:"center", gap:24, marginBottom:48 }}>
+      {/* Wide banner image */}
+      <div style={{ marginBottom:36 }}>
         <img
           src="/robert-brickey.jpg"
           alt="Robert Brickey"
-          style={{ width:80, height:80, borderRadius:"50%", objectFit:"cover", objectPosition:"center top", border:`3px solid ${C.gold}`, flexShrink:0 }}
+          style={{ width:"100%", maxHeight:320, objectFit:"cover", objectPosition:"center top", borderRadius:12, display:"block", boxShadow:"0 4px 20px rgba(0,0,0,0.08)" }}
           onError={e => { e.target.style.display = "none"; }}
         />
-        <div>
+        <div style={{ paddingTop:20 }}>
           <div style={{ fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:24, color:C.text, marginBottom:4 }}>Robert Brickey</div>
           <div style={{ color:C.muted, fontSize:12, letterSpacing:2, fontFamily:"'DM Sans', sans-serif" }}>FINANCIAL STRATEGIST, ETFM</div>
         </div>
@@ -443,25 +476,32 @@ function MetricTile({ label, value, sub }) {
 }
 
 function PhasePath({ activeIndex }) {
-  const phases = ["Awareness","Stabilization","Control","Positioning","Expansion"];
+  const phases = [
+    { name:"Awareness",     transform:"Visibility"        },
+    { name:"Stabilization", transform:"Organization"      },
+    { name:"Control",       transform:"Consistency"       },
+    { name:"Positioning",   transform:"Direction"         },
+    { name:"Ownership",     transform:"Long-Term Freedom" },
+  ];
   return (
     <div style={{ position:"relative" }}>
-      <div style={{ position:"absolute", top:21, left:"10%", right:"10%", height:1, background:C.border, zIndex:0 }} />
+      <div style={{ position:"absolute", top:27, left:"10%", right:"10%", height:1, background:`linear-gradient(to right, ${C.gold}, rgba(201,168,76,0.15))`, zIndex:0 }} />
       <div style={{ display:"flex", justifyContent:"space-between", position:"relative", zIndex:1 }}>
         {phases.map((phase, i) => (
-          <div key={phase} style={{ textAlign:"center", width:"20%" }}>
+          <div key={phase.name} style={{ textAlign:"center", flex:1, padding:"0 4px" }}>
             <div style={{
-              width:42, height:42, borderRadius:"50%",
-              background: i < activeIndex ? C.gold : i === activeIndex ? C.navy : C.surface,
+              width:54, height:54, borderRadius:"50%",
+              background: i === activeIndex ? C.navy : C.surface,
               border: `2px solid ${i < activeIndex ? C.gold : i === activeIndex ? C.navy : C.border}`,
               display:"flex", alignItems:"center", justifyContent:"center",
-              margin:"0 auto 12px",
-              color: i <= activeIndex ? "#fff" : C.muted,
-              fontSize:14, fontFamily:"'Cormorant Garamond', serif",
-              boxShadow: i === activeIndex ? "0 4px 14px rgba(26,39,68,0.18)" : "none",
+              margin:"0 auto 14px",
+              color: i === activeIndex ? C.gold : C.muted,
+              fontSize:14, fontFamily:"'Cormorant Garamond', serif", fontWeight:500,
+              boxShadow: i === activeIndex ? "0 4px 14px rgba(26,39,68,0.18)" : C.shadow,
             }}>0{i+1}</div>
-            <div style={{ fontSize:12, color: i === activeIndex ? C.text : C.muted, fontFamily:"'DM Sans', sans-serif", fontWeight: i === activeIndex ? 500 : 300 }}>{phase}</div>
-            {i === activeIndex && <div style={{ fontSize:10, color:C.gold, letterSpacing:2, fontFamily:"'DM Sans', sans-serif", marginTop:5 }}>ACTIVE</div>}
+            <div style={{ fontSize:12, color: i === activeIndex ? C.text : C.muted, fontFamily:"'DM Sans', sans-serif", fontWeight: i === activeIndex ? 500 : 300, marginBottom:5, lineHeight:1.3 }}>{phase.name}</div>
+            <div style={{ fontSize:10, color: i === activeIndex ? C.gold : "rgba(107,114,128,0.45)", fontFamily:"'DM Sans', sans-serif", letterSpacing:0.5, lineHeight:1.4 }}>→ {phase.transform}</div>
+            {i === activeIndex && <div style={{ fontSize:10, color:C.gold, letterSpacing:2, fontFamily:"'DM Sans', sans-serif", marginTop:6 }}>ACTIVE</div>}
           </div>
         ))}
       </div>
