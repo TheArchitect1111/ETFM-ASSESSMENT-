@@ -247,9 +247,9 @@ function TabDashboard({ sessionStatus, progressPct, frameworkStatus, supportDays
         <img src="/etfm-logo.png" alt="ETFM" style={{ maxWidth:220, width:"100%", borderRadius:12, boxShadow:"0 4px 16px rgba(0,0,0,0.13)", display:"inline-block", marginBottom:32 }} />
       </div>
 
-      <div style={{ marginBottom:48 }}>
+      <div style={{ marginBottom:48, textAlign:"center" }}>
         <h1 style={S.h1}>WELCOME TO YOUR STRATEGIC RESET</h1>
-        <p style={{ color:C.muted, fontSize:16, lineHeight:1.9, margin:"16px auto 0", maxWidth:680, fontFamily:"'Cormorant Garamond', Georgia, serif", fontWeight:300 }}>This is not coaching. This is strategic architecture designed to help you rebuild your financial operating system with intention and structure. Personal finances have become increasingly complex, not because people lack effort or intelligence, but because most people were never shown how to organize the system beneath the pressure. This strategic partnership was built to change that. Over the next 90 days, you will gain complete visibility into your financial system, close the structural gaps, and build a framework designed around your specific situation.</p>
+        <p style={{ color:C.muted, fontSize:16, lineHeight:1.9, margin:"16px auto 0", maxWidth:680, fontFamily:"'Cormorant Garamond', Georgia, serif", fontWeight:300, textAlign:"center" }}>This is not coaching. This is strategic architecture designed to help you rebuild your financial operating system with intention and structure. Personal finances have become increasingly complex, not because people lack effort or intelligence, but because most people were never shown how to organize the system beneath the pressure. This strategic partnership was built to change that. Over the next 90 days, you will gain complete visibility into your financial system, close the structural gaps, and build a framework designed around your specific situation.</p>
       </div>
 
       {/* METRIC TILES */}
