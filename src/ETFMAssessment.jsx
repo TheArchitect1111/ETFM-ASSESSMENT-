@@ -968,7 +968,7 @@ export default function ETFMAssessment(){
         Your Reset Experience is confirmed.
       </h2>
       <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"32px"}}>
-        Your purchase is complete. You now have access to the ETFM Financial Reset, a guided operating system built to replace the patterns keeping you stuck with structure that actually holds.
+        Your purchase is complete. Your private portal access has been sent to your email so you can enter the Reset Experience from your inbox.
       </p>
       <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"24px"}}>
         <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"20px"}}>The 4 Phases You're About to Work Through</p>
@@ -986,12 +986,8 @@ export default function ETFMAssessment(){
         ))}
       </div>
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"18px 22px",marginBottom:"24px",textAlign:"left"}}>
-        <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>Your dashboard access will be delivered to your email within <strong style={{color:C.text}}>24 hours</strong>. Check your inbox, and your spam folder if you don't see it.</p>
+        <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>Open the welcome email titled <strong style={{color:C.text}}>Your ETFM Reset Experience is ready</strong> and use the portal link inside. Check your spam or promotions folder if you do not see it within a few minutes.</p>
       </div>
-      <a href="/portal"
-        style={{display:"block",width:"100%",padding:"16px",backgroundColor:C.gold,color:C.dark,borderRadius:"6px",fontWeight:"bold",fontSize:"16px",cursor:"pointer",textDecoration:"none",marginBottom:"12px",boxSizing:"border-box",textAlign:"center"}}>
-        Begin Your Reset Experience
-      </a>
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>
     </Wrap>

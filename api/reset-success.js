@@ -59,7 +59,7 @@ function resetWelcomeHtml(firstName = "") {
 
 export default async function handler(req, res) {
   const checkoutSessionId = req.query.checkout_session_id;
-  if (!checkoutSessionId) return res.redirect(302, `${BASE_URL}/portal?resetPaid=missing_session`);
+  if (!checkoutSessionId) return res.redirect(302, `${BASE_URL}/?showReset=true&resetPaid=missing_session`);
 
   try {
     const session = await stripe.checkout.sessions.retrieve(checkoutSessionId);
@@ -99,9 +99,9 @@ export default async function handler(req, res) {
       });
     }
 
-    return res.redirect(302, `${BASE_URL}/portal?resetPaid=true`);
+    return res.redirect(302, `${BASE_URL}/?resetPaid=true`);
   } catch (err) {
     console.error("Reset success handler error:", err);
-    return res.redirect(302, `${BASE_URL}/portal?resetPaid=email_error`);
+    return res.redirect(302, `${BASE_URL}/?showReset=true&resetPaid=email_error`);
   }
 }
