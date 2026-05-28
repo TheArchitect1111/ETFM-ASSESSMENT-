@@ -1,113 +1,120 @@
 import { useState, useEffect } from "react";
 
-const STORAGE_KEY = "etfm_strategic_data";
+const STORAGE_KEY   = "etfm_strategic_data";
 const CALENDLY_PRE  = "https://calendly.com/exit-etfm/etfm-strategic-reset-session";
 const CALENDLY_POST = "https://calendly.com/exit-etfm/etfm-strategic-reset-session";
 
 const loadData = () => {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : {};
-  } catch { return {}; }
+  try { const s = localStorage.getItem(STORAGE_KEY); return s ? JSON.parse(s) : {}; }
+  catch { return {}; }
 };
-const saveData = (data) => {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
+const saveData = (d) => {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); } catch {}
 };
 
 const C = {
-  bg:            "#FAFAF8",
-  surface:       "#FFFFFF",
-  gold:          "#c9a84c",
-  goldSoft:      "rgba(201,168,76,0.07)",
-  goldBorder:    "rgba(201,168,76,0.28)",
-  text:          "#1a1a2e",
-  muted:         "#6b7280",
-  border:        "#e8e4de",
-  shadow:        "0 2px 14px rgba(0,0,0,0.055)",
-  successText:   "#16a34a",
-  successBg:     "#f0fdf4",
-  successBorder: "#bbf7d0",
+  bg:           "#FAF8F4",
+  surface:      "#FFFFFF",
+  gold:         "#c9a84c",
+  navy:         "#1a2744",
+  text:         "#1a1a2e",
+  muted:        "#6b7280",
+  border:       "#ede9e3",
+  shadow:       "0 2px 16px rgba(0,0,0,0.06)",
+  goldSoft:     "rgba(201,168,76,0.08)",
+  successText:  "#16a34a",
+  successBg:    "#f0fdf4",
+  successBorder:"#bbf7d0",
 };
+
+const TABS = [
+  { id:"dashboard", label:"Dashboard" },
+  { id:"intake",    label:"Intake"    },
+  { id:"framework", label:"Framework" },
+  { id:"sessions",  label:"Sessions"  },
+  { id:"roadmap",   label:"Roadmap"   },
+  { id:"advisory",  label:"Advisory"  },
+];
 
 const INTAKE_SECTIONS = [
   {
-    id: "reality", label: "FINANCIAL REALITY", num: "01",
-    desc: "Your current financial picture. Estimates are acceptable.",
-    questions: [
-      { id: "r1", label: "Approximate monthly take-home income", placeholder: "$" },
-      { id: "r2", label: "Total monthly fixed expenses (rent, mortgage, car, insurance)", placeholder: "$" },
-      { id: "r3", label: "Total monthly variable expenses (groceries, dining, subscriptions)", placeholder: "$" },
-      { id: "r4", label: "Total debt outside of a mortgage, if any", placeholder: "None / approximate amount" },
-      { id: "r5", label: "Emergency fund status", placeholder: "None / amount / months of coverage" },
-      { id: "r6", label: "When did you last have a clear, complete picture of your finances?", placeholder: "Month and year" },
+    id:"reality", label:"FINANCIAL REALITY", num:"01",
+    desc:"Your current financial picture. Estimates are acceptable.",
+    questions:[
+      { id:"r1", label:"Approximate monthly take-home income", placeholder:"$" },
+      { id:"r2", label:"Total monthly fixed expenses (rent, mortgage, car, insurance)", placeholder:"$" },
+      { id:"r3", label:"Total monthly variable expenses (groceries, dining, subscriptions)", placeholder:"$" },
+      { id:"r4", label:"Total debt outside of a mortgage, if any", placeholder:"None / approximate amount" },
+      { id:"r5", label:"Emergency fund status", placeholder:"None / amount / months of coverage" },
+      { id:"r6", label:"When did you last have a clear, complete picture of your finances?", placeholder:"Month and year" },
     ]
   },
   {
-    id: "stress", label: "STRESS AND PRESSURE POINTS", num: "02",
-    desc: "Understanding pressure points allows your strategist to address them directly in Session 1.",
-    questions: [
-      { id: "s1", label: "Current financial stress level (1 to 10)", placeholder: "1 = minimal, 10 = overwhelming" },
-      { id: "s2", label: "What is creating the most financial pressure in your life right now?", multiline: true },
-      { id: "s3", label: "What financial problem have you been avoiding or delaying?", multiline: true },
-      { id: "s4", label: "Was there a specific event that contributed to your current situation?", multiline: true, placeholder: "Job loss, divorce, unexpected expense, income change..." },
-      { id: "s5", label: "What does financial stress feel like in your day-to-day life?", multiline: true },
-      { id: "s6", label: "How long have you been carrying this level of financial stress?", placeholder: "Weeks / months / years" },
+    id:"stress", label:"STRESS AND PRESSURE POINTS", num:"02",
+    desc:"Understanding pressure points allows your strategist to address them directly in Session 1.",
+    questions:[
+      { id:"s1", label:"Current financial stress level (1 to 10)", placeholder:"1 = minimal, 10 = overwhelming" },
+      { id:"s2", label:"What is creating the most financial pressure in your life right now?", multiline:true },
+      { id:"s3", label:"What financial problem have you been avoiding or delaying?", multiline:true },
+      { id:"s4", label:"Was there a specific event that contributed to your current situation?", multiline:true, placeholder:"Job loss, divorce, unexpected expense, income change..." },
+      { id:"s5", label:"What does financial stress feel like in your day-to-day life?", multiline:true },
+      { id:"s6", label:"How long have you been carrying this level of financial stress?", placeholder:"Weeks / months / years" },
     ]
   },
   {
-    id: "behavior", label: "SPENDING AND BEHAVIOR", num: "03",
-    desc: "Behavioral patterns are the root of most financial outcomes. Answer honestly.",
-    questions: [
-      { id: "b1", label: "How would you describe your spending?", placeholder: "Intentional / reactive / avoidant / impulsive" },
-      { id: "b2", label: "What is your most costly recurring financial habit?", multiline: true },
-      { id: "b3", label: "Do you currently track your spending? If yes, how?", multiline: true },
-      { id: "b4", label: "What emotional triggers drive your financial decisions?", multiline: true, placeholder: "Stress, boredom, social pressure, fear..." },
-      { id: "b5", label: "Have you created a budget or plan before and abandoned it? What happened?", multiline: true },
+    id:"behavior", label:"SPENDING AND BEHAVIOR", num:"03",
+    desc:"Behavioral patterns are the root of most financial outcomes. Answer honestly.",
+    questions:[
+      { id:"b1", label:"How would you describe your spending?", placeholder:"Intentional / reactive / avoidant / impulsive" },
+      { id:"b2", label:"What is your most costly recurring financial habit?", multiline:true },
+      { id:"b3", label:"Do you currently track your spending? If yes, how?", multiline:true },
+      { id:"b4", label:"What emotional triggers drive your financial decisions?", multiline:true, placeholder:"Stress, boredom, social pressure, fear..." },
+      { id:"b5", label:"Have you created a budget or plan before and abandoned it? What happened?", multiline:true },
     ]
   },
   {
-    id: "income", label: "INCOME AND STABILITY", num: "04",
-    desc: "Income consistency directly affects what financial systems are available to you.",
-    questions: [
-      { id: "i1", label: "Is your income consistent month to month or variable?", placeholder: "Consistent / variable / seasonal" },
-      { id: "i2", label: "Do you have more than one income source?", placeholder: "Yes / No / Describe" },
-      { id: "i3", label: "What is your biggest income-related concern right now?", multiline: true },
-      { id: "i4", label: "Have you experienced a significant income change in the last 12 months?", multiline: true },
-      { id: "i5", label: "What would a 20% increase in monthly income change about your situation?", multiline: true },
+    id:"income", label:"INCOME AND STABILITY", num:"04",
+    desc:"Income consistency directly affects what financial systems are available to you.",
+    questions:[
+      { id:"i1", label:"Is your income consistent month to month or variable?", placeholder:"Consistent / variable / seasonal" },
+      { id:"i2", label:"Do you have more than one income source?", placeholder:"Yes / No / Describe" },
+      { id:"i3", label:"What is your biggest income-related concern right now?", multiline:true },
+      { id:"i4", label:"Have you experienced a significant income change in the last 12 months?", multiline:true },
+      { id:"i5", label:"What would a 20% increase in monthly income change about your situation?", multiline:true },
     ]
   },
   {
-    id: "goals", label: "GOALS AND PRIORITIES", num: "05",
-    desc: "Your goals inform the entire structure of your Strategic Reset.",
-    questions: [
-      { id: "g1", label: "What does financial freedom mean to you specifically?", multiline: true },
-      { id: "g2", label: "Most important financial goal in the next 12 months", multiline: true },
-      { id: "g3", label: "What financial outcome would create the most immediate relief?", multiline: true },
-      { id: "g4", label: "What does a financially stable life look like for you in 3 to 5 years?", multiline: true },
-      { id: "g5", label: "What financial milestone have you been unable to reach, and what has stopped you?", multiline: true },
-      { id: "g6", label: "What would you do differently if you had complete financial clarity?", multiline: true },
+    id:"goals", label:"GOALS AND PRIORITIES", num:"05",
+    desc:"Your goals inform the entire structure of your Strategic Reset.",
+    questions:[
+      { id:"g1", label:"What does financial freedom mean to you specifically?", multiline:true },
+      { id:"g2", label:"Most important financial goal in the next 12 months", multiline:true },
+      { id:"g3", label:"What financial outcome would create the most immediate relief?", multiline:true },
+      { id:"g4", label:"What does a financially stable life look like for you in 3 to 5 years?", multiline:true },
+      { id:"g5", label:"What financial milestone have you been unable to reach, and what has stopped you?", multiline:true },
+      { id:"g6", label:"What would you do differently if you had complete financial clarity?", multiline:true },
     ]
   },
   {
-    id: "systems", label: "SYSTEMS AND STRUCTURE", num: "06",
-    desc: "Understanding what you already have helps identify the specific gaps to close.",
-    questions: [
-      { id: "sy1", label: "Do you have any financial systems currently in place?", multiline: true, placeholder: "Automatic savings, bill tracking, budget, investment accounts..." },
-      { id: "sy2", label: "How do you currently manage bills and due dates?", multiline: true },
-      { id: "sy3", label: "Do you have a savings plan? If yes, describe it.", multiline: true },
-      { id: "sy4", label: "How do you typically make financial decisions?", placeholder: "Planned / reactive / intuitive / emotional" },
-      { id: "sy5", label: "What financial system, if it existed, would make the biggest difference right now?", multiline: true },
+    id:"systems", label:"SYSTEMS AND STRUCTURE", num:"06",
+    desc:"Understanding what you already have helps identify the specific gaps to close.",
+    questions:[
+      { id:"sy1", label:"Do you have any financial systems currently in place?", multiline:true, placeholder:"Automatic savings, bill tracking, budget, investment accounts..." },
+      { id:"sy2", label:"How do you currently manage bills and due dates?", multiline:true },
+      { id:"sy3", label:"Do you have a savings plan? If yes, describe it.", multiline:true },
+      { id:"sy4", label:"How do you typically make financial decisions?", placeholder:"Planned / reactive / intuitive / emotional" },
+      { id:"sy5", label:"What financial system, if it existed, would make the biggest difference right now?", multiline:true },
     ]
   },
   {
-    id: "context", label: "PARTNERSHIP CONTEXT", num: "07",
-    desc: "These final questions help your strategist prepare specifically for Session 1.",
-    questions: [
-      { id: "c1", label: "What made you decide to invest in the Strategic Reset Partnership?", multiline: true },
-      { id: "c2", label: "What do you most want to walk away from these sessions with?", multiline: true },
-      { id: "c3", label: "What have you tried before that has not worked?", multiline: true },
-      { id: "c4", label: "What is your biggest concern about this process?", multiline: true },
-      { id: "c5", label: "Is there anything important about your financial situation you have not yet shared?", multiline: true },
+    id:"context", label:"PARTNERSHIP CONTEXT", num:"07",
+    desc:"These final questions help your strategist prepare specifically for Session 1.",
+    questions:[
+      { id:"c1", label:"What made you decide to invest in the Strategic Reset Partnership?", multiline:true },
+      { id:"c2", label:"What do you most want to walk away from these sessions with?", multiline:true },
+      { id:"c3", label:"What have you tried before that has not worked?", multiline:true },
+      { id:"c4", label:"What is your biggest concern about this process?", multiline:true },
+      { id:"c5", label:"Is there anything important about your financial situation you have not yet shared?", multiline:true },
     ]
   },
 ];
@@ -116,48 +123,63 @@ const ALL_IDS = INTAKE_SECTIONS.flatMap(s => s.questions.map(q => q.id));
 const TOTAL_Q  = ALL_IDS.length;
 
 export default function ETFMStrategic() {
-  const [data, setData]               = useState(loadData);
-  const [saved, setSaved]             = useState(false);
-  const [activeIntake, setActiveIntake] = useState(null);
+  const [data, setData]         = useState(loadData);
+  const [saved, setSaved]       = useState(false);
+  const [activeTab, setActiveTab] = useState("dashboard");
 
   useEffect(() => {
-    if (!document.getElementById("etfm-strategic-fonts")) {
+    if (!document.getElementById("es-fonts")) {
       const link = document.createElement("link");
-      link.id   = "etfm-strategic-fonts";
-      link.rel  = "stylesheet";
+      link.id = "es-fonts"; link.rel = "stylesheet";
       link.href = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap";
       document.head.appendChild(link);
     }
-    if (!document.getElementById("etfm-strategic-anim")) {
-      const style = document.createElement("style");
-      style.id = "etfm-strategic-anim";
-      style.textContent = `
-        @keyframes stFadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
-        .st-fade { animation: stFadeUp 0.6s ease both; }
-        a.st-nav-link { color: #6b7280; text-decoration: none; font-family: 'DM Sans', sans-serif; font-size: 13px; letter-spacing: 0.5px; padding: 6px 0; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
-        a.st-nav-link:hover { color: #1a1a2e; border-bottom-color: #c9a84c; }
+    if (!document.getElementById("es-css")) {
+      const el = document.createElement("style");
+      el.id = "es-css";
+      el.textContent = `
+        @keyframes esIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+        .es-fade { animation: esIn 0.22s ease both; }
+        *,*::before,*::after { box-sizing:border-box; }
+        @media(max-width:768px){
+          .es-g2  { grid-template-columns:1fr!important; }
+          .es-g3  { grid-template-columns:1fr!important; }
+          .es-g4  { grid-template-columns:1fr 1fr!important; }
+          .es-mat { grid-template-columns:1fr 1fr!important; }
+          .es-nav { padding:0 16px!important; }
+          .es-cnt { padding:32px 20px!important; }
+          .es-nac { flex-direction:column!important; align-items:flex-start!important; gap:16px!important; }
+          .es-rob { grid-template-columns:1fr!important; gap:24px!important; }
+        }
       `;
-      document.head.appendChild(style);
+      document.head.appendChild(el);
     }
   }, []);
 
-  const update = (key, value) => {
-    const next = { ...data, [key]: value };
-    setData(next);
-    saveData(next);
+  const update = (key, val) => {
+    const next = { ...data, [key]: val };
+    setData(next); saveData(next);
     setSaved(true);
     setTimeout(() => setSaved(false), 1500);
   };
 
-  const answeredCount  = ALL_IDS.filter(id => (data[id] || "").trim()).length;
-  const progressPct    = Math.round((answeredCount / TOTAL_Q) * 100);
-  const intakeComplete = data.intake_submitted;
-  const call1Complete  = data.call1_complete;
-  const call2Complete  = data.call2_complete;
-
-  const currentPhase   = call2Complete ? "Phase 3: Framework" : call1Complete ? "Phase 2: Sessions" : "Phase 1: Intake";
-  const sessionStatus  = call2Complete ? "Both sessions complete" : call1Complete ? "Session 1 complete" : "Not yet started";
+  const answeredCount   = ALL_IDS.filter(id => (data[id] || "").trim()).length;
+  const progressPct     = Math.round((answeredCount / TOTAL_Q) * 100);
+  const intakeComplete  = data.intake_submitted;
+  const call1Complete   = data.call1_complete;
+  const call2Complete   = data.call2_complete;
   const frameworkStatus = call1Complete ? "Unlocked" : "Locked";
+  const sessionStatus   = call2Complete ? "Both complete" : call1Complete ? "Session 1 done" : "Not started";
+
+  const supportDaysRemaining = (() => {
+    if (!data.support_start) return "Not started";
+    const start = new Date(data.support_start);
+    if (isNaN(start)) return "Not started";
+    const end = new Date(start.getTime() + 60 * 24 * 60 * 60 * 1000);
+    const diff = Math.ceil((end - new Date()) / (1000 * 60 * 60 * 24));
+    return diff > 0 ? `${diff} days` : "Complete";
+  })();
+
   const nextAction = call2Complete
     ? "Review your Strategic Framework and 90-Day Roadmap"
     : call1Complete
@@ -166,377 +188,479 @@ export default function ETFMStrategic() {
         ? "Book and complete Session 1"
         : progressPct === 100
           ? "Submit your Intake Form"
-          : "Complete your Strategic Intake Form below.";
+          : "Complete your Strategic Intake Form.";
+
+  const nextTabAction = call2Complete ? "framework" : call1Complete ? "sessions" : intakeComplete ? "sessions" : "intake";
 
   const processSteps = [
-    { label: "Complete the Strategic Intake Form",          done: !!intakeComplete },
-    { label: "Book and attend Session 1",                   done: !!call1Complete },
-    { label: "Receive your Matrix Score and Analysis",      done: !!(call1Complete && data.structural_analysis) },
-    { label: "Receive your Strategic Framework",            done: !!(call1Complete && data.fw_priority) },
-    { label: "Book and attend Session 2",                   done: !!call2Complete },
-    { label: "Begin your 60-Day Priority Email Support",    done: !!data.support_start },
+    { label:"Complete the Strategic Intake Form",       done:!!intakeComplete },
+    { label:"Book and attend Session 1",                done:!!call1Complete },
+    { label:"Receive your Matrix Score and Analysis",   done:!!(call1Complete && data.structural_analysis) },
+    { label:"Receive your Strategic Framework",         done:!!(call1Complete && data.fw_priority) },
+    { label:"Book and attend Session 2",                done:!!call2Complete },
+    { label:"Begin your 60-Day Priority Email Support", done:!!data.support_start },
   ];
 
   return (
-    <div style={S.page}>
+    <div style={{ fontFamily:"'DM Sans', Inter, sans-serif", background:C.bg, minHeight:"100vh", color:C.text }}>
 
-      {/* FIXED NAV */}
-      <nav style={S.nav}>
-        <div style={{ display:"flex", alignItems:"center", gap:36 }}>
-          <div>
-            <div style={S.logo}>ETFM</div>
-            <div style={S.logoSub}>ESCAPE THE FINANCIAL MATRIX</div>
-          </div>
-          <div style={S.navLinks}>
-            {[["Intake","#section1"],["Sessions","#section2"],["Framework","#section4"],["Roadmap","#section6"],["Notes","#section7"],["Support","#section8"]].map(([label, href]) => (
-              <a key={href} href={href} className="st-nav-link">{label}</a>
-            ))}
-          </div>
+      {/* NAV */}
+      <nav style={S.nav} className="es-nav">
+        <div style={{ fontFamily:"'Cormorant Garamond', Georgia, serif", color:C.gold, fontSize:20, letterSpacing:6 }}>ETFM</div>
+        <div style={{ display:"flex", alignItems:"center" }}>
+          {TABS.map(tab => (
+            <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
+              ...S.navBtn,
+              color:       activeTab === tab.id ? C.navy : C.muted,
+              fontWeight:  activeTab === tab.id ? 500 : 400,
+              borderBottom:`2px solid ${activeTab === tab.id ? C.gold : "transparent"}`,
+            }}>{tab.label}</button>
+          ))}
         </div>
-        <div style={{ textAlign:"right" }}>
-          <div style={{ color:C.text, fontSize:13, fontFamily:"'DM Sans', sans-serif" }}>Strategic Reset Partnership</div>
-          <div style={{ color:C.gold, fontSize:11, letterSpacing:2, marginTop:2, fontFamily:"'DM Sans', sans-serif" }}>PRIVATE CLIENT DASHBOARD</div>
+        <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+          {saved && <span style={{ color:C.gold, fontSize:10, letterSpacing:3 }}>SAVED</span>}
+          <div style={S.avatar}>R</div>
         </div>
       </nav>
 
-      {saved && <div style={S.saveToast}>SAVED</div>}
-
-      {/* HERO */}
-      <section style={S.hero} className="st-fade">
-        <p style={S.eyebrow}>YOUR STRATEGIC RESET PARTNERSHIP</p>
-        <h1 style={S.heroTitle}>Private Client<br />Strategic Dashboard</h1>
-        <p style={S.heroSub}>A private, one-on-one strategic engagement built entirely around your specific financial situation, behaviors, and goals.</p>
-      </section>
-
-      {/* STATUS */}
-      <section style={S.section}>
-        <SectionLabel>YOUR RESET STATUS</SectionLabel>
-        <div style={S.statusGrid}>
-          {[
-            { label:"CURRENT PHASE",    val: currentPhase },
-            { label:"SESSION STATUS",   val: sessionStatus },
-            { label:"FRAMEWORK STATUS", val: frameworkStatus },
-            { label:"INTAKE PROGRESS",  val: `${progressPct}%` },
-          ].map(({ label, val }) => (
-            <div key={label} style={S.statusTile}>
-              <div style={S.tileLabel}>{label}</div>
-              <div style={S.tileVal}>{val}</div>
-            </div>
-          ))}
+      {/* CONTENT */}
+      <main style={{ paddingTop:60 }}>
+        <div key={activeTab} className="es-fade es-cnt" style={S.content}>
+          {activeTab === "dashboard" && <TabDashboard sessionStatus={sessionStatus} progressPct={progressPct} frameworkStatus={frameworkStatus} supportDaysRemaining={supportDaysRemaining} nextAction={nextAction} nextTabAction={nextTabAction} setActiveTab={setActiveTab} processSteps={processSteps} intakeComplete={intakeComplete} call1Complete={call1Complete} />}
+          {activeTab === "intake"    && <TabIntake data={data} update={update} answeredCount={answeredCount} progressPct={progressPct} intakeComplete={intakeComplete} call1Complete={call1Complete} />}
+          {activeTab === "framework" && <TabFramework data={data} update={update} call1Complete={call1Complete} />}
+          {activeTab === "sessions"  && <TabSessions data={data} update={update} call1Complete={call1Complete} call2Complete={call2Complete} />}
+          {activeTab === "roadmap"   && <TabRoadmap data={data} update={update} call1Complete={call1Complete} />}
+          {activeTab === "advisory"  && <TabAdvisory data={data} update={update} call1Complete={call1Complete} />}
         </div>
-        <div style={S.nextActionBar}>
-          <span style={S.eyebrow}>NEXT ACTION</span>
-          <span style={{ color:C.text, fontSize:14, fontFamily:"'DM Sans', sans-serif" }}>{nextAction}</span>
-        </div>
-      </section>
-
-      {/* PROCESS */}
-      <section style={S.section}>
-        <SectionLabel>YOUR RESET PROCESS</SectionLabel>
-        <div style={S.processGrid}>
-          {processSteps.map((step, i) => (
-            <div key={i} style={{ ...S.processStep, ...(step.done ? S.processStepDone : {}) }}>
-              <span style={{ ...S.processNum, ...(step.done ? { color:C.successText } : {}) }}>0{i+1}</span>
-              <span style={{ color: step.done ? C.successText : C.text, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight: step.done ? 400 : 300 }}>{step.label}</span>
-              {step.done && <span style={S.checkmark}>&#10003;</span>}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SECTION 1: INTAKE */}
-      <section id="section1" style={S.section}>
-        <SectionLabel>01 · STRATEGIC INTAKE FORM</SectionLabel>
-        <p style={S.sectionNote}>38 questions across 7 sections. Your answers are reviewed by Robert before Session 1. Answer as honestly as you can — accuracy matters more than perfection.</p>
-
-        <div style={S.progressWrap}>
-          <div style={{ display:"flex", justifyContent:"space-between", marginBottom:10 }}>
-            <span style={S.eyebrow}>COMPLETION</span>
-            <span style={{ color:C.muted, fontSize:12, fontFamily:"'DM Sans', sans-serif" }}>{answeredCount} of {TOTAL_Q} answered</span>
-          </div>
-          <div style={S.progressTrack}>
-            <div style={{ ...S.progressFill, width:`${progressPct}%` }} />
-          </div>
-          <div style={{ textAlign:"right", marginTop:6, color:C.gold, fontSize:13, fontFamily:"'Cormorant Garamond', Georgia, serif" }}>{progressPct}%</div>
-        </div>
-
-        {INTAKE_SECTIONS.map(sec => {
-          const open     = activeIntake === sec.id;
-          const secDone  = sec.questions.filter(q => (data[q.id] || "").trim()).length;
-          const complete = secDone === sec.questions.length;
-          return (
-            <div key={sec.id} style={{ ...S.intakeSec, ...(open ? S.intakeSecOpen : {}) }}>
-              <button style={S.intakeHeader} onClick={() => setActiveIntake(open ? null : sec.id)}>
-                <div style={{ display:"flex", alignItems:"center", gap:16 }}>
-                  <span style={{ ...S.intakeNum, ...(complete ? { color:C.successText } : {}) }}>{sec.num}</span>
-                  <div style={{ textAlign:"left" }}>
-                    <div style={{ color:C.text, fontSize:13, letterSpacing:1.5, fontFamily:"'DM Sans', sans-serif" }}>{sec.label}</div>
-                    <div style={{ color:C.muted, fontSize:12, marginTop:2, fontFamily:"'DM Sans', sans-serif" }}>{secDone} / {sec.questions.length} answered</div>
-                  </div>
-                </div>
-                <div style={{ display:"flex", alignItems:"center", gap:12 }}>
-                  {complete && <span style={S.checkBadge}>&#10003;</span>}
-                  <span style={{ color:C.muted, fontSize:11 }}>{open ? "▲" : "▼"}</span>
-                </div>
-              </button>
-              {open && (
-                <div style={S.intakeBody}>
-                  <p style={{ color:C.muted, fontSize:13, lineHeight:1.7, marginBottom:20, fontStyle:"italic", fontFamily:"'Cormorant Garamond', Georgia, serif" }}>{sec.desc}</p>
-                  {sec.questions.map(q => (
-                    <div key={q.id} style={{ marginBottom:18 }}>
-                      <label style={S.fieldLabel}>{q.label}</label>
-                      {q.multiline
-                        ? <textarea value={data[q.id] || ""} onChange={e => update(q.id, e.target.value)} placeholder={q.placeholder || ""} rows={3} style={S.textarea} />
-                        : <input   value={data[q.id] || ""} onChange={e => update(q.id, e.target.value)} placeholder={q.placeholder || ""} style={S.input} />
-                      }
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-        })}
-
-        {progressPct === 100 && !intakeComplete && (
-          <button style={{ ...S.btnPrimary, marginTop:20, width:"100%", display:"block" }} onClick={() => update("intake_submitted", true)}>
-            SUBMIT INTAKE FORM
-          </button>
-        )}
-        {intakeComplete && (
-          <div style={S.submittedBadge}>&#10003; Intake form submitted. Robert will review your responses before Session 1.</div>
-        )}
-
-        {intakeComplete && (
-          <div style={{ ...S.card, marginTop:20, borderTop:`2px solid ${C.gold}` }}>
-            <div style={S.eyebrow}>SESSION 1 STATUS</div>
-            <p style={{ color:C.muted, fontSize:14, lineHeight:1.7, margin:"12px 0 16px", fontFamily:"'DM Sans', sans-serif" }}>
-              Once Session 1 is complete, mark it below to unlock your personalized materials.
-            </p>
-            {call1Complete
-              ? <div style={S.submittedBadge}>&#10003; Session 1 complete. Your personalized materials are now unlocked.</div>
-              : <button style={S.btnSecondary} onClick={() => update("call1_complete", true)}>MARK SESSION 1 COMPLETE</button>
-            }
-          </div>
-        )}
-      </section>
-
-      {/* SECTION 2: SESSIONS */}
-      <section id="section2" style={S.section}>
-        <SectionLabel>02 · SESSION BOOKING</SectionLabel>
-        <p style={S.sectionNote}>Two private 30-minute strategy calls. Book Session 1 after completing your intake. Session 2 follows after your framework is delivered.</p>
-        <div style={S.bookingGrid}>
-
-          <div style={{ ...S.card, borderTop:`2px solid ${C.gold}` }}>
-            <div style={S.eyebrow}>SESSION 1 OF 2</div>
-            <h3 style={S.cardTitle}>Strategic Reality Session</h3>
-            <p style={S.cardDesc}>Reviews your intake, identifies high-leverage pressure points, and begins building your Strategic Framework.</p>
-            <div style={S.metaRow}><span style={S.metaLabel}>DURATION</span><span style={S.metaVal}>30 minutes</span></div>
-            <div style={S.metaRow}><span style={S.metaLabel}>FORMAT</span><span style={S.metaVal}>Private video call</span></div>
-            <div style={S.metaRow}><span style={S.metaLabel}>REQUIRES</span><span style={S.metaVal}>Intake form completed</span></div>
-            <div style={{ marginTop:20 }}>
-              {call1Complete
-                ? <div style={S.submittedBadge}>&#10003; Session 1 complete</div>
-                : <a href={CALENDLY_PRE} target="_blank" rel="noopener noreferrer" style={{ ...S.btnPrimary, display:"block", textAlign:"center", textDecoration:"none" }}>BOOK SESSION 1</a>
-              }
-            </div>
-          </div>
-
-          <div style={{ ...S.card, borderTop:`2px solid ${C.border}`, opacity: call1Complete ? 1 : 0.55 }}>
-            <div style={S.eyebrow}>SESSION 2 OF 2</div>
-            <h3 style={S.cardTitle}>Strategic Implementation Session</h3>
-            <p style={S.cardDesc}>Reviews your 90-Day Roadmap, confirms your Decision Rules, and closes with your complete Strategic Operating Framework.</p>
-            <div style={S.metaRow}><span style={S.metaLabel}>DURATION</span><span style={S.metaVal}>30 minutes</span></div>
-            <div style={S.metaRow}><span style={S.metaLabel}>FORMAT</span><span style={S.metaVal}>Private video call</span></div>
-            <div style={S.metaRow}><span style={S.metaLabel}>REQUIRES</span><span style={S.metaVal}>Session 1 complete</span></div>
-            <div style={{ marginTop:20 }}>
-              {call2Complete
-                ? <div style={S.submittedBadge}>&#10003; Session 2 complete</div>
-                : call1Complete
-                  ? <a href={CALENDLY_POST} target="_blank" rel="noopener noreferrer" style={{ ...S.btnPrimary, display:"block", textAlign:"center", textDecoration:"none" }}>BOOK SESSION 2</a>
-                  : <div style={S.lockedBtn}>UNLOCKS AFTER SESSION 1</div>
-              }
-            </div>
-          </div>
-
-        </div>
-        {call1Complete && !call2Complete && (
-          <button style={{ ...S.btnSecondary, marginTop:14 }} onClick={() => update("call2_complete", true)}>MARK SESSION 2 COMPLETE</button>
-        )}
-        {call2Complete && <div style={{ ...S.submittedBadge, marginTop:14 }}>&#10003; Both sessions complete</div>}
-      </section>
-
-      {/* SECTION 3: MATRIX SCORE */}
-      <section id="section3" style={S.section}>
-        <SectionLabel>03 · MATRIX SCORE AND STRUCTURAL ANALYSIS</SectionLabel>
-        <p style={S.sectionNote}>Your behavioral and financial analysis, prepared personally by Robert after Session 1.</p>
-        <LockedSection unlocked={call1Complete} message="Unlocks after Session 1.">
-          <div style={S.matrixGrid}>
-            {[
-              { key:"sc_awareness",  name:"Awareness",           desc:"How clearly you see where your money goes." },
-              { key:"sc_pattern",    name:"Money Pattern",       desc:"How consistently you manage income and expenses." },
-              { key:"sc_stress",     name:"Stress Response",     desc:"How you respond when financial pressure builds." },
-              { key:"sc_structure",  name:"Financial Structure", desc:"The systems and habits you have in place." },
-              { key:"sc_readiness",  name:"System Readiness",    desc:"Your ability to build and follow a financial plan." },
-            ].map(comp => (
-              <div key={comp.key} style={S.matrixCard}>
-                <div style={{ color:C.gold, fontSize:11, letterSpacing:2, marginBottom:4, fontFamily:"'DM Sans', sans-serif" }}>{comp.name}</div>
-                <div style={{ color:C.muted, fontSize:12, lineHeight:1.5, marginBottom:10, fontFamily:"'DM Sans', sans-serif", fontWeight:300 }}>{comp.desc}</div>
-                <PersonalizedField label={comp.name} id={comp.key} data={data} update={update} unlocked={call1Complete} singleLine displayAs="score" />
-              </div>
-            ))}
-          </div>
-          <PersonalizedField label="STRUCTURAL ANALYSIS" id="structural_analysis" data={data} update={update} unlocked={call1Complete} rows={6} pendingText="Your structural analysis will appear here after Session 1." />
-        </LockedSection>
-      </section>
-
-      {/* SECTION 4: STRATEGIC FRAMEWORK */}
-      <section id="section4" style={S.section}>
-        <SectionLabel>04 · PERSONALIZED STRATEGIC FRAMEWORK</SectionLabel>
-        <p style={S.sectionNote}>Your custom financial operating system, built around your intake responses and strategy session.</p>
-        <LockedSection unlocked={call1Complete} message="Unlocks after Session 1.">
-          <div style={S.frameworkGrid}>
-            {[
-              { id:"fw_priority",  label:"PRIMARY STRATEGIC PRIORITY",   pendingText:"The single most important financial move for you right now." },
-              { id:"fw_structure", label:"STRUCTURAL FOUNDATION",         pendingText:"The core structure your finances will be built on." },
-              { id:"fw_behavior",  label:"BEHAVIORAL PROTOCOL",           pendingText:"Specific behavioral guidelines based on your money patterns." },
-              { id:"fw_income",    label:"INCOME AND STABILITY STRATEGY", pendingText:"A plan for protecting or stabilizing your income." },
-              { id:"fw_debt",      label:"DEBT AND OBLIGATION FRAMEWORK", pendingText:"A clear strategy for handling existing debt and obligations." },
-              { id:"fw_build",     label:"WEALTH BUILDING PATHWAY",       pendingText:"The long-term path forward based on your timeline and goals." },
-            ].map(f => (
-              <div key={f.id} style={S.card}>
-                <PersonalizedField label={f.label} id={f.id} data={data} update={update} unlocked={call1Complete} rows={4} pendingText={f.pendingText} />
-              </div>
-            ))}
-          </div>
-        </LockedSection>
-      </section>
-
-      {/* SECTION 5: DECISION RULES */}
-      <section id="section5" style={S.section}>
-        <SectionLabel>05 · DECISION RULES AND FINANCIAL POLICY</SectionLabel>
-        <p style={S.sectionNote}>Your personal spending, saving, and debt policies — designed to reduce emotional decisions and replace reactive habits with structure.</p>
-        <LockedSection unlocked={call1Complete} message="Unlocks after Session 1.">
-          {[
-            { id:"rule_spending",  label:"SPENDING RULE",       pendingText:"Your personal discretionary spending guideline." },
-            { id:"rule_saving",    label:"SAVING RULE",          pendingText:"The saving rate or method that works for your situation." },
-            { id:"rule_debt",      label:"DEBT RULE",            pendingText:"How you will handle debt repayment — which debts, in what order." },
-            { id:"rule_income",    label:"INCOME RULE",          pendingText:"How you treat and allocate income when it arrives." },
-            { id:"rule_emergency", label:"EMERGENCY FUND RULE",  pendingText:"Your target emergency fund amount and the plan to build it." },
-            { id:"rule_invest",    label:"INVESTMENT RULE",      pendingText:"" },
-          ].map(r => (
-            <div key={r.id} style={{ ...S.card, marginBottom:8 }}>
-              <PersonalizedField label={r.label} id={r.id} data={data} update={update} unlocked={call1Complete} rows={2} pendingText={r.pendingText} />
-            </div>
-          ))}
-          <div style={{ ...S.card, marginTop:8 }}>
-            <PersonalizedField label="ADDITIONAL FINANCIAL POLICIES" id="rule_additional" data={data} update={update} unlocked={call1Complete} rows={4} />
-          </div>
-        </LockedSection>
-      </section>
-
-      {/* SECTION 6: ROADMAP */}
-      <section id="section6" style={S.section}>
-        <SectionLabel>06 · CUSTOM 90-DAY ROADMAP</SectionLabel>
-        <p style={S.sectionNote}>A phased implementation plan built around your situation and priorities. Three phases, each building on the last.</p>
-        <LockedSection unlocked={call1Complete} message="Unlocks after Session 1.">
-          {[
-            { id:"road_30", label:"DAYS 1–30: FOUNDATION",    sub:"Stabilization and structure",      pendingText:"The first 30 days focus on stopping financial leaks and installing structure." },
-            { id:"road_60", label:"DAYS 31–60: MOMENTUM",     sub:"Consistency and reinforcement",    pendingText:"The middle phase reinforces new behaviors and builds confidence in your system." },
-            { id:"road_90", label:"DAYS 61–90: POSITIONING",  sub:"Advancement and future alignment", pendingText:"The final phase moves from stability toward growth." },
-          ].map(phase => (
-            <div key={phase.id} style={{ ...S.card, marginBottom:10 }}>
-              <div style={{ display:"flex", alignItems:"baseline", gap:16, marginBottom:14 }}>
-                <div style={{ color:C.gold, fontSize:12, letterSpacing:2, fontFamily:"'DM Sans', sans-serif" }}>{phase.label}</div>
-                <div style={{ color:C.muted, fontSize:12, fontStyle:"italic", fontFamily:"'DM Sans', sans-serif" }}>{phase.sub}</div>
-              </div>
-              <PersonalizedField label={phase.label} id={phase.id} data={data} update={update} unlocked={call1Complete} rows={5} hideLabel pendingText={phase.pendingText} />
-            </div>
-          ))}
-          <div style={{ ...S.card, borderLeft:`2px solid ${C.gold}` }}>
-            <PersonalizedField label="90-DAY TARGET OUTCOME" id="road_outcome" data={data} update={update} unlocked={call1Complete} rows={3} pendingText="Your specific, measurable result agreed upon by you and Robert." />
-          </div>
-        </LockedSection>
-      </section>
-
-      {/* SECTION 7: SESSION NOTES */}
-      <section id="section7" style={S.section}>
-        <SectionLabel>07 · SESSION NOTES</SectionLabel>
-        <p style={S.sectionNote}>Detailed notes from each session, posted here after each call.</p>
-        <LockedSection unlocked={call1Complete} message="Unlocks after Session 1.">
-          <div style={S.bookingGrid}>
-            <div style={S.card}>
-              <div style={S.eyebrow}>SESSION 1 NOTES</div>
-              {data.session1_date && <div style={{ color:C.muted, fontSize:13, fontStyle:"italic", fontFamily:"'Cormorant Garamond', Georgia, serif", margin:"8px 0 14px" }}>{data.session1_date}</div>}
-              <PersonalizedField label="SESSION 1 NOTES" id="session1_notes" data={data} update={update} unlocked={call1Complete} rows={8} hideLabel />
-              <div style={{ marginTop:14 }}>
-                <label style={S.fieldLabel}>SESSION DATE</label>
-                <input value={data.session1_date || ""} onChange={e => update("session1_date", e.target.value)} placeholder="MM/DD/YYYY" style={S.input} />
-              </div>
-            </div>
-            <div style={{ ...S.card, opacity: call2Complete ? 1 : 0.55 }}>
-              <div style={S.eyebrow}>SESSION 2 NOTES</div>
-              {data.session2_date && <div style={{ color:C.muted, fontSize:13, fontStyle:"italic", fontFamily:"'Cormorant Garamond', Georgia, serif", margin:"8px 0 14px" }}>{data.session2_date}</div>}
-              <PersonalizedField label="SESSION 2 NOTES" id="session2_notes" data={data} update={update} unlocked={!!call2Complete} rows={8} hideLabel />
-              <div style={{ marginTop:14 }}>
-                <label style={S.fieldLabel}>SESSION DATE</label>
-                <input value={data.session2_date || ""} onChange={e => update("session2_date", e.target.value)} placeholder="MM/DD/YYYY" style={S.input} />
-              </div>
-            </div>
-          </div>
-          <div style={{ ...S.card, marginTop:10 }}>
-            <PersonalizedField label="KEY DELIVERABLES AND ACTION COMMITMENTS" id="deliverables" data={data} update={update} unlocked={call1Complete} rows={4} />
-          </div>
-        </LockedSection>
-      </section>
-
-      {/* SECTION 8: SUPPORT */}
-      <section id="section8" style={{ ...S.section, paddingBottom:80 }}>
-        <SectionLabel>08 · 60-DAY PRIORITY EMAIL SUPPORT</SectionLabel>
-        <p style={S.sectionNote}>Direct email access for questions, implementation guidance, and accountability for 60 days after your framework is delivered.</p>
-        <LockedSection unlocked={call1Complete} message="Unlocks after Session 1.">
-          <div style={S.card}>
-            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline", borderBottom:`1px solid ${C.border}`, paddingBottom:16, marginBottom:16 }}>
-              <div style={{ color:C.gold, fontSize:12, letterSpacing:2, fontFamily:"'DM Sans', sans-serif" }}>PRIORITY EMAIL SUPPORT</div>
-              <div style={{ color:C.muted, fontSize:13, fontStyle:"italic", fontFamily:"'Cormorant Garamond', Georgia, serif" }}>
-                {data.support_start ? `Started: ${data.support_start}` : "Begins after Session 2"}
-              </div>
-            </div>
-            <p style={{ color:C.muted, fontSize:14, lineHeight:1.8, marginBottom:20, fontFamily:"'DM Sans', sans-serif", fontWeight:300 }}>
-              Use this period for strategic questions, implementation decisions, and pressure-point guidance. Response within 24 to 48 business hours.
-            </p>
-            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14, marginBottom:20 }}>
-              <div>
-                <label style={S.fieldLabel}>SUPPORT START DATE</label>
-                <input value={data.support_start || ""} onChange={e => update("support_start", e.target.value)} placeholder="MM/DD/YYYY" style={S.input} />
-              </div>
-              <div>
-                <label style={S.fieldLabel}>SUPPORT END DATE</label>
-                <input value={data.support_end || ""} onChange={e => update("support_end", e.target.value)} placeholder="MM/DD/YYYY" style={S.input} />
-              </div>
-            </div>
-            <PersonalizedField label="SUPPORT LOG" id="support_log" data={data} update={update} unlocked={call1Complete} rows={10} />
-          </div>
-        </LockedSection>
-      </section>
-
-      {/* FOOTER */}
-      <footer style={S.footer}>
-        <p style={{ fontFamily:"'Cormorant Garamond', Georgia, serif", fontStyle:"italic", color:C.muted, fontSize:15, margin:0, lineHeight:1.8, maxWidth:520 }}>
-          You do not need to solve everything immediately. Stay honest, intentional, and committed to building stronger structure one decision at a time.
-        </p>
-        <span style={{ color:C.gold, fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:20, letterSpacing:6, flexShrink:0 }}>ETFM</span>
-      </footer>
+      </main>
     </div>
   );
 }
 
-/* ── COMPONENTS ── */
+/* ─────────── TAB: DASHBOARD ─────────── */
 
-function SectionLabel({ children }) {
+function TabDashboard({ sessionStatus, progressPct, frameworkStatus, supportDaysRemaining, nextAction, nextTabAction, setActiveTab, processSteps, intakeComplete, call1Complete }) {
   return (
-    <div style={{ display:"flex", alignItems:"center", gap:16, marginBottom:14 }}>
-      <span style={{ color:C.gold, fontSize:11, letterSpacing:4, fontFamily:"'DM Sans', sans-serif", whiteSpace:"nowrap" }}>{children}</span>
-      <div style={{ flex:1, height:1, background:C.border }} />
+    <div>
+      <div style={{ marginBottom:48 }}>
+        <h1 style={S.h1}>WELCOME TO YOUR STRATEGIC RESET</h1>
+        <p style={S.sub}>This is not coaching. This is strategic architecture designed to help you rebuild your financial operating system with intention and structure.</p>
+      </div>
+
+      {/* METRIC TILES */}
+      <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:16, marginBottom:52 }} className="es-g4">
+        <MetricTile label="Session Status"         value={sessionStatus} />
+        <MetricTile label="Intake Progress"        value={`${progressPct}%`} />
+        <MetricTile label="Framework Status"       value={frameworkStatus} />
+        <MetricTile label="Support Days Remaining" value={supportDaysRemaining} />
+      </div>
+
+      {/* PROCESS STEPS */}
+      <div style={{ marginBottom:52 }}>
+        <div style={{ ...S.eyebrow, marginBottom:20 }}>YOUR RESET PROCESS</div>
+        {processSteps.map((step, i) => (
+          <div key={i} style={{ display:"flex", alignItems:"center", gap:16, padding:"14px 0", borderBottom: i < processSteps.length - 1 ? `1px solid ${C.border}` : "none" }}>
+            <div style={{ width:28, height:28, borderRadius:"50%", flexShrink:0, background: step.done ? C.gold : C.surface, border:`2px solid ${step.done ? C.gold : C.border}`, display:"flex", alignItems:"center", justifyContent:"center" }}>
+              {step.done
+                ? <span style={{ color:"#fff", fontSize:12, lineHeight:1 }}>&#10003;</span>
+                : <span style={{ color:C.muted, fontSize:11, fontFamily:"'Cormorant Garamond', serif" }}>0{i+1}</span>
+              }
+            </div>
+            <span style={{ color: step.done ? C.text : C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight: step.done ? 400 : 300 }}>{step.label}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* NEXT ACTION CARD */}
+      <div style={S.nextActionCard} className="es-nac">
+        <div>
+          <div style={{ color:C.gold, fontSize:10, letterSpacing:4, marginBottom:10, fontFamily:"'DM Sans', sans-serif" }}>NEXT ACTION</div>
+          <div style={{ color:"#fff", fontSize:22, fontFamily:"'Cormorant Garamond', Georgia, serif", fontWeight:400, lineHeight:1.3 }}>{nextAction}</div>
+        </div>
+        <button onClick={() => setActiveTab(nextTabAction)} style={S.btnGold}>BEGIN NOW</button>
+      </div>
+
+      {/* ROBERT BRICKEY — YOUR STRATEGIC PARTNER */}
+      <div className="es-rob" style={{ marginTop:68, background:C.surface, border:`1px solid ${C.border}`, borderTop:`2px solid ${C.gold}`, borderRadius:12, padding:"40px", boxShadow:C.shadow, display:"grid", gridTemplateColumns:"1fr 1fr", gap:48, alignItems:"center" }}>
+        <img
+          src="/robert-brickey.jpg"
+          alt="Robert Brickey"
+          style={{ width:"100%", borderRadius:12, objectFit:"cover", objectPosition:"top center", maxHeight:340, boxShadow:"0 4px 20px rgba(0,0,0,0.09)", display:"block" }}
+          onError={e => { e.target.style.display = "none"; }}
+        />
+        <div>
+          <div style={{ ...S.eyebrow, marginBottom:20 }}>YOUR STRATEGIC PARTNER</div>
+          <p style={{ color:C.navy, fontSize:16, fontFamily:"'Cormorant Garamond', Georgia, serif", lineHeight:1.9, marginBottom:28, fontWeight:400 }}>
+            Every session is built around your specific financial reality. The goal is not generic advice. It is a personalized strategic framework designed around your situation, your patterns, and your goals.
+          </p>
+          <p style={{ color:C.muted, fontSize:14, fontFamily:"'Cormorant Garamond', Georgia, serif", fontStyle:"italic", margin:0 }}>Robert Brickey — Financial Strategist, ETFM</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────── TAB: INTAKE ─────────── */
+
+function TabIntake({ data, update, answeredCount, progressPct, intakeComplete, call1Complete }) {
+  const [activeIntake, setActiveIntake] = useState(null);
+  return (
+    <div>
+      <div style={{ marginBottom:32 }}>
+        <div style={{ ...S.eyebrow, marginBottom:10 }}>STRATEGIC INTAKE</div>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Your intake responses shape every element of your personalized strategic framework.</p>
+      </div>
+      <h2 style={{ ...S.h2, marginTop:0, marginBottom:8 }}>Strategic Intake Form</h2>
+      <p style={{ color:C.muted, fontSize:14, marginBottom:36, fontFamily:"'DM Sans', sans-serif", fontWeight:300 }}>38 questions across 7 sections. Answer as honestly as you can — accuracy matters more than perfection.</p>
+
+      {/* Progress bar */}
+      <div style={{ ...S.card, marginBottom:28 }}>
+        <div style={{ display:"flex", justifyContent:"space-between", marginBottom:10 }}>
+          <span style={S.eyebrow}>COMPLETION</span>
+          <span style={{ color:C.muted, fontSize:12, fontFamily:"'DM Sans', sans-serif" }}>{answeredCount} of {TOTAL_Q} answered</span>
+        </div>
+        <div style={{ background:"#f0ede8", height:4, borderRadius:2 }}>
+          <div style={{ background:C.gold, height:4, borderRadius:2, width:`${progressPct}%`, transition:"width 0.4s ease" }} />
+        </div>
+        <div style={{ textAlign:"right", marginTop:6, color:C.gold, fontSize:13, fontFamily:"'Cormorant Garamond', Georgia, serif" }}>{progressPct}%</div>
+      </div>
+
+      {/* Intake accordion */}
+      {INTAKE_SECTIONS.map(sec => {
+        const open    = activeIntake === sec.id;
+        const secDone = sec.questions.filter(q => (data[q.id] || "").trim()).length;
+        const complete = secDone === sec.questions.length;
+        return (
+          <div key={sec.id} style={{ background:C.surface, border:`1px solid ${open ? C.gold : C.border}`, borderRadius:12, marginBottom:8, boxShadow:C.shadow, overflow:"hidden" }}>
+            <button style={{ width:"100%", background:"none", border:"none", padding:"18px 24px", display:"flex", alignItems:"center", justifyContent:"space-between", cursor:"pointer" }} onClick={() => setActiveIntake(open ? null : sec.id)}>
+              <div style={{ display:"flex", alignItems:"center", gap:16 }}>
+                <span style={{ color: complete ? C.successText : C.gold, fontSize:18, fontFamily:"'Cormorant Garamond', serif", minWidth:30 }}>{sec.num}</span>
+                <div style={{ textAlign:"left" }}>
+                  <div style={{ color:C.text, fontSize:13, letterSpacing:1.5, fontFamily:"'DM Sans', sans-serif" }}>{sec.label}</div>
+                  <div style={{ color:C.muted, fontSize:12, marginTop:2, fontFamily:"'DM Sans', sans-serif" }}>{secDone} / {sec.questions.length} answered</div>
+                </div>
+              </div>
+              <div style={{ display:"flex", alignItems:"center", gap:12 }}>
+                {complete && <span style={{ background:C.successBg, border:`1px solid ${C.successBorder}`, color:C.successText, fontSize:12, padding:"2px 9px", borderRadius:3 }}>&#10003;</span>}
+                <span style={{ color:C.muted, fontSize:11 }}>{open ? "▲" : "▼"}</span>
+              </div>
+            </button>
+            {open && (
+              <div style={{ padding:"4px 24px 24px", borderTop:`1px solid ${C.border}` }}>
+                <p style={{ color:C.muted, fontSize:13, lineHeight:1.7, marginBottom:20, fontStyle:"italic", fontFamily:"'Cormorant Garamond', Georgia, serif" }}>{sec.desc}</p>
+                {sec.questions.map(q => (
+                  <div key={q.id} style={{ marginBottom:18 }}>
+                    <label style={S.fieldLabel}>{q.label}</label>
+                    {q.multiline
+                      ? <textarea value={data[q.id] || ""} onChange={e => update(q.id, e.target.value)} placeholder={q.placeholder || ""} rows={3} style={S.textarea} />
+                      : <input   value={data[q.id] || ""} onChange={e => update(q.id, e.target.value)} placeholder={q.placeholder || ""} style={S.input} />
+                    }
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      {progressPct === 100 && !intakeComplete && (
+        <button style={{ ...S.btnNavy, marginTop:20, width:"100%", display:"block" }} onClick={() => update("intake_submitted", true)}>
+          SUBMIT INTAKE FORM
+        </button>
+      )}
+      {intakeComplete && (
+        <div style={{ background:C.successBg, border:`1px solid ${C.successBorder}`, color:C.successText, fontSize:13, padding:"12px 18px", borderRadius:8, marginTop:16, fontFamily:"'DM Sans', sans-serif" }}>&#10003; Intake form submitted. Robert will review your responses before Session 1.</div>
+      )}
+      {intakeComplete && (
+        <div style={{ ...S.card, marginTop:20, borderTop:`2px solid ${C.gold}` }}>
+          <div style={{ ...S.eyebrow, marginBottom:12 }}>SESSION 1 STATUS</div>
+          <p style={{ color:C.muted, fontSize:14, lineHeight:1.7, margin:"0 0 16px", fontFamily:"'DM Sans', sans-serif" }}>Once Session 1 is complete, mark it below to unlock your personalized materials.</p>
+          {call1Complete
+            ? <div style={{ background:C.successBg, border:`1px solid ${C.successBorder}`, color:C.successText, fontSize:13, padding:"12px 18px", borderRadius:8, fontFamily:"'DM Sans', sans-serif" }}>&#10003; Session 1 complete. Your personalized materials are now unlocked.</div>
+            : <button style={S.btnNavy} onClick={() => update("call1_complete", true)}>MARK SESSION 1 COMPLETE</button>
+          }
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ─────────── TAB: FRAMEWORK ─────────── */
+
+function TabFramework({ data, update, call1Complete }) {
+  return (
+    <div>
+      <div style={{ marginBottom:32 }}>
+        <div style={{ ...S.eyebrow, marginBottom:10 }}>YOUR STRATEGIC FRAMEWORK</div>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Your personalized financial framework is built during your strategy session and delivered here.</p>
+      </div>
+      <h2 style={{ ...S.h2, marginTop:0, marginBottom:48 }}>Personalized Strategic Framework</h2>
+
+      {/* Matrix Score */}
+      <div style={{ ...S.eyebrow, marginBottom:16 }}>MATRIX SCORE AND STRUCTURAL ANALYSIS</div>
+      <LockedSection unlocked={call1Complete} message="Unlocks after Session 1.">
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(5,1fr)", gap:10, marginBottom:20 }} className="es-mat">
+          {[
+            { key:"sc_awareness",  name:"Awareness",           desc:"How clearly you see where your money goes." },
+            { key:"sc_pattern",    name:"Money Pattern",       desc:"How consistently you manage income and expenses." },
+            { key:"sc_stress",     name:"Stress Response",     desc:"How you respond when financial pressure builds." },
+            { key:"sc_structure",  name:"Financial Structure", desc:"The systems and habits you have in place." },
+            { key:"sc_readiness",  name:"System Readiness",    desc:"Your ability to build and follow a financial plan." },
+          ].map(comp => (
+            <div key={comp.key} style={S.card}>
+              <div style={{ color:C.gold, fontSize:11, letterSpacing:2, marginBottom:4, fontFamily:"'DM Sans', sans-serif" }}>{comp.name}</div>
+              <div style={{ color:C.muted, fontSize:12, lineHeight:1.5, marginBottom:10, fontFamily:"'DM Sans', sans-serif", fontWeight:300 }}>{comp.desc}</div>
+              <PersonalizedField label={comp.name} id={comp.key} data={data} update={update} unlocked={call1Complete} singleLine displayAs="score" />
+            </div>
+          ))}
+        </div>
+        <div style={{ ...S.card, marginBottom:48 }}>
+          <PersonalizedField label="STRUCTURAL ANALYSIS" id="structural_analysis" data={data} update={update} unlocked={call1Complete} rows={6} pendingText="Your structural analysis will appear here after Session 1." />
+        </div>
+      </LockedSection>
+
+      {/* Strategic Framework */}
+      <div style={{ ...S.eyebrow, marginBottom:16, marginTop:8 }}>STRATEGIC FRAMEWORK</div>
+      <LockedSection unlocked={call1Complete} message="Unlocks after Session 1.">
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12, marginBottom:48 }} className="es-g2">
+          {[
+            { id:"fw_priority",  label:"PRIMARY STRATEGIC PRIORITY",   pendingText:"The single most important financial move for you right now." },
+            { id:"fw_structure", label:"STRUCTURAL FOUNDATION",         pendingText:"The core structure your finances will be built on." },
+            { id:"fw_behavior",  label:"BEHAVIORAL PROTOCOL",           pendingText:"Specific behavioral guidelines based on your money patterns." },
+            { id:"fw_income",    label:"INCOME AND STABILITY STRATEGY", pendingText:"A plan for protecting or stabilizing your income." },
+            { id:"fw_debt",      label:"DEBT AND OBLIGATION FRAMEWORK", pendingText:"A clear strategy for handling existing debt and obligations." },
+            { id:"fw_build",     label:"WEALTH BUILDING PATHWAY",       pendingText:"The long-term path forward based on your timeline and goals." },
+          ].map(f => (
+            <div key={f.id} style={S.card}>
+              <PersonalizedField label={f.label} id={f.id} data={data} update={update} unlocked={call1Complete} rows={4} pendingText={f.pendingText} />
+            </div>
+          ))}
+        </div>
+      </LockedSection>
+
+      {/* Decision Rules */}
+      <div style={{ ...S.eyebrow, marginBottom:16, marginTop:8 }}>DECISION RULES AND FINANCIAL POLICY</div>
+      <LockedSection unlocked={call1Complete} message="Unlocks after Session 1.">
+        {[
+          { id:"rule_spending",  label:"SPENDING RULE",      pendingText:"Your personal discretionary spending guideline." },
+          { id:"rule_saving",    label:"SAVING RULE",         pendingText:"The saving rate or method that works for your situation." },
+          { id:"rule_debt",      label:"DEBT RULE",           pendingText:"How you will handle debt repayment — which debts, in what order." },
+          { id:"rule_income",    label:"INCOME RULE",         pendingText:"How you treat and allocate income when it arrives." },
+          { id:"rule_emergency", label:"EMERGENCY FUND RULE", pendingText:"Your target emergency fund amount and the plan to build it." },
+          { id:"rule_invest",    label:"INVESTMENT RULE",     pendingText:"" },
+        ].map(r => (
+          <div key={r.id} style={{ ...S.card, marginBottom:8 }}>
+            <PersonalizedField label={r.label} id={r.id} data={data} update={update} unlocked={call1Complete} rows={2} pendingText={r.pendingText} />
+          </div>
+        ))}
+        <div style={{ ...S.card, marginTop:8 }}>
+          <PersonalizedField label="ADDITIONAL FINANCIAL POLICIES" id="rule_additional" data={data} update={update} unlocked={call1Complete} rows={4} />
+        </div>
+      </LockedSection>
+    </div>
+  );
+}
+
+/* ─────────── TAB: SESSIONS ─────────── */
+
+function TabSessions({ data, update, call1Complete, call2Complete }) {
+  return (
+    <div>
+      <div style={{ marginBottom:32 }}>
+        <div style={{ ...S.eyebrow, marginBottom:10 }}>YOUR SESSIONS</div>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Two private strategy sessions with Robert. Your pre-session call builds the plan. Your post-session call reviews it.</p>
+      </div>
+      <h2 style={{ ...S.h2, marginTop:0, marginBottom:40 }}>Session Booking</h2>
+
+      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:16, marginBottom:24 }} className="es-g2">
+        {/* Session 1 */}
+        <div style={{ ...S.card, borderTop:`2px solid ${C.gold}` }}>
+          <div style={{ ...S.eyebrow, marginBottom:12 }}>SESSION 1 OF 2</div>
+          <div style={{ fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:20, color:C.text, fontWeight:400, margin:"0 0 10px" }}>Strategic Reality Session</div>
+          <p style={{ color:C.muted, fontSize:14, lineHeight:1.7, fontFamily:"'DM Sans', sans-serif", fontWeight:300, marginBottom:16 }}>Reviews your intake, identifies high-leverage pressure points, and begins building your Strategic Framework.</p>
+          {[["DURATION","30 minutes"],["FORMAT","Private video call"],["REQUIRES","Intake form completed"]].map(([k,v]) => (
+            <div key={k} style={{ display:"flex", justifyContent:"space-between", padding:"8px 0", borderBottom:`1px solid ${C.border}` }}>
+              <span style={{ color:C.muted, fontSize:11, letterSpacing:2, fontFamily:"'DM Sans', sans-serif" }}>{k}</span>
+              <span style={{ color:C.text, fontSize:13, fontFamily:"'DM Sans', sans-serif" }}>{v}</span>
+            </div>
+          ))}
+          <div style={{ marginTop:20 }}>
+            {call1Complete
+              ? <div style={S.successBadge}>&#10003; Session 1 complete</div>
+              : <a href={CALENDLY_PRE} target="_blank" rel="noopener noreferrer" style={{ ...S.btnNavy, display:"block", textAlign:"center", textDecoration:"none" }}>BOOK SESSION 1</a>
+            }
+          </div>
+        </div>
+
+        {/* Session 2 */}
+        <div style={{ ...S.card, borderTop:`2px solid ${call1Complete ? C.gold : C.border}`, opacity: call1Complete ? 1 : 0.55 }}>
+          <div style={{ ...S.eyebrow, marginBottom:12 }}>SESSION 2 OF 2</div>
+          <div style={{ fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:20, color:C.text, fontWeight:400, margin:"0 0 10px" }}>Strategic Implementation Session</div>
+          <p style={{ color:C.muted, fontSize:14, lineHeight:1.7, fontFamily:"'DM Sans', sans-serif", fontWeight:300, marginBottom:16 }}>Reviews your 90-Day Roadmap, confirms your Decision Rules, and closes with your complete Strategic Operating Framework.</p>
+          {[["DURATION","30 minutes"],["FORMAT","Private video call"],["REQUIRES","Session 1 complete"]].map(([k,v]) => (
+            <div key={k} style={{ display:"flex", justifyContent:"space-between", padding:"8px 0", borderBottom:`1px solid ${C.border}` }}>
+              <span style={{ color:C.muted, fontSize:11, letterSpacing:2, fontFamily:"'DM Sans', sans-serif" }}>{k}</span>
+              <span style={{ color:C.text, fontSize:13, fontFamily:"'DM Sans', sans-serif" }}>{v}</span>
+            </div>
+          ))}
+          <div style={{ marginTop:20 }}>
+            {call2Complete
+              ? <div style={S.successBadge}>&#10003; Session 2 complete</div>
+              : call1Complete
+                ? <a href={CALENDLY_POST} target="_blank" rel="noopener noreferrer" style={{ ...S.btnNavy, display:"block", textAlign:"center", textDecoration:"none" }}>BOOK SESSION 2</a>
+                : <div style={{ background:"#f9f8f6", border:`1px solid ${C.border}`, color:C.muted, fontSize:11, letterSpacing:2, padding:"13px 18px", textAlign:"center", borderRadius:8, fontFamily:"'DM Sans', sans-serif" }}>UNLOCKS AFTER SESSION 1</div>
+            }
+          </div>
+        </div>
+      </div>
+
+      {call1Complete && !call2Complete && (
+        <button style={{ ...S.btnNavy, marginBottom:52 }} onClick={() => update("call2_complete", true)}>MARK SESSION 2 COMPLETE</button>
+      )}
+      {call2Complete && <div style={{ ...S.successBadge, marginBottom:52 }}>&#10003; Both sessions complete</div>}
+
+      {/* Session Notes */}
+      <div style={{ ...S.eyebrow, marginBottom:20 }}>SESSION NOTES</div>
+      <LockedSection unlocked={call1Complete} message="Unlocks after Session 1.">
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:16, marginBottom:16 }} className="es-g2">
+          <div style={S.card}>
+            <div style={{ ...S.eyebrow, marginBottom:12 }}>SESSION 1 NOTES</div>
+            {data.session1_date && <div style={{ color:C.muted, fontSize:13, fontStyle:"italic", fontFamily:"'Cormorant Garamond', Georgia, serif", margin:"0 0 14px" }}>{data.session1_date}</div>}
+            <PersonalizedField label="SESSION 1 NOTES" id="session1_notes" data={data} update={update} unlocked={call1Complete} rows={8} hideLabel />
+            <div style={{ marginTop:14 }}>
+              <label style={S.fieldLabel}>SESSION DATE</label>
+              <input value={data.session1_date || ""} onChange={e => update("session1_date", e.target.value)} placeholder="MM/DD/YYYY" style={S.input} />
+            </div>
+          </div>
+          <div style={{ ...S.card, opacity: call2Complete ? 1 : 0.55 }}>
+            <div style={{ ...S.eyebrow, marginBottom:12 }}>SESSION 2 NOTES</div>
+            {data.session2_date && <div style={{ color:C.muted, fontSize:13, fontStyle:"italic", fontFamily:"'Cormorant Garamond', Georgia, serif", margin:"0 0 14px" }}>{data.session2_date}</div>}
+            <PersonalizedField label="SESSION 2 NOTES" id="session2_notes" data={data} update={update} unlocked={!!call2Complete} rows={8} hideLabel />
+            <div style={{ marginTop:14 }}>
+              <label style={S.fieldLabel}>SESSION DATE</label>
+              <input value={data.session2_date || ""} onChange={e => update("session2_date", e.target.value)} placeholder="MM/DD/YYYY" style={S.input} />
+            </div>
+          </div>
+        </div>
+        <div style={S.card}>
+          <PersonalizedField label="KEY DELIVERABLES AND ACTION COMMITMENTS" id="deliverables" data={data} update={update} unlocked={call1Complete} rows={4} />
+        </div>
+      </LockedSection>
+    </div>
+  );
+}
+
+/* ─────────── TAB: ROADMAP ─────────── */
+
+function TabRoadmap({ data, update, call1Complete }) {
+  return (
+    <div>
+      <div style={{ marginBottom:32 }}>
+        <div style={{ ...S.eyebrow, marginBottom:10 }}>YOUR 90-DAY ROADMAP</div>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>A practical implementation plan built around your specific situation and strategic priorities.</p>
+      </div>
+      <h2 style={{ ...S.h2, marginTop:0, marginBottom:40 }}>Custom 90-Day Roadmap</h2>
+
+      <LockedSection unlocked={call1Complete} message="Unlocks after Session 1.">
+        {[
+          { id:"road_30", label:"DAYS 1–30: FOUNDATION",   sub:"Stabilization and structure",      pendingText:"The first 30 days focus on stopping financial leaks and installing structure." },
+          { id:"road_60", label:"DAYS 31–60: MOMENTUM",    sub:"Consistency and reinforcement",    pendingText:"The middle phase reinforces new behaviors and builds confidence in your system." },
+          { id:"road_90", label:"DAYS 61–90: POSITIONING", sub:"Advancement and future alignment", pendingText:"The final phase moves from stability toward growth." },
+        ].map(phase => (
+          <div key={phase.id} style={{ ...S.card, marginBottom:12 }}>
+            <div style={{ display:"flex", alignItems:"baseline", gap:16, marginBottom:14 }}>
+              <div style={{ color:C.gold, fontSize:12, letterSpacing:2, fontFamily:"'DM Sans', sans-serif" }}>{phase.label}</div>
+              <div style={{ color:C.muted, fontSize:12, fontStyle:"italic", fontFamily:"'DM Sans', sans-serif" }}>{phase.sub}</div>
+            </div>
+            <PersonalizedField label={phase.label} id={phase.id} data={data} update={update} unlocked={call1Complete} rows={5} hideLabel pendingText={phase.pendingText} />
+          </div>
+        ))}
+        <div style={{ ...S.card, borderLeft:`2px solid ${C.gold}` }}>
+          <PersonalizedField label="90-DAY TARGET OUTCOME" id="road_outcome" data={data} update={update} unlocked={call1Complete} rows={3} pendingText="Your specific, measurable result agreed upon by you and Robert." />
+        </div>
+      </LockedSection>
+    </div>
+  );
+}
+
+/* ─────────── TAB: ADVISORY ─────────── */
+
+function TabAdvisory({ data, update, call1Complete }) {
+  return (
+    <div>
+      <div style={{ marginBottom:36 }}>
+        <div style={{ ...S.eyebrow, marginBottom:10 }}>STRATEGIC ADVISORY</div>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Direct strategic guidance and support from Robert throughout your reset.</p>
+      </div>
+
+      {/* Wide banner image */}
+      <div style={{ marginBottom:36 }}>
+        <img
+          src="/robert-brickey.jpg"
+          alt="Robert Brickey"
+          style={{ width:"100%", maxHeight:320, objectFit:"cover", objectPosition:"top center", borderRadius:12, display:"block", boxShadow:"0 4px 20px rgba(0,0,0,0.08)" }}
+          onError={e => { e.target.style.display = "none"; }}
+        />
+        <div style={{ paddingTop:20 }}>
+          <div style={{ fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:24, color:C.text, marginBottom:4 }}>Robert Brickey</div>
+          <div style={{ color:C.muted, fontSize:12, letterSpacing:2, fontFamily:"'DM Sans', sans-serif" }}>FINANCIAL STRATEGIST, ETFM</div>
+        </div>
+      </div>
+
+      {/* Strategic guidance cards */}
+      <div style={{ ...S.eyebrow, marginBottom:20 }}>STRATEGIC GUIDANCE</div>
+      <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:16, marginBottom:52 }} className="es-g3">
+        {[
+          { label:"CURRENT FOCUS",    text:"Complete your Strategic Intake Form fully and honestly. The depth of your answers directly shapes the quality of your sessions." },
+          { label:"THIS WEEK",        text:"Your intake is the foundation of everything. A thorough, honest intake produces a stronger, more targeted strategic framework." },
+          { label:"WHAT TO EXPECT",   text:"Session 1 reviews your intake, maps your financial reality, and begins building your personalized strategic framework." },
+        ].map(({ label, text }) => (
+          <div key={label} style={{ ...S.card, borderTop:`2px solid ${C.gold}` }}>
+            <div style={{ color:C.gold, fontSize:10, letterSpacing:3, marginBottom:10, fontFamily:"'DM Sans', sans-serif" }}>{label}</div>
+            <p style={{ color:C.muted, fontSize:14, lineHeight:1.7, fontFamily:"'DM Sans', sans-serif", fontWeight:300, margin:0 }}>{text}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* 60-day email support */}
+      <div style={{ ...S.eyebrow, marginBottom:16 }}>60-DAY PRIORITY EMAIL SUPPORT</div>
+      <LockedSection unlocked={call1Complete} message="Unlocks after Session 1.">
+        <div style={S.card}>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline", borderBottom:`1px solid ${C.border}`, paddingBottom:16, marginBottom:16 }}>
+            <div style={{ color:C.gold, fontSize:12, letterSpacing:2, fontFamily:"'DM Sans', sans-serif" }}>PRIORITY EMAIL SUPPORT</div>
+            <div style={{ color:C.muted, fontSize:13, fontStyle:"italic", fontFamily:"'Cormorant Garamond', Georgia, serif" }}>
+              {data.support_start ? `Started: ${data.support_start}` : "Begins after Session 2"}
+            </div>
+          </div>
+          <p style={{ color:C.muted, fontSize:14, lineHeight:1.8, marginBottom:20, fontFamily:"'DM Sans', sans-serif", fontWeight:300 }}>
+            Use this period for strategic questions, implementation decisions, and pressure-point guidance. Response within 24 to 48 business hours.
+          </p>
+          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14, marginBottom:20 }} className="es-g2">
+            <div>
+              <label style={S.fieldLabel}>SUPPORT START DATE</label>
+              <input value={data.support_start || ""} onChange={e => update("support_start", e.target.value)} placeholder="MM/DD/YYYY" style={S.input} />
+            </div>
+            <div>
+              <label style={S.fieldLabel}>SUPPORT END DATE</label>
+              <input value={data.support_end || ""} onChange={e => update("support_end", e.target.value)} placeholder="MM/DD/YYYY" style={S.input} />
+            </div>
+          </div>
+          <PersonalizedField label="SUPPORT LOG" id="support_log" data={data} update={update} unlocked={call1Complete} rows={10} />
+        </div>
+      </LockedSection>
+    </div>
+  );
+}
+
+/* ─────────── SHARED UI ─────────── */
+
+function MetricTile({ label, value, sub }) {
+  return (
+    <div style={{ ...S.card, borderTop:`2px solid ${C.gold}`, textAlign:"center", padding:"24px 20px" }}>
+      <div style={{ fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:28, color:C.text, lineHeight:1, marginBottom: sub ? 6 : 10 }}>{value}</div>
+      {sub && <div style={{ color:C.gold, fontSize:11, letterSpacing:2, fontFamily:"'DM Sans', sans-serif", marginBottom:6 }}>{sub}</div>}
+      <div style={{ color:C.muted, fontSize:11, letterSpacing:2, fontFamily:"'DM Sans', sans-serif" }}>{label.toUpperCase()}</div>
     </div>
   );
 }
@@ -577,7 +701,7 @@ function PersonalizedField({ label, id, data, update, unlocked, rows = 4, hideLa
     );
   }
   return (
-    <div style={S.pendingCard}>
+    <div style={{ background:"#f9f8f6", border:`1px solid ${C.border}`, borderRadius:8, padding:"14px 16px" }}>
       {!hideLabel && <div style={{ color:C.gold, fontSize:10, letterSpacing:3, marginBottom:6, fontFamily:"'DM Sans', sans-serif" }}>{label}</div>}
       <p style={{ color:C.muted, fontSize:13, lineHeight:1.7, fontStyle:"italic", margin:0, fontFamily:"'Cormorant Garamond', Georgia, serif" }}>
         {pendingText || "This field will be ready after your Strategy Session."}
@@ -590,7 +714,7 @@ function LockedSection({ unlocked, children, message }) {
   if (unlocked) return <div>{children}</div>;
   return (
     <div>
-      <div style={S.lockedBanner}>
+      <div style={{ background:"#f9f8f6", border:`1px solid ${C.border}`, borderRadius:8, padding:"14px 18px", marginBottom:14 }}>
         <span style={{ color:C.muted, fontSize:13, fontFamily:"'DM Sans', sans-serif" }}>{message || "Unlocks after your Strategy Session."}</span>
       </div>
       <div style={{ opacity:0.5, pointerEvents:"none", userSelect:"none" }}>{children}</div>
@@ -598,58 +722,23 @@ function LockedSection({ unlocked, children, message }) {
   );
 }
 
-/* ── STYLES ── */
+/* ─────────── STYLES ─────────── */
 
 const S = {
-  page:         { fontFamily:"'DM Sans', Inter, sans-serif", background:C.bg, color:C.text, minHeight:"100vh", paddingTop:68, paddingBottom:80 },
-  nav:          { position:"fixed", top:0, left:0, right:0, zIndex:100, background:C.surface, borderBottom:`1px solid ${C.border}`, padding:"14px 48px", display:"flex", alignItems:"center", justifyContent:"space-between" },
-  logo:         { fontFamily:"'Cormorant Garamond', Georgia, serif", color:C.gold, fontSize:21, letterSpacing:7 },
-  logoSub:      { color:C.muted, fontSize:10, letterSpacing:3, marginTop:2, fontFamily:"'DM Sans', sans-serif" },
-  navLinks:     { display:"flex", gap:28, marginLeft:40 },
-  saveToast:    { position:"fixed", top:76, right:20, background:C.surface, border:`1px solid ${C.gold}`, color:C.gold, fontSize:11, padding:"7px 16px", zIndex:9999, letterSpacing:3, fontFamily:"'DM Sans', sans-serif", boxShadow:C.shadow },
-  hero:         { padding:"72px 48px 60px", borderBottom:`1px solid ${C.border}` },
-  eyebrow:      { color:C.gold, fontSize:11, letterSpacing:4, fontFamily:"'DM Sans', sans-serif", margin:0 },
-  heroTitle:    { fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:52, color:C.text, fontWeight:300, lineHeight:1.1, margin:"18px 0 20px" },
-  heroSub:      { color:C.muted, fontSize:16, lineHeight:1.8, maxWidth:560, fontFamily:"'DM Sans', sans-serif", fontWeight:300, margin:0 },
-  section:      { padding:"68px 48px 0" },
-  sectionNote:  { color:C.muted, fontSize:14, lineHeight:1.8, marginBottom:28, fontFamily:"'DM Sans', sans-serif", fontWeight:300, maxWidth:600 },
-  card:         { background:C.surface, border:`1px solid ${C.border}`, borderRadius:8, padding:28, boxShadow:C.shadow },
-  statusGrid:   { display:"grid", gridTemplateColumns:"repeat(4, 1fr)", gap:12, marginBottom:12 },
-  statusTile:   { background:C.surface, border:`1px solid ${C.border}`, borderRadius:8, padding:"20px 22px", boxShadow:C.shadow },
-  tileLabel:    { color:C.muted, fontSize:10, letterSpacing:3, marginBottom:8, fontFamily:"'DM Sans', sans-serif" },
-  tileVal:      { color:C.text, fontSize:16, fontFamily:"'Cormorant Garamond', Georgia, serif", fontWeight:400 },
-  nextActionBar:{ background:C.surface, border:`1px solid ${C.border}`, borderLeft:`3px solid ${C.gold}`, borderRadius:4, padding:"14px 20px", display:"flex", alignItems:"baseline", gap:16, boxShadow:C.shadow },
-  processGrid:  { display:"flex", flexDirection:"column", gap:2 },
-  processStep:  { background:C.surface, border:`1px solid ${C.border}`, borderRadius:6, padding:"14px 20px", display:"flex", alignItems:"center", gap:16, boxShadow:C.shadow },
-  processStepDone:{ background:C.successBg, borderColor:C.successBorder },
-  processNum:   { color:C.gold, fontSize:15, fontFamily:"'Cormorant Garamond', Georgia, serif", minWidth:26, flexShrink:0 },
-  checkmark:    { marginLeft:"auto", flexShrink:0, color:C.successText, fontSize:14 },
-  progressWrap: { background:C.surface, border:`1px solid ${C.border}`, borderRadius:8, padding:"20px 24px", marginBottom:14, boxShadow:C.shadow },
-  progressTrack:{ background:"#f0ede8", height:4, borderRadius:2 },
-  progressFill: { background:C.gold, height:4, borderRadius:2, transition:"width 0.4s ease" },
-  intakeSec:    { background:C.surface, border:`1px solid ${C.border}`, borderRadius:8, marginBottom:6, boxShadow:C.shadow, overflow:"hidden" },
-  intakeSecOpen:{ borderColor:C.gold },
-  intakeHeader: { width:"100%", background:"none", border:"none", padding:"18px 22px", display:"flex", alignItems:"center", justifyContent:"space-between", cursor:"pointer", fontFamily:"'DM Sans', sans-serif" },
-  intakeNum:    { color:C.gold, fontSize:18, fontFamily:"'Cormorant Garamond', Georgia, serif", minWidth:30 },
-  intakeBody:   { padding:"4px 22px 24px", borderTop:`1px solid ${C.border}` },
-  checkBadge:   { background:C.successBg, border:`1px solid ${C.successBorder}`, color:C.successText, fontSize:12, padding:"2px 9px", borderRadius:3 },
-  bookingGrid:  { display:"grid", gridTemplateColumns:"1fr 1fr", gap:16, marginBottom:14 },
-  cardTitle:    { fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:20, color:C.text, fontWeight:400, margin:"12px 0 10px" },
-  cardDesc:     { color:C.muted, fontSize:14, lineHeight:1.7, fontFamily:"'DM Sans', sans-serif", fontWeight:300, marginBottom:16 },
-  metaRow:      { display:"flex", justifyContent:"space-between", padding:"8px 0", borderBottom:`1px solid ${C.border}` },
-  metaLabel:    { color:C.muted, fontSize:11, letterSpacing:2, fontFamily:"'DM Sans', sans-serif" },
-  metaVal:      { color:C.text, fontSize:13, fontFamily:"'DM Sans', sans-serif", fontWeight:400 },
-  matrixGrid:   { display:"grid", gridTemplateColumns:"repeat(5, 1fr)", gap:10, marginBottom:20 },
-  matrixCard:   { background:C.surface, border:`1px solid ${C.border}`, borderRadius:6, padding:16, boxShadow:C.shadow },
-  frameworkGrid:{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12 },
-  lockedBanner: { background:"#f9f8f6", border:`1px solid ${C.border}`, borderRadius:6, padding:"14px 18px", marginBottom:14 },
-  pendingCard:  { background:"#f9f8f6", border:`1px solid ${C.border}`, borderRadius:4, padding:"14px 16px" },
-  submittedBadge:{ background:C.successBg, border:`1px solid ${C.successBorder}`, color:C.successText, fontSize:13, letterSpacing:0.5, padding:"12px 18px", borderRadius:4, fontFamily:"'DM Sans', sans-serif" },
-  btnPrimary:   { background:C.text, color:"#FFFFFF", border:"none", padding:"13px 28px", fontSize:11, letterSpacing:2, cursor:"pointer", fontFamily:"'DM Sans', sans-serif", fontWeight:500, borderRadius:4 },
-  btnSecondary: { background:"transparent", color:C.text, border:`1px solid ${C.border}`, padding:"13px 28px", fontSize:11, letterSpacing:2, cursor:"pointer", fontFamily:"'DM Sans', sans-serif", borderRadius:4 },
-  lockedBtn:    { background:"#f9f8f6", border:`1px solid ${C.border}`, color:C.muted, fontSize:11, letterSpacing:2, padding:"13px 18px", textAlign:"center", borderRadius:4, fontFamily:"'DM Sans', sans-serif" },
-  fieldLabel:   { display:"block", color:C.muted, fontSize:11, letterSpacing:2, marginBottom:7, fontFamily:"'DM Sans', sans-serif" },
-  input:        { width:"100%", background:C.bg, border:`1px solid ${C.border}`, color:C.text, fontSize:14, padding:"10px 14px", fontFamily:"'DM Sans', sans-serif", outline:"none", boxSizing:"border-box", borderRadius:4 },
-  textarea:     { width:"100%", background:C.bg, border:`1px solid ${C.border}`, color:C.text, fontSize:14, padding:"10px 14px", fontFamily:"'DM Sans', sans-serif", outline:"none", resize:"vertical", boxSizing:"border-box", borderRadius:4 },
-  footer:       { margin:"64px 48px 0", borderTop:`1px solid ${C.border}`, paddingTop:28, paddingBottom:60, display:"flex", justifyContent:"space-between", alignItems:"center", gap:40 },
+  nav:           { position:"fixed", top:0, left:0, right:0, zIndex:100, background:C.surface, borderBottom:`1px solid ${C.border}`, padding:"0 48px", display:"flex", alignItems:"center", justifyContent:"space-between", height:60 },
+  navBtn:        { background:"none", border:"none", cursor:"pointer", padding:"0 14px", height:60, fontFamily:"'DM Sans', sans-serif", fontSize:13, letterSpacing:0.3, transition:"all 0.15s ease", outline:"none" },
+  avatar:        { width:34, height:34, borderRadius:"50%", background:C.navy, display:"flex", alignItems:"center", justifyContent:"center", color:C.gold, fontSize:14, fontFamily:"'Cormorant Garamond', serif", flexShrink:0 },
+  content:       { padding:"52px 48px", maxWidth:1100, margin:"0 auto" },
+  h1:            { fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:52, fontWeight:300, color:C.text, margin:0, lineHeight:1.1 },
+  h2:            { fontFamily:"'Cormorant Garamond', Georgia, serif", fontSize:40, fontWeight:300, color:C.text, margin:0, lineHeight:1.15 },
+  sub:           { color:C.muted, fontSize:17, margin:"10px 0 0", fontFamily:"'DM Sans', sans-serif", fontWeight:300 },
+  eyebrow:       { color:C.gold, fontSize:11, letterSpacing:4, fontFamily:"'DM Sans', sans-serif" },
+  card:          { background:C.surface, border:`1px solid ${C.border}`, borderRadius:12, padding:28, boxShadow:C.shadow },
+  nextActionCard:{ background:C.navy, borderRadius:12, padding:"28px 36px", display:"flex", alignItems:"center", justifyContent:"space-between", gap:24, boxShadow:"0 4px 24px rgba(26,39,68,0.12)", marginTop:0 },
+  btnGold:       { background:C.gold, color:C.navy, border:"none", padding:"13px 28px", borderRadius:8, fontSize:11, fontWeight:700, letterSpacing:2, cursor:"pointer", fontFamily:"'DM Sans', sans-serif", flexShrink:0, whiteSpace:"nowrap" },
+  btnNavy:       { background:C.navy, color:"#fff", border:"none", padding:"14px 32px", borderRadius:8, fontSize:11, fontWeight:500, letterSpacing:2, cursor:"pointer", fontFamily:"'DM Sans', sans-serif" },
+  successBadge:  { background:C.successBg, border:`1px solid ${C.successBorder}`, color:C.successText, fontSize:13, letterSpacing:0.5, padding:"12px 18px", borderRadius:8, fontFamily:"'DM Sans', sans-serif" },
+  fieldLabel:    { display:"block", color:C.muted, fontSize:11, letterSpacing:2, marginBottom:7, fontFamily:"'DM Sans', sans-serif" },
+  input:         { width:"100%", background:C.bg, border:`1px solid ${C.border}`, color:C.text, fontSize:14, padding:"10px 14px", fontFamily:"'DM Sans', sans-serif", outline:"none", borderRadius:6, boxSizing:"border-box" },
+  textarea:      { width:"100%", background:C.bg, border:`1px solid ${C.border}`, color:C.text, fontSize:14, padding:"10px 14px", fontFamily:"'DM Sans', sans-serif", outline:"none", resize:"vertical", borderRadius:6, boxSizing:"border-box" },
 };
