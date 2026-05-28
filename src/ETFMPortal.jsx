@@ -189,13 +189,13 @@ function TabDashboard({ tc, overallPct, firstName, nextMilestone, setActiveTab }
         <img
           src="/robert-brickey.jpg"
           alt="Robert Brickey"
-          style={{ width:"100%", borderRadius:12, objectFit:"cover", objectPosition:"center top", maxHeight:340, boxShadow:"0 4px 20px rgba(0,0,0,0.09)", display:"block" }}
+          style={{ width:"100%", borderRadius:12, objectFit:"cover", objectPosition:"top center", maxHeight:340, boxShadow:"0 4px 20px rgba(0,0,0,0.09)", display:"block" }}
           onError={e => { e.target.style.display = "none"; }}
         />
         <div>
           <div style={{ ...S.eyebrow, marginBottom:20 }}>GUIDANCE THROUGH THE RESET</div>
           <p style={{ color:C.navy, fontSize:16, fontFamily:"'Cormorant Garamond', Georgia, serif", lineHeight:1.9, marginBottom:28, fontWeight:400 }}>
-            This process was built around one belief: most financial stress is the result of operating without a clear system. When you finally see the full picture — without judgment — and begin building structure around it, something shifts. Not just in the numbers, but in how you experience money day to day. That is what this reset is designed to create.
+            ETFM was built from years of watching hardworking people carry financial stress without ever being shown how to organize the system beneath it. This process is designed to help you slow down, see clearly, and begin rebuilding with structure instead of reaction.
           </p>
           <p style={{ color:C.muted, fontSize:14, fontFamily:"'Cormorant Garamond', Georgia, serif", fontStyle:"italic", margin:0 }}>Robert Brickey — Creator, ETFM</p>
         </div>
