@@ -128,8 +128,8 @@ function TabDashboard({ tc, overallPct, firstName, nextMilestone, setActiveTab }
   return (
     <div>
       <div style={{ marginBottom:48 }}>
-        <h1 style={S.h1}>{firstName ? `Welcome, ${firstName}.` : "Welcome."}</h1>
-        <p style={S.sub}>Your reset is in progress.</p>
+        <h1 style={S.h1}>WELCOME TO YOUR RESET</h1>
+        <p style={S.sub}>Most people spend years reacting financially without ever seeing the full system clearly. This space was built to help you slow down, organize the noise, and begin rebuilding with intention.</p>
       </div>
 
       <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:16, marginBottom:20 }} className="ep-g4">
@@ -140,12 +140,12 @@ function TabDashboard({ tc, overallPct, firstName, nextMilestone, setActiveTab }
       </div>
 
       <div style={{ marginTop:32, marginBottom:32 }}>
-        <div style={{ ...S.eyebrow, marginBottom:20 }}>HOW THIS WORKS</div>
+        <div style={{ ...S.eyebrow, marginBottom:20 }}>THIS WEEK'S FOCUS</div>
         {[
-          "Start with the Dashboard. Your next action is always shown here.",
-          "Navigate using the tabs above. Each tab shows one part of your system.",
-          "Work through Tools in order. Complete each one before moving to the next.",
-          "Return every week. Progress builds through consistency, not speed.",
+          "Awareness comes before change. Start by seeing your current reality clearly.",
+          "Move through each phase intentionally. Every tool builds on the one before it.",
+          "Progress here is not about speed. It is about consistency and structure.",
+          "Small actions repeated consistently create long-term stability and momentum.",
         ].map((step, i) => (
           <div key={i} style={{ display:"flex", gap:20, padding:"12px 0", borderBottom: i < 3 ? `1px solid ${C.border}` : "none", alignItems:"flex-start" }}>
             <span style={{ color:C.gold, fontSize:11, letterSpacing:2, fontFamily:"'DM Sans', sans-serif", flexShrink:0, paddingTop:2, minWidth:28 }}>0{i+1}</span>
@@ -161,6 +161,8 @@ function TabDashboard({ tc, overallPct, firstName, nextMilestone, setActiveTab }
         </div>
         <button onClick={() => setActiveTab("tools")} style={S.btnGold}>BEGIN NOW</button>
       </div>
+
+      <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, marginTop:24, marginBottom:0, fontStyle:"italic" }}>Your reset is not about perfection. It is about building a system that finally supports your life instead of constantly reacting to it.</p>
 
       <div style={{ marginTop:52 }}>
         <div style={{ ...S.eyebrow, marginBottom:24 }}>YOUR JOURNEY</div>
@@ -180,9 +182,15 @@ function TabPhase1({ setActiveTab }) {
         <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>This is where your reset begins. Before building anything, you need a clear, honest picture of where things currently stand.</p>
       </div>
       <h1 style={{ ...S.h1, marginTop:0, marginBottom:20 }}>Phase 1: Awareness</h1>
-      <p style={{ color:C.muted, fontSize:16, lineHeight:1.8, maxWidth:560, marginBottom:52, fontFamily:"'DM Sans', sans-serif", fontWeight:300 }}>
-        Before you can build structure, you need an honest picture of what is actually happening. This phase is entirely about seeing clearly.
+      <p style={{ color:C.muted, fontSize:16, lineHeight:1.8, maxWidth:560, marginBottom:36, fontFamily:"'DM Sans', sans-serif", fontWeight:300 }}>
+        Most people try to change financial behavior before they fully understand what is actually happening. Awareness is where clarity begins. Before structure can be built, your financial reality has to become visible without judgment, avoidance, or emotional reaction.
       </p>
+
+      <div style={{ marginBottom:40 }}>
+        <div style={{ ...S.eyebrow, marginBottom:10 }}>WHY THIS PHASE MATTERS</div>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>This phase is about slowing down long enough to see the patterns that have been quietly shaping your financial life beneath the surface. The goal is not shame. The goal is visibility.</p>
+      </div>
+
       <div style={{ ...S.eyebrow, marginBottom:20 }}>THIS WEEK</div>
       <div style={{ marginBottom:52 }}>
         {[
@@ -211,39 +219,40 @@ function TabTools({ data, update, t2Locked, t3Locked, t4Locked }) {
     <div>
       <div style={{ marginBottom:32 }}>
         <div style={{ ...S.eyebrow, marginBottom:10 }}>YOUR TOOLS</div>
-        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>These are the structured exercises that drive your reset. Complete them in order. Each one builds directly into the next.</p>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>These tools are designed to help you slow down, organize your financial reality, and begin rebuilding with intention. Each one reveals another layer of your operating system.</p>
       </div>
       <h2 style={{ ...S.h2, marginTop:0, marginBottom:8 }}>Your Tools This Week</h2>
-      <p style={{ color:C.muted, fontSize:14, marginBottom:40, fontFamily:"'DM Sans', sans-serif", fontWeight:300 }}>Complete each tool in order. Each one unlocks the next.</p>
+      <p style={{ color:C.muted, fontSize:14, marginBottom:40, fontFamily:"'DM Sans', sans-serif", fontWeight:300 }}>Each completed tool creates greater visibility, structure, and momentum.</p>
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:16 }} className="ep-g2">
         <ToolCard
           phase="PHASE 1 — TOOL 01" name="Financial Reset Workbook"
-          desc="Identify where your reset begins and the key pressure points in your financial life."
+          desc="Identify the financial patterns, emotional pressure points, and recurring cycles shaping your current system."
           time="15 min" status="ready" completed={data.tool1_complete}
           onComplete={() => update("tool1_complete", true)}
         ><WorkbookForm data={data} update={update} /></ToolCard>
 
         <ToolCard
           phase="PHASE 1 — TOOL 02" name="Financial Reality Audit"
-          desc="A structured look at your complete financial picture: income, expenses, debt, and obligations."
+          desc="For many people, this is the first time they have ever seen their full financial reality clearly mapped in one place."
           time="20 min" status={t2Locked ? "locked" : "ready"} completed={data.tool2_complete}
           onComplete={() => update("tool2_complete", true)}
         ><AuditForm data={data} update={update} /></ToolCard>
 
         <ToolCard
           phase="PHASE 1 — TOOL 03" name="Spending Reflection"
-          desc="An honest review of where your money went over the last 30 days and what patterns drove it."
+          desc="A behavioral review of where your money flowed over the last 30 days and what those decisions may reveal."
           time="15 min" status={t3Locked ? "locked" : "ready"} completed={data.tool3_complete}
           onComplete={() => update("tool3_complete", true)}
         ><SpendingForm data={data} update={update} /></ToolCard>
 
         <ToolCard
           phase="PHASE 1 — TOOL 04" name="Weekly System Review"
-          desc="A structured 10-minute check-in completed at the end of each week throughout your reset."
+          desc="A structured weekly reset designed to strengthen consistency, visibility, and intentional decision-making over time."
           time="10 min" status={t4Locked ? "locked" : "ready"} completed={data.tool4_complete}
           onComplete={() => update("tool4_complete", true)}
         ><WeeklyReviewForm data={data} update={update} /></ToolCard>
       </div>
+      <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, marginTop:32, marginBottom:0, fontStyle:"italic" }}>Structure changes behavior. Visibility changes decisions.</p>
     </div>
   );
 }
@@ -264,15 +273,17 @@ function TabProgress({ tc, overallPct, structurePct, data }) {
     <div>
       <div style={{ marginBottom:32 }}>
         <div style={{ ...S.eyebrow, marginBottom:10 }}>YOUR PROGRESS</div>
-        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Track how far you have come. Progress here reflects real structural change, not just activity.</p>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>This is not just activity tracking. These indicators reflect real behavioral and structural change happening over time.</p>
       </div>
       <h2 style={{ ...S.h2, marginTop:0, marginBottom:52 }}>Reset Progress Overview</h2>
 
-      <div style={{ display:"flex", gap:60, justifyContent:"center", marginBottom:64 }} className="ep-rings">
-        <RingProgress pct={overallPct}     value={`${overallPct}%`}     label="Overall Reset"  />
-        <RingProgress pct={structurePct}   value={`${structurePct}%`}   label="Structure Score" />
-        <RingProgress pct={consistencyPct} value={`${consistencyPct}%`} label="Consistency"    />
+      <div style={{ display:"flex", gap:60, justifyContent:"center", marginBottom:28 }} className="ep-rings">
+        <RingProgress pct={overallPct}     value={`${overallPct}%`}     label="System Stability"       />
+        <RingProgress pct={structurePct}   value={`${structurePct}%`}   label="Financial Visibility"   />
+        <RingProgress pct={consistencyPct} value={`${consistencyPct}%`} label="Behavioral Consistency" />
       </div>
+
+      <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, marginBottom:52, fontStyle:"italic" }}>Progress is not measured by perfection. It is measured by awareness, consistency, and the ability to move intentionally instead of reactively.</p>
 
       <div style={{ marginBottom:52 }}>
         <div style={{ ...S.eyebrow, marginBottom:16 }}>WEEKLY ACTIVITY</div>
@@ -294,6 +305,11 @@ function TabProgress({ tc, overallPct, structurePct, data }) {
           {m.done && <span style={{ color:C.gold, fontSize:10, letterSpacing:2, fontFamily:"'DM Sans', sans-serif" }}>DONE</span>}
         </div>
       ))}
+
+      <div style={{ marginTop:48 }}>
+        <div style={{ ...S.eyebrow, marginBottom:10 }}>WHAT IS CHANGING</div>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>As visibility increases, emotional pressure decreases. As structure improves, decision-making becomes clearer. As consistency builds, momentum begins to compound.</p>
+      </div>
     </div>
   );
 }
@@ -302,17 +318,17 @@ function TabProgress({ tc, overallPct, structurePct, data }) {
 
 function TabRoadmap() {
   const phases = [
-    { num:"01", name:"Awareness",     desc:"Seeing your financial reality clearly before building anything.",           active:true  },
-    { num:"02", name:"Stabilization", desc:"Organizing everything into one structured system.",                        active:false },
-    { num:"03", name:"Control",       desc:"Building consistent routines. Moving from reacting to directing.",         active:false },
-    { num:"04", name:"Positioning",   desc:"Aligning your behavior with future goals and intentional growth.",         active:false },
-    { num:"05", name:"Expansion",     desc:"Building long-term systems, ownership structures, and financial freedom.", active:false },
+    { num:"01", name:"Awareness",     desc:"From confusion to visibility. Seeing your financial reality clearly before trying to change it.",                       active:true  },
+    { num:"02", name:"Stabilization", desc:"From reaction to organization. Building systems that reduce chaos and increase clarity.",                               active:false },
+    { num:"03", name:"Control",       desc:"From survival to intentionality. Strengthening routines, consistency, and decision-making.",                           active:false },
+    { num:"04", name:"Positioning",   desc:"From short-term pressure to long-term direction. Creating structure that supports future growth.",                     active:false },
+    { num:"05", name:"Expansion",     desc:"From maintenance to expansion. Operating with greater confidence, clarity, and consistency.",                          active:false },
   ];
   return (
     <div>
       <div style={{ marginBottom:32 }}>
         <div style={{ ...S.eyebrow, marginBottom:10 }}>YOUR JOURNEY</div>
-        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Five phases from chaos to momentum. Understanding where you are going makes every step more intentional.</p>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Financial transformation rarely happens all at once. It happens in phases. Each stage creates the foundation for the next.</p>
       </div>
       <h2 style={{ ...S.h2, marginTop:0, marginBottom:48 }}>Five-Phase Reset Roadmap</h2>
       <div style={{ display:"flex", flexDirection:"column" }}>
@@ -359,6 +375,7 @@ function TabRoadmap() {
           </div>
         ))}
       </div>
+      <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, marginTop:32, marginBottom:0, fontStyle:"italic" }}>Every phase changes how your financial system operates and how you experience financial pressure emotionally.</p>
     </div>
   );
 }
@@ -370,7 +387,7 @@ function TabAdvisory() {
     <div>
       <div style={{ marginBottom:36 }}>
         <div style={{ ...S.eyebrow, marginBottom:10 }}>STRATEGIC GUIDANCE</div>
-        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>Direct observations and priority actions from Robert based on where you are in your reset.</p>
+        <p style={{ color:C.muted, fontSize:14, fontFamily:"'DM Sans', sans-serif", fontWeight:300, lineHeight:1.7, margin:0, maxWidth:600 }}>These observations are designed to help you stay grounded, intentional, and focused as your reset progresses.</p>
       </div>
 
       <div style={{ display:"flex", alignItems:"center", gap:24, marginBottom:48 }}>
@@ -388,16 +405,16 @@ function TabAdvisory() {
 
       <div style={{ borderLeft:`3px solid ${C.gold}`, padding:"4px 0 4px 28px", marginBottom:52, maxWidth:580 }}>
         <p style={{ color:C.text, fontSize:18, fontFamily:"'Cormorant Garamond', Georgia, serif", fontStyle:"italic", lineHeight:1.9, margin:0, opacity:0.85 }}>
-          This is about awareness. Structure. Consistency. Creating a system that supports your life instead of constantly reacting to it. Small actions repeated consistently create massive long-term change.
+          Right now the goal is not optimization. It is visibility. Most people try to solve financial stress before they fully understand the system creating it. Slow down enough to see the patterns clearly before trying to accelerate.
         </p>
       </div>
 
       <div style={{ ...S.eyebrow, marginBottom:20 }}>STRATEGIC GUIDANCE</div>
       <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:16, marginBottom:52 }} className="ep-g2">
         {[
-          { label:"STRATEGIC FOCUS",  text:"Complete all four Phase 1 tools before advancing. Quality matters more than speed." },
-          { label:"PRIORITY ACTION",  text:"Open the Financial Reset Workbook now. It is your first tool and your starting point." },
-          { label:"NEXT MILESTONE",   text:"Complete Tool 01 to unlock Tool 02 and begin building your reset progress." },
+          { label:"CURRENT FOCUS",        text:"Complete the Phase 1 tools slowly and honestly. Clarity matters more than speed." },
+          { label:"THIS WEEK'S PRIORITY", text:"Your first responsibility is visibility. Awareness creates leverage." },
+          { label:"NEXT MILESTONE",       text:"Complete Tool 01 to unlock deeper insight into your financial patterns and operating structure." },
         ].map(({ label, text }) => (
           <div key={label} style={{ ...S.card, borderTop:`2px solid ${C.gold}` }}>
             <div style={{ color:C.gold, fontSize:10, letterSpacing:3, marginBottom:10, fontFamily:"'DM Sans', sans-serif" }}>{label}</div>
