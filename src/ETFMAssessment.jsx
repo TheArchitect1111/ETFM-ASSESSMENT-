@@ -965,10 +965,10 @@ export default function ETFMAssessment(){
       <div style={{fontSize:"48px",marginBottom:"16px"}}>&#10003;</div>
       <Tag t="ETFM Financial Reset, Step 3"/>
       <h2 style={{fontSize:"34px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"20px",lineHeight:"1.3"}}>
-        Your Reset Experience is confirmed.
+        Congratulations. Your Reset Experience is confirmed.
       </h2>
       <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.7",marginBottom:"32px"}}>
-        Your purchase is complete. Your private portal access has been sent to your email so you can enter the Reset Experience from your inbox.
+        Thank you for taking this step. Your purchase is complete, and your private portal access is being delivered to your inbox now.
       </p>
       <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"28px",textAlign:"left",marginBottom:"24px"}}>
         <p style={{color:C.gold,fontSize:"11px",textTransform:"uppercase",letterSpacing:"2px",marginBottom:"20px"}}>The 4 Phases You're About to Work Through</p>
@@ -986,7 +986,7 @@ export default function ETFMAssessment(){
         ))}
       </div>
       <div style={{backgroundColor:C.white,border:`1px solid ${C.border}`,borderRadius:"8px",padding:"18px 22px",marginBottom:"24px",textAlign:"left"}}>
-        <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>Open the welcome email titled <strong style={{color:C.text}}>Your ETFM Reset Experience is ready</strong> and use the portal link inside. Check your spam or promotions folder if you do not see it within a few minutes.</p>
+        <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>What happens next: check your email for <strong style={{color:C.text}}>Your ETFM Reset Experience is ready</strong>. That email contains your portal access link and the next steps for beginning the Reset. Check spam or promotions if you do not see it within a few minutes.</p>
       </div>
       <Hr/>
       <p style={{fontSize:"13px",color:C.muted}}>Questions? <strong>exit@etfm.systems</strong></p>

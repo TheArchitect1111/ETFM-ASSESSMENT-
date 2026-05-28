@@ -61,15 +61,21 @@ export default async function handler(req, res) {
   const checkoutSessionId = req.query.checkout_session_id;
   if (!checkoutSessionId) return res.redirect(302, `${BASE_URL}/?showReset=true&resetPaid=missing_session`);
 
+  let session;
   try {
-    const session = await stripe.checkout.sessions.retrieve(checkoutSessionId);
+    session = await stripe.checkout.sessions.retrieve(checkoutSessionId);
     const isReset = session.metadata?.product === "reset_99";
     const isPaid = session.payment_status === "paid";
 
     if (!isReset || !isPaid) {
       return res.redirect(302, `${BASE_URL}/?showReset=true&resetPaid=false`);
     }
+  } catch (err) {
+    console.error("Reset payment verification error:", err);
+    return res.redirect(302, `${BASE_URL}/?showReset=true&resetPaid=verification_error`);
+  }
 
+  try {
     const metadata = session.metadata || {};
     const alreadySent = metadata.onboarding_sent === "true";
 
@@ -98,10 +104,9 @@ export default async function handler(req, res) {
         metadata: { ...metadata, onboarding_sent: "true" },
       });
     }
-
-    return res.redirect(302, `${BASE_URL}/?resetPaid=true`);
   } catch (err) {
-    console.error("Reset success handler error:", err);
-    return res.redirect(302, `${BASE_URL}/?showReset=true&resetPaid=email_error`);
+    console.error("Reset onboarding follow-up error:", err);
   }
+
+  return res.redirect(302, `${BASE_URL}/?resetPaid=true`);
 }
