@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 const LOGO_URL = "https://raw.githubusercontent.com/TheArchitect1111/ETFM-ASSESSMENT-/main/file_00000000e10471f5bb36fabf63d29869.png";
 const CALENDLY = "https://calendly.com/exit-etfm/etfm-strategic-reset-session";
-const STRIPE_RESET = "https://buy.stripe.com/dRm8wQ6GI0N06938468Vi0e";
 
 const C = {
   bg: "#f7f4ef", dark: "#1a1a2e", gold: "#c9973a", goldSoft: "#c9973a18",
@@ -461,6 +460,16 @@ export default function ETFMAssessment(){
     setLoading(true);
     try{
       const res=await fetch("/api/session-checkout",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,firstName,hasBlueprint:blueprintClient})});
+      const data=await res.json();
+      if(data.checkoutUrl) window.location.href=data.checkoutUrl;
+    }catch(e){alert("Something went wrong. Please try again.");}
+    finally{setLoading(false);}
+  };
+
+  const payReset=async()=>{
+    setLoading(true);
+    try{
+      const res=await fetch("/api/reset-checkout",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,firstName})});
       const data=await res.json();
       if(data.checkoutUrl) window.location.href=data.checkoutUrl;
     }catch(e){alert("Something went wrong. Please try again.");}
@@ -970,7 +979,9 @@ export default function ETFMAssessment(){
       <div style={{textAlign:'center', padding:'2rem'}}>
         <h2>Build the Structure</h2>
         <p>The ETFM Reset Experience is a guided implementation system to reduce financial chaos and create real stability.</p>
-        <a href="https://buy.stripe.com/dRm8wQ6GI0N06938468Vi0e" style={{display:'inline-block', padding:'1rem 2rem', background:'#1a2744', color:'#c9a84c', textDecoration:'none'}}>Begin Your Reset Experience — $99</a>
+        <button onClick={payReset} disabled={loading} style={{display:'inline-block', padding:'1rem 2rem', background:'#1a2744', color:'#c9a84c', border:'none', cursor:'pointer'}}>
+          {loading ? "One moment, setting up your Reset..." : "Begin Your Reset Experience - $99"}
+        </button>
       </div>
     </Wrap>
   );
