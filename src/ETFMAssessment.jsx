@@ -387,6 +387,12 @@ export default function ETFMAssessment(){
   useEffect(()=>{window.scrollTo({top:0,behavior:"smooth"});},[screen,freeIdx,bpIdx]);
 
   useEffect(()=>{
+    if(screen!=="q_transition") return;
+    const t=setTimeout(advanceFromTransition,2500);
+    return()=>clearTimeout(t);
+  },[screen]);
+
+  useEffect(()=>{
     const params=new URLSearchParams(window.location.search);
     const s=params.get("session");
     const cancelled=params.get("cancelled");
