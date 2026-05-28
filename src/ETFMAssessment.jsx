@@ -412,7 +412,7 @@ export default function ETFMAssessment(){
         setFirstName(data.first_name||"");
         setEmail(data.email||"");
         setBlueprintClient(true);
-        setScreen("blueprint_chat");
+        setScreen("blueprint_intro");
       }else{setScreen("blueprint_unpaid");}
     }catch(e){setScreen("blueprint_unpaid");}
   };
@@ -784,6 +784,27 @@ export default function ETFMAssessment(){
     </Wrap>
   );
 
+  // BLUEPRINT INTRO (post-payment, pre-questions)
+  if(screen==="blueprint_intro") return(
+    <Wrap max="520px">
+      <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"4px",color:C.gold,marginBottom:"52px",opacity:0.8}}>ETFM Strategic Blueprint</p>
+      <h1 style={{fontSize:"42px",fontFamily:"Georgia, serif",color:C.text,lineHeight:"1.2",marginBottom:"22px",fontWeight:"normal"}}>Your pattern has been identified.</h1>
+      <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.9",marginBottom:"20px",maxWidth:"440px",margin:"0 auto 20px"}}>What you are about to complete is not a questionnaire. It is a financial visibility review designed to surface the structural gaps, behavioral patterns, and decision-making loops currently shaping your financial life.</p>
+      <p style={{fontSize:"14px",color:"rgba(122,122,138,0.65)",fontStyle:"italic",lineHeight:"1.7",marginBottom:"64px",marginTop:"20px"}}>There are no wrong answers. Accuracy matters more than perfection.</p>
+      <div style={{maxWidth:"400px",margin:"0 auto 64px",textAlign:"left"}}>
+        <p style={{fontSize:"10px",textTransform:"uppercase",letterSpacing:"3px",color:C.gold,marginBottom:"28px",opacity:0.7}}>What Happens Next</p>
+        {[
+          "01 — You complete 18 visibility questions.",
+          "02 — Your Financial Archetype is identified.",
+          "03 — Your personalized Blueprint is delivered to your inbox.",
+        ].map((line,i)=>(
+          <p key={i} style={{fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.5",marginBottom:"20px",margin:"0 0 20px"}}>{line}</p>
+        ))}
+      </div>
+      <button onClick={()=>setScreen("blueprint_chat")} style={{backgroundColor:C.dark,color:C.gold,border:"none",padding:"16px 48px",fontSize:"14px",fontWeight:"bold",borderRadius:"8px",cursor:"pointer",letterSpacing:"1.5px",textTransform:"uppercase"}}>Begin the Visibility Review</button>
+    </Wrap>
+  );
+
   // BLUEPRINT CHAT
   if(screen==="blueprint_chat"){
     const q=BQ[bpIdx];
@@ -793,7 +814,7 @@ export default function ETFMAssessment(){
         <div style={{maxWidth:"680px",margin:"0 auto"}}>
           <div style={{marginBottom:"8px",display:"flex",justifyContent:"space-between"}}>
             <p style={{fontSize:"11px",color:C.gold,textTransform:"uppercase",letterSpacing:"1px",margin:0}}>Strategic Blueprint: {q.section}</p>
-            <p style={{fontSize:"11px",color:C.muted,margin:0}}>{bpIdx+1} of {BQ.length}</p>
+            <p style={{fontSize:"11px",color:C.muted,margin:0}}>Financial Visibility Review • {bpIdx+1} of {BQ.length}</p>
           </div>
           <div style={{marginBottom:"36px",backgroundColor:C.border,height:"3px",borderRadius:"2px",overflow:"hidden"}}>
             <div style={{backgroundColor:C.gold,height:"100%",width:`${prog}%`,transition:"width 0.4s ease"}}/>
