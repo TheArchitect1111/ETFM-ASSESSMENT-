@@ -402,6 +402,14 @@ export default function ETFMAssessment(){
     }
   },[]);
 
+  useEffect(()=>{
+    if(!document.getElementById("ea-fonts")){
+      const l=document.createElement("link");l.id="ea-fonts";l.rel="stylesheet";
+      l.href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap";
+      document.head.appendChild(l);
+    }
+  },[]);
+
   const checkBlueprintSession=async(s, checkoutSessionId)=>{
     try{
       const checkoutParam = checkoutSessionId ? `&checkout_session_id=${encodeURIComponent(checkoutSessionId)}` : "";
@@ -508,11 +516,16 @@ export default function ETFMAssessment(){
   if(screen==="intro") return(
     <Wrap max="560px">
       <div style={{marginBottom:"0"}}>
+        <div style={{paddingTop:"8px",paddingBottom:"44px",textAlign:"center"}}>
+          <p style={{fontFamily:"'Cormorant Garamond',Georgia,serif",fontSize:"28px",color:"#c9a84c",fontVariant:"small-caps",letterSpacing:"0.3em",margin:"0 0 10px",fontWeight:"600"}}>E T F M</p>
+          <p style={{fontSize:"10px",textTransform:"uppercase",letterSpacing:"0.22em",color:"rgba(201,168,76,0.65)",margin:0}}>Escape the Financial Matrix</p>
+        </div>
         <div style={{width:"64px",height:"64px",borderRadius:"50%",backgroundColor:C.dark,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 52px",opacity:0.88}}>
           <img src={LOGO_URL} alt="ETFM" style={{width:"48px",height:"48px",objectFit:"contain"}} onError={e=>e.target.style.display="none"}/>
         </div>
         <h1 style={{fontSize:"40px",fontFamily:"Georgia, serif",color:C.text,lineHeight:"1.25",marginBottom:"14px",fontWeight:"normal"}}>Most people don't have a money problem.</h1>
-        <h2 style={{fontSize:"30px",fontFamily:"Georgia, serif",color:"rgba(26,26,46,0.5)",lineHeight:"1.25",marginBottom:"48px",fontWeight:"normal"}}>They have a pattern problem.</h2>
+        <h2 style={{fontSize:"30px",fontFamily:"Georgia, serif",color:"rgba(26,26,46,0.5)",lineHeight:"1.25",marginBottom:"32px",fontWeight:"normal"}}>They have a pattern problem.</h2>
+        <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.9",marginBottom:"40px",maxWidth:"680px",margin:"0 auto 40px",fontFamily:"Georgia, serif"}}>Personal finances have become increasingly complex — not because people lack effort or intelligence, but because most people were never shown how to organize the system beneath the pressure. Accounts, obligations, decisions, and patterns compound quietly over time until the weight of it becomes the background noise of daily life. ETFM was built to change that. This process is designed to help you slow down, see your financial system clearly, and begin rebuilding it with structure, intention, and direction.</p>
         <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.9",marginBottom:"52px",maxWidth:"440px",margin:"0 auto 52px"}}>The same cycles repeat. The same pressure returns. Not because of effort or intelligence, but because the underlying financial system has never been clearly seen or rebuilt. The ETFM Snapshot is a 5-question behavioral diagnostic designed to identify hidden patterns, system leaks, and the financial behaviors shaping your life beneath the surface. It takes about two minutes.</p>
         <button onClick={()=>setScreen("snapshot_intro")} style={{backgroundColor:C.gold,color:C.dark,border:"none",padding:"16px 48px",fontSize:"14px",fontWeight:"bold",borderRadius:"8px",cursor:"pointer",letterSpacing:"1.5px",textTransform:"uppercase"}}>Start Your Snapshot</button>
         <p style={{fontSize:"12px",color:"rgba(122,122,138,0.65)",marginTop:"18px",letterSpacing:"0.3px"}}>Five questions. One clearer view of the system you're operating inside.</p>
@@ -539,6 +552,7 @@ export default function ETFMAssessment(){
     <Wrap max="600px">
       <Tag t="ETFM Behavioral Pattern Diagnostic"/>
       <h1 style={{fontSize:"34px",fontFamily:"Georgia, serif",marginBottom:"16px",color:C.text,lineHeight:"1.3"}}>Before we surface your pattern, here is what this diagnostic does.</h1>
+      <p style={{fontSize:"15px",color:C.muted,marginBottom:"24px",lineHeight:"1.8",fontStyle:"italic"}}>Before we surface your pattern, it helps to understand what this diagnostic is designed to reveal — and why your honest responses matter more than your ideal ones.</p>
       <p style={{fontSize:"16px",color:C.muted,marginBottom:"24px",lineHeight:"1.8"}}>This is not a quiz. It is a 5-question behavioral pattern analysis designed to identify the structural and behavioral factors currently shaping your financial decisions. Each question surfaces a specific layer of your financial operating system.</p>
       <div style={{backgroundColor:C.dark,borderRadius:"10px",padding:"24px",marginBottom:"32px",textAlign:"left"}}>
         {[
@@ -589,7 +603,10 @@ export default function ETFMAssessment(){
           <div style={{marginBottom:"40px",padding:"0"}}>
             {q.subtext&&<p style={{color:"rgba(122,122,138,0.85)",fontSize:"13px",margin:"0 0 14px",lineHeight:"1.7"}}>{q.subtext}</p>}
             {q.highlight&&<p style={{color:"rgba(26,26,46,0.5)",fontSize:"14px",fontStyle:"italic",letterSpacing:"0.5px",lineHeight:"1.9",margin:"0 0 24px",paddingLeft:"14px",borderLeft:"1.5px solid rgba(201,151,58,0.35)"}}>{q.highlight}</p>}
-            <p style={{fontSize:"10px",textTransform:"uppercase",letterSpacing:"3px",color:C.gold,marginBottom:"12px",opacity:0.8}}>{STAGES[freeIdx]}</p>
+            <p style={{fontSize:"10px",textTransform:"uppercase",letterSpacing:"3px",color:C.gold,marginBottom:"8px",opacity:0.8}}>{STAGES[freeIdx]}</p>
+            <p style={{fontSize:"12px",color:"rgba(122,122,138,0.65)",marginBottom:"16px",lineHeight:"1.6",fontStyle:"italic",margin:"0 0 16px"}}>
+              {["How clearly you currently see your financial picture.","How you respond when financial stress builds.","The systems and habits you have in place.","Where you are trying to go financially.","How ready you are to build and follow a system."][freeIdx]}
+            </p>
             <h2 style={{fontSize:"28px",fontFamily:"Georgia, serif",color:C.text,margin:0,lineHeight:"1.35",fontWeight:"normal"}}>{q.bot}</h2>
           </div>
           {q.options.map((opt,i)=>(
@@ -622,6 +639,7 @@ export default function ETFMAssessment(){
       <div style={{maxWidth:"560px",width:"100%",textAlign:"center"}}>
         <Tag t="Pattern Analysis Complete"/>
         <h2 style={{fontSize:"32px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Your behavioral pattern has been identified.</h2>
+        <p style={{fontSize:"15px",color:C.muted,marginBottom:"20px",lineHeight:"1.8",fontStyle:"italic",maxWidth:"480px",margin:"0 auto 20px"}}>Your pattern has been identified. Enter your details to receive your complete Awareness Score, Financial Archetype, and personalized behavioral breakdown.</p>
         <p style={{fontSize:"16px",color:C.muted,marginBottom:"32px",lineHeight:"1.8"}}>What we found reveals how your financial decisions have been structured, where hidden system leaks exist, and what behavioral blind spots have been shaping your financial life without your awareness. Your Awareness Score is ready.</p>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"12px",marginBottom:"32px"}}>
           {[
@@ -669,6 +687,7 @@ export default function ETFMAssessment(){
     return(
     <div style={{minHeight:"100vh",backgroundColor:C.bg,padding:"40px 20px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
       <div style={{maxWidth:"580px",width:"100%",textAlign:"center"}}>
+        <p style={{fontSize:"15px",color:C.muted,lineHeight:"1.8",marginBottom:"24px",fontStyle:"italic",textAlign:"left"}}>What follows is a diagnostic reading of your current financial operating system — where it is holding, and where it is leaking.</p>
         <p style={{color:'#4A4A4A',fontSize:'15px',lineHeight:'1.9',marginBottom:'24px',textAlign:'left'}}>What this diagnostic uncovered is not a reflection of your effort. It is a map of how your financial operating system is currently running: which behavioral patterns are active, where structural gaps are creating friction, and where hidden system leaks are driving the cycles you keep experiencing. Most people don't have an effort problem. They have a structure problem. Now you can see it.</p>
         <Tag t="Behavioral Pattern Analysis Complete"/>
         <h2 style={{fontSize:"32px",fontFamily:"Georgia, serif",color:C.text,marginBottom:"16px",lineHeight:"1.3"}}>Your financial operating system has been mapped.</h2>
@@ -818,7 +837,7 @@ export default function ETFMAssessment(){
   if(screen==="blueprint_intro") return(
     <Wrap max="520px">
       <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"4px",color:C.gold,marginBottom:"52px",opacity:0.8}}>ETFM Strategic Blueprint</p>
-      <h1 style={{fontSize:"42px",fontFamily:"Georgia, serif",color:C.text,lineHeight:"1.2",marginBottom:"22px",fontWeight:"normal"}}>Your pattern has been identified.</h1>
+      <h1 style={{fontSize:"42px",fontFamily:"Georgia, serif",color:C.text,lineHeight:"1.2",marginBottom:"22px",fontWeight:"normal"}}>Let's identify the pattern beneath the pressure.</h1>
       <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.9",marginBottom:"20px",maxWidth:"440px",margin:"0 auto 20px"}}>What you are about to complete is not a questionnaire. It is a financial visibility review designed to surface the structural gaps, behavioral patterns, and decision-making loops currently shaping your financial life.</p>
       <p style={{fontSize:"14px",color:"rgba(122,122,138,0.65)",fontStyle:"italic",lineHeight:"1.7",marginBottom:"64px",marginTop:"20px"}}>There are no wrong answers. Accuracy matters more than perfection.</p>
       <div style={{maxWidth:"400px",margin:"0 auto 64px",textAlign:"left"}}>
