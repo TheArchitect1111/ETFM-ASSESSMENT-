@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 
   // ── GET: Check session status OR create session from email button ──────────
   if (req.method === "GET") {
-    const { session_id, action, email, firstName } = req.query;
+    const { session_id, checkout_session_id, action, email, firstName } = req.query;
 
     // Create session from email button click then redirect to Stripe
     if (action === "create" && email) {
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
             quantity: 1,
           }],
           mode: "payment",
-          success_url: `https://etfm-assessment.vercel.app/blueprint/continue?session=${sessionId}`,
+          success_url: `https://etfm-assessment.vercel.app/blueprint/continue?session=${sessionId}&checkout_session_id={CHECKOUT_SESSION_ID}`,
           cancel_url: `https://etfm-assessment.vercel.app/blueprint/continue?session=${sessionId}&cancelled=true`,
           customer_email: email,
           metadata: { blueprint_session_id: sessionId },
@@ -65,6 +65,33 @@ export default async function handler(req, res) {
         .single();
 
       if (error || !data) return res.status(404).json({ error: "Session not found" });
+
+      if (data.status !== "paid" && checkout_session_id) {
+        try {
+          const stripe = (await import("stripe")).default(process.env.STRIPE_SECRET_KEY);
+          const checkoutSession = await stripe.checkout.sessions.retrieve(checkout_session_id);
+          const sessionMatches = checkoutSession.metadata?.blueprint_session_id === session_id;
+          const paymentComplete = checkoutSession.payment_status === "paid";
+
+          if (sessionMatches && paymentComplete) {
+            const paidAt = new Date().toISOString();
+            const { error: updateError } = await supabase
+              .from("blueprint_sessions")
+              .update({ status: "paid", paid_at: paidAt })
+              .eq("session_id", session_id);
+
+            if (updateError) {
+              console.error("Supabase payment verification update error:", updateError);
+              return res.status(500).json({ error: "Payment verified but DB update failed" });
+            }
+
+            return res.status(200).json({ ...data, status: "paid", paid_at: paidAt });
+          }
+        } catch (err) {
+          console.error("Stripe payment verification error:", err);
+        }
+      }
+
       return res.status(200).json(data);
     }
 
@@ -109,7 +136,7 @@ export default async function handler(req, res) {
           quantity: 1,
         }],
         mode: "payment",
-        success_url: `https://etfm-assessment.vercel.app/blueprint/continue?session=${sessionId}`,
+        success_url: `https://etfm-assessment.vercel.app/blueprint/continue?session=${sessionId}&checkout_session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `https://etfm-assessment.vercel.app/blueprint/continue?session=${sessionId}&cancelled=true`,
         customer_email: email,
         metadata: { blueprint_session_id: sessionId },

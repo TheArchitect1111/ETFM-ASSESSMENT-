@@ -393,13 +393,14 @@ export default function ETFMAssessment(){
     if(s&&!params.get("sessionPaid")){
       setSid(s);
       if(cancelled==="true"){setScreen("blueprint_cancelled");}
-      else{checkBlueprintSession(s);}
+      else{checkBlueprintSession(s, params.get("checkout_session_id"));}
     }
   },[]);
 
-  const checkBlueprintSession=async(s)=>{
+  const checkBlueprintSession=async(s, checkoutSessionId)=>{
     try{
-      const res=await fetch(`/api/blueprint-session?session_id=${s}`);
+      const checkoutParam = checkoutSessionId ? `&checkout_session_id=${encodeURIComponent(checkoutSessionId)}` : "";
+      const res=await fetch(`/api/blueprint-session?session_id=${s}${checkoutParam}`);
       const data=await res.json();
       if(data.status==="paid"){
         setFirstName(data.first_name||"");
