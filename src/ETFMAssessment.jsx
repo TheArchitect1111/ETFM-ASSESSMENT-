@@ -847,31 +847,40 @@ export default function ETFMAssessment(){
 
   // BLUEPRINT COMPLETE
   if(screen==="blueprint_complete") return(
-    <Wrap max="620px">
-      <div style={{textAlign:"center",marginBottom:"32px"}}>
-        <img src={LOGO_URL} alt="ETFM" style={{width:"64px",display:"block",margin:"0 auto 16px"}}/>
-        <Tag t="Blueprint Complete"/>
+    <div style={{minHeight:"100vh",background:"linear-gradient(150deg,#f5f0e8 0%,#f7f4ef 45%,#f2ece2 100%)",padding:"80px 20px"}}>
+      <div style={{maxWidth:"520px",margin:"0 auto",textAlign:"center"}}>
+
+        <p style={{fontSize:"11px",textTransform:"uppercase",letterSpacing:"4px",color:C.gold,marginBottom:"56px",opacity:0.8}}>ETFM Strategic Blueprint</p>
+
+        <h1 style={{fontSize:"40px",fontFamily:"Georgia, serif",color:C.text,lineHeight:"1.2",marginBottom:"28px",fontWeight:"normal"}}>Your Strategic Blueprint has been prepared.</h1>
+
+        <p style={{fontSize:"16px",color:C.muted,lineHeight:"1.9",marginBottom:"72px"}}>You have just moved through a deeper layer of the ETFM system. What was surfaced here is not a report. It is a map of the patterns that have been shaping your financial life.</p>
+
+        <p style={{fontSize:"19px",fontFamily:"Georgia, serif",color:C.text,fontStyle:"italic",opacity:0.4,lineHeight:"1.7",marginBottom:"80px"}}>The moment a pattern becomes visible, it can begin to change.</p>
+
+        <div style={{textAlign:"left",marginBottom:"72px"}}>
+          <p style={{fontSize:"10px",textTransform:"uppercase",letterSpacing:"3px",color:C.gold,marginBottom:"28px",opacity:0.7}}>What Happens Next</p>
+          {[
+            "01 — Your Strategic Blueprint arrives by email.",
+            "02 — Review your Awareness Score and behavioral patterns.",
+            "03 — Begin your 30-Day Reset Protocol.",
+            "04 — Decide whether to continue into the ETFM Reset Experience.",
+          ].map((line,i)=>(
+            <p key={i} style={{fontSize:"15px",color:C.text,fontFamily:"Georgia, serif",lineHeight:"1.6",margin:"0 0 20px"}}>{line}</p>
+          ))}
+        </div>
+
+        <div style={{textAlign:"left",marginBottom:"72px"}}>
+          <p style={{fontSize:"10px",textTransform:"uppercase",letterSpacing:"3px",color:C.gold,marginBottom:"20px",opacity:0.7}}>Before Your Blueprint Arrives</p>
+          <p style={{fontSize:"15px",color:C.muted,lineHeight:"1.9",margin:0}}>Have a notebook nearby. Some of the patterns you uncover may change the way you see your financial life moving forward.</p>
+        </div>
+
+        <p style={{fontSize:"14px",color:"rgba(122,122,138,0.6)",lineHeight:"1.9",fontStyle:"italic",marginBottom:"72px"}}>If you continue into the ETFM Reset Experience, your Blueprint investment is fully credited toward the next phase.</p>
+
+        <p style={{fontSize:"12px",color:C.muted}}>Questions? <a href="mailto:exit@etfm.systems" style={{color:C.gold,textDecoration:"none"}}>exit@etfm.systems</a></p>
+
       </div>
-      <div style={{backgroundColor:C.white,borderRadius:"12px",border:`1px solid ${C.border}`,overflow:"hidden",textAlign:"left"}}>
-        <div style={{backgroundColor:C.dark,padding:"32px 40px",textAlign:"center"}}>
-          <h1 style={{margin:0,color:C.white,fontSize:"26px",fontFamily:"Georgia, serif",fontWeight:"normal",lineHeight:"1.4"}}>Your Strategic Blueprint<br/>has been prepared.</h1>
-        </div>
-        <div style={{padding:"40px"}}>
-          <p style={{color:C.text,fontSize:"16px",lineHeight:"1.8",marginBottom:"16px"}}>What you did today took honesty, and that matters.</p>
-          <p style={{color:C.muted,fontSize:"15px",lineHeight:"1.9",marginBottom:"32px"}}>Most people avoid looking closely at their financial patterns. You didn't. Your personalized Blueprint, strategic roadmap, and 30-Day Reset Protocol will be in your inbox shortly, typically within a few minutes. Check your spam folder if you don't see it right away.</p>
-          <div style={{backgroundColor:C.bg,borderRadius:"8px",padding:"20px 24px",marginBottom:"32px",borderLeft:`3px solid ${C.gold}`}}>
-            <p style={{margin:"0 0 10px",color:C.gold,fontSize:"14px",fontWeight:"bold",lineHeight:"1.6"}}>Your Blueprint Investment Carries Forward</p>
-            <p style={{margin:0,color:C.muted,fontSize:"14px",lineHeight:"1.8"}}>If you decide to invest in the ETFM Financial Reset ($499), your $47 Blueprint investment is fully credited toward your total. That credit also unlocks an additional discount, bringing your final investment to $425. Your first step toward clarity never loses its value. It builds on it.</p>
-          </div>
-          <div style={{textAlign:"center",padding:"24px 0",borderTop:`1px solid ${C.border}`}}>
-            <p style={{margin:0,color:C.text,fontSize:"16px",lineHeight:"2.4",fontFamily:"Georgia, serif",fontStyle:"italic"}}>Clarity creates control.<br/>Control creates momentum.<br/>Momentum creates freedom.</p>
-          </div>
-        </div>
-        <div style={{backgroundColor:C.bg,padding:"20px 40px",textAlign:"center",borderTop:`1px solid ${C.border}`}}>
-          <p style={{margin:0,color:C.muted,fontSize:"13px"}}>Questions? <a href="mailto:exit@etfm.systems" style={{color:C.gold,textDecoration:"none"}}>exit@etfm.systems</a></p>
-        </div>
-      </div>
-    </Wrap>
+    </div>
   );
 
   // SESSION OFFER
