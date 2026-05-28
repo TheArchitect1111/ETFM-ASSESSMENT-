@@ -3,7 +3,9 @@ import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const BASE_URL = "https://etfm-assessment.vercel.app";
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const MAKE_RESET_WEBHOOK_URL = process.env.MAKE_RESET_WEBHOOK_URL;
+const MAKE_RESET_WEBHOOK_URL =
+  process.env.MAKE_RESET_WEBHOOK_URL ||
+  "https://hook.us2.make.com/55f1ykdw76g5ecyelm5hqvcewr71lqs1";
 
 async function sendEmail(to, subject, html) {
   if (!RESEND_API_KEY || !to) return { skipped: true };
