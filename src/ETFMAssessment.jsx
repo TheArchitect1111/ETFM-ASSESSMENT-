@@ -595,8 +595,7 @@ export default function ETFMAssessment(){
     return(
       <div style={{minHeight:"100vh",background:"linear-gradient(150deg,#f5f0e8 0%,#f7f4ef 45%,#f2ece2 100%)",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",padding:"40px 20px"}}>
         <div style={{maxWidth:"480px",width:"100%",textAlign:"center"}}>
-          <p style={{fontSize:"26px",fontFamily:"Georgia, serif",color:C.text,lineHeight:"1.6",marginBottom:"56px",fontWeight:"normal"}}>{line}</p>
-          <button onClick={advanceFromTransition} style={{backgroundColor:"transparent",border:"none",color:C.gold,fontSize:"12px",textTransform:"uppercase",letterSpacing:"2.5px",cursor:"pointer",padding:"8px 0"}}>Continue →</button>
+          <p style={{fontSize:"26px",fontFamily:"Georgia, serif",color:C.text,lineHeight:"1.6",fontWeight:"normal"}}>{line}</p>
         </div>
       </div>
     );
@@ -774,7 +773,7 @@ export default function ETFMAssessment(){
       <div style={{textAlign:'center', padding:'2rem'}}>
         <h2>Go Deeper</h2>
         <p>Your Snapshot revealed the pattern. The Blueprint shows you the system driving it.</p>
-        <a href="https://buy.stripe.com/fZueVee9agLY7d7esu8Vi0f" style={{display:'inline-block', padding:'1rem 2rem', background:'#1a2744', color:'#c9a84c', textDecoration:'none'}}>Unlock Your Strategic Blueprint — $47</a>
+        <button onClick={payBlueprint} disabled={loading} style={{display:'inline-block', padding:'1rem 2rem', background:'#1a2744', color:'#c9a84c', border:'none', cursor:'pointer'}}>{loading ? "One moment, setting up your Blueprint..." : "Unlock Your Strategic Blueprint - $47"}</button>
       </div>
     </Wrap>
   );
@@ -845,7 +844,8 @@ export default function ETFMAssessment(){
       <div style={{textAlign:'center', padding:'2rem'}}>
         <h2>Private Strategic Partnership</h2>
         <p>Work directly with Robert to analyze your financial reality, close the structural gaps, and build a system that runs on intention, not pressure.</p>
-        <a href="https://buy.stripe.com/7sY14o7KMbrE693ckm8Vi0c" style={{display:'inline-block', padding:'1rem 2rem', background:'#1a2744', color:'#c9a84c', textDecoration:'none'}}>Book Your Strategic Reset Session — $499</a>
+        <a href={`${CALENDLY}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(firstName)}`} target="_blank" rel="noopener noreferrer" style={{display:'inline-block', padding:'1rem 2rem', background:'#1a2744', color:'#c9a84c', textDecoration:'none'}}>{blueprintClient ? "Book Your Strategic Reset Session - $425 Blueprint Client Rate" : "Book Your Strategic Reset Session - $499"}</a>
+        <p style={{fontSize:'13px', color:C.muted}}>{blueprintClient ? "Your $47 Blueprint purchase has been credited, reducing your Strategic Reset rate to $425." : "Blueprint clients receive a credited Strategic Reset rate of $425."}</p>
       </div>
     </Wrap>
   );
