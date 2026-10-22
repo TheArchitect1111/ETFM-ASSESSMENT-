@@ -3,64 +3,53 @@ const supabaseAnon = createClient(process.env.SUPABASE_URL, process.env.SUPABASE
 const supabaseAdmin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+const CALENDLY = "https://calendly.com/exit-etfm/etfm-strategic-reset-session";
+const FRAMEWORK_URL = "https://etfm-assessment.vercel.app/framework.html";
 const LOGO = "https://raw.githubusercontent.com/TheArchitect1111/ETFM-ASSESSMENT-/main/file_00000000e10471f5bb36fabf63d29869.png";
 async function callClaude(prompt, maxTokens = 2048) {
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" },
-    body: JSON.stringify({ model: "claude-opus-4-5", max_tokens: maxTokens, messages: [{ role: "user", content: prompt }] }),
-  });
-  const data = await res.json();
-  if (!res.ok) throw new Error(`Claude error: ${JSON.stringify(data)}`);
-  return data?.content?.[0]?.text || "";
+  const res = await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "Content-Type": "application/json", "x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" }, body: JSON.stringify({ model: "claude-opus-4-5", max_tokens: maxTokens, messages: [{ role: "user", content: prompt }] }) });
+  const data = await res.json(); if (!res.ok) throw new Error(`Claude error: ${JSON.stringify(data)}`); const text = data?.content?.[0]?.text || ""; if (!text.trim()) throw new Error("Claude returned empty"); return text;
 }
 function answerText(answers = [], index, fallback = "Not provided") { return answers[index]?.answer || answers[index] || fallback; }
 function blueprintFallbackReport(firstName = "there", freeAnswers = [], blueprintAnswers = []) {
-  const visibility = answerText(blueprintAnswers, 0);
-  return `<h3>Executive Pattern Read</h3><p>${firstName}, your Blueprint needs clearer visibility and structure.</p><p>Visibility: ${visibility}</p>`;
+  const visibility = answerText(blueprintAnswers, 0); const pressure = answerText(blueprintAnswers, 3); const structure = answerText(blueprintAnswers, 5); const trajectory = answerText(blueprintAnswers, 16);
+  return `<h3 style="color:#1a1a2e;font-family:Georgia,serif;">Executive Pattern Read</h3><p>${firstName}, your Blueprint points to a financial system that needs clearer visibility, stronger operating structure, and more consistent review.</p><hr style="border:none;border-top:1px solid #e8e3da;margin:32px 0;"><h3 style="color:#1a1a2e;font-family:Georgia,serif;">What Your Answers Revealed</h3><p><strong style="color:#c9973a;">Visibility:</strong> ${visibility}</p><p><strong style="color:#c9973a;">Pressure Point:</strong> ${pressure}</p><p><strong style="color:#c9973a;">Current Structure:</strong> ${structure}</p><p><strong style="color:#c9973a;">Future Concern:</strong> ${trajectory}</p><hr style="border:none;border-top:1px solid #e8e3da;margin:32px 0;"><h3 style="color:#1a1a2e;font-family:Georgia,serif;">Your First Three Moves</h3><ol><li>Create one complete list of bills, debts, due dates, balances, and recurring obligations.</li><li>Set one weekly 30-minute financial review.</li><li>Choose one priority for the next 30 days.</li></ol>`;
 }
-function isUsableReport(html = "") { const text = html.replace(/<[^>]*>/g, " ").trim(); return text.length > 500; }
-async function sendEmail(to, subject, html) {
-  const res = await fetch("https://api.resend.com/emails", { method: "POST", headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" }, body: JSON.stringify({ from: "ETFM <noreply@send.etfm.systems>", to, subject, html }) });
-  return res.json();
-}
-function emailWrapper(content) { return `<!DOCTYPE html><html><body><table width="600"><tr><td>${content}</td></tr></table></body></html>`; }
+function isUsableReport(html = "") { const text = html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim(); return text.length > 500 && /Strategic|Blueprint|30-Day|Week 1|Financial/i.test(text); }
+async function sendEmail(to, subject, html) { const res = await fetch("https://api.resend.com/emails", { method: "POST", headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" }, body: JSON.stringify({ from: "ETFM <noreply@send.etfm.systems>", to, subject, html }) }); const data = await res.json(); if (!res.ok) console.error("Resend error:", data); return data; }
+function emailWrapper(content) { return `<!DOCTYPE html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/></head><body style="margin:0;padding:0;background-color:#f7f4ef;font-family:Arial,sans-serif;"><table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f7f4ef;padding:40px 0;"><tr><td align="center"><table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e8e3da;"><tr><td style="background-color:#1a1a2e;padding:32px 40px;text-align:center;"><img src="${LOGO}" alt="ETFM" width="80" style="display:block;margin:0 auto 16px;max-width:80px;"/><p style="margin:0;color:#c9973a;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-family:Georgia,serif;">Escape The Financial Matrix</p></td></tr>${content}<tr><td style="background-color:#f7f4ef;padding:24px 40px;text-align:center;border-top:1px solid #e8e3da;"><p style="margin:0 0 8px;color:#7a7a8a;font-size:12px;">Questions? <a href="mailto:exit@etfm.systems" style="color:#c9973a;">exit@etfm.systems</a></p><p style="margin:0;color:#a0a0a8;font-size:11px;font-style:italic;line-height:1.6;">ETFM provides educational and strategic financial guidance.</p></td></tr></table></td></tr></table></body></html>`; }
 const SCORE_MAP_API = { no_idea:2, some_inconsistent:7, track_mentally:11, track_most:16, know_exactly:20, disappears_bills:2, spend_quickly:4, try_save:9, use_intentionally:16, save_invest:20, avoid:2, emotional_decisions:5, work_more:9, ask_others:12, slow_plan:20, debt:6, spending:6, saving:9, income_consistency:10, planning_future:11, investing:13, fairly_organized:20, stability:13, peace_of_mind:15, freedom_from_debt:16, time_freedom:17, ownership_wealth:20, security_family:19, dont_know:5 };
+const SCORE_CATEGORIES = ["Awareness", "Money Pattern", "Stress Response", "Financial Structure", "System Readiness"];
 function calculateAwarenessScore(answers) { const scores = answers.map((a) => SCORE_MAP_API[a] || 10); return Math.min(100, scores.reduce((sum, s) => sum + s, 0)); }
-function assignArchetype(answers, awarenessScore) {
-  if (awarenessScore < 25) return "Financial Avoider"; if (awarenessScore < 40) return "Drifter";
-  if (answers.includes("disappears_bills")) return "Leaker"; if (awarenessScore >= 70) return "Builder"; return "Directionless Earner";
-}
+function assignArchetype(answers, awarenessScore) { if (awarenessScore < 25) return "Financial Avoider"; if (awarenessScore < 40) return "Drifter"; if (answers.includes("disappears_bills") || answers.includes("spend_quickly")) return "Leaker"; if (answers.includes("work_more") && awarenessScore < 60) return "Overextended Achiever"; if (answers.includes("dont_know")) return "Directionless Earner"; if (answers.includes("try_save") && awarenessScore < 60) return "Stuck Saver"; if (awarenessScore >= 70) return "Builder"; return "Directionless Earner"; }
 export default async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "https://etfm-assessment.vercel.app");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  if (req.method === "OPTIONS") return res.status(200).end();
-  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
-  const ALLOWED = ["subscribe", "blueprint_report"];
-  const { type: checkType } = req.body || {};
-  if (!checkType || !ALLOWED.includes(checkType)) return res.status(400).json({ error: "Invalid type" });
+  res.setHeader("Access-Control-Allow-Origin", "https://etfm-assessment.vercel.app"); res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS"); res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  if (req.method === "OPTIONS") return res.status(200).end(); if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
+  const ALLOWED = ["subscribe", "blueprint_report"]; const { type: checkType } = req.body || {}; if (!checkType || !ALLOWED.includes(checkType)) return res.status(400).json({ error: "Invalid type" });
   const { type, ...body } = req.body;
   if (type === "subscribe") {
-    const { firstName, email, answers } = body;
-    const answerValues = answers.map((a) => a.answer);
-    const awarenessScore = calculateAwarenessScore(answerValues);
-    const archetype = assignArchetype(answerValues, awarenessScore);
+    const { firstName, email, answers } = body; const answerValues = answers.map((a) => a.answer); const awarenessScore = calculateAwarenessScore(answerValues); const archetype = assignArchetype(answerValues, awarenessScore);
+    const answersText = answers.map((a, i) => `Q${i + 1}: ${a.question}\nAnswer: ${a.answer}`).join("\n\n"); const componentScores = answerValues.map((v) => SCORE_MAP_API[v] || 40);
+    const scoreTableHtml = `<table cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 28px;border-collapse:collapse;background:#1a1a2e;border-radius:10px;overflow:hidden;"><tr><td colspan="2" style="padding:18px 20px 10px;text-align:center;"><p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0;">Your Total Score Breakdown</p></td></tr><tr style="background:rgba(201,151,58,0.15);border-bottom:2px solid rgba(201,151,58,0.4);"><td style="padding:12px 20px;color:#ffffff;font-size:15px;font-weight:bold;">Total Score</td><td style="padding:12px 20px;color:#c9973a;font-size:24px;font-family:Georgia,serif;font-weight:bold;text-align:right;">${awarenessScore}/100</td></tr>${SCORE_CATEGORIES.map((cat, i) => `<tr style="border-bottom:1px solid rgba(255,255,255,0.06);"><td style="padding:9px 20px;color:#a0a0b8;font-size:13px;">${cat}</td><td style="padding:9px 20px;color:#c9973a;font-size:16px;font-weight:bold;text-align:right;">${componentScores[i]}</td></tr>`).join('')}</table>`;
+    let snapshotHtml = ""; try { snapshotHtml = await callClaude(`You are Robert Brickey, ETFM. ${firstName}'s Archetype: ${archetype} Score: ${awarenessScore}/100 Answers: ${answersText} Write Snapshot HTML, under 250 words.`, 1024); } catch (err) { snapshotHtml = `<p>Hi ${firstName},</p><p>Your ETFM Financial Snapshot has been prepared. Your Total Score is <strong>${awarenessScore}/100</strong> and your archetype is <strong>${archetype}</strong>.</p>`; }
+    const emailHtml = emailWrapper(`<tr><td style="padding:40px;color:#1a1a2e;font-size:15px;line-height:1.8;"><p style="font-family:Georgia,serif;font-size:22px;">Congratulations, ${firstName}.</p>${scoreTableHtml}${snapshotHtml}</td></tr><tr><td style="padding:32px 40px;background-color:#1a1a2e;text-align:center;"><a href="https://etfm-assessment.vercel.app/?email=${encodeURIComponent(email)}&firstName=${encodeURIComponent(firstName)}&showBlueprint=true" style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 36px;border-radius:6px;font-weight:bold;font-size:16px;">Get the Strategic Blueprint: $47</a></td></tr>`);
+    try { await sendEmail(email, `${firstName}, your ETFM Financial Snapshot is here`, emailHtml); } catch (err) { console.error("Email send error:", err); }
+    try { const adminHtml = emailWrapper(`<tr><td style="padding:32px 40px;"><h2>New Lead: ${firstName} - ${archetype} (${awarenessScore}/100)</h2><p>${email}</p></td></tr>`); await sendEmail("exit@etfm.systems", `New Lead: ${firstName}: ${archetype} (${awarenessScore}/100)`, adminHtml); } catch (err) { console.error("Admin notification error:", err); }
     return res.status(200).json({ success: true, awarenessScore, archetype });
   }
   if (type === "blueprint_report") {
     const { firstName, email, freeAnswers, blueprintAnswers } = body;
-    const emailToCheck = (email || '').toLowerCase().trim();
-    if (!emailToCheck) return res.status(401).json({ error: 'Email required' });
+    const emailToCheck = (email || '').toLowerCase().trim(); if (!emailToCheck) return res.status(401).json({ error: 'Email required for Blueprint report' });
     try {
       const { data: ent, error: entError } = await supabaseAdmin.from('entitlement_ledger').select('id').eq('email', emailToCheck).eq('product','blueprint_report').eq('status','paid').limit(1).maybeSingle();
       if (entError) { console.error(`Entitlement check failed: ${entError.message}`); return res.status(500).json({ error: 'Entitlement check failed' }); }
-      if (!ent) { console.log(`Paywall blocked: ${emailToCheck} has no paid entitlement`); return res.status(402).json({ error: 'Payment required', message: 'Purchase Blueprint at /pricing' }); }
-    } catch (e) { console.error(`Entitlement exception: ${e.message}`); return res.status(500).json({ error: 'Server error' }); }
-    let reportHtml = "";
-    try { reportHtml = await callClaude(`Write Blueprint for ${firstName}`, 1500); } catch (err) { reportHtml = blueprintFallbackReport(firstName, freeAnswers, blueprintAnswers); }
-    const emailHtml = emailWrapper(reportHtml);
-    try { await sendEmail(email, `${firstName}, your Blueprint is ready`, emailHtml); } catch (err) {}
+      if (!ent) { console.log(`Paywall blocked: ${emailToCheck} has no paid entitlement`); return res.status(402).json({ error: 'Payment required', message: 'Purchase Blueprint at /pricing to unlock this report. $47 credit applies.' }); }
+    } catch (e) { console.error(`Entitlement exception: ${e.message}`); return res.status(500).json({ error: 'Server error checking entitlement' }); }
+    const allAnswersText = ["=== LEVEL 1 ===", ...Object.entries(freeAnswers || {}).map(([q, a]) => `${q}: ${a}`), "\n=== LEVEL 2 ===", ...blueprintAnswers.map((a, i) => `Q${i + 1}: ${a.question}\nAnswer: ${a.answer}`)].join("\n");
+    let reportHtml = ""; try { reportHtml = await callClaude(`You are Robert Brickey, ETFM. CLIENT: ${firstName} DATA: ${allAnswersText} Write Strategic Financial Blueprint HTML, fixed architecture, under 900 words.`, 1500); } catch (err) { reportHtml = blueprintFallbackReport(firstName, freeAnswers, blueprintAnswers); }
+    if (!isUsableReport(reportHtml)) { reportHtml = blueprintFallbackReport(firstName, freeAnswers, blueprintAnswers); }
+    const emailHtml = emailWrapper(`<tr><td style="padding:32px 40px 0;text-align:center;"><p style="color:#c9973a;font-size:11px;text-transform:uppercase;letter-spacing:3px;">Strategic Financial Blueprint</p><h1 style="color:#1a1a2e;font-family:Georgia,serif;font-size:26px;">Your Private Strategic Report</h1></td></tr><tr><td style="padding:40px;color:#1a1a2e;font-size:15px;line-height:1.8;">${reportHtml}</td></tr><tr><td style="padding:32px 40px;background-color:#1a1a2e;text-align:center;"><a href="https://etfm-assessment.vercel.app/?email=${encodeURIComponent(email)}&firstName=${encodeURIComponent(firstName)}&showSession=true&hasBlueprint=true" style="display:inline-block;background-color:#c9973a;color:#1a1a2e;text-decoration:none;padding:14px 36px;border-radius:6px;font-weight:bold;font-size:16px;">Book Strategic Reset: $425 Blueprint Rate</a></td></tr>`);
+    try { await sendEmail(email, `${firstName}, your ETFM Strategic Blueprint is ready`, emailHtml); } catch (err) { console.error("Blueprint email error:", err); }
     return res.status(200).json({ success: true });
   }
   return res.status(400).json({ error: "Invalid request type" });
